@@ -18,6 +18,8 @@ public class NutritionService {
         return nutritionTracker.orElse(null);
     }
 
+    public List<NutritionTracker> getNutritionByName(String name){ return nutritionRepository.findNutritionDataByName(name);}
+
 
 
 
