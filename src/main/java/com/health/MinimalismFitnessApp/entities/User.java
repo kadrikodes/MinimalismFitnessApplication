@@ -18,7 +18,16 @@ public class User {
     public LocalDate birthdate;
     public String gender;
 
-    @OneToMany //TODO : add this mapping + ArrayList
+    //@OneToMany //TODO : add this mapping + ArrayList
+
+    public User(String name, Long id, double height, double weight, LocalDate birthdate, String gender) {
+        this.name = name;
+        this.id = id;
+        this.height = height;
+        this.weight = weight;
+        this.birthdate = birthdate;
+        this.gender = gender;
+    }
 
     public String getName() {
         return name;
