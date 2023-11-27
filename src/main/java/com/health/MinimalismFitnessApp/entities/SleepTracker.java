@@ -19,9 +19,14 @@ public class SleepTracker {
     @ManyToOne
     private User user;
 
-    public SleepTracker(Long id) {
-        this.id = id;
+    public SleepTracker(LocalTime targetBedtime, LocalTime targetWakeUpTime, LocalTime actualBedtime, LocalTime actualWakeupTime, User user) {
+        this.targetBedtime = targetBedtime;
+        this.targetWakeUpTime = targetWakeUpTime;
+        this.actualBedtime = actualBedtime;
+        this.actualWakeupTime = actualWakeupTime;
+        this.user = user;
     }
+
 
     public Long getId() {
         return id;
