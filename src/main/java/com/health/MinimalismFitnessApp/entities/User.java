@@ -4,21 +4,22 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-
 import java.time.LocalDate;
 
 @Entity
 public class User {
     @Id
     @GeneratedValue
-    public String name;
-    public Long id;
-    public double height;
-    public double weight;
-    public LocalDate birthdate;
-    public String gender;
+    private String name;
+    private Long id;
+    private double height;
+    private double weight;
+    private LocalDate birthdate;
+    private String gender;
 
     //@OneToMany //TODO : add this mapping + ArrayList
+
+    public User(){}
 
     public User(String name, Long id, double height, double weight, LocalDate birthdate, String gender) {
         this.name = name;
@@ -76,8 +77,6 @@ public class User {
     public void setGender(String gender) {
         this.gender = gender;
     }
-
-    public User(){}
 
 
 }
