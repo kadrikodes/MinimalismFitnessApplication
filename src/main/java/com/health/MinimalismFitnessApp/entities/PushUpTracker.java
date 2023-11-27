@@ -3,16 +3,20 @@ package com.health.MinimalismFitnessApp.entities;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class PushUpTracker {
 
     @Id
     @GeneratedValue
+    private long id;
     private int numberOfPushUps;
     private int target;
     private double timeDuration;
     private int caloriesBurnt;
+    @ManyToOne
+    private User user;
 
     public PushUpTracker() {}
 
