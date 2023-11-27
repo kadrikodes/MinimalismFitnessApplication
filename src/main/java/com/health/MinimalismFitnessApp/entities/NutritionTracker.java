@@ -1,9 +1,6 @@
 package com.health.MinimalismFitnessApp.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
 @Entity
 public class NutritionTracker {
@@ -17,12 +14,77 @@ public class NutritionTracker {
     private int carbohydrates;
     private int fats;
     private String mealType;
+
+    @ManyToOne
     private User user;
 
+    public NutritionTracker(String foodName, int calories, int protein, int carbohydrates, int fats, String mealType, User user) {
+        this.foodName = foodName;
+        this.calories = calories;
+        this.protein = protein;
+        this.carbohydrates = carbohydrates;
+        this.fats = fats;
+        this.mealType = mealType;
+        this.user = user;
+    }
 
+    public Long getId() {
+        return id;
+    }
 
+    public String getFoodName() {
+        return foodName;
+    }
 
+    public void setFoodName(String foodName) {
+        this.foodName = foodName;
+    }
 
+    public int getCalories() {
+        return calories;
+    }
 
+    public void setCalories(int calories) {
+        this.calories = calories;
+    }
 
+    public int getProtein() {
+        return protein;
+    }
+
+    public void setProtein(int protein) {
+        this.protein = protein;
+    }
+
+    public int getCarbohydrates() {
+        return carbohydrates;
+    }
+
+    public void setCarbohydrates(int carbohydrates) {
+        this.carbohydrates = carbohydrates;
+    }
+
+    public int getFats() {
+        return fats;
+    }
+
+    public void setFats(int fats) {
+        this.fats = fats;
+    }
+
+    public String getMealType() {
+        return mealType;
+    }
+
+    public void setMealType(String mealType) {
+        this.mealType = mealType;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
