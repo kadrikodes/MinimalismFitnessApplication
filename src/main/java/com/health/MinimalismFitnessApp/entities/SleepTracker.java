@@ -2,6 +2,7 @@ package com.health.MinimalismFitnessApp.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 import java.time.LocalTime;
 
@@ -14,6 +15,9 @@ public class SleepTracker {
     private LocalTime targetWakeUpTime;
     private LocalTime actualBedtime;
     private LocalTime actualWakeupTime;
+
+    @ManyToOne
+    private User user;
 
     public SleepTracker(Long id) {
         this.id = id;
