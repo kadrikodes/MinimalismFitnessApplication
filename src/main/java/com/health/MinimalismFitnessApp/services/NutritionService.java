@@ -37,4 +37,8 @@ public class NutritionService {
 
         return nutritionRepository.save(nutritionData);
     }
+
+    public void deleteNutritionData(long nutritionID){
+        nutritionRepository.deleteById(nutritionID);
+    }
 }

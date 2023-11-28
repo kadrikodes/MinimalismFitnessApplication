@@ -21,7 +21,7 @@ public class NutritionController {
     @GetMapping("")
     public List<NutritionData> getAllNutritionData() { return nutritionService.findAll();}
 
-    @GetMapping("/{nutritionID")
+    @GetMapping("/{nutritionID}")
     public NutritionData getNutritionDataByID(@PathVariable long nutritionID){
         NutritionData nutritionData = nutritionService.getNutritionID(nutritionID);
         if(nutritionData == null){
@@ -39,6 +39,11 @@ public class NutritionController {
     @PostMapping("/addNutritionData")
     public NutritionData addNutritionData(@RequestBody NutritionData nutritionData){
         return nutritionService.addNutritionData(nutritionData);
+    }
+
+    @DeleteMapping("/{nutritionID}")
+    public void deleteNutritionData(@PathVariable long nutritionID){
+
     }
 
 }
