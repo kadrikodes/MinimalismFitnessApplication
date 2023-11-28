@@ -3,6 +3,7 @@ package com.health.MinimalismFitnessApp.services;
 import com.health.MinimalismFitnessApp.dataaccess.INutritionRepository;
 import com.health.MinimalismFitnessApp.dataaccess.IUserRepository;
 import com.health.MinimalismFitnessApp.entities.NutritionData;
+import com.health.MinimalismFitnessApp.entities.UserData;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -25,6 +26,15 @@ public class NutritionService {
     public List<NutritionData> getNutritionByName(String name){ return nutritionRepository.findNutritionDataByName(name);}
 
     public NutritionData addNutritionData(NutritionData nutritionData){
-        return null;
+        String name = nutritionData.getUser().getName();
+        Optional<UserData> prospectiveUser = userRepository.findByName(name); //Esra TODO
+        if(prospectiveUser.isEmpty()){
+            UserData userData = userRepository.save(nutritionData.getUser());
+            nutritionData.setUser(userData);
+        } else{
+            nutritionData.setUser(prospectiveUser.get());
+        }
+
+        return nutritionRepository.save(nutritionData);
     }
 }
