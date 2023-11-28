@@ -1,4 +1,11 @@
 package com.health.MinimalismFitnessApp.dataaccess;
 
-public interface IPushUpRepository {
+
+import com.health.MinimalismFitnessApp.entities.PushUpTracker;
+import org.springframework.data.repository.ListCrudRepository;
+
+import java.util.List;
+
+public interface IPushUpRepository extends ListCrudRepository<PushUpTracker, Long> {
+    List<PushUpTracker> findPushUpTrackerByUserName(String name);
 }
