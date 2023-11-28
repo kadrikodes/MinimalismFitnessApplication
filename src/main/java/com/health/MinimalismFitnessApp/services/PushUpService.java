@@ -21,6 +21,10 @@ public class PushUpService {
         pushUpRepository.deleteById(delete);
     }
 
+    public static void saveOrUpdate(PushUpData pushUpData) {
+        pushUpRepository.save(pushUpData);
+    }
+
     public List<PushUpData> findAll() {
         return pushUpRepository.findAll();
     }
