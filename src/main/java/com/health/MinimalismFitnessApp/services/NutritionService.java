@@ -28,18 +28,18 @@ public class NutritionService {
 
     public List<NutritionData> getNutritionByName(String name){ return nutritionRepository.findNutritionDataByUserDataName(name);}
 
-//    public NutritionData addNutritionData(NutritionData nutritionData){
-//        String name = nutritionData.getUser().getName();
-//        Optional<UserData> prospectiveUser = userRepository.findUserDataByUserDataName(name);
-//        if(prospectiveUser.isEmpty()){
-//            UserData userData = userRepository.save(nutritionData.getUser());
-//            nutritionData.setUser(userData);
-//        } else{
-//            nutritionData.setUser(prospectiveUser.get());
-//        }
-//
-//        return nutritionRepository.save(nutritionData);
-//    }
+    public NutritionData addNutritionData(NutritionData nutritionData){
+        String name = nutritionData.getUser().getName();
+        Optional<UserData> prospectiveUser = userRepository.findUserDataByName(name);
+        if(prospectiveUser.isEmpty()){
+            UserData userData = userRepository.save(nutritionData.getUser());
+            nutritionData.setUser(userData);
+        } else{
+            nutritionData.setUser(prospectiveUser.get());
+        }
+
+        return nutritionRepository.save(nutritionData);
+    }
 
     public void deleteNutritionData(long nutritionID){
         nutritionRepository.deleteById(nutritionID);
