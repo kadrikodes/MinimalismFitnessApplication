@@ -5,6 +5,7 @@ import com.health.MinimalismFitnessApp.dataaccess.IUserRepository;
 import com.health.MinimalismFitnessApp.entities.NutritionData;
 import com.health.MinimalismFitnessApp.entities.UserData;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,8 +20,8 @@ public class NutritionService {
     public List<NutritionData> findAll(){ return nutritionRepository.findAll();}
 
     public NutritionData getNutritionID(long nutritionId){
-        Optional<NutritionData> nutritionTracker = nutritionRepository.findById(nutritionId);
-        return nutritionTracker.orElse(null);
+        Optional<NutritionData> nutritionData = nutritionRepository.findById(nutritionId);
+        return nutritionData.orElse(null);
     }
 
     public List<NutritionData> getNutritionByName(String name){ return nutritionRepository.findNutritionDataByName(name);}

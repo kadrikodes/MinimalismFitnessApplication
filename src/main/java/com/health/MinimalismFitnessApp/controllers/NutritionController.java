@@ -24,13 +24,7 @@ public class NutritionController {
 
     @GetMapping("/{nutritionID}")
     public NutritionData getNutritionDataByID(@PathVariable long nutritionID){
-        boolean validId = nutritionService.checkNutritionDataExistsByID(nutritionID);
-
-        if (validId){
-            return nutritionService.getNutritionID(nutritionID);
-        } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Nutrition data not found");
-        }
+        return nutritionService.getNutritionID(nutritionID);
     }
 
 
@@ -45,15 +39,8 @@ public class NutritionController {
     }
 
     @DeleteMapping("/{nutritionID}")
-    public ResponseEntity<Long> deleteNutritionData(@PathVariable long nutritionID){
-        boolean validID = nutritionService.checkNutritionDataExistsByID(nutritionID);
-
-        if (validID){
-            nutritionService.deleteNutritionData(nutritionID);
-            return new ResponseEntity<>(nutritionID, HttpStatus.OK);
-        } else{
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    public void deleteNutritionData(@PathVariable long nutritionID){
+        nutritionService.deleteNutritionData(nutritionID);
     }
 
 }
