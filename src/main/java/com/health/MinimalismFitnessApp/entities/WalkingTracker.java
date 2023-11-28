@@ -10,15 +10,25 @@ import java.time.LocalDateTime;
 public class WalkingTracker {
     @Id
     @GeneratedValue
-    Long Id;
-    int steps;
-    double distance;
-    int caloriesBurned;
-    double duration;
-    double speed;
-    LocalDateTime time;
+    private Long Id;
+    private int steps;
+
+
+    private double distance;
+    private int caloriesBurned;
+    private double duration;
+    private double speed;
+    private LocalDateTime time;
 
     public WalkingTracker() {}
+    public WalkingTracker(int steps, double distance, int caloriesBurned, double duration, double speed, LocalDateTime time) {
+        this.steps = steps;
+        this.distance = distance;
+        this.caloriesBurned = caloriesBurned;
+        this.duration = duration;
+        this.speed = speed;
+        this.time = time;
+    }
 
     public Long getId() {
         return Id;
