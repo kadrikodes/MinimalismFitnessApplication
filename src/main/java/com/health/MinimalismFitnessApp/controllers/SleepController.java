@@ -12,7 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/sleeptracker")    //Sleep tracker Endpoint
 public class SleepController {
-    SleepService sleepService;
+    private final SleepService sleepService;
 
     @Autowired
     public SleepController(SleepService sleepService) {
