@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface ISleepRepository extends ListCrudRepository<SleepData, Long> {
-    List<SleepData> findSleepRecordByName(String name);
+    List<SleepData> findSleepDataByUserName(String name);
 }
