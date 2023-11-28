@@ -45,7 +45,17 @@ public class NutritionService {
         nutritionRepository.deleteById(nutritionID);
     }
 
-    public boolean checkNutritionDataExistsByID(long nutritionID){
-        return nutritionRepository.existsById(nutritionID);
+    public void updateNutritionData(long nutritionID, NutritionData nutritionData) {
+        NutritionData oldNutritionData = nutritionRepository.findById(nutritionID).orElseThrow();
+
+        oldNutritionData.setFoodName(nutritionData.getFoodName());
+        oldNutritionData.setCalories(nutritionData.getCalories());
+        oldNutritionData.setProtein(nutritionData.getProtein());
+        oldNutritionData.setCarbohydrates(nutritionData.getCarbohydrates());
+        oldNutritionData.setFats(nutritionData.getFats());
+        oldNutritionData.setMealType(nutritionData.getMealType());
+        oldNutritionData.setUser(nutritionData.getUser());
+
+        nutritionRepository.save(oldNutritionData);
     }
 }

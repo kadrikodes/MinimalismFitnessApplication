@@ -43,4 +43,9 @@ public class NutritionController {
         nutritionService.deleteNutritionData(nutritionID);
     }
 
+    @PutMapping("/{nutritionID}")
+    public NutritionData updateNutritionData(@PathVariable long nutritionID, @RequestBody NutritionData nutritionData){
+        nutritionService.updateNutritionData(nutritionID, nutritionData);
+    }
+
 }
