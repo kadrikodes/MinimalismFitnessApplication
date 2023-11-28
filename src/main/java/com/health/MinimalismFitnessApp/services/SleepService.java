@@ -37,7 +37,7 @@ public class SleepService {
     }
 
     public List<SleepData> getSleepRecordByName(String name) {
-        return sleepRepository.findSleepRecordByName(name);
+        return sleepRepository.findSleepDataByUserName(name);
     }
 
     public SleepData addSleepRecord(SleepData sleepData) {
