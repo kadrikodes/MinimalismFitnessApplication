@@ -21,11 +21,11 @@ public class WalkingService {
         return walkingTracker.orElse(null);
     }
 
-    public java.util.List<WalkingTracker> getWalkingTrackerByUserName(String name) {
+    public List<WalkingTracker> getWalkingTrackerByUserName(String name) {
         return walkingRepository.findWalkingTrackerByUserName(name);
     }
 
     public WalkingTracker addWalkingTrackerData(WalkingTracker walkingTracker) {
-        return walkingTracker;
+        return walkingTracker; //TODO: implement logic
     }
 }
