@@ -11,27 +11,30 @@ import java.util.Optional;
 @Service
 public class PushUpService {
 
-    IPushUpRepository pushUpRepository;
+    static IPushUpRepository pushUpRepository;
     @Autowired
     public PushUpService(IPushUpRepository pushUpRepository) {
         this.pushUpRepository = pushUpRepository;
+    }
+
+    public static void delete(long delete) {
+        pushUpRepository.deleteById(delete);
     }
 
     public List<PushUpData> findAll() {
         return pushUpRepository.findAll();
     }
 
-    public PushUpData getPushUpTrackerById (long pushUpTrackerId) {
-        Optional<PushUpData> pushUpTracker = pushUpRepository.findById(pushUpTrackerId);
-        return pushUpTracker.orElse(null);
+    public PushUpData getPushUpDataById(long pushUpDataId) {
+        Optional<PushUpData> pushUpData = pushUpRepository.findById(pushUpDataId);
+        return pushUpData.orElse(null);
     }
 
-    public List<PushUpData> getPushUpTrackerByUserName (String name) {
-        return pushUpRepository.findPushUpTrackerByUserName(name);
+    public List<PushUpData> getPushUpDataByUserDataName(String name) {
+        return pushUpRepository.findPushUpDataByUserDataName(name);
     }
 
-    public PushUpData addPushUpTrackerData(PushUpData pushUpData) {
+    public PushUpData addPushUpData(PushUpData pushUpData) {
         return pushUpData;
     }
-
 }
