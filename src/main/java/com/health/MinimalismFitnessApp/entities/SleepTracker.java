@@ -77,7 +77,6 @@ public class SleepTracker {
         this.actualWakeupTime = actualWakeupTime;
     }
 
-
     public void calculateSleepHours()
     {
 
