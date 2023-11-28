@@ -18,16 +18,16 @@ public class WalkingData {
     private int caloriesBurned;
     private double duration;
     private double speed;
-    private LocalDateTime time;
+    private LocalDateTime dateTime;
 
     public WalkingData() {}
-    public WalkingData(int steps, double distance, int caloriesBurned, double duration, double speed, LocalDateTime time) {
+    public WalkingData(int steps, double distance, int caloriesBurned, double duration, double speed, LocalDateTime dateTime) {
         this.steps = steps;
         this.distance = distance;
         this.caloriesBurned = caloriesBurned;
         this.duration = duration;
         this.speed = speed;
-        this.time = time;
+        this.dateTime = dateTime;
     }
 
     public Long getId() {
@@ -78,11 +78,11 @@ public class WalkingData {
         this.speed = speed;
     }
 
-    public LocalDateTime getTime() {
-        return time;
+    public LocalDateTime getDateTime() {
+        return dateTime;
     }
 
-    public void setTime(LocalDateTime time) {
-        this.time = time;
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
     }
 }
