@@ -8,7 +8,7 @@ import jakarta.persistence.ManyToOne;
 import java.time.LocalTime;
 
 @Entity
-public class SleepTracker {
+public class SleepData {
 
     @Id
     @GeneratedValue
@@ -19,14 +19,14 @@ public class SleepTracker {
     private LocalTime actualWakeupTime;
 
     @ManyToOne
-    private User user;
+    private UserData userData;
 
-    public SleepTracker(LocalTime targetBedtime, LocalTime targetWakeUpTime, LocalTime actualBedtime, LocalTime actualWakeupTime, User user) {
+    public SleepData(LocalTime targetBedtime, LocalTime targetWakeUpTime, LocalTime actualBedtime, LocalTime actualWakeupTime, UserData userData) {
         this.targetBedtime = targetBedtime;
         this.targetWakeUpTime = targetWakeUpTime;
         this.actualBedtime = actualBedtime;
         this.actualWakeupTime = actualWakeupTime;
-        this.user = user;
+        this.userData = userData;
     }
 
     public Long getId() {
@@ -37,12 +37,12 @@ public class SleepTracker {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public UserData getUser() {
+        return userData;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(UserData userData) {
+        this.userData = userData;
     }
 
     public LocalTime getTargetBedtime() {

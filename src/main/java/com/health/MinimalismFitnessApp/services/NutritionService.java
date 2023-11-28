@@ -2,7 +2,7 @@ package com.health.MinimalismFitnessApp.services;
 
 import com.health.MinimalismFitnessApp.dataaccess.INutritionRepository;
 import com.health.MinimalismFitnessApp.dataaccess.IUserRepository;
-import com.health.MinimalismFitnessApp.entities.NutritionTracker;
+import com.health.MinimalismFitnessApp.entities.NutritionData;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -15,18 +15,16 @@ public class NutritionService {
     @Autowired
     public NutritionService(INutritionRepository nutritionRepository) {this.nutritionRepository = nutritionRepository; }
 
-    public List<NutritionTracker> findAll(){ return nutritionRepository.findAll();}
+    public List<NutritionData> findAll(){ return nutritionRepository.findAll();}
 
-    public NutritionTracker getNutritionID(long nutritionId){
-        Optional<NutritionTracker> nutritionTracker = nutritionRepository.findById(nutritionId);
+    public NutritionData getNutritionID(long nutritionId){
+        Optional<NutritionData> nutritionTracker = nutritionRepository.findById(nutritionId);
         return nutritionTracker.orElse(null);
     }
 
-    public List<NutritionTracker> getNutritionByName(String name){ return nutritionRepository.findNutritionDataByName(name);}
+    public List<NutritionData> getNutritionByName(String name){ return nutritionRepository.findNutritionDataByName(name);}
 
-
-
-
-
-
+    public NutritionData addNutritionData(NutritionData nutritionData){
+        return null;
+    }
 }

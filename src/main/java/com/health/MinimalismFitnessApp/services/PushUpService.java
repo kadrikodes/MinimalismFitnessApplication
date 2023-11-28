@@ -1,7 +1,7 @@
 package com.health.MinimalismFitnessApp.services;
 
 import com.health.MinimalismFitnessApp.dataaccess.IPushUpRepository;
-import com.health.MinimalismFitnessApp.entities.PushUpTracker;
+import com.health.MinimalismFitnessApp.entities.PushUpData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,21 +17,21 @@ public class PushUpService {
         this.pushUpRepository = pushUpRepository;
     }
 
-    public List<PushUpTracker> findAll() {
+    public List<PushUpData> findAll() {
         return pushUpRepository.findAll();
     }
 
-    public PushUpTracker getPushUpTrackerById (long pushUpTrackerId) {
-        Optional<PushUpTracker> pushUpTracker = pushUpRepository.findById(pushUpTrackerId);
+    public PushUpData getPushUpTrackerById (long pushUpTrackerId) {
+        Optional<PushUpData> pushUpTracker = pushUpRepository.findById(pushUpTrackerId);
         return pushUpTracker.orElse(null);
     }
 
-    public List<PushUpTracker> getPushUpTrackerByUserName (String name) {
+    public List<PushUpData> getPushUpTrackerByUserName (String name) {
         return pushUpRepository.findPushUpTrackerByUserName(name);
     }
 
-    public PushUpTracker addPushUpTrackerData(PushUpTracker pushUpTracker) {
-        return pushUpTracker;
+    public PushUpData addPushUpTrackerData(PushUpData pushUpData) {
+        return pushUpData;
     }
 
 }

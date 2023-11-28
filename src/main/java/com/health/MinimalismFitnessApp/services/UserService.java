@@ -1,7 +1,7 @@
 package com.health.MinimalismFitnessApp.services;
 
 import com.health.MinimalismFitnessApp.dataaccess.IUserRepository;
-import com.health.MinimalismFitnessApp.entities.User;
+import com.health.MinimalismFitnessApp.entities.UserData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -16,18 +16,18 @@ public class UserService {
         this.iUserRepository=mockIUserRepository;
     }
 
-    public User addUser(User user){
-        if(user.getId() != null && user.getId() != 0)
+    public UserData addUser(UserData userData){
+        if(userData.getId() != null && userData.getId() != 0)
             throw  new IllegalArgumentException("The ID provided for a create/post must be null or zero.");
-        return this.iUserRepository.save(user);
+        return this.iUserRepository.save(userData);
     }
 
-    public List<User> findAll() {
+    public List<UserData> findAll() {
         return this.iUserRepository.findAll();
     }
 
-    public User getUserById(long userId) {
-        Optional<User> optionalUser=this.iUserRepository.findById(userId);
+    public UserData getUserById(long userId) {
+        Optional<UserData> optionalUser=this.iUserRepository.findById(userId);
         if(optionalUser.isEmpty()){
             return null;
         }else return optionalUser.get();

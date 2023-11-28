@@ -2,8 +2,8 @@ package com.health.MinimalismFitnessApp.services;
 
 import com.health.MinimalismFitnessApp.dataaccess.ISleepRepository;
 import com.health.MinimalismFitnessApp.dataaccess.IUserRepository;
-import com.health.MinimalismFitnessApp.entities.SleepTracker;
-import com.health.MinimalismFitnessApp.entities.User;
+import com.health.MinimalismFitnessApp.entities.SleepData;
+import com.health.MinimalismFitnessApp.entities.UserData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,16 +22,16 @@ public class SleepService {
         this.userRepository = userRepository;
     }
 
-    public List<User> findAll() {
+    public List<UserData> findAll() {
         return this.userRepository.findAll();
     }
 
-    public SleepTracker getSleepRecordById(long sleepId){
-        Optional<SleepTracker> sleepTracker = sleepRepository.findById(sleepId);
+    public SleepData getSleepRecordById(long sleepId){
+        Optional<SleepData> sleepTracker = sleepRepository.findById(sleepId);
         return sleepTracker.orElse(null);
     }
 
-    public List<SleepTracker> getSleepRecordByName(String name) {
+    public List<SleepData> getSleepRecordByName(String name) {
         return sleepRepository.findSleepRecordByName(name);
     }
 

@@ -6,7 +6,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 
 @Entity
-public class PushUpTracker {
+public class PushUpData {
 
     @Id
     @GeneratedValue
@@ -16,9 +16,9 @@ public class PushUpTracker {
     private double timeDuration;
     private int caloriesBurnt;
     @ManyToOne
-    private User user;
+    private UserData userData;
 
-    public PushUpTracker() {}
+    public PushUpData() {}
 
     public long getId() {
         return id;
@@ -28,12 +28,12 @@ public class PushUpTracker {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public UserData getUser() {
+        return userData;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(UserData userData) {
+        this.userData = userData;
     }
 
     public int getNumberOfPushUps() {
