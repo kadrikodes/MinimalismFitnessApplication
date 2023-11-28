@@ -24,11 +24,13 @@ public class NutritionController {
 
     @GetMapping("/{nutritionID}")
     public NutritionData getNutritionDataByID(@PathVariable long nutritionID){
-        NutritionData nutritionData = nutritionService.getNutritionID(nutritionID);
-        if(nutritionData == null){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Nutrition data not found");}
+        boolean validId = nutritionService.checkNutritionDataExistsByID(nutritionID);
 
-        return nutritionData;
+        if (validId){
+            return nutritionService.getNutritionID(nutritionID);
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Nutrition data not found");
+        }
     }
 
 
