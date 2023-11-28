@@ -45,17 +45,18 @@ public class NutritionService {
         nutritionRepository.deleteById(nutritionID);
     }
 
-    public void updateNutritionData(long nutritionID, NutritionData nutritionData) {
-        NutritionData oldNutritionData = nutritionRepository.findById(nutritionID).orElseThrow();
+    public NutritionData updateNutritionData(long nutritionID, NutritionData nutritionData) {
+        NutritionData nutritionDataUpdate = nutritionRepository.findById(nutritionID).orElseThrow();
 
-        oldNutritionData.setFoodName(nutritionData.getFoodName());
-        oldNutritionData.setCalories(nutritionData.getCalories());
-        oldNutritionData.setProtein(nutritionData.getProtein());
-        oldNutritionData.setCarbohydrates(nutritionData.getCarbohydrates());
-        oldNutritionData.setFats(nutritionData.getFats());
-        oldNutritionData.setMealType(nutritionData.getMealType());
-        oldNutritionData.setUser(nutritionData.getUser());
+        nutritionDataUpdate.setFoodName(nutritionData.getFoodName());
+        nutritionDataUpdate.setCalories(nutritionData.getCalories());
+        nutritionDataUpdate.setProtein(nutritionData.getProtein());
+        nutritionDataUpdate.setCarbohydrates(nutritionData.getCarbohydrates());
+        nutritionDataUpdate.setFats(nutritionData.getFats());
+        nutritionDataUpdate.setMealType(nutritionData.getMealType());
+        nutritionDataUpdate.setUser(nutritionData.getUser());
 
-        nutritionRepository.save(oldNutritionData);
+        nutritionRepository.save(nutritionDataUpdate);
+        return nutritionDataUpdate;
     }
 }
