@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 @Repository
 public interface IPushUpRepository extends ListCrudRepository<PushUpData, Long> {
-    List<PushUpData> findPushUpTrackerByUserName(String name);
+    List<PushUpData> findPushUpDataByUserDataName(String name);
 }

@@ -24,11 +24,11 @@ public class PushUpController {
     }
     @GetMapping("/user/{id}")
     public List<PushUpData> getPushUpDataById(@PathVariable long id) {
-        return (List<PushUpData>) this.pushUpService.getPushUpTrackerById(id);
+        return (List<PushUpData>) this.pushUpService.getPushUpDataById(id);
     }
     @GetMapping("{/{user}")
     public List<PushUpData> getPushUpDataByUserName(@PathVariable String name) {
-        return this.pushUpService.getPushUpTrackerByUserName(name);
+        return this.pushUpService.getPushUpDataByUserDataName(name);
     }
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -36,10 +36,14 @@ public class PushUpController {
         PushUpData newPushUp;
 
         try {
-            newPushUp = this.pushUpService.addPushUpTrackerData(pushUpData);
+            newPushUp = this.pushUpService.addPushUpData(pushUpData);
         } catch (IllegalAccessError e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
         return newPushUp;
+    }
+    @DeleteMapping("/user/{delete}")
+    public void deletePushUpData(@PathVariable("delete") long delete) {
+        PushUpService.delete(delete);
     }
 }
