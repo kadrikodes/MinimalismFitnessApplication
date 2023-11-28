@@ -18,12 +18,17 @@ public class SleepService {
     ISleepRepository sleepRepository;
     IUserRepository userRepository;
     @Autowired
-    public SleepService(IUserRepository userRepository) {
+    public SleepService(IUserRepository userRepository, ISleepRepository sleepRepository) {
         this.userRepository = userRepository;
+        this.sleepRepository = sleepRepository;
     }
 
     public List<UserData> findAll() {
         return this.userRepository.findAll();
+    }
+
+    public List<SleepData> getAllSleepRecords() {
+        return sleepRepository.findAll();
     }
 
     public SleepData getSleepRecordById(long sleepId){
@@ -35,9 +40,34 @@ public class SleepService {
         return sleepRepository.findSleepRecordByName(name);
     }
 
+    public SleepData addSleepRecord(SleepData sleepData) {
+        return sleepRepository.save(sleepData);
+    }
 
+    public SleepData updateSleepRecord(Long sleepDataId, SleepData updatedSleepData) {
+        Optional<SleepData> existingSleepDataOptional = sleepRepository.findById(sleepDataId);
 
+        if(existingSleepDataOptional.isPresent()) {
+            SleepData existingSleepData = existingSleepDataOptional.get();
+            existingSleepData.setTargetBedtime(updatedSleepData.getTargetBedtime());
+            existingSleepData.setTargetWakeUpTime(updatedSleepData.getTargetWakeUpTime());
+            existingSleepData.setActualBedtime(updatedSleepData.getActualBedtime());
+            existingSleepData.setActualWakeupTime(updatedSleepData.getActualWakeupTime());
 
+            return sleepRepository.save(existingSleepData);
+        }
+        else{
+            throw new IllegalArgumentException("Sleep record not found with ID: " + sleepDataId);
+        }
+    }
 
+    public void deleteSleepRecord(Long sleepDataId) {
+        if (sleepRepository.existsById(sleepDataId)) {
+            sleepRepository.deleteById(sleepDataId);
+        }
+        else {
+            throw new IllegalArgumentException("Sleep record not found with ID:" + sleepDataId);
+        }
+    }
 
 }
