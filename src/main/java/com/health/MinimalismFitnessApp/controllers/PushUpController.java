@@ -47,7 +47,7 @@ public class PushUpController {
         PushUpService.delete(delete);
     }
 
-    @PutMapping("/pushups/{update}")
+    @PutMapping("/{update}")
     public PushUpData PushUpDataUpdate(@RequestBody PushUpData pushUpData) {
         PushUpService.saveOrUpdate(pushUpData);
         return pushUpData;
