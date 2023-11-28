@@ -41,4 +41,8 @@ public class NutritionService {
     public void deleteNutritionData(long nutritionID){
         nutritionRepository.deleteById(nutritionID);
     }
+
+    public boolean checkNutritionDataExistsByID(long nutritionID){
+        return nutritionRepository.existsById(nutritionID);
+    }
 }
