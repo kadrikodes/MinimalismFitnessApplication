@@ -16,7 +16,6 @@ import java.util.List;
 public class WalkingController {
 
     WalkingService walkingService;
-    UserService userService;
 
     @Autowired
     public WalkingController(WalkingService walkingService) {
