@@ -7,7 +7,7 @@ import jakarta.persistence.Id;
 import java.time.LocalDateTime;
 
 @Entity
-public class WalkingTracker {
+public class WalkingData {
     @Id
     @GeneratedValue
     private Long Id;
@@ -20,8 +20,8 @@ public class WalkingTracker {
     private double speed;
     private LocalDateTime time;
 
-    public WalkingTracker() {}
-    public WalkingTracker(int steps, double distance, int caloriesBurned, double duration, double speed, LocalDateTime time) {
+    public WalkingData() {}
+    public WalkingData(int steps, double distance, int caloriesBurned, double duration, double speed, LocalDateTime time) {
         this.steps = steps;
         this.distance = distance;
         this.caloriesBurned = caloriesBurned;

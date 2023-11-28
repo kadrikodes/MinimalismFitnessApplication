@@ -3,11 +3,11 @@ package com.health.MinimalismFitnessApp.entities;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+
 import java.time.LocalDate;
 
 @Entity
-public class User {
+public class UserData {
     @Id
     @GeneratedValue
     private String name;
@@ -19,9 +19,9 @@ public class User {
 
     //@OneToMany //TODO : add this mapping + ArrayList
 
-    public User(){}
+    public UserData(){}
 
-    public User(String name, Long id, double height, double weight, LocalDate birthdate, String gender) {
+    public UserData(String name, Long id, double height, double weight, LocalDate birthdate, String gender) {
         this.name = name;
         this.id = id;
         this.height = height;

@@ -3,7 +3,7 @@ package com.health.MinimalismFitnessApp.entities;
 import jakarta.persistence.*;
 
 @Entity
-public class NutritionTracker {
+public class NutritionData {
     @Id
     @GeneratedValue
     private Long id;
@@ -16,16 +16,16 @@ public class NutritionTracker {
     private String mealType;
 
     @ManyToOne
-    private User user;
+    private UserData userData;
 
-    public NutritionTracker(String foodName, int calories, int protein, int carbohydrates, int fats, String mealType, User user) {
+    public NutritionData(String foodName, int calories, int protein, int carbohydrates, int fats, String mealType, UserData userData) {
         this.foodName = foodName;
         this.calories = calories;
         this.protein = protein;
         this.carbohydrates = carbohydrates;
         this.fats = fats;
         this.mealType = mealType;
-        this.user = user;
+        this.userData = userData;
     }
 
     public Long getId() {
@@ -80,11 +80,11 @@ public class NutritionTracker {
         this.mealType = mealType;
     }
 
-    public User getUser() {
-        return user;
+    public UserData getUser() {
+        return userData;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(UserData userData) {
+        this.userData = userData;
     }
 }
