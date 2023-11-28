@@ -34,6 +34,9 @@ public class NutritionController {
     }
 
 
-
+    @GetMapping("/user/name/{name}")
+    public List<NutritionData> getNutritionDataByUserName(@PathVariable String name){
+        return nutritionService.getNutritionByName(name);
+    }
 
 }
