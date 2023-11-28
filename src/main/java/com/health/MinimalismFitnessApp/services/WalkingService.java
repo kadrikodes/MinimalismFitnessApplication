@@ -35,9 +35,9 @@ public class WalkingService {
         return walkingRepository.findByDateTimeAndDistance(dateTime, distance);
     }
 
-    public List<WalkingData> getEntriesSortedByData() {
-        return walkingRepository.findAllByOrderByDateAsc();
-    }
+    //public List<WalkingData> getEntriesSortedByData() {
+    //    return walkingRepository.findAllByOrderByDateAsc();
+   // }
 
     public WalkingData updateWalkingData(long id, WalkingData walkingData) {
         WalkingData existingWalkingData = walkingRepository.findById(id)

@@ -26,9 +26,7 @@ public class UserService {
         return this.iUserRepository.findAll();
     }
 
-    public List<UserData> getAllUsers() {
-        return iUserRepository.findAll();
-    }
+    public List<UserData> getAllUsersByName(String name) {return iUserRepository.findUserDataByName(name);}
 
     public ResponseStatusException addUser(UserData userData){
         if(userData.getId() != null && userData.getId() != 0)

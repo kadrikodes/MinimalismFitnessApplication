@@ -32,14 +32,14 @@ public class UserController {
     }
 
 
-    @GetMapping("/user")
+    @GetMapping("")
     public Iterable<UserData> findAll() {
         return userService.findAll();
     }
 
     @GetMapping("/{userId}")
     public UserData getAllUsers() {
-        List<UserData> users = userService.getAllUsers();
+        List<UserData> users = userService.findAll();
         if (users.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
         } else {

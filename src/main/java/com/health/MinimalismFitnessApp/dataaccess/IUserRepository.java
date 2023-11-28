@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface IUserRepository extends ListCrudRepository<UserData,Long> {
-List<UserData> findUserDataByUserDataName(String name);
+List<UserData> findUserDataByName(String name);
 }

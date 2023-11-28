@@ -52,10 +52,10 @@ public class WalkingController {
         return walkingService.searchEntriesByCriteria(dateTime, distance);
     }
 
-    @GetMapping("/walking/sorted")
-    public List<WalkingData> getSortedWalkingData() {
-        return walkingService.getEntriesSortedByData();
-    }
+//    @GetMapping("/walking/sorted")
+//    public List<WalkingData> getSortedWalkingData() {
+//        return walkingService.getEntriesSortedByData();
+//    }
 
     @PutMapping("/walking/update/{update}")
     public WalkingData updateWalkingData(@PathVariable long id, @RequestBody WalkingData walkingData) {

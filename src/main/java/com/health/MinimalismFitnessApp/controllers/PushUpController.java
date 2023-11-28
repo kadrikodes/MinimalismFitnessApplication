@@ -26,9 +26,9 @@ public class PushUpController {
     public List<PushUpData> getPushUpDataById(@PathVariable long id) {
         return (List<PushUpData>) this.pushUpService.getPushUpDataById(id);
     }
-    @GetMapping("{/{user}")
-    public List<PushUpData> getPushUpDataByUserName(@PathVariable String name) {
-        return this.pushUpService.getPushUpDataByUserDataName(name);
+    @GetMapping("/{userName}")
+    public List<PushUpData> getPushUpDataByUserName(@PathVariable String userName) {
+        return this.pushUpService.getPushUpDataByUserDataName(userName);
     }
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)

@@ -13,5 +13,5 @@ public interface IWalkingRepository extends ListCrudRepository<WalkingData, Long
 
     List<WalkingData> findByDateTimeAndDistance(LocalDateTime dateTime, double distance);
 
-    List<WalkingData> findAllByOrderByDateAsc();
+    //List<WalkingData> findAllByOrderByDateAsc();
 }

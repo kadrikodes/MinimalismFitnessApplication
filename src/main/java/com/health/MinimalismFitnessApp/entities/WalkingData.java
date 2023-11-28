@@ -3,6 +3,7 @@ package com.health.MinimalismFitnessApp.entities;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 import java.time.LocalDateTime;
 
@@ -20,14 +21,26 @@ public class WalkingData {
     private double speed;
     private LocalDateTime dateTime;
 
+    @ManyToOne
+    private UserData userData;
+
     public WalkingData() {}
-    public WalkingData(int steps, double distance, int caloriesBurned, double duration, double speed, LocalDateTime dateTime) {
+    public WalkingData(int steps, double distance, int caloriesBurned, double duration, double speed, LocalDateTime dateTime, UserData userData) {
         this.steps = steps;
         this.distance = distance;
         this.caloriesBurned = caloriesBurned;
         this.duration = duration;
         this.speed = speed;
         this.dateTime = dateTime;
+        this.userData = userData;
+    }
+
+    public UserData getUserData() {
+        return userData;
+    }
+
+    public void setUserData(UserData userData) {
+        this.userData = userData;
     }
 
     public Long getId() {
