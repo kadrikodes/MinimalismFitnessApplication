@@ -33,10 +33,10 @@ public class NutritionController {
         return nutritionService.getNutritionByName(name);
     }
 
-    @PostMapping("/addNutritionData")
-    public NutritionData addNutritionData(@RequestBody NutritionData nutritionData){
-        return nutritionService.addNutritionData(nutritionData);
-    }
+//    @PostMapping("/addNutritionData")
+//    public NutritionData addNutritionData(@RequestBody NutritionData nutritionData){
+//        return nutritionService.addNutritionData(nutritionData);
+//    }
 
     @DeleteMapping("/{nutritionID}")
     public void deleteNutritionData(@PathVariable long nutritionID){
