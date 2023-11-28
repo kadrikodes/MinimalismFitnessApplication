@@ -24,7 +24,7 @@ public class WalkingService {
     }
 
     public List<WalkingData> getWalkingDataByUserName(String name) {
-        return walkingRepository.findWalkingTrackerByUserName(name);
+        return walkingRepository.findWalkingDataByUserDataName(name);
     }
 
     public WalkingData addWalkingData(WalkingData walkingData) {

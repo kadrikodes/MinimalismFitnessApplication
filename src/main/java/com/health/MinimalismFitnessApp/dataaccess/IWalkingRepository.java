@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 public interface IWalkingRepository extends ListCrudRepository<WalkingData, Long> {
-    List<WalkingData> findWalkingTrackerByUserName(String name);
+    List<WalkingData> findWalkingDataByUserDataName(String name);
 
     List<WalkingData> findByDateTimeAndDistance(LocalDateTime dateTime, double distance);
 
