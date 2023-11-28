@@ -43,7 +43,7 @@ public class NutritionController {
 
     @DeleteMapping("/{nutritionID}")
     public void deleteNutritionData(@PathVariable long nutritionID){
-
+        nutritionService.deleteNutritionData(nutritionID);
     }
 
 }
