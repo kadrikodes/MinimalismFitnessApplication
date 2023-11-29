@@ -84,12 +84,28 @@ class SleepControllerIntegrationTest {
     }
 
     @Test
-    void getSleepRecordByName() {
-
+    void getSleepRecordByName() throws Exception {
+        MvcResult result =
+                (this.mockMvc.perform(MockMvcRequestBuilders.get("/sleeptracker/name/{name}", "ABC")))
+                        .andExpect(status().isOk())
+                        .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                        .andReturn();
+        String contentAsJson = result.getResponse().getContentAsString();
+        SleepData[] sleepData = mapper.readValue(contentAsJson, SleepData[].class);
+        assertEquals(10, sleepData[0].getId());
     }
 
     @Test
-    void getSleepRecordById() {
+    void getSleepRecordById() throws Exception {
+        MvcResult result =
+                (this.mockMvc.perform(MockMvcRequestBuilders.get("/sleeptracker/{sleepDataId}", 11L)))
+                        .andExpect(status().isOk())
+                        .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                        .andReturn();
+        String contentAsJson = result.getResponse().getContentAsString();
+        SleepData sleepData = mapper.readValue(contentAsJson, SleepData.class);
+        assertEquals("ABC", sleepData.getUser().getName());
+        assertEquals(11L, sleepData.getId());
     }
 
     @Test
