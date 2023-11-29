@@ -5,9 +5,10 @@ import org.springframework.stereotype.Repository;
 import org.springframework.data.repository.ListCrudRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Repository
 public interface IUserRepository extends ListCrudRepository<UserData,Long> {
-List<UserData> findUserDataByName(String name);
+Optional<UserData> findUserDataByName(String name);
 }

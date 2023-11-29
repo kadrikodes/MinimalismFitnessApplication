@@ -11,6 +11,7 @@ public class UserData {
     @Id
     @GeneratedValue
     private Long id;
+
     private String name;
     private double height;
     private double weight;
@@ -21,9 +22,8 @@ public class UserData {
 
     public UserData(){}
 
-    public UserData(String name, Long id, double height, double weight, LocalDate birthdate, String gender) {
+    public UserData(String name, double height, double weight, LocalDate birthdate, String gender) {
         this.name = name;
-        this.id = id;
         this.height = height;
         this.weight = weight;
         this.birthdate = birthdate;

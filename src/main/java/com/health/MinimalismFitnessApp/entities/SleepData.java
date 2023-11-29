@@ -1,9 +1,6 @@
 package com.health.MinimalismFitnessApp.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
 import java.time.LocalTime;
 
@@ -11,7 +8,8 @@ import java.time.LocalTime;
 public class SleepData {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator = "sleep_data_sequence")
+    @SequenceGenerator(name="sleep_data_sequence", initialValue = 100)
     private Long id;
     private LocalTime targetBedtime;
     private LocalTime targetWakeUpTime;
@@ -20,6 +18,10 @@ public class SleepData {
 
     @ManyToOne
     private UserData userData;
+
+    public SleepData(){
+
+    }
 
     public SleepData(LocalTime targetBedtime, LocalTime targetWakeUpTime, LocalTime actualBedtime, LocalTime actualWakeupTime, UserData userData) {
         this.targetBedtime = targetBedtime;
