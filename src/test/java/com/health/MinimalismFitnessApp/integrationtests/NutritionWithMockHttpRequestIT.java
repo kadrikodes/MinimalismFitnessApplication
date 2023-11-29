@@ -12,7 +12,8 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import static com.health.MinimalismFitnessApp.TestConstants.EXPECTED_NUTRITION_JSON;
+import static com.health.MinimalismFitnessApp.TestConstants.EXPECTED_ALL_NUTRITION_JSON;
+import static com.health.MinimalismFitnessApp.TestConstants.EXPECTED_ONE_NUTRITION_JSON;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -36,9 +37,24 @@ public class NutritionWithMockHttpRequestIT {
                 mockMvc.perform(MockMvcRequestBuilders.get("/nutrition"))
                         .andExpect(status().isOk())
                         .andExpect((content().contentType(MediaType.APPLICATION_JSON)))
-                        .andExpect(content().json(EXPECTED_NUTRITION_JSON))
+                        .andExpect(content().json(EXPECTED_ALL_NUTRITION_JSON))
                         .andReturn();
     }
+
+    @Test
+    public  void testGettingOneNutritionData() throws Exception {
+        long nutritionID = 1000L;
+
+        MvcResult mvcResult =
+                this.mockMvc.perform(MockMvcRequestBuilders.get("/nutrition/" + nutritionID ))
+                        .andExpect(status().isOk())
+                        .andExpect((content().contentType(MediaType.APPLICATION_JSON)))
+                        .andExpect(content().json(EXPECTED_ONE_NUTRITION_JSON))
+                        .andReturn();
+    }
+
+
+
 
 
 }
