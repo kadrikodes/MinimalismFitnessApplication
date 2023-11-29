@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
+@RequestMapping("/walking")
 public class WalkingController {
 
     WalkingService walkingService;
@@ -22,12 +23,12 @@ public class WalkingController {
         this.walkingService = walkingService;
     }
 
-    @GetMapping("/walking")
+    @GetMapping
     public List<WalkingData> getAllWalkingData() {
         return walkingService.findAll();
     }
 
-    @GetMapping("/walking/{walkingId}")
+    @GetMapping("/{walkingId}")
     public WalkingData getWalkingDataById(@PathVariable long walkingId) {
         WalkingData walkingData = walkingService.getWalkingDataById(walkingId);
 
@@ -37,7 +38,7 @@ public class WalkingController {
         return walkingData;
     }
 
-    @GetMapping("walking/user/name/{name}")
+    @GetMapping("/name/{name}")
     public List<WalkingData> getWalkingDataByUserName(@PathVariable String name) {
         return walkingService.getWalkingDataByUserName(name);
     }
@@ -47,7 +48,7 @@ public class WalkingController {
         return walkingService.addWalkingData(walkingData);
     }
 
-    @GetMapping("/walking/search")
+    @GetMapping("/search")
     public List<WalkingData> searchWalkingData(@RequestParam(required = false)LocalDateTime dateTime, @RequestParam(required = false) double distance) {
         return walkingService.searchEntriesByCriteria(dateTime, distance);
     }
@@ -57,14 +58,14 @@ public class WalkingController {
 //        return walkingService.getEntriesSortedByData();
 //    }
 
-    @PutMapping("/walking/update/{update}")
-    public WalkingData updateWalkingData(@PathVariable long id, @RequestBody WalkingData walkingData) {
-        return walkingService.updateWalkingData(id, walkingData);
+    @PutMapping("/{walkingId}")
+    public WalkingData updateWalkingData(@PathVariable long walkingId, @RequestBody WalkingData walkingData) {
+        return walkingService.updateWalkingData(walkingId, walkingData);
     }
 
-    @DeleteMapping("/walking/delete/{delete}")
-    public ResponseEntity<String> deleteWalkingData(@PathVariable long id) {
-        walkingService.deleteWalkingTracker(id);
+    @DeleteMapping("/{walkingId}")
+    public ResponseEntity<String> deleteWalkingData(@PathVariable long walkingId) {
+        walkingService.deleteWalkingTracker(walkingId);
         return ResponseEntity.ok("Walking data deleted successfully");
     }
 

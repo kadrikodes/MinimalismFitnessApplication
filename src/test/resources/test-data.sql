@@ -1,0 +1,1 @@
+INSERT INTO push_up_data (number_of_push_ups, target, time_duration, calories_burnt, id) VALUES (5, 10, 1.5, 50, 4);

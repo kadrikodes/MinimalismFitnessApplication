@@ -13,8 +13,6 @@ public class WalkingData {
     @GeneratedValue
     private Long Id;
     private int steps;
-
-
     private double distance;
     private int caloriesBurned;
     private double duration;
