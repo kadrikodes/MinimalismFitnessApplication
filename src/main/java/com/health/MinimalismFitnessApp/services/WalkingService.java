@@ -3,6 +3,7 @@ package com.health.MinimalismFitnessApp.services;
 import com.health.MinimalismFitnessApp.dataaccess.IWalkingRepository;
 import com.health.MinimalismFitnessApp.entities.WalkingData;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -11,8 +12,12 @@ import java.util.Optional;
 
 @Service
 public class WalkingService {
-
     private IWalkingRepository walkingRepository;
+
+    @Autowired
+    public WalkingService(IWalkingRepository walkingRepository) {
+        this.walkingRepository = walkingRepository;
+    }
 
     public List<WalkingData> findAll() {
         return walkingRepository.findAll();
@@ -28,7 +33,7 @@ public class WalkingService {
     }
 
     public WalkingData addWalkingData(WalkingData walkingData) {
-        return walkingData;
+        return walkingRepository.save(walkingData);
     }
 
     public List<WalkingData> searchEntriesByCriteria(LocalDateTime dateTime, double distance) {
@@ -39,8 +44,8 @@ public class WalkingService {
     //    return walkingRepository.findAllByOrderByDateAsc();
    // }
 
-    public WalkingData updateWalkingData(long id, WalkingData walkingData) {
-        WalkingData existingWalkingData = walkingRepository.findById(id)
+    public WalkingData updateWalkingData(long walkingId, WalkingData walkingData) {
+        WalkingData existingWalkingData = walkingRepository.findById(walkingId)
                 .orElseThrow(() -> new EntityNotFoundException("Walking data not found"));
 
         existingWalkingData.setDistance(walkingData.getDistance());
@@ -51,8 +56,8 @@ public class WalkingService {
         return walkingRepository.save(existingWalkingData);
     }
 
-    public void deleteWalkingTracker(long id) {
-        WalkingData walkingData = walkingRepository.findById(id)
+    public void deleteWalkingTracker(long walkingId) {
+        WalkingData walkingData = walkingRepository.findById(walkingId)
                 .orElseThrow(() -> new EntityNotFoundException("Walking data not found"));
 
         walkingRepository.delete(walkingData);
