@@ -23,8 +23,8 @@ public class PushUpController {
         return pushUpService.findAll();
     }
     @GetMapping("/user/{id}")
-    public List<PushUpData> getPushUpDataById(@PathVariable long id) {
-        return (List<PushUpData>) this.pushUpService.getPushUpDataById(id);
+    public PushUpData getPushUpDataById(@PathVariable long id) {
+        return this.pushUpService.getPushUpDataById(id);
     }
     @GetMapping("/{userName}")
     public List<PushUpData> getPushUpDataByUserName(@PathVariable String userName) {
@@ -32,7 +32,7 @@ public class PushUpController {
     }
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public PushUpData addPushUp(@RequestBody PushUpData pushUpData) {
+    public PushUpData addPushUpData(@RequestBody PushUpData pushUpData) {
         PushUpData newPushUp;
 
         try {
@@ -48,7 +48,7 @@ public class PushUpController {
     }
 
     @PutMapping("/{update}")
-    public PushUpData PushUpDataUpdate(@RequestBody PushUpData pushUpData) {
+    public PushUpData updatePushUpData(@RequestBody PushUpData pushUpData) {
         PushUpService.saveOrUpdate(pushUpData);
         return pushUpData;
     }

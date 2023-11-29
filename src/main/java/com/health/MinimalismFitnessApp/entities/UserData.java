@@ -10,8 +10,8 @@ import java.time.LocalDate;
 public class UserData {
     @Id
     @GeneratedValue
-    private String name;
     private Long id;
+    private String name;
     private double height;
     private double weight;
     private LocalDate birthdate;
