@@ -32,7 +32,7 @@ public class PushUpController {
     }
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public PushUpData addPushUp(@RequestBody PushUpData pushUpData) {
+    public PushUpData addPushUpData(@RequestBody PushUpData pushUpData) {
         PushUpData newPushUp;
 
         try {
@@ -45,5 +45,11 @@ public class PushUpController {
     @DeleteMapping("/user/{delete}")
     public void deletePushUpData(@PathVariable("delete") long delete) {
         PushUpService.delete(delete);
+    }
+
+    @PutMapping("/{update}")
+    public PushUpData updatePushUpData(@RequestBody PushUpData pushUpData) {
+        PushUpService.saveOrUpdate(pushUpData);
+        return pushUpData;
     }
 }

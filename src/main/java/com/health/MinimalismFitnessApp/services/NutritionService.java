@@ -17,7 +17,11 @@ public class NutritionService {
     IUserRepository userRepository;
 
     @Autowired
-    public NutritionService(INutritionRepository nutritionRepository) {this.nutritionRepository = nutritionRepository; }
+    public NutritionService(INutritionRepository nutritionRepository, IUserRepository userRepository) {
+        this.nutritionRepository = nutritionRepository;
+        this.userRepository = userRepository;
+    }
+
 
     public List<NutritionData> findAll(){ return nutritionRepository.findAll();}
 
@@ -28,24 +32,39 @@ public class NutritionService {
 
     public List<NutritionData> getNutritionByName(String name){ return nutritionRepository.findNutritionDataByUserDataName(name);}
 
-//    public NutritionData addNutritionData(NutritionData nutritionData){
-//        String name = nutritionData.getUser().getName();
-//        Optional<UserData> prospectiveUser = userRepository.findUserDataByUserDataName(name);
-//        if(prospectiveUser.isEmpty()){
-//            UserData userData = userRepository.save(nutritionData.getUser());
-//            nutritionData.setUser(userData);
-//        } else{
-//            nutritionData.setUser(prospectiveUser.get());
-//        }
-//
-//        return nutritionRepository.save(nutritionData);
-//    }
+    public NutritionData addNutritionData(NutritionData nutritionData){
+        String name = nutritionData.getUser().getName();
+        Optional<UserData> prospectiveUser = userRepository.findUserDataByName(name);
+        if(prospectiveUser.isEmpty()){
+            UserData userData = userRepository.save(nutritionData.getUser());
+            nutritionData.setUser(userData);
+        } else{
+            nutritionData.setUser(prospectiveUser.get());
+        }
 
-    public void deleteNutritionData(long nutritionID){
-        nutritionRepository.deleteById(nutritionID);
+        return nutritionRepository.save(nutritionData);
     }
 
-    public boolean checkNutritionDataExistsByID(long nutritionID){
-        return nutritionRepository.existsById(nutritionID);
+    public void deleteNutritionData(long nutritionID){
+        if (nutritionRepository.existsById(nutritionID)){
+            nutritionRepository.deleteById(nutritionID);
+        }else{
+            throw new IllegalArgumentException("Nutrition data with ID " + nutritionID + " not found");
+        }
+    }
+
+    public NutritionData updateNutritionData(long nutritionID, NutritionData nutritionData) {
+        NutritionData nutritionDataUpdate = nutritionRepository.findById(nutritionID).orElseThrow();
+
+        nutritionDataUpdate.setFoodName(nutritionData.getFoodName());
+        nutritionDataUpdate.setCalories(nutritionData.getCalories());
+        nutritionDataUpdate.setProtein(nutritionData.getProtein());
+        nutritionDataUpdate.setCarbohydrates(nutritionData.getCarbohydrates());
+        nutritionDataUpdate.setFats(nutritionData.getFats());
+        nutritionDataUpdate.setMealType(nutritionData.getMealType());
+        nutritionDataUpdate.setUser(nutritionData.getUser());
+
+        nutritionRepository.save(nutritionDataUpdate);
+        return nutritionDataUpdate;
     }
 }

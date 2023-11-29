@@ -12,6 +12,7 @@ import java.util.Optional;
 public class PushUpService {
 
     static IPushUpRepository pushUpRepository;
+
     @Autowired
     public PushUpService(IPushUpRepository pushUpRepository) {
         this.pushUpRepository = pushUpRepository;
@@ -19,6 +20,11 @@ public class PushUpService {
 
     public static void delete(long delete) {
         pushUpRepository.deleteById(delete);
+    }
+
+    public static PushUpData saveOrUpdate(PushUpData pushUpData) {
+        pushUpRepository.save(pushUpData);
+        return pushUpData;
     }
 
     public List<PushUpData> findAll() {
@@ -37,4 +43,8 @@ public class PushUpService {
     public PushUpData addPushUpData(PushUpData pushUpData) {
         return pushUpData;
     }
+
+//    public void updatePushUpData(PushUpData pushUpData, long id) {
+//        pushUpRepository.save(pushUpData);
+//    }
 }
