@@ -20,8 +20,8 @@ public class SleepController {
     }
 
     @GetMapping("/{sleepDataId}")
-    public SleepData getSleepRecordById(@PathVariable Long id) {
-        return sleepService.getSleepRecordById(id);
+    public SleepData getSleepRecordById(@PathVariable Long sleepDataId) {
+        return sleepService.getSleepRecordById(sleepDataId);
     }
 
     @GetMapping("/name/{name}")
@@ -44,11 +44,11 @@ public class SleepController {
         }
     }
 
-    @PutMapping("/{sleepDataId}")
+    @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public SleepData updateSleepRecord(@PathVariable Long sleepDataId, @RequestBody SleepData sleepData) {
+    public SleepData updateSleepRecord(@PathVariable Long id, @RequestBody SleepData sleepData) {
         try {
-            return sleepService.updateSleepRecord(sleepDataId, sleepData);
+            return sleepService.updateSleepRecord(id, sleepData);
         } catch (IllegalArgumentException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         } catch (Exception e) {
