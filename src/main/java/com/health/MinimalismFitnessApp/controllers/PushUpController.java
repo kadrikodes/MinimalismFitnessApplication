@@ -23,8 +23,8 @@ public class PushUpController {
         return pushUpService.findAll();
     }
     @GetMapping("/user/{id}")
-    public List<PushUpData> getPushUpDataById(@PathVariable long id) {
-        return (List<PushUpData>) this.pushUpService.getPushUpDataById(id);
+    public PushUpData getPushUpDataById(@PathVariable long id) {
+        return this.pushUpService.getPushUpDataById(id);
     }
     @GetMapping("/{userName}")
     public List<PushUpData> getPushUpDataByUserName(@PathVariable String userName) {
