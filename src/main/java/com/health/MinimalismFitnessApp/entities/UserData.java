@@ -1,15 +1,14 @@
 package com.health.MinimalismFitnessApp.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
 @Entity
 public class UserData {
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator = "message_sequence")
+    @SequenceGenerator(name="message_sequence", initialValue = 100)
     private Long id;
 
     private String name;
@@ -17,6 +16,11 @@ public class UserData {
     private double weight;
     private LocalDate birthdate;
     private String gender;
+public static final String MALE="MALE";
+public static final String FEMALE="FEMALE";
+
+
+
 
     //@OneToMany //TODO : add this mapping + ArrayList
 
