@@ -20,8 +20,8 @@ public class SleepController {
     }
 
     @GetMapping("/{sleepDataId}")
-    public SleepData getSleepRecordById(@PathVariable Long id) {
-        return sleepService.getSleepRecordById(id);
+    public SleepData getSleepRecordById(@PathVariable Long sleepDataId) {
+        return sleepService.getSleepRecordById(sleepDataId);
     }
 
     @GetMapping("/name/{name}")
