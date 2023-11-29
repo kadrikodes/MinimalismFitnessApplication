@@ -22,6 +22,8 @@ import java.time.LocalDate;
 import static com.health.MinimalismFitnessApp.TestConstants.EXPECTED_ALL_NUTRITION_JSON;
 import static com.health.MinimalismFitnessApp.TestConstants.EXPECTED_ONE_NUTRITION_JSON;
 
+import static org.hamcrest.Matchers.emptyOrNullString;
+import static org.hamcrest.Matchers.isEmptyOrNullString;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -60,6 +62,17 @@ public class NutritionWithMockHttpRequestIT {
                         .andExpect(content().json(EXPECTED_ONE_NUTRITION_JSON))
                         .andReturn();
     }
+
+    @Test
+    void deleteNutritionRecord() throws Exception {
+        long nutritionID = 1000L;
+
+        mockMvc.perform(MockMvcRequestBuilders.delete("/nutrition/" + nutritionID))
+                        .andExpect(status().isNoContent())
+                        .andExpect(content().string(emptyOrNullString()));
+    }
+
+
 
     @Test
     public void testAddingANutritionRecord() throws Exception {

@@ -46,7 +46,11 @@ public class NutritionService {
     }
 
     public void deleteNutritionData(long nutritionID){
-        nutritionRepository.deleteById(nutritionID);
+        if (nutritionRepository.existsById(nutritionID)){
+            nutritionRepository.deleteById(nutritionID);
+        }else{
+            throw new IllegalArgumentException("Nutrition data with ID " + nutritionID + " not found");
+        }
     }
 
     public NutritionData updateNutritionData(long nutritionID, NutritionData nutritionData) {

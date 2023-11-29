@@ -38,8 +38,15 @@ public class NutritionController {
     }
 
     @DeleteMapping("/{nutritionID}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteNutritionData(@PathVariable long nutritionID){
-        nutritionService.deleteNutritionData(nutritionID);
+        try{
+            nutritionService.deleteNutritionData(nutritionID);
+        } catch (IllegalArgumentException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Internal Server Error", e);
+        }
     }
 
     @PutMapping("/{nutritionID}")
