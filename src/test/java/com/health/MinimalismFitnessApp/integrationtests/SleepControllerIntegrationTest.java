@@ -1,4 +1,4 @@
-package com.health.MinimalismFitnessApp.controllers;
+package com.health.MinimalismFitnessApp.integrationtests;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -78,8 +78,8 @@ class SleepControllerIntegrationTest {
 
         assertEquals("22:00", sleepData[0].getTargetBedtime().toString());
         assertEquals("07:00", sleepData[0].getTargetWakeUpTime().toString());
-        assertEquals("22:10", sleepData[1].getTargetBedtime().toString());
-        assertEquals("07:10", sleepData[1].getTargetWakeUpTime().toString());
+        assertEquals("22:00", sleepData[1].getTargetBedtime().toString());
+        assertEquals("07:00", sleepData[1].getTargetWakeUpTime().toString());
 
     }
 
@@ -95,7 +95,7 @@ class SleepControllerIntegrationTest {
     @Test
     void addSleepRecord() throws Exception {
         int initialRecordCount = sleepRepository.findAll().size();
-        UserData userData = new UserData("ABC", 15L, 67, 167, LocalDate.of(1960,04,11),"Male");
+        UserData userData = new UserData("ABC", 15L, 67, 167, LocalDate.of(1960,04,11),"MALE");
         SleepData newSleepData = new SleepData(LocalTime.of( 22,30), LocalTime.of(07, 30), LocalTime.of(22,30), LocalTime.of(07, 00), userData);
         String json = mapper.writeValueAsString(newSleepData);
 

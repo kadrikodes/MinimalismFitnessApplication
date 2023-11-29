@@ -77,7 +77,7 @@ public class NutritionWithMockHttpRequestIT {
     @Test
     public void testAddingANutritionRecord() throws Exception {
         int originalNumOfNutritionRecords = getNumberOfNutritionRecords();
-        UserData testUser = new UserData("Samuel", 174, 82.5, LocalDate.of(1996,10,12), "Male");
+        UserData testUser = new UserData("Samuel", 100L, 174, 82.5, LocalDate.of(1996,10,12), "Male");
         NutritionData testNutritionData = new NutritionData("Burger", 300, 50, 30, 20, "Lunch", testUser);
 
         String json = objectMapper.writeValueAsString(testNutritionData);
