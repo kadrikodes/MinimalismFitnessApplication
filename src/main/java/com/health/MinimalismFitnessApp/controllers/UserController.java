@@ -10,7 +10,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 public class UserController {
     UserService userService;
 
@@ -21,8 +21,8 @@ public class UserController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseStatusException addUser(@RequestBody UserData userData) {
-        ResponseStatusException newUser;
+    public UserData addUser(@RequestBody UserData userData) {
+        UserData newUser;
         try {
             newUser=this.userService.addUser(userData);
         } catch (IllegalArgumentException e) {
@@ -49,7 +49,7 @@ public class UserController {
 
     @PutMapping("/{userId}")
     @ResponseStatus(HttpStatus.OK)
-    public UserData updateUser(@PathVariable long userId, @RequestBody UserData updatedUserData) {
+    public UserData updateUser(@PathVariable Long userId, @RequestBody UserData updatedUserData) {
         try {
             userService.updateUser(userId, updatedUserData);
         } catch (IllegalArgumentException e) {
