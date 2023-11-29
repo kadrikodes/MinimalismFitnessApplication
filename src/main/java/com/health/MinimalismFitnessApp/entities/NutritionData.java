@@ -18,6 +18,8 @@ public class NutritionData {
     @ManyToOne
     private UserData userData;
 
+    public NutritionData(){}
+
     public NutritionData(String foodName, int calories, int protein, int carbohydrates, int fats, String mealType, UserData userData) {
         this.foodName = foodName;
         this.calories = calories;
