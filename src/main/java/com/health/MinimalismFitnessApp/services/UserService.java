@@ -1,6 +1,7 @@
 package com.health.MinimalismFitnessApp.services;
 
 import com.health.MinimalismFitnessApp.dataaccess.IUserRepository;
+import com.health.MinimalismFitnessApp.entities.NutritionData;
 import com.health.MinimalismFitnessApp.entities.UserData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -75,4 +76,8 @@ public class UserService {
         throw new ResponseStatusException(HttpStatus.OK, "User with ID " + userId + " has been successfully deleted.");
     }}
 
+    public UserData findByID(long userId) {
+        Optional<UserData> userData = iUserRepository.findById(userId);
+        return userData.orElse(null);
+    }
 }

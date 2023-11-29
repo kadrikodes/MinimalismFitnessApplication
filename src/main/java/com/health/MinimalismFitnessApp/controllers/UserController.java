@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
@@ -38,13 +39,8 @@ public class UserController {
     }
 
     @GetMapping("/{userId}")
-    public UserData getAllUsers() {
-        List<UserData> users = userService.findAll();
-        if (users.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
-        } else {
-            throw new ResponseStatusException(HttpStatus.OK, "User not found");
-        }
+    public UserData getUserById(@PathVariable long userId) {
+        return userService.findByID(userId);
     }
 
     @PutMapping("/{userId}")
