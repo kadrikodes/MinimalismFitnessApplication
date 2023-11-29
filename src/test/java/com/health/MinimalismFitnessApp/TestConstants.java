@@ -1,3 +1,5 @@
+package com.health.MinimalismFitnessApp;
+
 public class TestConstants {
 
     public static final String EXPECTED_NUTRITION_JSON = """
