@@ -17,7 +17,11 @@ public class NutritionService {
     IUserRepository userRepository;
 
     @Autowired
-    public NutritionService(INutritionRepository nutritionRepository) {this.nutritionRepository = nutritionRepository; }
+    public NutritionService(INutritionRepository nutritionRepository, IUserRepository userRepository) {
+        this.nutritionRepository = nutritionRepository;
+        this.userRepository = userRepository;
+    }
+
 
     public List<NutritionData> findAll(){ return nutritionRepository.findAll();}
 
