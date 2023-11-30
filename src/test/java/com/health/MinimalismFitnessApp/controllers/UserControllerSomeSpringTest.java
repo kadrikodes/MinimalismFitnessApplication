@@ -22,7 +22,7 @@ import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(UserController.class)
-class UserControllerTest {
+class UserControllerSomeSpringTest {
 
     @MockBean
     UserService mockUserService;
