@@ -2,6 +2,7 @@ package com.health.MinimalismFitnessApp.entities;
 
 import jakarta.persistence.*;
 
+import java.time.Duration;
 import java.time.LocalTime;
 
 @Entity
@@ -15,8 +16,11 @@ public class SleepData {
     private LocalTime targetWakeUpTime;
     private LocalTime actualBedtime;
     private LocalTime actualWakeupTime;
+    @Transient
+    private long sleepDuration;
 
     @ManyToOne
+    @JoinColumn(name = "user_data_id")
     private UserData userData;
 
     public SleepData(){
@@ -77,6 +81,37 @@ public class SleepData {
 
     public void setActualWakeupTime(LocalTime actualWakeupTime) {
         this.actualWakeupTime = actualWakeupTime;
+    }
+
+    public long getSleepDuration() {
+        return sleepDuration;
+    }
+
+    public void setSleepDuration(long sleepDuration) {
+        this.sleepDuration = sleepDuration;
+    }
+
+    public void calculateSleepHours() {
+        if(actualBedtime != null && actualWakeupTime != null) {
+            Duration sleepDuration = Duration.between(actualBedtime, actualWakeupTime);
+            long hoursPart = sleepDuration.toHoursPart();
+            long minutesPart = sleepDuration.toMinutesPart();
+            this.sleepDuration = Math.abs(Math.abs((hoursPart + (minutesPart / 60)))-24);
+        }
+        else {
+            System.out.println("Please provide both actual bedtime and wake-up time");
+        }
+    }
+
+    public void inferenceFromSleepData() {
+        if(sleepDuration > 8*60) {
+            System.out.println("You had a good night's sleep");
+        } else if (sleepDuration >= 6*60 && sleepDuration <= 8*60) {
+            System.out.println("Your sleep duration is within the recommended range");
+        } else {
+            System.out.println("Consider improving your sleep");
+        }
+
     }
 
 }
