@@ -1,10 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            image 'maven:3.9.0'
-            args '-v /root/.m2:/root/.m2'
-        }
-    }
+    agent any
     options {
         skipStagesAfterUnstable()
     }
@@ -16,52 +11,30 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'mvn test'
-            }
-            post {
-                always {
-                    junit 'target/surefire-reports/*.xml'
-                }
+                sh 'mvn test -f pom.xml'
             }
         }
         stage('SonarQube Analysis') {
-                            steps {
-                                script {
-                                    withSonarQubeEnv('sonarqube') {
-                //                        sh "${tool('sonar-scanner')}/bin/sonar-scanner -Dsonar.projectKey=myProjectKey -Dsonar.projectName=myProjectName"
-                                        sh 'mvn clean package sonar:sonar'
-                                    }
-                                }
-                            }
-        }
-        stage("Quality Gate") {
             steps {
-             timeout(time: 15, unit: 'MINUTES') {
-                waitForQualityGate abortPipeline: false
-               }
-             }
-         }
-        stage('Deliver') {
-            steps {
-            //    sh './jenkins/scripts/deliver.sh'
-            echo "Delivery successful"
+                script {
+                    withSonarQubeEnv('sonarqube') {
+                        sh 'mvn sonar:sonar -Pcoverage'
+                    }
+                }
             }
         }
-     }
+       stage("Quality Gate") {
+           steps {
+             timeout(time: 15, unit: 'MINUTES') {
+               waitForQualityGate abortPipeline: true
+             }
+           }
+         }
+        stage('Deploy') {
+            steps {
+                echo "[INFO] DEPLOYMENT SUCCESS!!!"
+                //sh './jenkins/scripts/deploy.sh'
+            }
+        }
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
