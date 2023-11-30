@@ -4,6 +4,7 @@ import com.health.MinimalismFitnessApp.entities.PushUpData;
 import com.health.MinimalismFitnessApp.services.PushUpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -47,9 +48,28 @@ public class PushUpController {
         PushUpService.delete(delete);
     }
 
+//    @PutMapping("/{update}")
+//    public PushUpData updatePushUpData(@RequestBody PushUpData pushUpData) {
+//        PushUpService.saveOrUpdate(pushUpData);
+//        return pushUpData;
+//    }
+
     @PutMapping("/{update}")
-    public PushUpData updatePushUpData(@RequestBody PushUpData pushUpData) {
-        PushUpService.saveOrUpdate(pushUpData);
-        return pushUpData;
+    public ResponseEntity<PushUpData> updatePushUpData(@PathVariable("update") long id, @RequestBody PushUpData pushUpData) {
+        PushUpData existingPushUpData = pushUpService.getPushUpDataById(id);
+
+        if (existingPushUpData == null) {
+
+            return ResponseEntity.notFound().build();
+        }
+
+        existingPushUpData.setNumberOfPushUps(pushUpData.getNumberOfPushUps());
+        existingPushUpData.setTarget(pushUpData.getTarget());
+        existingPushUpData.setTimeDuration(pushUpData.getTimeDuration());
+        existingPushUpData.setCaloriesBurnt(pushUpData.getCaloriesBurnt());
+
+        pushUpService.saveOrUpdate(existingPushUpData);
+
+        return ResponseEntity.ok(existingPushUpData);
     }
 }

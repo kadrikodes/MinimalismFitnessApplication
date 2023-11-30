@@ -1,6 +1,7 @@
 package com.health.MinimalismFitnessApp.integrationtests;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.health.MinimalismFitnessApp.dataaccess.IWalkingRepository;
 import com.health.MinimalismFitnessApp.entities.UserData;
 import com.health.MinimalismFitnessApp.entities.WalkingData;
 import com.health.MinimalismFitnessApp.services.WalkingService;
@@ -19,8 +20,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -33,7 +33,7 @@ public class WalkingDataWithMockHttpRequestsTest {
     @Autowired
     MockMvc mockMvc;
     @Autowired
-    WalkingService walkingService;
+    IWalkingRepository walkingRepository;
     @Autowired
     ObjectMapper mapper;
 
@@ -168,5 +168,7 @@ public class WalkingDataWithMockHttpRequestsTest {
         mockMvc.perform(MockMvcRequestBuilders.delete("/walking/" + walkingId))
                 .andExpect(status().isOk())
                 .andReturn();
+        WalkingData deletedWalkingData = walkingRepository.findById(1000L).orElse(null);
+        assertNull(deletedWalkingData, "Walking data deleted successfully");
     }
 }
