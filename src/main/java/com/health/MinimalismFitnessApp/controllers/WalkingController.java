@@ -68,6 +68,4 @@ public class WalkingController {
         walkingService.deleteWalkingTracker(walkingId);
         return ResponseEntity.ok("Walking data deleted successfully");
     }
-
-
 }
