@@ -19,19 +19,19 @@ public class SleepController {
         this.sleepService = sleepService;
     }
 
+    @GetMapping
+    public List<SleepData> getAllSleepData() {
+        return sleepService.getAllSleepData();
+    }
+
     @GetMapping("/{sleepDataId}")
     public SleepData getSleepDataById(@PathVariable Long sleepDataId) {
-        return sleepService.getSleepRecordById(sleepDataId);
+        return sleepService.getSleepDataById(sleepDataId);
     }
 
     @GetMapping("/name/{name}")
     public List<SleepData> getSleepRecordByName(@PathVariable String name) {
         return sleepService.getSleepRecordByName(name);
-    }
-
-    @GetMapping
-    public List<SleepData> getAllSleepRecords() {
-        return sleepService.getAllSleepRecords();
     }
 
     @PostMapping

@@ -27,11 +27,11 @@ public class SleepService {
         return this.userRepository.findAll();
     }
 
-    public List<SleepData> getAllSleepRecords() {
+    public List<SleepData> getAllSleepData() {
         return sleepRepository.findAll();
     }
 
-    public SleepData getSleepRecordById(long sleepId){
+    public SleepData getSleepDataById(long sleepId){
         Optional<SleepData> sleepTracker = sleepRepository.findById(sleepId);
         return sleepTracker.orElse(null);
     }
@@ -69,5 +69,7 @@ public class SleepService {
             throw new IllegalArgumentException("Sleep record not found with ID:" + sleepDataId);
         }
     }
+
+
 
 }
