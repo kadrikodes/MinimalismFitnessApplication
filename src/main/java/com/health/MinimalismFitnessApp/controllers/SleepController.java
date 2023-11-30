@@ -20,7 +20,7 @@ public class SleepController {
     }
 
     @GetMapping("/{sleepDataId}")
-    public SleepData getSleepRecordById(@PathVariable Long sleepDataId) {
+    public SleepData getSleepDataById(@PathVariable Long sleepDataId) {
         return sleepService.getSleepRecordById(sleepDataId);
     }
 
@@ -67,5 +67,27 @@ public class SleepController {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Internal Server Error", e);
         }
     }
+
+    @PostMapping("/calculate-sleep-hours")
+    @ResponseStatus(HttpStatus.OK)
+    public void calculateSleepHours(@RequestBody SleepData sleepData) {
+        try {
+            sleepData.calculateSleepHours();
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error calculating sleep hours", e);
+        }
+    }
+
+    @PostMapping("/inference-from-sleep-data")
+    @ResponseStatus(HttpStatus.OK)
+    public void inferenceFromSleepData(@RequestBody SleepData sleepData) {
+        try {
+            sleepData.inferenceFromSleepData();
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error generating sleep inference", e);
+        }
+    }
+
+
 
 }

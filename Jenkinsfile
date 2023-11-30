@@ -16,50 +16,30 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'mvn test'
-            }
-            post {
-                always {
-                    junit 'target/surefire-reports/*.xml'
-                }
+                sh 'mvn test -f pom.xml'
             }
         }
         stage('SonarQube Analysis') {
-             steps {
-                 script {
-                     withSonarQubeEnv('sonarqube') {
-                         sh 'mvn clean package sonar:sonar'
-                     }
-                 }
-             }
-        }
-        stage("Quality Gate") {
             steps {
+                script {
+                    withSonarQubeEnv('sonarqube') {
+                        sh 'mvn sonar:sonar -Pcoverage'
+                    }
+                }
+            }
+        }
+       stage("Quality Gate") {
+           steps {
              timeout(time: 15, unit: 'MINUTES') {
-                waitForQualityGate abortPipeline: false
-               }
+               waitForQualityGate abortPipeline: true
              }
-        }
-        stage('Deliver') {
+           }
+         }
+        stage('Deploy') {
             steps {
-            echo "Delivery successful"
+                echo "[INFO] DEPLOYMENT SUCCESS!!!"
+                //sh './jenkins/scripts/deploy.sh'
             }
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
