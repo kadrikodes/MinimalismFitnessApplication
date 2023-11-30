@@ -54,7 +54,7 @@ class PushUpControllerWithMockHttpRequestIT {
         PushUpData deletedPushUpData = pushUpRepository.findById(4L).orElse(null);
         //assertNotNull(deletedPushUpData, "PushUp Data exists before deletion");
 
-        mockMvc.perform(MockMvcRequestBuilders.delete("/pushups/user/{pushUpId}", 4)
+        mockMvc.perform(MockMvcRequestBuilders.delete("/pushups/user/{delete}", 4)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andReturn();
