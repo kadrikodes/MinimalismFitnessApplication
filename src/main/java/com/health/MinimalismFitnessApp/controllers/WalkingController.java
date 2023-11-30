@@ -1,7 +1,6 @@
 package com.health.MinimalismFitnessApp.controllers;
 
 import com.health.MinimalismFitnessApp.entities.WalkingData;
-import com.health.MinimalismFitnessApp.services.UserService;
 import com.health.MinimalismFitnessApp.services.WalkingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.health.MinimalismFitnessApp.dataaccess.IWalkingRepository;
 import com.health.MinimalismFitnessApp.entities.UserData;
 import com.health.MinimalismFitnessApp.entities.WalkingData;
-import com.health.MinimalismFitnessApp.services.WalkingService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
