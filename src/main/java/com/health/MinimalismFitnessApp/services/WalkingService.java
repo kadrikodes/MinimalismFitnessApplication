@@ -1,6 +1,7 @@
 package com.health.MinimalismFitnessApp.services;
 
 import com.health.MinimalismFitnessApp.dataaccess.IWalkingRepository;
+import com.health.MinimalismFitnessApp.entities.UserData;
 import com.health.MinimalismFitnessApp.entities.WalkingData;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,10 +41,6 @@ public class WalkingService {
         return walkingRepository.findByDateTimeAndDistance(dateTime, distance);
     }
 
-    //public List<WalkingData> getEntriesSortedByData() {
-    //    return walkingRepository.findAllByOrderByDateAsc();
-   // }
-
     public WalkingData updateWalkingData(long walkingId, WalkingData walkingData) {
         WalkingData existingWalkingData = walkingRepository.findById(walkingId)
                 .orElseThrow(() -> new EntityNotFoundException("Walking data not found"));
@@ -61,5 +58,57 @@ public class WalkingService {
                 .orElseThrow(() -> new EntityNotFoundException("Walking data not found"));
 
         walkingRepository.delete(walkingData);
+    }
+
+    public int calculateStepsToBurnCalories(double caloriesToBurn, double caloriesPerStep) {
+        return (int) Math.ceil(caloriesToBurn / caloriesPerStep);
+    }
+
+    public double calculateWeightLoss(int stepsTaken, double caloriesPerStep, double caloriesPerKg) {
+        double caloriesBurned = stepsTaken * caloriesPerStep;
+        return caloriesBurned / caloriesPerKg;
+    }
+    public boolean hasAchievedDailyGoal(int stepsTaken, int dailyStepGoal) {
+        return stepsTaken >= dailyStepGoal;
+    }
+    public boolean hasAchievedWeeklyGoal(int stepsTaken, int weeklyStepGoal) {
+        return stepsTaken >= weeklyStepGoal;
+    }
+    public boolean hasAchievedMonthlyGoal(int stepsTaken, int monthlyStepGoal) {
+        return stepsTaken >= monthlyStepGoal;
+    }
+
+    public double getCaloriesPerStep() {
+        return 0.05;
+    }
+
+    public double getCaloriesPerKg() {
+        return 7700;
+    }
+
+    public int getDailyStepGoal() {
+        return 15000;
+    }
+
+    public int getWeeklyStepGoal() {
+        return 105000;
+    }
+
+    public int getMonthlyStepGoal() {
+        return 420000;
+    }
+
+    public double calculateTotalCaloriesBurned(long walkingId) {
+        walkingRepository.findById(walkingId)
+                .orElseThrow(() -> new EntityNotFoundException("Walking Id not found"));
+
+        Optional<WalkingData> walkingDataList = walkingRepository.findById(walkingId);
+
+        double totalCaloriesBurned = walkingDataList.stream()
+                .mapToDouble(WalkingData::getCaloriesBurned)
+                .sum();
+
+        return totalCaloriesBurned;
+
     }
 }

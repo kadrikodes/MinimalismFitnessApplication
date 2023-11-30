@@ -20,8 +20,8 @@ public class PushUpService {
         this.pushUpRepository = pushUpRepository;
     }
 
-    public static void delete(long delete) {
-        pushUpRepository.deleteById(delete);
+    public static void delete(long pushUpId) {
+        pushUpRepository.deleteById(pushUpId);
     }
 
     public static PushUpData saveOrUpdate(PushUpData pushUpData) {
@@ -33,8 +33,8 @@ public class PushUpService {
         return pushUpRepository.findAll();
     }
 
-    public PushUpData getPushUpDataById(long pushUpDataId) {
-        Optional<PushUpData> pushUpData = pushUpRepository.findById(pushUpDataId);
+    public PushUpData getPushUpDataById(long pushUpId) {
+        Optional<PushUpData> pushUpData = pushUpRepository.findById(pushUpId);
         return pushUpData.orElse(null);
     }
 

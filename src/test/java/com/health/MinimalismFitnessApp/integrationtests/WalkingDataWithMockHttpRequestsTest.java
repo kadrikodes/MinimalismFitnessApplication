@@ -19,6 +19,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Timer;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -40,7 +41,7 @@ public class WalkingDataWithMockHttpRequestsTest {
     @Test
     public void testGettingAllWalkingData() throws Exception {
         MvcResult result =
-                (this.mockMvc.perform(MockMvcRequestBuilders.get("/walking")))
+                (this.mockMvc.perform(MockMvcRequestBuilders.get("/walking/allWalkingData")))
                         .andExpect(status().isOk())
                         .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                         .andReturn();
@@ -154,21 +155,158 @@ public class WalkingDataWithMockHttpRequestsTest {
 
         String jsonRequest = mapper.writeValueAsString(updatedData);
 
-        mockMvc.perform(MockMvcRequestBuilders.put("/walking/" + walkingId)
+        mockMvc.perform(MockMvcRequestBuilders.put("/walking/update/" + walkingId)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonRequest))
                 .andExpect(status().isOk())
                 .andReturn();
+
+        WalkingData updatedWalkingData = walkingRepository.findById(1000L).orElse(null);
+        assertNotNull(updatedWalkingData);
+        assertEquals(updatedData.getSteps(), updatedWalkingData.getSteps());
+        assertEquals(updatedData.getDistance(), updatedWalkingData.getDistance());
     }
 
     @Test
     void testDeleteWalkingData() throws Exception {
         long walkingId = 1000L;
 
-        mockMvc.perform(MockMvcRequestBuilders.delete("/walking/" + walkingId))
+        mockMvc.perform(MockMvcRequestBuilders.delete("/walking/delete/" + walkingId))
                 .andExpect(status().isOk())
                 .andReturn();
         WalkingData deletedWalkingData = walkingRepository.findById(1000L).orElse(null);
         assertNull(deletedWalkingData, "Walking data deleted successfully");
     }
+
+    @Test
+    void testStepsToBurnCalories() throws Exception {
+        double caloriesToBurn = 500.0;
+
+        MvcResult result =
+                (this.mockMvc.perform(MockMvcRequestBuilders.get("/walking/calculateStepsToBurnCalories")
+                        .param("caloriesToBurn", String.valueOf(caloriesToBurn))))
+                        .andExpect(status().isOk())
+                        .andReturn();
+
+        int steps = Integer.parseInt(result.getResponse().getContentAsString());
+        assertTrue(steps > 0);
+    }
+
+    @Test
+    void testCalculateWeightLoss() throws Exception {
+        int steps = 1000;
+
+        MvcResult result =
+                (this.mockMvc.perform(MockMvcRequestBuilders.get("/walking/calculateWeightLoss")
+                        .param("stepsTaken", String.valueOf(steps))))
+                        .andExpect(status().isOk())
+                        .andReturn();
+
+        double weightLoss = Double.parseDouble(result.getResponse().getContentAsString());
+        assertTrue(weightLoss > 0);
+    }
+
+    @Test
+    public void testGetTotalCaloriesBurned() throws Exception {
+        long walkingId = 1000L;
+
+        MvcResult result =
+                (this.mockMvc.perform(MockMvcRequestBuilders.get("/walking/calories/" + walkingId)))
+                        .andExpect(status().isOk())
+                        .andReturn();
+
+        double totalCaloriesBurned = Double.parseDouble(result.getResponse().getContentAsString());
+        assertTrue(totalCaloriesBurned > 0);
+    }
+
+    @Test
+    void testScheduleWalkReminder() throws Exception {
+        int hours = 1;
+        int minutes = 30;
+
+        MvcResult result =
+                (this.mockMvc.perform(MockMvcRequestBuilders.get("/walking/calculateWeightLoss")
+                        .param("stepsTaken", String.valueOf(hours))
+                        .param("minutes", String.valueOf(minutes)))
+                        .andExpect(status().isOk())
+                        .andReturn());
+
+        WalkingData scheduleReminder = walkingRepository.findById(1000L).orElse(null);
+
+        assertNotNull(scheduleReminder);
+    }
+
+    @Test
+    void testHasAchievedDailyGoal() throws Exception {
+        int stepsTaken = 16000;
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/walking/hasAchievedDailyGoal")
+                        .param("stepsTaken", String.valueOf(stepsTaken)))
+                .andExpect(status().isOk())
+                .andExpect(content().string("true"));
+
+        assertTrue(stepsTaken >= 15000);
+    }
+
+    @Test
+    void testHasNotAchievedDailyGoal() throws Exception {
+        int stepsTaken = 10000;
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/walking/hasAchievedDailyGoal")
+                        .param("stepsTaken", String.valueOf(stepsTaken)))
+                .andExpect(status().isOk())
+                .andExpect(content().string("false"));
+
+        assertFalse(stepsTaken >= 15000);
+    }
+
+    @Test
+    void testHasAchievedWeeklyGoal() throws Exception {
+        int stepsTaken = 110000;
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/walking/hasAchievedWeeklyGoal")
+                        .param("stepsTaken", String.valueOf(stepsTaken)))
+                .andExpect(status().isOk())
+                .andExpect(content().string("true"));
+
+        assertTrue(stepsTaken >= 105000);
+    }
+
+    @Test
+    void testHasNotAchievedWeeklyGoal() throws Exception {
+        int stepsTaken = 100000;
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/walking/hasAchievedWeeklyGoal")
+                        .param("stepsTaken", String.valueOf(stepsTaken)))
+                .andExpect(status().isOk())
+                .andExpect(content().string("false"));
+
+        assertFalse(stepsTaken >= 105000);
+    }
+
+    @Test
+    void testHasAchievedMonthlyGoal() throws Exception {
+        int stepsTaken = 450000;
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/walking/hasAchievedMonthlyGoal")
+                        .param("stepsTaken", String.valueOf(stepsTaken)))
+                .andExpect(status().isOk())
+                .andExpect(content().string("true"));
+
+        assertTrue(stepsTaken >= 420000);
+    }
+
+    @Test
+    void testHasNotAchievedMonthlyGoal() throws Exception {
+        int stepsTaken = 400000;
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/walking/hasAchievedMonthlyGoal")
+                        .param("stepsTaken", String.valueOf(stepsTaken)))
+                .andExpect(status().isOk())
+                .andExpect(content().string("false"));
+
+        assertFalse(stepsTaken >= 420000);
+    }
+
+
 }
