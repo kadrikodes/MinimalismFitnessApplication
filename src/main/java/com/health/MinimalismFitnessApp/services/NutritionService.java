@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -54,7 +55,8 @@ public class NutritionService {
     }
 
     public NutritionData updateNutritionData(long nutritionID, NutritionData nutritionData) {
-        NutritionData nutritionDataUpdate = nutritionRepository.findById(nutritionID).orElseThrow();
+        NutritionData nutritionDataUpdate = nutritionRepository.findById(nutritionID)
+                .orElseThrow(() -> new NoSuchElementException("NutritionData not found with ID: " + nutritionID));
 
         nutritionDataUpdate.setFoodName(nutritionData.getFoodName());
         nutritionDataUpdate.setCalories(nutritionData.getCalories());

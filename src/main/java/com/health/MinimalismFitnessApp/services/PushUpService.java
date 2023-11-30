@@ -2,6 +2,8 @@ package com.health.MinimalismFitnessApp.services;
 
 import com.health.MinimalismFitnessApp.dataaccess.IPushUpRepository;
 import com.health.MinimalismFitnessApp.entities.PushUpData;
+import com.health.MinimalismFitnessApp.entities.WalkingData;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +20,8 @@ public class PushUpService {
         this.pushUpRepository = pushUpRepository;
     }
 
-    public static void delete(long delete) {
-        pushUpRepository.deleteById(delete);
+    public static void delete(long pushUpId) {
+        pushUpRepository.deleteById(pushUpId);
     }
 
     public static PushUpData saveOrUpdate(PushUpData pushUpData) {
@@ -31,8 +33,8 @@ public class PushUpService {
         return pushUpRepository.findAll();
     }
 
-    public PushUpData getPushUpDataById(long pushUpDataId) {
-        Optional<PushUpData> pushUpData = pushUpRepository.findById(pushUpDataId);
+    public PushUpData getPushUpDataById(long pushUpId) {
+        Optional<PushUpData> pushUpData = pushUpRepository.findById(pushUpId);
         return pushUpData.orElse(null);
     }
 
@@ -44,7 +46,22 @@ public class PushUpService {
         return pushUpData;
     }
 
-//    public void updatePushUpData(PushUpData pushUpData, long id) {
-//        pushUpRepository.save(pushUpData);
-//    }
+    public PushUpData updatePushUpData(long id, PushUpData pushUpData) {
+        PushUpData existingPushUpData = pushUpRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Push up data not found"));
+
+        existingPushUpData.setNumberOfPushUps(pushUpData.getNumberOfPushUps());
+        existingPushUpData.setTarget(pushUpData.getTarget());
+        existingPushUpData.setTimeDuration(pushUpData.getTimeDuration());
+        existingPushUpData.setCaloriesBurnt(pushUpData.getCaloriesBurnt());
+
+        return pushUpRepository.save(existingPushUpData);
+    }
+
+    public void deletePushUpData(long id) {
+        PushUpData pushUpData = pushUpRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Push up data not found"));
+
+//        pushUpData.delete(pushUpData);
+    }
 }

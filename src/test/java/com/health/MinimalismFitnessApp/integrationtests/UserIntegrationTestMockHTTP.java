@@ -1,11 +1,14 @@
-package com.health.MinimalismFitnessApp.integrationTests;
+package com.health.MinimalismFitnessApp.integrationtests;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.health.MinimalismFitnessApp.dataaccess.IUserRepository;
 import com.health.MinimalismFitnessApp.entities.UserData;
 import com.health.MinimalismFitnessApp.services.UserService;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -18,6 +21,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -26,7 +30,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@Sql("classpath:data.sql")
+@Sql("classpath:test-data-user.sql")
 @SpringBootTest
 @DirtiesContext(classMode=DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 @AutoConfigureMockMvc
@@ -84,6 +88,21 @@ public class UserIntegrationTestMockHTTP {
 
     }
 
+    @Test
+    public void testGetUserDataById() throws Exception {
+        mapper.registerModule(new JavaTimeModule());
+        long userId = 1;
+        MvcResult result =
+                (this.mockMvc.perform(MockMvcRequestBuilders.get("/users/" + userId)))
+                        .andExpect(status().isOk())
+                        .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                        .andReturn();
+
+        String contentAsJson = result.getResponse().getContentAsString();
+        UserData actualUserId = mapper.readValue(contentAsJson, UserData.class);
+        assertEquals("Esra", actualUserId.getName());
+    }
+
 
     @Test
     void testAddingNewUserRecords() throws Exception {
@@ -102,6 +121,47 @@ public class UserIntegrationTestMockHTTP {
         assertEquals(UserData.MALE, addedUser.getGender());
 
 }
+
+
+//    static final String NEW_MESSAGE_CONTENT = "This is the new user";
+//    @Disabled
+//    @Test
+//    void testAddUserHappyPath() throws Exception {
+//        mapper.registerModule(new JavaTimeModule());
+//        UserData newUser = new UserData(NEW_MESSAGE_CONTENT, 0L,180.0,80.0, java.time.LocalDate.of(1999,8,8), "FEMALE");
+//        String json = this.mapper.writeValueAsString(newUser);
+//        MvcResult result =
+//                this.mockMvc.perform(MockMvcRequestBuilders.post("/users")
+//                                .contentType(MediaType.APPLICATION_JSON)
+//                                .content(json))
+//                        .andExpect(status().isCreated())
+//                        .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+//                        .andReturn();
+//        checkUserFields(result, newUser);
+//    }
+
+
+
+    private void checkUserFields(MvcResult result, UserData expectedUser) throws UnsupportedEncodingException, JsonProcessingException {
+        String resultJson = result.getResponse().getContentAsString();
+        UserData resultUser = this.mapper.readValue(resultJson, UserData.class);
+
+        assertEquals(expectedUser.getName(), resultUser.getName());
+        assertEquals(expectedUser.getGender(), resultUser.getGender());
+        assertEquals(expectedUser.getId(), resultUser.getId());
+        assertEquals(expectedUser.getBirthdate(), resultUser.getBirthdate());
+        assertEquals(expectedUser.getHeight(), resultUser.getHeight());
+        assertEquals(expectedUser.getWeight(), resultUser.getWeight());
+
+        Assertions.assertNotNull(resultUser.getId());
+        Assertions.assertTrue(resultUser.getId() > 0);
+
+//        Assertions.assertNotNull(resultUser.getSender().getId());
+//        Assertions.assertTrue(resultMessage.getSender().getId() > 0);
+    }
+
+
+
 
 
     @Test
@@ -123,8 +183,7 @@ public class UserIntegrationTestMockHTTP {
     @Test
     void deleteUserRecord() throws Exception {
         UserData deletedUserData = iUserRepository.findById(1L).orElse(null);
-        mockMvc.perform(delete("/users/{userId}", 1)
-                        .contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(MockMvcRequestBuilders.delete("/users/{userId}", 1L))
                         .andExpect(status().isOk())
                          .andReturn();
 

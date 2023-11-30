@@ -1,4 +1,4 @@
-package com.health.MinimalismFitnessApp.integrationtests;
+package com.health.MinimalismFitnessApp.integrationTests;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -30,6 +30,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import static org.assertj.core.api.FactoryBasedNavigableListAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -41,7 +42,7 @@ import static org.springframework.web.servlet.function.RequestPredicates.content
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@Sql("classpath:test-sleep-data.sql")
+@Sql("classpath:data.sql")
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 @TestPropertySource(properties = {"spring.sql.init.mode=never"})
 class SleepControllerIntegrationTest {
@@ -56,14 +57,6 @@ class SleepControllerIntegrationTest {
         mapper.registerModule(new JavaTimeModule());
     }
 
-
-    @BeforeEach
-    void setUp() {
-    }
-
-    @AfterEach
-    void tearDown() {
-    }
 
     @Test
     void testGettingAllSleepRecords() throws Exception {
@@ -126,8 +119,6 @@ class SleepControllerIntegrationTest {
 
     @Test
     void updateSleepRecord() throws Exception {
-//        UserData userData = new UserData("ABC", 15L, 67, 167, LocalDate.of(1960,04,11),"Male");
-//        SleepData updateSleepData = new SleepData(LocalTime.of( 22,30), LocalTime.of(07, 30), LocalTime.of(22,30), LocalTime.of(07, 00), userData);
         SleepData updatedSleepData = sleepRepository.findById(11L).orElse(null);
         updatedSleepData.setActualBedtime(LocalTime.of(23,00));
         String json = mapper.writeValueAsString(updatedSleepData);
@@ -152,4 +143,26 @@ class SleepControllerIntegrationTest {
         SleepData checkingSleepDataAfterDeletion = sleepRepository.findById(10L).orElse(null);
         assertNull(checkingSleepDataAfterDeletion, "Sleep Record Deleted");
     }
+
+    @Test
+    void calculateSleepHoursAndInference() throws Exception {
+        UserData userData = new UserData("TestUser", 25L, 70, 170, LocalDate.of(1990, 1, 1), "MALE");
+        SleepData sleepData = new SleepData(LocalTime.of(22, 30), LocalTime.of(07, 30), LocalTime.of(22, 30), LocalTime.of(07, 00), userData);
+
+        String json = mapper.writeValueAsString(sleepData);
+
+        MvcResult result = this.mockMvc.perform(MockMvcRequestBuilders.post("/sleeptracker")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(json))
+                .andExpect(status().isCreated())
+                .andReturn();
+
+        String contentAsJson = result.getResponse().getContentAsString();
+        SleepData createdSleepData = mapper.readValue(contentAsJson, SleepData.class);
+
+        createdSleepData.calculateSleepHours();
+        assertEquals(createdSleepData.getSleepDuration(), 9);
+        createdSleepData.inferenceFromSleepData();
+    }
+
 }

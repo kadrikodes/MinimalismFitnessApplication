@@ -2,6 +2,7 @@ package com.health.MinimalismFitnessApp.integrationtests;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.health.MinimalismFitnessApp.entities.NutritionData;
+import com.health.MinimalismFitnessApp.entities.SleepData;
 import com.health.MinimalismFitnessApp.entities.UserData;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 import static com.health.MinimalismFitnessApp.TestConstants.EXPECTED_ALL_NUTRITION_JSON;
 import static com.health.MinimalismFitnessApp.TestConstants.EXPECTED_ONE_NUTRITION_JSON;
@@ -64,21 +66,41 @@ public class NutritionWithMockHttpRequestIT {
     }
 
     @Test
-    void deleteNutritionRecord() throws Exception {
-        long nutritionID = 1000L;
+    void testDeletingNutritionRecord() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.delete("/nutrition/" + nutritionID))
+        mockMvc.perform(MockMvcRequestBuilders.delete("/nutrition/" + 1000L))
                         .andExpect(status().isNoContent())
                         .andExpect(content().string(emptyOrNullString()));
     }
+
+    @Test
+    void testUpdatingNutritionRecord() throws Exception {
+        UserData testUser = new UserData("Rais", 1L, 180, 85, LocalDate.of(2000,1,1), "MALE");
+        NutritionData updatedNutritionData = new NutritionData(1000L, "Pounded Yam", 600, 20, 60, 20, "Dinner", testUser);
+
+        String json = objectMapper.writeValueAsString(updatedNutritionData);
+
+        mockMvc.perform(MockMvcRequestBuilders.put("/nutrition/" + 1000L)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(json)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+
+        MvcResult getResult = mockMvc.perform(MockMvcRequestBuilders.get("/nutrition/" + 1000L))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(content().json(objectMapper.writeValueAsString(updatedNutritionData)))
+                .andReturn();
+
+    }
+
 
 
 
     @Test
     public void testAddingANutritionRecord() throws Exception {
         int originalNumOfNutritionRecords = getNumberOfNutritionRecords();
-        UserData testUser = new UserData("Samuel", 100L, 174, 82.5, LocalDate.of(1996,10,12), "Male");
-        NutritionData testNutritionData = new NutritionData("Burger", 300, 50, 30, 20, "Lunch", testUser);
+        UserData testUser = new UserData("Samuel", 3L, 174, 82.5, LocalDate.of(1996,10,12), "MALE");
+        NutritionData testNutritionData = new NutritionData(3000L, "Burger", 300, 50, 30, 20, "Lunch", testUser);
 
         String json = objectMapper.writeValueAsString(testNutritionData);
 

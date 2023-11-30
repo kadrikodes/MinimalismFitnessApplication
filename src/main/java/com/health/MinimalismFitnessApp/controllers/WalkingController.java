@@ -1,7 +1,6 @@
 package com.health.MinimalismFitnessApp.controllers;
 
 import com.health.MinimalismFitnessApp.entities.WalkingData;
-import com.health.MinimalismFitnessApp.services.UserService;
 import com.health.MinimalismFitnessApp.services.WalkingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,19 +10,22 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 @RestController
 @RequestMapping("/walking")
 public class WalkingController {
 
     WalkingService walkingService;
+    Timer walkReminderTimer;
 
     @Autowired
     public WalkingController(WalkingService walkingService) {
         this.walkingService = walkingService;
     }
 
-    @GetMapping
+    @GetMapping("/allWalkingData")
     public List<WalkingData> getAllWalkingData() {
         return walkingService.findAll();
     }
@@ -53,19 +55,61 @@ public class WalkingController {
         return walkingService.searchEntriesByCriteria(dateTime, distance);
     }
 
-//    @GetMapping("/walking/sorted")
-//    public List<WalkingData> getSortedWalkingData() {
-//        return walkingService.getEntriesSortedByData();
-//    }
-
-    @PutMapping("/{walkingId}")
+    @PutMapping("/update/{walkingId}")
     public WalkingData updateWalkingData(@PathVariable long walkingId, @RequestBody WalkingData walkingData) {
         return walkingService.updateWalkingData(walkingId, walkingData);
     }
 
-    @DeleteMapping("/{walkingId}")
+    @DeleteMapping("/delete/{walkingId}")
     public ResponseEntity<String> deleteWalkingData(@PathVariable long walkingId) {
         walkingService.deleteWalkingTracker(walkingId);
         return ResponseEntity.ok("Walking data deleted successfully");
+    }
+
+    @GetMapping("/calculateStepsToBurnCalories")
+    public int calculateStepsToBurnCalories(@RequestParam double caloriesToBurn) {
+        double caloriesPerStep = walkingService.getCaloriesPerStep();
+        return walkingService.calculateStepsToBurnCalories(caloriesToBurn, caloriesPerStep);
+    }
+
+    @GetMapping("/calculateWeightLoss")
+    public double calculateWeightLoss(@RequestParam int stepsTaken) {
+        double caloriesPerStep = walkingService.getCaloriesPerStep();
+        double caloriesPerKg = walkingService.getCaloriesPerKg();
+        return walkingService.calculateWeightLoss(stepsTaken, caloriesPerStep, caloriesPerKg);
+    }
+
+    @PostMapping("/scheduleWalkReminder")
+    public ResponseEntity<String> scheduleWalkReminder(@RequestParam int hours, @RequestParam int minutes) {
+        walkReminderTimer = new Timer();
+        walkReminderTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                System.out.println("It's time for a walk!");
+            }
+        }, hours * 60 * 60 * 1000 + minutes * 60 * 1000);
+
+        return ResponseEntity.ok("Walk reminder scheduled successfully");
+    }
+
+    @GetMapping("/hasAchievedDailyGoal")
+    public boolean hasAchievedDailyGoal(@RequestParam int stepsTaken) {
+        int dailyStepGoal = walkingService.getDailyStepGoal();
+        return walkingService.hasAchievedDailyGoal(stepsTaken, dailyStepGoal);
+    }
+    @GetMapping("/hasAchievedWeeklyGoal")
+    public boolean hasAchievedWeeklyGoal(@RequestParam int stepsTaken) {
+        int weeklyStepGoal = walkingService.getWeeklyStepGoal();
+        return walkingService.hasAchievedDailyGoal(stepsTaken, weeklyStepGoal);
+    }
+    @GetMapping("/hasAchievedMonthlyGoal")
+    public boolean hasAchievedMonthlyGoal(@RequestParam int stepsTaken) {
+        int monthlyStepGoal = walkingService.getMonthlyStepGoal();
+        return walkingService.hasAchievedDailyGoal(stepsTaken, monthlyStepGoal);
+    }
+
+    @GetMapping("/calories/{walkingId}")
+    public double getTotalCaloriesBurned(@PathVariable long walkingId) {
+        return walkingService.calculateTotalCaloriesBurned(walkingId);
     }
 }
