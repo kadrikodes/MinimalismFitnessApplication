@@ -79,17 +79,4 @@ public class SleepData {
         this.actualWakeupTime = actualWakeupTime;
     }
 
-//    public void calculateTargetSleepHours(LocalTime targetBedtime, LocalTime targetWakeUpTime)
-//    {
-//
-//    }
-//    public void calculateActualSleepHours(LocalTime actualBedtime, LocalTime actualWakeupTime)
-//    {
-//
-//    }
-//
-//    public void inferenceOfSleep()
-//    {
-//
-//    }
 }
