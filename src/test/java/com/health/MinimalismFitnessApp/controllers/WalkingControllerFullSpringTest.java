@@ -43,7 +43,7 @@ public class WalkingControllerFullSpringTest {
 
     @Test
     void testGetAllWalkingData() throws Exception {
-        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/walking");
+        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/walking/allWalkingData");
 
         mockMvc.perform(requestBuilder).andExpect(status().isOk());
 
@@ -57,7 +57,7 @@ public class WalkingControllerFullSpringTest {
         when(mockWalkingService.findAll()).thenReturn(walkingData);
 
         ResultActions resultActions = this.mockMvc.perform(
-                MockMvcRequestBuilders.get("/walking"));
+                MockMvcRequestBuilders.get("/walking/allWalkingData"));
         resultActions.andExpect(status().isOk());
 
 
@@ -142,7 +142,7 @@ public class WalkingControllerFullSpringTest {
 
         String json = mapper.writeValueAsString(updatedData);
 
-        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.put("/walking/" + walkingId.toString());
+        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.put("/walking/update/" + walkingId.toString());
         MvcResult result = mockMvc.perform((requestBuilder)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(json))
@@ -156,7 +156,7 @@ public class WalkingControllerFullSpringTest {
     void testDeleteWalkingData() throws Exception {
         Long walkingId = 1L;
 
-        mockMvc.perform(delete("/walking/" + walkingId.toString()))
+        mockMvc.perform(delete("/walking/delete/" + walkingId.toString()))
                 .andExpect(status().isOk());
 
         verify(mockWalkingService, times(1)).deleteWalkingTracker(walkingId);
