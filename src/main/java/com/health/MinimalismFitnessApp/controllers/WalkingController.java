@@ -100,12 +100,12 @@ public class WalkingController {
     @GetMapping("/hasAchievedWeeklyGoal")
     public boolean hasAchievedWeeklyGoal(@RequestParam int stepsTaken) {
         int weeklyStepGoal = walkingService.getWeeklyStepGoal();
-        return walkingService.hasAchievedDailyGoal(stepsTaken, weeklyStepGoal);
+        return walkingService.hasAchievedWeeklyGoal(stepsTaken, weeklyStepGoal);
     }
     @GetMapping("/hasAchievedMonthlyGoal")
     public boolean hasAchievedMonthlyGoal(@RequestParam int stepsTaken) {
         int monthlyStepGoal = walkingService.getMonthlyStepGoal();
-        return walkingService.hasAchievedDailyGoal(stepsTaken, monthlyStepGoal);
+        return walkingService.hasAchievedMonthlyGoal(stepsTaken, monthlyStepGoal);
     }
 
     @GetMapping("/calories/{walkingId}")
