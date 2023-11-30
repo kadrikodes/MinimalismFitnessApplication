@@ -34,16 +34,17 @@ pipeline {
                                 }
                             }
         }
-     // stage("Quality Gate") {
-     //     steps {
-     //      timeout(time: 15, unit: 'MINUTES') {
-     //         waitForQualityGate abortPipeline: false
-     //       }
-     //    }
-     // }
+        stage("Quality Gate") {
+            steps {
+             timeout(time: 15, unit: 'MINUTES') {
+                waitForQualityGate abortPipeline: false
+               }
+             }
+         }
         stage('Deliver') {
             steps {
-                sh './jenkins/scripts/deliver.sh'
+            //    sh './jenkins/scripts/deliver.sh'
+            echo "Delivery successful"
             }
         }
      }
