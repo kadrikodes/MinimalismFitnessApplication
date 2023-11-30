@@ -23,9 +23,9 @@ public class PushUpController {
     public Iterable<PushUpData> getAllPushUpData() {
         return pushUpService.findAll();
     }
-    @GetMapping("/user/{id}")
-    public PushUpData getPushUpDataById(@PathVariable long id) {
-        return this.pushUpService.getPushUpDataById(id);
+    @GetMapping("/user/{pushUpId}")
+    public PushUpData getPushUpDataById(@PathVariable long pushUpId) {
+        return this.pushUpService.getPushUpDataById(pushUpId);
     }
     @GetMapping("/{userName}")
     public List<PushUpData> getPushUpDataByUserName(@PathVariable String userName) {
@@ -43,9 +43,9 @@ public class PushUpController {
         }
         return newPushUp;
     }
-    @DeleteMapping("/user/{delete}")
-    public void deletePushUpData(@PathVariable("delete") long delete) {
-        PushUpService.delete(delete);
+    @DeleteMapping("/user/{pushUpId}")
+    public void deletePushUpData(@PathVariable long pushUpId) {
+        PushUpService.delete(pushUpId);
     }
 
 //    @PutMapping("/{update}")
@@ -54,9 +54,9 @@ public class PushUpController {
 //        return pushUpData;
 //    }
 
-    @PutMapping("/{update}")
-    public ResponseEntity<PushUpData> updatePushUpData(@PathVariable("update") long id, @RequestBody PushUpData pushUpData) {
-        PushUpData existingPushUpData = pushUpService.getPushUpDataById(id);
+    @PutMapping("/{pushUpId}")
+    public ResponseEntity<PushUpData> updatePushUpData(@PathVariable long pushUpId, @RequestBody PushUpData pushUpData) {
+        PushUpData existingPushUpData = pushUpService.getPushUpDataById(pushUpId);
 
         if (existingPushUpData == null) {
 
