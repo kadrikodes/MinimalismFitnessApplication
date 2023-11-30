@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.net.URISyntaxException;
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.mockito.Mockito.*;
@@ -36,6 +37,17 @@ public class NutritionControllerNoSpringTest {
     }
 
     @Test
+    void getNutritionRecordByName(){
+        UserData userData = new UserData("Rais", 1L, 180, 85, LocalDate.of(2000,1,1), "MALE");
+        NutritionData nutritionData = new NutritionData(1000L, "Pounded Yam", 600, 20, 60, 20, "Dinner", userData);
+        nutritionController.addNutritionData(nutritionData);
+        mockNutritionService.getNutritionByName("Rais");
+        verify(mockNutritionService, times(1)).getNutritionByName("Rais");
+
+
+    }
+
+    @Test
     void addingANutritionRecord() throws URISyntaxException{
         NutritionData nutritionData = new NutritionData(1000L, "Pounded Yam", 600, 20, 60, 20, "Dinner", new UserData());
         nutritionController.addNutritionData(nutritionData);
@@ -51,6 +63,16 @@ public class NutritionControllerNoSpringTest {
         verify(mockNutritionService, times(1)).addNutritionData(nutritionData);
         verify(mockNutritionService, times(1)).updateNutritionData(1000L, updatedNutritionData);
     }
+
+    @Test
+    void deletingNutritionRecord(){
+        NutritionData nutritionData = new NutritionData(1000L, "Pounded Yam", 600, 20, 60, 20, "Dinner", new UserData());
+        nutritionController.addNutritionData(nutritionData);
+        nutritionController.deleteNutritionData(1000L);
+        verify(mockNutritionService, times(1)).deleteNutritionData(1000L);
+    }
+
+
 
 
 
