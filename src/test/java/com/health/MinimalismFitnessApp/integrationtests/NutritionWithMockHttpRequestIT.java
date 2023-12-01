@@ -2,7 +2,6 @@ package com.health.MinimalismFitnessApp.integrationtests;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.health.MinimalismFitnessApp.entities.NutritionData;
-import com.health.MinimalismFitnessApp.entities.SleepData;
 import com.health.MinimalismFitnessApp.entities.UserData;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +18,11 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 
-import static com.health.MinimalismFitnessApp.TestConstants.EXPECTED_ALL_NUTRITION_JSON;
-import static com.health.MinimalismFitnessApp.TestConstants.EXPECTED_ONE_NUTRITION_JSON;
+import static com.health.MinimalismFitnessApp.TestConstantsNutrition.EXPECTED_ALL_NUTRITION_JSON;
+import static com.health.MinimalismFitnessApp.TestConstantsNutrition.EXPECTED_ONE_NUTRITION_JSON;
 
 import static org.hamcrest.Matchers.emptyOrNullString;
-import static org.hamcrest.Matchers.isEmptyOrNullString;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
