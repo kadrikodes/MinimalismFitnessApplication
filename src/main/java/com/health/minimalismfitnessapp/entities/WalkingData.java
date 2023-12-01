@@ -47,6 +47,7 @@ public class WalkingData {
 
     public void setId(Long id) {
         this.id = id;
+
     }
 
     public int getSteps() {

@@ -87,6 +87,7 @@ public class WalkingService {
 
     public int getDailyStepGoal() { return 15000; }
 
+
     public int getWeeklyStepGoal() {
         return 105000;
     }

@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.Duration;
 import java.util.List;
 
 @RestController
@@ -19,9 +20,14 @@ public class SleepController {
         this.sleepService = sleepService;
     }
 
+    @GetMapping
+    public List<SleepData> getAllSleepData() {
+        return sleepService.getAllSleepData();
+    }
+
     @GetMapping("/{sleepDataId}")
     public SleepData getSleepDataById(@PathVariable Long sleepDataId) {
-        return sleepService.getSleepRecordById(sleepDataId);
+        return sleepService.getSleepDataById(sleepDataId);
     }
 
     @GetMapping("/name/{name}")
@@ -29,10 +35,6 @@ public class SleepController {
         return sleepService.getSleepRecordByName(name);
     }
 
-    @GetMapping
-    public List<SleepData> getAllSleepRecords() {
-        return sleepService.getAllSleepRecords();
-    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -68,23 +70,14 @@ public class SleepController {
         }
     }
 
-    @PostMapping("/calculate-sleep-hours")
-    @ResponseStatus(HttpStatus.OK)
-    public void calculateSleepHours(@RequestBody SleepData sleepData) {
-        try {
-            sleepData.calculateSleepHours();
-        } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error calculating sleep hours", e);
-        }
-    }
 
-    @PostMapping("/inference-from-sleep-data")
+    @GetMapping("/targetSleepDuration")
     @ResponseStatus(HttpStatus.OK)
-    public void inferenceFromSleepData(@RequestBody SleepData sleepData) {
+    public Duration targetSleepDuration(@RequestBody SleepData sleepData) {
         try {
-            sleepData.inferenceFromSleepData();
-        } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error generating sleep inference", e);
+            return sleepService.targetSleepDuration(sleepData);
+        } catch (IllegalArgumentException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
 

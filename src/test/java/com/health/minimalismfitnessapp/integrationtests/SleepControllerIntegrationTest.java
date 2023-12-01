@@ -1,4 +1,4 @@
-package com.health.minimalismfitnessapp.integrationTests;
+package com.health.minimalismfitnessapp.integrationtests;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -19,12 +19,11 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -32,21 +31,19 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@Sql("classpath:data.sql")
+@Sql("classpath:test-sleep-data.sql")
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 @TestPropertySource(properties = {"spring.sql.init.mode=never"})
 class SleepControllerIntegrationTest {
     private final ObjectMapper mapper = new ObjectMapper();
     @Autowired
     MockMvc mockMvc;
-
+  
     @Autowired
     ISleepRepository sleepRepository;
-
     public SleepControllerIntegrationTest() {
         mapper.registerModule(new JavaTimeModule());
     }
-
 
     @Test
     void testGettingAllSleepRecords() throws Exception {
@@ -69,26 +66,26 @@ class SleepControllerIntegrationTest {
     @Test
     void getSleepRecordByName() throws Exception {
         MvcResult result =
-                (this.mockMvc.perform(MockMvcRequestBuilders.get("/sleeptracker/name/{name}", "ABC")))
+                (this.mockMvc.perform(MockMvcRequestBuilders.get("/sleeptracker/name/{name}", "User2")))
                         .andExpect(status().isOk())
                         .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                         .andReturn();
         String contentAsJson = result.getResponse().getContentAsString();
         SleepData[] sleepData = mapper.readValue(contentAsJson, SleepData[].class);
-        assertEquals(10, sleepData[0].getId());
+        assertEquals(53, sleepData[0].getId());
     }
 
     @Test
     void getSleepRecordById() throws Exception {
         MvcResult result =
-                (this.mockMvc.perform(MockMvcRequestBuilders.get("/sleeptracker/{sleepDataId}", 11L)))
+                (this.mockMvc.perform(MockMvcRequestBuilders.get("/sleeptracker/{sleepDataId}", 51L)))
                         .andExpect(status().isOk())
                         .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                         .andReturn();
         String contentAsJson = result.getResponse().getContentAsString();
         SleepData sleepData = mapper.readValue(contentAsJson, SleepData.class);
-        assertEquals("ABC", sleepData.getUser().getName());
-        assertEquals(11L, sleepData.getId());
+        assertEquals("User1", sleepData.getUser().getName());
+        assertEquals(51L, sleepData.getId());
     }
 
     @Test
@@ -109,10 +106,10 @@ class SleepControllerIntegrationTest {
 
     @Test
     void updateSleepRecord() throws Exception {
-        SleepData updatedSleepData = sleepRepository.findById(11L).orElse(null);
+        SleepData updatedSleepData = sleepRepository.findById(52L).orElse(null);
         updatedSleepData.setActualBedtime(LocalTime.of(23,00));
         String json = mapper.writeValueAsString(updatedSleepData);
-        MvcResult result = this.mockMvc.perform(MockMvcRequestBuilders.put("/sleeptracker/{id}",11)
+        MvcResult result = this.mockMvc.perform(MockMvcRequestBuilders.put("/sleeptracker/{id}",52)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(json))
                 .andExpect(status().isOk())
@@ -126,33 +123,29 @@ class SleepControllerIntegrationTest {
 
     @Test
     void deleteSleepRecord() throws Exception {
-        SleepData deletedSleepData = sleepRepository.findById(10L).orElse(null);
-        mockMvc.perform(delete("/sleeptracker/{id}", 10)
+        SleepData deletedSleepData = sleepRepository.findById(53L).orElse(null);
+        mockMvc.perform(delete("/sleeptracker/{id}", 53)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
-        SleepData checkingSleepDataAfterDeletion = sleepRepository.findById(10L).orElse(null);
+        SleepData checkingSleepDataAfterDeletion = sleepRepository.findById(53L).orElse(null);
         assertNull(checkingSleepDataAfterDeletion, "Sleep Record Deleted");
     }
 
     @Test
-    void calculateSleepHoursAndInference() throws Exception {
-        UserData userData = new UserData("TestUser", 25L, 70, 170, LocalDate.of(1990, 1, 1), "MALE");
-        SleepData sleepData = new SleepData(LocalTime.of(22, 30), LocalTime.of(07, 30), LocalTime.of(22, 30), LocalTime.of(07, 00), userData);
-
+    void testTargetSleepDuration() throws Exception {
+        SleepData sleepData = sleepRepository.findById(52L).orElse(null);
         String json = mapper.writeValueAsString(sleepData);
 
-        MvcResult result = this.mockMvc.perform(MockMvcRequestBuilders.post("/sleeptracker")
+        MvcResult result = this.mockMvc.perform(MockMvcRequestBuilders.get("/sleeptracker/targetSleepDuration")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(json))
-                .andExpect(status().isCreated())
+                .andExpect(status().isOk())
                 .andReturn();
 
         String contentAsJson = result.getResponse().getContentAsString();
-        SleepData createdSleepData = mapper.readValue(contentAsJson, SleepData.class);
-
-        createdSleepData.calculateSleepHours();
-        assertEquals(createdSleepData.getSleepDuration(), 9);
-        createdSleepData.inferenceFromSleepData();
+        Duration targetSleepDuration = mapper.readValue(contentAsJson, Duration.class);
+        assertEquals(Duration.ofHours(9), targetSleepDuration);
+        assertNotNull(targetSleepDuration);
     }
 
 }

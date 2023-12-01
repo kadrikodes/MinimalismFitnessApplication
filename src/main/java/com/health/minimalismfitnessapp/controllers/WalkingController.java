@@ -23,7 +23,6 @@ public class WalkingController {
     Timer walkReminderTimer;
     private static final Logger logger = LoggerFactory.getLogger(WalkingController.class);
 
-
     @Autowired
     public WalkingController(WalkingService walkingService) {
         this.walkingService = walkingService;
@@ -93,6 +92,7 @@ public class WalkingController {
             }
         }, (long) hours * 60 * 60 * 1000 + (long) minutes * 60 * 1000);
 
+
         return ResponseEntity.ok("Walk reminder scheduled successfully");
     }
 
@@ -105,6 +105,7 @@ public class WalkingController {
     public boolean hasAchievedWeeklyGoal(@RequestParam int stepsTaken) {
         int weeklyStepGoal = walkingService.getWeeklyStepGoal();
         return walkingService.hasAchievedWeeklyGoal(stepsTaken, weeklyStepGoal);
+
     }
     @GetMapping("/hasAchievedMonthlyGoal")
     public boolean hasAchievedMonthlyGoal(@RequestParam int stepsTaken) {
