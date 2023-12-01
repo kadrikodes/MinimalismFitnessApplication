@@ -1,10 +1,9 @@
-package com.health.MinimalismFitnessApp.integrationtests;
+package com.health.minimalismFitnessApp.integrationtests;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.health.MinimalismFitnessApp.dataaccess.IUserRepository;
-import com.health.MinimalismFitnessApp.entities.UserData;
-import com.health.MinimalismFitnessApp.services.UserService;
+import com.health.minimalismFitnessApp.dataaccess.IUserRepository;
+import com.health.minimalismFitnessApp.entities.UserData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +25,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@SuppressWarnings({"NewClassNamingConvention", "ResultOfMethodCallIgnored", "unused"})
 @Sql("classpath:test-data-user.sql")
 @SpringBootTest
 @DirtiesContext(classMode=DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
@@ -47,22 +47,13 @@ public class UserIntegrationTestMockHTTP {
 
     private final ObjectMapper mapper = new ObjectMapper();
 
-    UserService mockUserService;
-
-    public static final String EXPECTED_JSON = """
-            Body = [{"id":1,"name":"Esra","height":170.0,"weight":60.0,"birthdate":"1980-06-19","gender":"Female"},{"id":2,"name":"Divin","height":170.0,"weight":60.0,"birthdate":"1980-06-18","gender":"Male"},{"id":3,"name":"Rais","height":170.0,"weight":60.0,"birthdate":"1980-06-16","gender":"Male"},{"id":4,"name":"Sam","height":170.0,"weight":60.0,"birthdate":"1980-06-14","gender":"Male"},{"id":5,"name":"Kadri","height":170.0,"weight":60.0,"birthdate":"1980-06-12","gender":"Male"},{"id":6,"name":"Joe","height":170.0,"weight":60.0,"birthdate":"1980-06-16","gender":"Male"},{"id":7,"name":"Mike","height":170.0,"weight":60.0,"birthdate":"1980-06-11","gender":"Male"},{"id":8,"name":"Sally","height":170.0,"weight":60.0,"birthdate":"1980-06-13","gender":"Female"},{"id":9,"name":"Sara","height":170.0,"weight":60.0,"birthdate":"1980-06-16","gender":"Female"},{"id":10,"name":"Josh","height":170.0,"weight":60.0,"birthdate":"1980-06-17","gender":"Male"}]""";
-
 
     @BeforeEach
     void setUp() {
         if (existingUser == null)
             existingUser = new UserData("Esra", 1L, 170.0, 60.0, LocalDate.of(1980, 6, 19), UserData.FEMALE);
-
-        // Ensure this Person object has an ID
         if (existingUser.getId() == null)
             this.iUserRepository.save(existingUser);
-
-        // Will not have an ID
         newUser = new UserData("Karen", 1L, 170.0, 60.0, LocalDate.of(1980, 6, 18), UserData.FEMALE);
     }
 
@@ -90,7 +81,7 @@ public class UserIntegrationTestMockHTTP {
         mapper.registerModule(new JavaTimeModule());
         UserData newUserData = new UserData("mike", null, 170.0, 60.0, LocalDate.of(1980, 2, 19), UserData.MALE);
         String json = mapper.writeValueAsString(newUserData);
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/users")
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/users/addUser")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(json))
                         .andExpect(status().isCreated())
@@ -108,9 +99,10 @@ public class UserIntegrationTestMockHTTP {
     void updateUserRecord() throws Exception {
         mapper.registerModule(new JavaTimeModule());
         UserData updatedUserData = iUserRepository.findById(1L).orElse(null);
+        assert updatedUserData != null;
         updatedUserData.setName("karen");
         String json = mapper.writeValueAsString(updatedUserData);
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.put("/users/{userId}",1)
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.put("/users/updateUser/"+1)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(json))
                         .andExpect(status().isOk())
@@ -122,8 +114,8 @@ public class UserIntegrationTestMockHTTP {
 
     @Test
     void deleteUserRecord() throws Exception {
-        UserData deletedUserData = iUserRepository.findById(1L).orElse(null);
-        mockMvc.perform(delete("/users/{userId}", 1)
+        iUserRepository.findById(1L).orElse(null);
+        mockMvc.perform(delete("/users/deleteUser/"+ 1L)
                         .contentType(MediaType.APPLICATION_JSON))
                         .andExpect(status().isOk())
                          .andReturn();
