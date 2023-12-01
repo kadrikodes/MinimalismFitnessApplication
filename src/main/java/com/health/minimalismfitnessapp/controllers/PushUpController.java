@@ -48,12 +48,6 @@ public class PushUpController {
         PushUpService.delete(delete);
     }
 
-//    @PutMapping("/{update}")
-//    public PushUpData updatePushUpData(@RequestBody PushUpData pushUpData) {
-//        PushUpService.saveOrUpdate(pushUpData);
-//        return pushUpData;
-//    }
-
     @PutMapping("/{update}")
     public ResponseEntity<PushUpData> updatePushUpData(@PathVariable("update") long id, @RequestBody PushUpData pushUpData) {
         PushUpData existingPushUpData = pushUpService.getPushUpDataById(id);
