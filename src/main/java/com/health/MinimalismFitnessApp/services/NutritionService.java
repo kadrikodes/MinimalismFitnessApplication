@@ -5,7 +5,6 @@ import com.health.MinimalismFitnessApp.dataaccess.IUserRepository;
 import com.health.MinimalismFitnessApp.entities.NutritionData;
 import com.health.MinimalismFitnessApp.entities.UserData;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
