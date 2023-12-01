@@ -8,11 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-<<<<<<< HEAD
 import java.util.Optional;
 
-=======
->>>>>>> master
+
 @RestController
 @RequestMapping("/users")
 public class UserController {
