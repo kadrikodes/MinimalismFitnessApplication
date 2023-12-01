@@ -73,8 +73,8 @@ public class NutritionWithMockHttpRequestIT {
     @Test
     void testUpdatingNutritionRecord() throws Exception {
         UserData testUser = new UserData("Rais", 1L, 180, 85, LocalDate.of(2000,1,1), "MALE");
-        NutritionData updatedNutritionData = new NutritionData(1000L, "Pounded Yam", 600, 20, 60, 20, "Dinner", testUser);
-
+        NutritionData updatedNutritionData = new NutritionData("Pounded Yam", 600, 20, 60, 20, "Dinner", testUser);
+        updatedNutritionData.setId(1000L);
         String json = objectMapper.writeValueAsString(updatedNutritionData);
 
         mockMvc.perform(MockMvcRequestBuilders.put("/nutrition/" + 1000L)
@@ -97,7 +97,7 @@ public class NutritionWithMockHttpRequestIT {
     public void testAddingANutritionRecord() throws Exception {
         int originalNumOfNutritionRecords = getNumberOfNutritionRecords();
         UserData testUser = new UserData("Samuel", 3L, 174, 82.5, LocalDate.of(1996,10,12), "MALE");
-        NutritionData testNutritionData = new NutritionData(3000L, "Burger", 300, 50, 30, 20, "Lunch", testUser);
+        NutritionData testNutritionData = new NutritionData("Burger", 300, 50, 30, 20, "Lunch", testUser);
 
         String json = objectMapper.writeValueAsString(testNutritionData);
 

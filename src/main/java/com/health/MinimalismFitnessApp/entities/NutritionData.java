@@ -20,8 +20,7 @@ public class NutritionData {
 
     public NutritionData(){}
 
-    public NutritionData(Long id, String foodName, int calories, int protein, int carbohydrates, int fats, String mealType, UserData userData) {
-        this.id = id;
+    public NutritionData(String foodName, int calories, int protein, int carbohydrates, int fats, String mealType, UserData userData) {
         this.foodName = foodName;
         this.calories = calories;
         this.protein = protein;
@@ -34,6 +33,7 @@ public class NutritionData {
     public Long getId() {
         return id;
     }
+    public void setId(Long id){ this.id = id;}
 
     public String getFoodName() {
         return foodName;

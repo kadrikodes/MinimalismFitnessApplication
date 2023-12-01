@@ -19,11 +19,11 @@ public class TestConstantsNutrition {
     public static ArrayList<NutritionData> getNutritionList() {
         ArrayList<NutritionData> nutritionDataArrayList = new ArrayList<>();
 
-        NutritionData nutritionData1 = new NutritionData(1L, "Pounded Yam", 600, 20, 60, 20, "Dinner", new UserData("Rais", 1L, 180, 85, LocalDate.of(2000,1,1), "MALE"));
+        NutritionData nutritionData1 = new NutritionData("Pounded Yam", 600, 20, 60, 20, "Dinner", new UserData("Rais", 1L, 180, 85, LocalDate.of(2000,1,1), "MALE"));
         nutritionDataArrayList.add(nutritionData1);
-        NutritionData nutritionData2 = new NutritionData(2L, "Curry", 500, 30, 30, 40, "Lunch", new UserData("Kadri", 2L, 185, 90, LocalDate.of(1997,1,1), "MALE"));
+        NutritionData nutritionData2 = new NutritionData("Curry", 500, 30, 30, 40, "Lunch", new UserData("Kadri", 2L, 185, 90, LocalDate.of(1997,1,1), "MALE"));
         nutritionDataArrayList.add(nutritionData2);
-        NutritionData nutritionData3 = new NutritionData(2L, "Fish and chips", 400, 30, 40, 30, "Lunch", new UserData("Esta", 3L, 160, 60, LocalDate.of(1998,1,1), "FEMALE"));
+        NutritionData nutritionData3 = new NutritionData("Fish and chips", 400, 30, 40, 30, "Lunch", new UserData("Esta", 3L, 160, 60, LocalDate.of(1998,1,1), "FEMALE"));
         nutritionDataArrayList.add(nutritionData3);
 
         return nutritionDataArrayList;
