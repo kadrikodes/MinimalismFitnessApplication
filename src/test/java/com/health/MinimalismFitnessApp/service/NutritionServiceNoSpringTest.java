@@ -88,15 +88,17 @@ public class NutritionServiceNoSpringTest {
         verify(mockNutritionRepo, times(1)).findById(1L);
         verify(mockNutritionRepo, times(1)).save(any(NutritionData.class));
     }
-//
-//    @Test
-//    void deletingNutritionRecord(){
-//        NutritionData nutritionData = new NutritionData(1000L, "Pounded Yam", 600, 20, 60, 20, "Dinner", new UserData());
-//        nutritionController.addNutritionData(nutritionData);
-//        nutritionController.deleteNutritionData(1000L);
-//        verify(mockNutritionService, times(1)).deleteNutritionData(1000L);
-//    }
-//
+
+    @Test
+    void deletingNutritionRecord(){
+        NutritionData nutritionData = new NutritionData(1L, "Pounded Yam", 600, 20, 60, 20, "Dinner", new UserData());
+        when(mockNutritionRepo.findById(1L)).thenReturn(Optional.of(nutritionData));
+        when(mockNutritionRepo.existsById(1L)).thenReturn(true);
+        nutritionService.deleteNutritionData(1L);
+        verify(mockNutritionRepo, times(1)).existsById(1L);
+        verify(mockNutritionRepo, times(1)).deleteById(1L);
+    }
+
 
 
 }
