@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @Service
 public class WalkingService {
-    private IWalkingRepository walkingRepository;
+    private final IWalkingRepository walkingRepository;
 
     @Autowired
     public WalkingService(IWalkingRepository walkingRepository) {
@@ -85,9 +85,8 @@ public class WalkingService {
         return 7700;
     }
 
-    public int getDailyStepGoal() {
-        return 15000;
-    }
+    public int getDailyStepGoal() { return 15000; }
+
 
     public int getWeeklyStepGoal() {
         return 105000;

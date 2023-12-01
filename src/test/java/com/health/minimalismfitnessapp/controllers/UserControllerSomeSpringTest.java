@@ -22,7 +22,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(UserController.class)
 @AutoConfigureMockMvc
-class UserControllerSpringTest {
+class UserControllerSomeSpringTest {
+
+
 
     @MockBean
     UserService mockUserService;

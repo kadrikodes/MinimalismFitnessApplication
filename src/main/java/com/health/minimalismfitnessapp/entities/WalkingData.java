@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 public class WalkingData {
     @Id
     @GeneratedValue
-    private Long Id;
+    private Long id;
     private int steps;
     private double distance;
     private int caloriesBurned;
@@ -42,11 +42,12 @@ public class WalkingData {
     }
 
     public Long getId() {
-        return Id;
+        return id;
     }
 
     public void setId(Long id) {
-        Id = id;
+        this.id = id;
+
     }
 
     public int getSteps() {

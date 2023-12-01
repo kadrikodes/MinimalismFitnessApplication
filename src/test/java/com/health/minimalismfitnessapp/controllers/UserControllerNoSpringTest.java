@@ -35,6 +35,7 @@ public class UserControllerNoSpringTest {
     void testGetUserDataById() {
         long userId = 1L;
         UserData expectedUserData = new UserData("Esra", 1L, 170.0, 160.0, LocalDate.of(1980, 6, 19), "FEMALE");
+
         when(mockUserService.getUserById(userId)).thenReturn(expectedUserData);
         userController.getUserById(userId);
         verify(mockUserService, times(1)).getUserById(userId);
@@ -64,6 +65,7 @@ public class UserControllerNoSpringTest {
     void testUpdateUserData() {
         long userId = 1L;
         UserData userData = new UserData("Esra", 0L, 170.0, 60.0, LocalDate.of(1980, 6, 19), "FEMALE");
+
         when(mockUserService.updateUser(userId, userData)).thenReturn(userData);
         UserData updatedUserData = userController.updateUser(userId, userData);
         verify(mockUserService, times(1)).updateUser(userId, userData);
@@ -80,6 +82,4 @@ public class UserControllerNoSpringTest {
     }
 
 }
-
-
 

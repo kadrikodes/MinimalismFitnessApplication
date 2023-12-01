@@ -1,10 +1,12 @@
-package com.health.minimalismFitnessApp.integrationTests;
+
+package com.health.minimalismfitnessapp.integrationtests;
+
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.health.minimalismFitnessApp.dataaccess.IPushUpRepository;
-import com.health.minimalismFitnessApp.entities.PushUpData;
-import com.health.minimalismFitnessApp.entities.UserData;
+import com.health.minimalismfitnessapp.dataaccess.IPushUpRepository;
+import com.health.minimalismfitnessapp.entities.PushUpData;
+import com.health.minimalismfitnessapp.entities.UserData;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -29,7 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 @TestPropertySource(properties = {"spring.sql.init.mode=never"})
-class PushUpWithMockHttpRequestIT {
+class PushUpControllerWithMockHttpRequestIT {
 
     private final ObjectMapper mapper = new ObjectMapper();
 
@@ -152,12 +154,3 @@ class PushUpWithMockHttpRequestIT {
         assertEquals(50, addedPushUpData.getCaloriesBurnt());
     }
 }
-
-
-
-
-
-
-
-
-

@@ -1,9 +1,11 @@
 package com.health.minimalismfitnessapp.integrationtests;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.health.minimalismfitnessapp.dataaccess.IUserRepository;
 import com.health.minimalismfitnessapp.entities.UserData;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -75,6 +78,21 @@ public class UserIntegrationTestMockHTTP {
 
     }
 
+    @Test
+    public void testGetUserDataById() throws Exception {
+        mapper.registerModule(new JavaTimeModule());
+        long userId = 1;
+        MvcResult result =
+                (this.mockMvc.perform(MockMvcRequestBuilders.get("/users/" + userId)))
+                        .andExpect(status().isOk())
+                        .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                        .andReturn();
+
+        String contentAsJson = result.getResponse().getContentAsString();
+        UserData actualUserId = mapper.readValue(contentAsJson, UserData.class);
+        assertEquals("Esra", actualUserId.getName());
+    }
+
 
     @Test
     void testAddingNewUserRecords() throws Exception {
@@ -93,6 +111,7 @@ public class UserIntegrationTestMockHTTP {
         assertEquals(UserData.MALE, addedUser.getGender());
 
 }
+
 
 
     @Test
@@ -117,6 +136,7 @@ public class UserIntegrationTestMockHTTP {
         iUserRepository.findById(1L).orElse(null);
         mockMvc.perform(delete("/users/deleteUser/"+ 1L)
                         .contentType(MediaType.APPLICATION_JSON))
+
                         .andExpect(status().isOk())
                          .andReturn();
 
