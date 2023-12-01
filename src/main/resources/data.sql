@@ -7,8 +7,8 @@ INSERT INTO sleep_data(id, target_bedtime, target_wake_up_time, actual_bedtime, 
 INSERT INTO sleep_data(id, target_bedtime, target_wake_up_time, actual_bedtime, actual_wakeup_time, user_data_id) VALUES (51, '22:00', '07:00','22:35', '07:30', 15);
 INSERT INTO sleep_data(id, target_bedtime, target_wake_up_time, actual_bedtime, actual_wakeup_time, user_data_id) VALUES (52, '22:00', '07:00','23:30', '08:30', 15);
 INSERT INTO sleep_data(id, target_bedtime, target_wake_up_time, actual_bedtime, actual_wakeup_time, user_data_id) VALUES (53, '22:30', '07:30','22:30', '07:00', 16);
-INSERT INTO nutrition_data (id, food_name, calories, protein, carbohydrates, fats, meal_type, user_data_id) VALUES (1000, 'Pizza', 500, 40, 30, 30, 'Lunch', 1);
-INSERT INTO nutrition_data (id, food_name, calories, protein, carbohydrates, fats, meal_type, user_data_id) VALUES (2000, 'Burger', 600, 60, 20, 20, 'Dinner', 2);
-INSERT INTO push_up_data (number_of_push_ups, target, time_duration, calories_burnt, id, user_data_id) VALUES (5, 10, 1.5, 50, 4, 100);
-INSERT INTO walking_data (id, steps, distance, calories_burned, duration, speed, date_time, user_data_id) VALUES (1000, 100, 10, 100, 60, 5, '2023-11-29 11:33', 100);
-INSERT INTO walking_data (id, steps, distance, calories_burned, duration, speed, date_time, user_data_id) VALUES (2000, 150, 20, 200, 120, 6, '2023-11-29 11:33', 200);
+--INSERT INTO nutrition_data (id, food_name, calories, protein, carbohydrates, fats, meal_type, user_data_id) VALUES (1000, 'Pizza', 500, 40, 30, 30, 'Lunch', 1);
+--INSERT INTO nutrition_data (id, food_name, calories, protein, carbohydrates, fats, meal_type, user_data_id) VALUES (2000, 'Burger', 600, 60, 20, 20, 'Dinner', 2);
+--INSERT INTO push_up_data (number_of_push_ups, target, time_duration, calories_burnt, id, user_data_id) VALUES (5, 10, 1.5, 50, 4, 100);
+--INSERT INTO walking_data (id, steps, distance, calories_burned, duration, speed, date_time, user_data_id) VALUES (1000, 100, 10, 100, 60, 5, '2023-11-29 11:33', 100);
+--INSERT INTO walking_data (id, steps, distance, calories_burned, duration, speed, date_time, user_data_id) VALUES (2000, 150, 20, 200, 120, 6, '2023-11-29 11:33', 200);
