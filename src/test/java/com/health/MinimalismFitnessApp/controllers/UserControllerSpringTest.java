@@ -1,9 +1,9 @@
-package com.health.minimalismFitnessApp.controllers;
+package com.health.minimalismfitnessapp.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.health.minimalismFitnessApp.entities.UserData;
-import com.health.minimalismFitnessApp.services.UserService;
+import com.health.minimalismfitnessapp.entities.UserData;
+import com.health.minimalismfitnessapp.services.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
