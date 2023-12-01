@@ -36,7 +36,6 @@ public class UserServiceFullSpringTest {
         List<UserData> actualUserData = userService.findAll();
         assertEquals(userData, actualUserData);
     }
-@Disabled
     @Test
     void testGetUserDataById() {
         long userId = 1L;
