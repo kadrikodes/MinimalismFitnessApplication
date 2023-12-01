@@ -16,7 +16,7 @@ public class PushUpService {
 
     @Autowired
     public PushUpService(IPushUpRepository pushUpRepository) {
-        this.pushUpRepository = pushUpRepository;
+        PushUpService.pushUpRepository = pushUpRepository;
     }
 
     public static void delete(long pushUpId) {
@@ -60,7 +60,5 @@ public class PushUpService {
     public void deletePushUpData(long id) {
         PushUpData pushUpData = pushUpRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Push up data not found"));
-
-//        pushUpData.delete(pushUpData);
     }
 }

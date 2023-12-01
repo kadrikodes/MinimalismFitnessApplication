@@ -83,7 +83,7 @@ public class UserIntegrationTestMockHTTP {
         mapper.registerModule(new JavaTimeModule());
         long userId = 1;
         MvcResult result =
-                (this.mockMvc.perform(MockMvcRequestBuilders.get("/users/" + userId)))
+                (this.mockMvc.perform(MockMvcRequestBuilders.get("/users/userId/" + userId)))
                         .andExpect(status().isOk())
                         .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                         .andReturn();
