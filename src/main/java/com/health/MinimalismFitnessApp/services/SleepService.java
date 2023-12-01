@@ -7,13 +7,13 @@ import com.health.MinimalismFitnessApp.entities.UserData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
+
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class SleepService {
-    public static final String SENDER_MUST_EXIST = "The sender of the message must already exist.";
-    public static final String MESSAGE_ID_MUST_BE_NULL_OR_0 = "The message id provided for a create/post must be null or zero.";
 
     ISleepRepository sleepRepository;
     IUserRepository userRepository;
@@ -27,11 +27,11 @@ public class SleepService {
         return this.userRepository.findAll();
     }
 
-    public List<SleepData> getAllSleepRecords() {
+    public List<SleepData> getAllSleepData() {
         return sleepRepository.findAll();
     }
 
-    public SleepData getSleepRecordById(long sleepId){
+    public SleepData getSleepDataById(long sleepId){
         Optional<SleepData> sleepTracker = sleepRepository.findById(sleepId);
         return sleepTracker.orElse(null);
     }
@@ -69,5 +69,24 @@ public class SleepService {
             throw new IllegalArgumentException("Sleep record not found with ID:" + sleepDataId);
         }
     }
+
+    public Duration targetSleepDuration(SleepData sleepData) {
+        if (sleepData.getTargetBedtime() != null && sleepData.getTargetWakeUpTime() != null) {
+            Duration hoursSleptOnTheSameDay = Duration.between(sleepData.getTargetBedtime(), sleepData.getTargetWakeUpTime());
+
+            // Check if sleep crosses midnight
+            if (sleepData.getTargetBedtime().isAfter(sleepData.getTargetWakeUpTime())) {
+                // Calculate hours slept on the next day
+                hoursSleptOnTheSameDay = hoursSleptOnTheSameDay.plus(Duration.ofHours(24));
+            }
+
+            return hoursSleptOnTheSameDay;
+        } else {
+            throw new IllegalArgumentException("Please provide both target bedtime and wake-up time");
+        }
+    }
+
+
+
 
 }
