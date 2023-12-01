@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import java.net.URISyntaxException;
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,16 +49,27 @@ public class NutritionServiceNoSpringTest {
         Assertions.assertNull(actual);
     }
 
-//    @Test
-//    void getNutritionRecordByName(){
-//        UserData userData = new UserData("Rais", 1L, 180, 85, LocalDate.of(2000,1,1), "MALE");
-//        NutritionData nutritionData = new NutritionData(1000L, "Pounded Yam", 600, 20, 60, 20, "Dinner", userData);
-//        nutritionController.addNutritionData(nutritionData);
-//        mockNutritionService.getNutritionByName("Rais");
-//        verify(mockNutritionService, times(1)).getNutritionByName("Rais");
-//
-//
-//    }
+    @Test
+    void getNutritionDataRecordByValidId(){
+        NutritionData nutritionData = new NutritionData(1L, "Pounded Yam", 600, 20, 60, 20, "Dinner", new UserData("Rais", 1L, 180, 85, LocalDate.of(2000,1,1), "MALE"));
+        when(this.mockNutritionRepo.findById(1L)).thenReturn(Optional.of(nutritionData));
+
+        NutritionData actual = nutritionService.getNutritionID(1L);
+
+        Assertions.assertEquals(nutritionData.getUser(), actual.getUser());
+        Assertions.assertEquals(nutritionData.getId(), actual.getId());
+        Assertions.assertEquals(nutritionData, actual);
+    }
+
+    @Test
+    void getNutritionRecordByName(){
+        List<NutritionData>  nutritionData = Collections.singletonList(new NutritionData(1L, "Pounded Yam", 600, 20, 60, 20, "Dinner", new UserData("Rais", 1L, 180, 85, LocalDate.of(2000,1,1), "MALE")));
+        when(this.mockNutritionRepo.findNutritionDataByUserDataName("Rais")).thenReturn(nutritionData);
+
+        List<NutritionData> actual = nutritionService.getNutritionByName("Rais");
+        Assertions.assertEquals(nutritionData, actual);
+
+    }
 //
 //    @Test
 //    void addingANutritionRecord() throws URISyntaxException {
