@@ -70,13 +70,13 @@ public class NutritionServiceNoSpringTest {
         Assertions.assertEquals(nutritionData, actual);
 
     }
-//
-//    @Test
-//    void addingANutritionRecord() throws URISyntaxException {
-//        NutritionData nutritionData = new NutritionData(1000L, "Pounded Yam", 600, 20, 60, 20, "Dinner", new UserData());
-//        nutritionController.addNutritionData(nutritionData);
-//        verify(mockNutritionService, times(1)).addNutritionData(nutritionData);
-//    }
+
+    @Test
+    void addingANutritionRecord() throws URISyntaxException {
+        NutritionData nutritionData = new NutritionData(1L, "Pounded Yam", 600, 20, 60, 20, "Dinner", new UserData("Rais", 1L, 180, 85, LocalDate.of(2000,1,1), "MALE"));
+        nutritionService.addNutritionData(nutritionData);
+        verify(mockNutritionRepo, times(1)).save(nutritionData);
+    }
 //
 //    @Test
 //    void updatingNutritionRecord() throws URISyntaxException{
