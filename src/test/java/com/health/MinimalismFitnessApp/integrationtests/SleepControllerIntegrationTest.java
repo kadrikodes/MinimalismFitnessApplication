@@ -1,15 +1,11 @@
-package com.health.MinimalismFitnessApp.integrationTests;
+package com.health.MinimalismFitnessApp.integrationtests;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.health.MinimalismFitnessApp.dataaccess.ISleepRepository;
 import com.health.MinimalismFitnessApp.entities.SleepData;
 import com.health.MinimalismFitnessApp.entities.UserData;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -20,24 +16,17 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import static org.assertj.core.api.FactoryBasedNavigableListAssert.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.web.servlet.function.RequestPredicates.contentType;
 
 
 @SpringBootTest
@@ -141,5 +130,21 @@ class SleepControllerIntegrationTest {
         assertNull(checkingSleepDataAfterDeletion, "Sleep Record Deleted");
     }
 
+    @Test
+    void testTargetSleepDuration() throws Exception {
+        SleepData sleepData = sleepRepository.findById(52L).orElse(null);
+        String json = mapper.writeValueAsString(sleepData);
+
+        MvcResult result = this.mockMvc.perform(MockMvcRequestBuilders.get("/sleeptracker/targetSleepDuration")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(json))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        String contentAsJson = result.getResponse().getContentAsString();
+        Duration targetSleepDuration = mapper.readValue(contentAsJson, Duration.class);
+        assertEquals(Duration.ofHours(9), targetSleepDuration);
+        assertNotNull(targetSleepDuration);
+    }
 
 }

@@ -7,6 +7,8 @@ import com.health.MinimalismFitnessApp.entities.UserData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -69,6 +71,23 @@ public class SleepService {
             throw new IllegalArgumentException("Sleep record not found with ID:" + sleepDataId);
         }
     }
+
+    public Duration targetSleepDuration(SleepData sleepData) {
+        if (sleepData.getTargetBedtime() != null && sleepData.getTargetWakeUpTime() != null) {
+            Duration hoursSleptOnTheSameDay = Duration.between(sleepData.getTargetBedtime(), sleepData.getTargetWakeUpTime());
+
+            // Check if sleep crosses midnight
+            if (sleepData.getTargetBedtime().isAfter(sleepData.getTargetWakeUpTime())) {
+                // Calculate hours slept on the next day
+                hoursSleptOnTheSameDay = hoursSleptOnTheSameDay.plus(Duration.ofHours(24));
+            }
+
+            return hoursSleptOnTheSameDay;
+        } else {
+            throw new IllegalArgumentException("Please provide both target bedtime and wake-up time");
+        }
+    }
+
 
 
 
