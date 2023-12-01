@@ -6,7 +6,6 @@ import com.health.minimalismfitnessapp.entities.SleepData;
 import com.health.minimalismfitnessapp.entities.UserData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.time.Duration;
 
 import java.util.List;
@@ -14,7 +13,6 @@ import java.util.Optional;
 
 @Service
 public class SleepService {
-
     ISleepRepository sleepRepository;
     IUserRepository userRepository;
     @Autowired
@@ -85,8 +83,4 @@ public class SleepService {
             throw new IllegalArgumentException("Please provide both target bedtime and wake-up time");
         }
     }
-
-
-
-
 }

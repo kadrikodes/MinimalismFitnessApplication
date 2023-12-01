@@ -80,6 +80,4 @@ public class SleepData {
         this.actualWakeupTime = actualWakeupTime;
     }
 
-
-
 }

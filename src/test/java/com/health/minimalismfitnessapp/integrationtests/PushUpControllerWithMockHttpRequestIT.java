@@ -1,5 +1,6 @@
 package com.health.minimalismfitnessapp.integrationtests;
 
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.health.minimalismfitnessapp.dataaccess.IPushUpRepository;
@@ -152,12 +153,3 @@ class PushUpControllerWithMockHttpRequestIT {
         assertEquals(50, addedPushUpData.getCaloriesBurnt());
     }
 }
-
-
-
-
-
-
-
-
-

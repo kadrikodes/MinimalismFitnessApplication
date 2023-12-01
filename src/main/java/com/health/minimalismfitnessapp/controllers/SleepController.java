@@ -35,6 +35,7 @@ public class SleepController {
         return sleepService.getSleepRecordByName(name);
     }
 
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public SleepData addSleepRecord(@RequestBody SleepData sleepData) {
@@ -68,6 +69,7 @@ public class SleepController {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Internal Server Error", e);
         }
     }
+
 
     @GetMapping("/targetSleepDuration")
     @ResponseStatus(HttpStatus.OK)

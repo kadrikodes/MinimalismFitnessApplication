@@ -2,6 +2,8 @@ package com.health.minimalismfitnessapp.controllers;
 
 import com.health.minimalismfitnessapp.entities.WalkingData;
 import com.health.minimalismfitnessapp.services.WalkingService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +19,9 @@ import java.util.TimerTask;
 @RequestMapping("/walking")
 public class WalkingController {
 
-    WalkingService walkingService;
+    final WalkingService walkingService;
     Timer walkReminderTimer;
+    private static final Logger logger = LoggerFactory.getLogger(WalkingController.class);
 
     @Autowired
     public WalkingController(WalkingService walkingService) {
@@ -85,9 +88,10 @@ public class WalkingController {
         walkReminderTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-                System.out.println("It's time for a walk!");
+                logger.info("It's time for a walk!");
             }
-        }, hours * 60 * 60 * 1000 + minutes * 60 * 1000);
+        }, (long) hours * 60 * 60 * 1000 + (long) minutes * 60 * 1000);
+
 
         return ResponseEntity.ok("Walk reminder scheduled successfully");
     }
@@ -100,12 +104,13 @@ public class WalkingController {
     @GetMapping("/hasAchievedWeeklyGoal")
     public boolean hasAchievedWeeklyGoal(@RequestParam int stepsTaken) {
         int weeklyStepGoal = walkingService.getWeeklyStepGoal();
-        return walkingService.hasAchievedDailyGoal(stepsTaken, weeklyStepGoal);
+        return walkingService.hasAchievedWeeklyGoal(stepsTaken, weeklyStepGoal);
+
     }
     @GetMapping("/hasAchievedMonthlyGoal")
     public boolean hasAchievedMonthlyGoal(@RequestParam int stepsTaken) {
         int monthlyStepGoal = walkingService.getMonthlyStepGoal();
-        return walkingService.hasAchievedDailyGoal(stepsTaken, monthlyStepGoal);
+        return walkingService.hasAchievedMonthlyGoal(stepsTaken, monthlyStepGoal);
     }
 
     @GetMapping("/calories/{walkingId}")

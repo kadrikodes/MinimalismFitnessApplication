@@ -72,12 +72,4 @@ public class NutritionControllerNoSpringTest {
         verify(mockNutritionService, times(1)).deleteNutritionData(1000L);
     }
 
-
-
-
-
-
-
-
-
 }

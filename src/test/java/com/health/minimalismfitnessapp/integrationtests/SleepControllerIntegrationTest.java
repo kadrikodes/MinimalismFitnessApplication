@@ -38,6 +38,7 @@ class SleepControllerIntegrationTest {
     private final ObjectMapper mapper = new ObjectMapper();
     @Autowired
     MockMvc mockMvc;
+  
     @Autowired
     ISleepRepository sleepRepository;
     public SleepControllerIntegrationTest() {

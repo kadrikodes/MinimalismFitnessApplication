@@ -151,10 +151,4 @@ public class NutritionWithMockHttpRequestIT {
             }
         }return isOnList;
     }
-
-
-
-
-
-
 }
