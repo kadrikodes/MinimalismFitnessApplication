@@ -1,8 +1,6 @@
 package com.health.MinimalismFitnessApp.entities;
 
 import jakarta.persistence.*;
-
-import java.time.Duration;
 import java.time.LocalTime;
 
 @Entity
