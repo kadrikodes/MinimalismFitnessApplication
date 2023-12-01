@@ -7,20 +7,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class UserService {
-    IUserRepository iUserRepository;
+    final IUserRepository iUserRepository;
 
     @Autowired
     public UserService(IUserRepository mockIUserRepository) {
         this.iUserRepository=mockIUserRepository;
     }
-
-    public List<UserData> users=new ArrayList<>();
 
     public List<UserData> findAll() {
         return this.iUserRepository.findAll();
@@ -36,19 +33,15 @@ public class UserService {
 
     public UserData getUserById(long userId) {
         Optional<UserData> optionalUser=this.iUserRepository.findById(userId);
-        if(optionalUser.isEmpty()){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User with ID " + userId + " has not been found.");
-        }else {
-            UserData userData = optionalUser.get();
-        throw new ResponseStatusException(HttpStatus.OK, "User with ID " + userId + " has been successfully found.");
-    }}
+        return optionalUser.orElse(null);
+    }
 
     public UserData updateUser(long userId, UserData updatedUserData) {
         Optional<UserData> optionalUser=this.iUserRepository.findById(userId);
 
         if (optionalUser.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        } else if (optionalUser.isPresent()){
+        } else {
             UserData existingUser = optionalUser.get();
             existingUser.setName(updatedUserData.getName());
             existingUser.setHeight(updatedUserData.getHeight());
@@ -56,8 +49,6 @@ public class UserService {
             existingUser.setBirthdate(updatedUserData.getBirthdate());
             existingUser.setGender(updatedUserData.getGender());
             return iUserRepository.save(existingUser);
-        }else {
-            throw new ResponseStatusException(HttpStatus.OK, "User with ID " + userId + " has been successfully updated.");
         }
 
     }
@@ -66,17 +57,10 @@ public class UserService {
         Optional<UserData> optionalUser=this.iUserRepository.findById(userId);
         if (optionalUser.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,"User with ID " + userId + " has not been found.");
-        } else if (optionalUser.isPresent()) {
+        } else {
             UserData existingUser = optionalUser.get();
             this.iUserRepository.delete(existingUser);
 
-        }else {
-
-        throw new ResponseStatusException(HttpStatus.OK, "User with ID " + userId + " has been successfully deleted.");
-    }}
-
-    public UserData findByID(long userId) {
-        Optional<UserData> userData = iUserRepository.findById(userId);
-        return userData.orElse(null);
+        }
     }
 }

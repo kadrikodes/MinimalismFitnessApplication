@@ -4,6 +4,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.health.minimalismfitnessapp.entities.UserData;
 import com.health.minimalismfitnessapp.services.UserService;
+<<<<<<<< HEAD:src/test/java/com/health/minimalismfitnessapp/controllers/UserControllerSpringTest.java
+========
+import org.junit.jupiter.api.BeforeEach;
+>>>>>>>> master:src/test/java/com/health/minimalismfitnessapp/controllers/UserControllerSomeSpringTest.java
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -21,10 +25,12 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(UserController.class)
+<<<<<<<< HEAD:src/test/java/com/health/minimalismfitnessapp/controllers/UserControllerSpringTest.java
 @AutoConfigureMockMvc
+class UserControllerSpringTest {
+========
 class UserControllerSomeSpringTest {
-
-
+>>>>>>>> master:src/test/java/com/health/minimalismfitnessapp/controllers/UserControllerSomeSpringTest.java
 
     @MockBean
     UserService mockUserService;

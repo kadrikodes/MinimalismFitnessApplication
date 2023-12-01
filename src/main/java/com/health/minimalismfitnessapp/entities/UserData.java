@@ -16,13 +16,9 @@ public class UserData {
     private double weight;
     private LocalDate birthdate;
     private String gender;
-public static final String MALE="MALE";
-public static final String FEMALE="FEMALE";
+    public static final String MALE="MALE";
+    public static final String FEMALE="FEMALE";
 
-
-
-
-    //@OneToMany //TODO : add this mapping + ArrayList
 
     public UserData(){}
 
@@ -45,10 +41,6 @@ public static final String FEMALE="FEMALE";
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public double getHeight() {

@@ -1,3 +1,4 @@
+
 package com.health.minimalismfitnessapp.integrationtests;
 
 

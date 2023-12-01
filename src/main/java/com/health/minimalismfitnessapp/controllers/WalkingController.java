@@ -2,8 +2,11 @@ package com.health.minimalismfitnessapp.controllers;
 
 import com.health.minimalismfitnessapp.entities.WalkingData;
 import com.health.minimalismfitnessapp.services.WalkingService;
+<<<<<<< HEAD
+=======
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+>>>>>>> master
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
