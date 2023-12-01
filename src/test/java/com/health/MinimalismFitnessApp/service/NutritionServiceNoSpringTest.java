@@ -77,16 +77,17 @@ public class NutritionServiceNoSpringTest {
         nutritionService.addNutritionData(nutritionData);
         verify(mockNutritionRepo, times(1)).save(nutritionData);
     }
-//
-//    @Test
-//    void updatingNutritionRecord() throws URISyntaxException{
-//        NutritionData nutritionData = new NutritionData(1000L, "Pounded Yam", 600, 20, 60, 20, "Dinner", new UserData());
-//        nutritionController.addNutritionData(nutritionData);
-//        NutritionData updatedNutritionData = new NutritionData(1000L, "Burger", 600, 50, 30, 20, "Lunch", new UserData());
-//        nutritionController.updateNutritionData(1000L, updatedNutritionData);
-//        verify(mockNutritionService, times(1)).addNutritionData(nutritionData);
-//        verify(mockNutritionService, times(1)).updateNutritionData(1000L, updatedNutritionData);
-//    }
+
+    @Test
+    void updatingNutritionRecord() throws URISyntaxException{
+        when(mockNutritionRepo.findById(1L)).thenReturn(Optional.of(new NutritionData(1L, "Pounded Yam", 600, 20, 60, 20, "Dinner", new UserData("Rais", 1L, 180, 85, LocalDate.of(2000,1,1), "MALE"))));
+        NutritionData updatedNutritionData = new NutritionData(1L, "Pizza", 500, 30, 50, 20, "Dinner", new UserData("Rais", 1L, 180, 85, LocalDate.of(2000,1,1), "MALE"));
+
+        when(mockNutritionRepo.save(any(NutritionData.class))).thenReturn(updatedNutritionData);
+        nutritionService.updateNutritionData(1L, updatedNutritionData);
+        verify(mockNutritionRepo, times(1)).findById(1L);
+        verify(mockNutritionRepo, times(1)).save(any(NutritionData.class));
+    }
 //
 //    @Test
 //    void deletingNutritionRecord(){
