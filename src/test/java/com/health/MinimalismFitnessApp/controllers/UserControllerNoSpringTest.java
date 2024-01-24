@@ -4,7 +4,7 @@ import com.health.MinimalismFitnessApp.entities.UserData;
 import com.health.MinimalismFitnessApp.entities.WalkingData;
 import com.health.MinimalismFitnessApp.services.UserService;
 import com.health.MinimalismFitnessApp.services.WalkingService;
-import org.h2.engine.User;
+//import org.h2.engine.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
