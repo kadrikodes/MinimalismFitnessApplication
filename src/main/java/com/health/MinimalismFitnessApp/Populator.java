@@ -2,6 +2,7 @@ package com.health.MinimalismFitnessApp;
 
 import com.health.MinimalismFitnessApp.dataaccess.*;
 import com.health.MinimalismFitnessApp.entities.NutritionData;
+import com.health.MinimalismFitnessApp.entities.PushUpData;
 import com.health.MinimalismFitnessApp.entities.UserData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -27,8 +28,12 @@ public class Populator {
     }
 
     public void populate(){
-        populateUserData();
-//        populateNutritionData();
+        UserData userData = new UserData("Rais", 180, 85, LocalDate.of(2000,1,1), "MALE");
+        iUserRepository.save(userData);
+        userData = new UserData("Divin", 160, 68, LocalDate.of(1999,1,1), "MALE");
+        iUserRepository.save(userData);
+        PushUpData pushUpData = new PushUpData(20,25,5,50,userData);
+        iPushUpRepository.save(pushUpData);
     }
 
     public void populateNutritionData() {
@@ -65,10 +70,7 @@ public class Populator {
     }
 
     public void populateUserData() {
-        UserData userData = new UserData("Rais", 180, 85, LocalDate.of(2000,1,1), "MALE");
-        iUserRepository.save(userData);
-        userData = new UserData("Divin", 160, 68, LocalDate.of(1999,1,1), "MALE");
-        iUserRepository.save(userData);
+
 
     }
 

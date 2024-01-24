@@ -15,10 +15,8 @@ public class UserData {
     private double weight;
     private LocalDate birthdate;
     private String gender;
-public static final String MALE="MALE";
-public static final String FEMALE="FEMALE";
-
-
+    public static final String MALE="MALE";
+    public static final String FEMALE="FEMALE";
 
 
     //@OneToMany //TODO : add this mapping + ArrayList

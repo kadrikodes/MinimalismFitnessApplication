@@ -34,8 +34,9 @@ class PushUpControllerNoSpringTest {
     @Test
     void testGetPushUpDataById() {
         Long id = 4L;
+        UserData userData1 = new UserData("Rais", 180, 80, LocalDate.of(1997, 06, 11), "MALE");
 
-        PushUpData expectedPushUpData = new PushUpData(5, 10, 1.5, 50);
+        PushUpData expectedPushUpData = new PushUpData(5, 10, 1.5, 50, userData1);
 
         when(mockPushUpService.getPushUpDataById(id)).thenReturn(expectedPushUpData);
         pushUpController.getPushUpDataById(id);
@@ -47,7 +48,9 @@ class PushUpControllerNoSpringTest {
     void testGetPushUpDataByName() {
         String userName = "Kadri";
 
-        PushUpData expectedPushUpData = new PushUpData(5,10,1.5,50);
+        UserData userData1 = new UserData("Rais", 180, 80, LocalDate.of(1997, 06, 11), "MALE");
+
+        PushUpData expectedPushUpData = new PushUpData(5, 10, 1.5, 50, userData1);
 
         when(mockPushUpService.getPushUpDataByUserDataName(userName)).thenReturn(Collections.singletonList(expectedPushUpData));
         pushUpController.getPushUpDataByUserName(userName);
@@ -57,7 +60,9 @@ class PushUpControllerNoSpringTest {
 
     @Test
     void testAddPushUpData() {
-        PushUpData pushUpData = new PushUpData(5,10,1.5,50);
+        UserData userData1 = new UserData("Rais", 180, 80, LocalDate.of(1997, 06, 11), "MALE");
+
+        PushUpData pushUpData = new PushUpData(5, 10, 1.5, 50, userData1);
 
         when(mockPushUpService.addPushUpData(pushUpData)).thenReturn(pushUpData);
 
