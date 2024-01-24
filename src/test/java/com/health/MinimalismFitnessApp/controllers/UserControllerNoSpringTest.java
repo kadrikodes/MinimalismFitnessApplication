@@ -1,21 +1,13 @@
 package com.health.MinimalismFitnessApp.controllers;
 
 import com.health.MinimalismFitnessApp.entities.UserData;
-import com.health.MinimalismFitnessApp.entities.WalkingData;
 import com.health.MinimalismFitnessApp.services.UserService;
-import com.health.MinimalismFitnessApp.services.WalkingService;
 //import org.h2.engine.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Collections;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
@@ -29,7 +21,7 @@ public class UserControllerNoSpringTest {
     UserController userController;
 
     LocalDate expectedLocalDate = LocalDate.of(1980,06,19);
-    UserData userData = new UserData("Esra", 0L, 170.0, 60.0, LocalDate.of(1980, 06, 19), "FEMALE");
+    UserData userData = new UserData("Esra", 170.0, 60.0, LocalDate.of(1980, 06, 19), "FEMALE");
 
     @BeforeEach
     void beforeEach() {
@@ -46,7 +38,7 @@ public class UserControllerNoSpringTest {
     @Test
     void testGetUserDataById() {
         Long userId = 1L;
-        UserData expectedUserData = new UserData("Esra", 1L, 170.0, 160.0, LocalDate.of(1980, 06, 19), "FEMALE");
+        UserData expectedUserData = new UserData("Esra", 170.0, 160.0, LocalDate.of(1980, 06, 19), "FEMALE");
         when(mockUserService.getUserById(userId)).thenReturn(expectedUserData);
         userController.getUserById(userId);
         verify(mockUserService, times(1)).getUserById(userId);
@@ -55,7 +47,7 @@ public class UserControllerNoSpringTest {
 
     @Test
     void testAddUserData() {
-        UserData userData = new UserData("Esra", 0L, 170.0, 60.0, LocalDate.of(1980, 06, 19), "FEMALE");
+        UserData userData = new UserData("Esra", 170.0, 60.0, LocalDate.of(1980, 06, 19), "FEMALE");
 
         when(mockUserService.addUser(userData)).thenReturn(userData);
 
@@ -70,7 +62,7 @@ public class UserControllerNoSpringTest {
     @Test
     void testUpdateUserData() {
         long userId = 1L;
-        UserData userData = new UserData("Esra", 0L, 170.0, 60.0, LocalDate.of(1980, 06, 19), "FEMALE");
+        UserData userData = new UserData("Esra", 170.0, 60.0, LocalDate.of(1980, 06, 19), "FEMALE");
         when(mockUserService.updateUser(userId, userData)).thenReturn(userData);
         UserData updatedUserData = userController.updateUser(userId, userData);
         verify(mockUserService, times(1)).updateUser(userId, userData);

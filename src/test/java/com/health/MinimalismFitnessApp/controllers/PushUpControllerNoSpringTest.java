@@ -2,16 +2,11 @@ package com.health.MinimalismFitnessApp.controllers;
 
 import com.health.MinimalismFitnessApp.entities.PushUpData;
 import com.health.MinimalismFitnessApp.entities.UserData;
-import com.health.MinimalismFitnessApp.entities.WalkingData;
 import com.health.MinimalismFitnessApp.services.PushUpService;
-import com.health.MinimalismFitnessApp.services.WalkingService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -22,7 +17,7 @@ class PushUpControllerNoSpringTest {
     PushUpService mockPushUpService;
     PushUpController pushUpController;
     LocalDate birthDate = LocalDate.of(1997, 06, 11);
-    UserData userData = new UserData("Kadri", 1L, 120, 70, birthDate, "Male");
+    UserData userData = new UserData("Kadri", 120, 70, birthDate, "Male");
 
     @BeforeEach
     void beforeEach() {

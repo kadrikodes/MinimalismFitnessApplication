@@ -49,7 +49,7 @@ class UserControllerSomeSpringTest {
     @Test
     void addUser() throws Exception {
         mapper.registerModule(new JavaTimeModule());
-        UserData userData = new UserData("Esra", 1L, 170.0, 60.0, LocalDate.of(1980, 6, 19), UserData.FEMALE);
+        UserData userData = new UserData("Esra", 170.0, 60.0, LocalDate.of(1980, 6, 19), UserData.FEMALE);
         String json = mapper.writeValueAsString(userData);
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/users")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -61,7 +61,7 @@ class UserControllerSomeSpringTest {
     @Test
     void updateUser() throws Exception {
         mapper.registerModule(new JavaTimeModule());
-        UserData updatedUserData = new UserData("Joe", 1L, 175.0, 65.0, LocalDate.of(1990, 7, 10), UserData.MALE);
+        UserData updatedUserData = new UserData("Joe", 175.0, 65.0, LocalDate.of(1990, 7, 10), UserData.MALE);
         String json = mapper.writeValueAsString(updatedUserData);
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.put("/users/{userId}", 1)
                         .contentType(MediaType.APPLICATION_JSON)

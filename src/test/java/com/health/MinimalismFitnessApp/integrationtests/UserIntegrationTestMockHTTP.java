@@ -8,7 +8,6 @@ import com.health.MinimalismFitnessApp.entities.UserData;
 import com.health.MinimalismFitnessApp.services.UserService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -60,14 +59,14 @@ public class UserIntegrationTestMockHTTP {
     @BeforeEach
     void setUp() {
         if (existingUser == null)
-            existingUser = new UserData("Esra", 1L, 170.0, 60.0, LocalDate.of(1980, 6, 19), UserData.FEMALE);
+            existingUser = new UserData("Esra", 170.0, 60.0, LocalDate.of(1980, 6, 19), UserData.FEMALE);
 
         // Ensure this Person object has an ID
         if (existingUser.getId() == null)
             this.iUserRepository.save(existingUser);
 
         // Will not have an ID
-        newUser = new UserData("Karen", 1L, 170.0, 60.0, LocalDate.of(1980, 6, 18), UserData.FEMALE);
+        newUser = new UserData("Karen", 170.0, 60.0, LocalDate.of(1980, 6, 18), UserData.FEMALE);
     }
 
     @Test
@@ -107,7 +106,7 @@ public class UserIntegrationTestMockHTTP {
     @Test
     void testAddingNewUserRecords() throws Exception {
         mapper.registerModule(new JavaTimeModule());
-        UserData newUserData = new UserData("mike", null, 170.0, 60.0, LocalDate.of(1980, 2, 19), UserData.MALE);
+        UserData newUserData = new UserData("mike", 170.0, 60.0, LocalDate.of(1980, 2, 19), UserData.MALE);
         String json = mapper.writeValueAsString(newUserData);
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/users")
                         .contentType(MediaType.APPLICATION_JSON)

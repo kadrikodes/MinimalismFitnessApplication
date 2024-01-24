@@ -68,7 +68,7 @@ class PushUpControllerWithMockHttpRequestIT {
     @Test
     void testUpdatePushUpData() throws Exception {
         long id = 4;
-        PushUpData pushUpData = new PushUpData(5, 10, 1.5, 100); new UserData("Kadri",100L,177,75, LocalDate.of(1997,06,11),"Male");
+        PushUpData pushUpData = new PushUpData(5, 10, 1.5, 100); new UserData("Kadri", 177,75, LocalDate.of(1997,06,11),"Male");
         pushUpData.setNumberOfPushUps(10);
         pushUpData.setTarget(20);
         pushUpData.setTimeDuration(2.5);
@@ -131,7 +131,7 @@ class PushUpControllerWithMockHttpRequestIT {
 
     @Test
     public void testAddPushUpData() throws Exception {
-        UserData newUserData = new UserData("Delima", 300L, 170, 120, LocalDate.of(1975, 8, 26), "Male");
+        UserData newUserData = new UserData("Delima", 170, 120, LocalDate.of(1975, 8, 26), "Male");
         PushUpData newPushUpData = new PushUpData(5, 10, 1.5, 50);
 
         String jsonRequest = mapper.writeValueAsString(newPushUpData);

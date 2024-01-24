@@ -2,7 +2,6 @@ package com.health.MinimalismFitnessApp.integrationtests;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.health.MinimalismFitnessApp.entities.NutritionData;
-import com.health.MinimalismFitnessApp.entities.SleepData;
 import com.health.MinimalismFitnessApp.entities.UserData;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +18,11 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 
 import static com.health.MinimalismFitnessApp.TestConstants.EXPECTED_ALL_NUTRITION_JSON;
 import static com.health.MinimalismFitnessApp.TestConstants.EXPECTED_ONE_NUTRITION_JSON;
 
 import static org.hamcrest.Matchers.emptyOrNullString;
-import static org.hamcrest.Matchers.isEmptyOrNullString;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -75,8 +72,8 @@ public class NutritionWithMockHttpRequestIT {
 
     @Test
     void testUpdatingNutritionRecord() throws Exception {
-        UserData testUser = new UserData("Rais", 1L, 180, 85, LocalDate.of(2000,1,1), "MALE");
-        NutritionData updatedNutritionData = new NutritionData(1000L, "Pounded Yam", 600, 20, 60, 20, "Dinner", testUser);
+        UserData testUser = new UserData("Rais", 180, 85, LocalDate.of(2000,1,1), "MALE");
+        NutritionData updatedNutritionData = new NutritionData("Pounded Yam", 600, 20, 60, 20, "Dinner", testUser);
 
         String json = objectMapper.writeValueAsString(updatedNutritionData);
 
@@ -99,8 +96,8 @@ public class NutritionWithMockHttpRequestIT {
     @Test
     public void testAddingANutritionRecord() throws Exception {
         int originalNumOfNutritionRecords = getNumberOfNutritionRecords();
-        UserData testUser = new UserData("Samuel", 3L, 174, 82.5, LocalDate.of(1996,10,12), "MALE");
-        NutritionData testNutritionData = new NutritionData(3000L, "Burger", 300, 50, 30, 20, "Lunch", testUser);
+        UserData testUser = new UserData("Samuel", 174, 82.5, LocalDate.of(1996,10,12), "MALE");
+        NutritionData testNutritionData = new NutritionData("Burger", 300, 50, 30, 20, "Lunch", testUser);
 
         String json = objectMapper.writeValueAsString(testNutritionData);
 

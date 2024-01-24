@@ -90,7 +90,7 @@ class SleepControllerIntegrationTest {
     @Test
     void addSleepRecord() throws Exception {
         int initialRecordCount = sleepRepository.findAll().size();
-        UserData userData = new UserData("ABC", 15L, 67, 167, LocalDate.of(1960,04,11),"MALE");
+        UserData userData = new UserData("ABC", 67, 167, LocalDate.of(1960,04,11),"MALE");
         SleepData newSleepData = new SleepData(LocalTime.of( 22,30), LocalTime.of(07, 30), LocalTime.of(22,30), LocalTime.of(07, 00), userData);
         String json = mapper.writeValueAsString(newSleepData);
 

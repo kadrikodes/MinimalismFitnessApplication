@@ -9,8 +9,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -20,7 +18,6 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 public class WalkingServiceFullSpringTest {
@@ -34,7 +31,7 @@ public class WalkingServiceFullSpringTest {
     TestUtilities testUtilities =new TestUtilities();
     LocalDateTime dateTime = LocalDateTime.of(2023, 11, 10, 12, 30);
     LocalDate birthDate = LocalDate.of(1997, 06, 11);
-    UserData userData = new UserData("Kadri", 1L, 120, 70, birthDate, "Male");
+    UserData userData = new UserData("Kadri", 120, 70, birthDate, "Male");
 
 
     @Test
@@ -79,7 +76,7 @@ public class WalkingServiceFullSpringTest {
         WalkingData result = walkingService.addWalkingData(walkingData);
 
         LocalDateTime expectedLocalDateTime = LocalDateTime.of(2023, 11, 10, 12, 30);
-        UserData expectedUserData = new UserData("Kadri", 1L, 120, 70, LocalDate.of(1997, 06, 11), "Male");
+        UserData expectedUserData = new UserData("Kadri", 120, 70, LocalDate.of(1997, 06, 11), "Male");
 
         assertNotNull(result);
         assertEquals(10, result.getDistance());
