@@ -24,8 +24,6 @@ public class PushUpData {
         this.target = target;
         this.timeDuration = timeDuration;
         this.caloriesBurnt = caloriesBurnt;
-        this.userData = userData;
-
     }
 
     public long getId() {

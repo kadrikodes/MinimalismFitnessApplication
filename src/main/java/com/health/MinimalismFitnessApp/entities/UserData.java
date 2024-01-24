@@ -7,8 +7,7 @@ import java.time.LocalDate;
 @Entity
 public class UserData {
     @Id
-    @GeneratedValue(generator = "message_sequence")
-    @SequenceGenerator(name="message_sequence", initialValue = 100)
+    @GeneratedValue
     private Long id;
 
     private String name;
