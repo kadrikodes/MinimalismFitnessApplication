@@ -14,9 +14,9 @@ public class TestUtilitiesUser {
     public List<UserData> createUserData() {
         List<UserData> userData = new ArrayList<>();
 
-        UserData firstUserData = new UserData("Esra", 1L, 170.0, 160.0, LocalDate.of(1980, 06, 19), "FEMALE");
+        UserData firstUserData = new UserData("Esra", 170.0, 160.0, LocalDate.of(1980, 06, 19), "FEMALE");
         userData.add(firstUserData);
-        UserData secondUserData = new UserData("Divin", 2L, 170.0, 160.0, LocalDate.of(1980, 06, 19), "MALE");
+        UserData secondUserData = new UserData("Divin", 170.0, 160.0, LocalDate.of(1980, 06, 19), "MALE");
         userData.add(secondUserData);
 
         return userData;

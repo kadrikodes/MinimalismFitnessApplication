@@ -1,8 +1,11 @@
 package com.health.minimalismfitnessapp.integrationtests;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+<<<<<<< HEAD:src/test/java/com/health/MinimalismFitnessApp/integrationtests/NutritionWithMockHttpRequestIT.java
 import com.health.minimalismfitnessapp.entities.NutritionData;
 import com.health.minimalismfitnessapp.entities.UserData;
+=======
+>>>>>>> master:src/test/java/com/health/minimalismfitnessapp/integrationtests/NutritionWithMockHttpRequestIT.java
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -73,9 +76,15 @@ public class NutritionWithMockHttpRequestIT {
 
     @Test
     void testUpdatingNutritionRecord() throws Exception {
+<<<<<<< HEAD:src/test/java/com/health/MinimalismFitnessApp/integrationtests/NutritionWithMockHttpRequestIT.java
+        UserData testUser = new UserData("Rais", 180, 85, LocalDate.of(2000,1,1), "MALE");
+        NutritionData updatedNutritionData = new NutritionData("Pounded Yam", 600, 20, 60, 20, "Dinner", testUser);
+
+=======
         UserData testUser = new UserData("Rais", 1L, 180, 85, LocalDate.of(2000,1,1), "MALE");
         NutritionData updatedNutritionData = new NutritionData("Pounded Yam", 600, 20, 60, 20, "Dinner", testUser);
         updatedNutritionData.setId(1000L);
+>>>>>>> master:src/test/java/com/health/minimalismfitnessapp/integrationtests/NutritionWithMockHttpRequestIT.java
         String json = objectMapper.writeValueAsString(updatedNutritionData);
 
         mockMvc.perform(MockMvcRequestBuilders.put("/nutrition/" + 1000L)
@@ -97,7 +106,11 @@ public class NutritionWithMockHttpRequestIT {
     @Test
     public void testAddingANutritionRecord() throws Exception {
         int originalNumOfNutritionRecords = getNumberOfNutritionRecords();
+<<<<<<< HEAD:src/test/java/com/health/MinimalismFitnessApp/integrationtests/NutritionWithMockHttpRequestIT.java
+        UserData testUser = new UserData("Samuel", 174, 82.5, LocalDate.of(1996,10,12), "MALE");
+=======
         UserData testUser = new UserData("Samuel", 3L, 174, 82.5, LocalDate.of(1996,10,12), "MALE");
+>>>>>>> master:src/test/java/com/health/minimalismfitnessapp/integrationtests/NutritionWithMockHttpRequestIT.java
         NutritionData testNutritionData = new NutritionData("Burger", 300, 50, 30, 20, "Lunch", testUser);
 
         String json = objectMapper.writeValueAsString(testNutritionData);

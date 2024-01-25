@@ -54,10 +54,21 @@ public class UserIntegrationTestMockHTTP {
     @BeforeEach
     void setUp() {
         if (existingUser == null)
+<<<<<<< HEAD:src/test/java/com/health/MinimalismFitnessApp/integrationtests/UserIntegrationTestMockHTTP.java
+            existingUser = new UserData("Esra", 170.0, 60.0, LocalDate.of(1980, 6, 19), UserData.FEMALE);
+
+        // Ensure this Person object has an ID
+        if (existingUser.getId() == null)
+            this.iUserRepository.save(existingUser);
+
+        // Will not have an ID
+        newUser = new UserData("Karen", 170.0, 60.0, LocalDate.of(1980, 6, 18), UserData.FEMALE);
+=======
             existingUser = new UserData("Esra", 1L, 170.0, 60.0, LocalDate.of(1980, 6, 19), UserData.FEMALE);
         if (existingUser.getId() == null)
             this.iUserRepository.save(existingUser);
         newUser = new UserData("Karen", 1L, 170.0, 60.0, LocalDate.of(1980, 6, 18), UserData.FEMALE);
+>>>>>>> master:src/test/java/com/health/minimalismfitnessapp/integrationtests/UserIntegrationTestMockHTTP.java
     }
 
     @Test
@@ -97,7 +108,7 @@ public class UserIntegrationTestMockHTTP {
     @Test
     void testAddingNewUserRecords() throws Exception {
         mapper.registerModule(new JavaTimeModule());
-        UserData newUserData = new UserData("mike", null, 170.0, 60.0, LocalDate.of(1980, 2, 19), UserData.MALE);
+        UserData newUserData = new UserData("mike", 170.0, 60.0, LocalDate.of(1980, 2, 19), UserData.MALE);
         String json = mapper.writeValueAsString(newUserData);
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/users/addUser")
                         .contentType(MediaType.APPLICATION_JSON)

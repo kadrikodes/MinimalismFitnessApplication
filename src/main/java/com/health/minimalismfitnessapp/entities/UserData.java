@@ -7,8 +7,7 @@ import java.time.LocalDate;
 @Entity
 public class UserData {
     @Id
-    @GeneratedValue(generator = "message_sequence")
-    @SequenceGenerator(name="message_sequence", initialValue = 100)
+    @GeneratedValue
     private Long id;
 
     private String name;
@@ -20,11 +19,15 @@ public class UserData {
     public static final String FEMALE="FEMALE";
 
 
+<<<<<<< HEAD:src/main/java/com/health/MinimalismFitnessApp/entities/UserData.java
+    //@OneToMany //TODO : add this mapping + ArrayList
+
+=======
+>>>>>>> master:src/main/java/com/health/minimalismfitnessapp/entities/UserData.java
     public UserData(){}
 
-    public UserData(String name, Long id, double height, double weight, LocalDate birthdate, String gender) {
+    public UserData(String name, double height, double weight, LocalDate birthdate, String gender) {
         this.name = name;
-        this.id = id;
         this.height = height;
         this.weight = weight;
         this.birthdate = birthdate;

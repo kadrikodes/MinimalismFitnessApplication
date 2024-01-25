@@ -19,11 +19,15 @@ public class PushUpData {
     private UserData userData;
 
     public PushUpData() {}
-    public PushUpData(int numberOfPushUps, int target, double timeDuration, int caloriesBurnt) {
+    public PushUpData(int numberOfPushUps, int target, double timeDuration, int caloriesBurnt, UserData userData) {
         this.numberOfPushUps = numberOfPushUps;
         this.target = target;
         this.timeDuration = timeDuration;
         this.caloriesBurnt = caloriesBurnt;
+<<<<<<< HEAD:src/main/java/com/health/MinimalismFitnessApp/entities/PushUpData.java
+        this.userData = userData;
+=======
+>>>>>>> master:src/main/java/com/health/minimalismfitnessapp/entities/PushUpData.java
     }
 
     public long getId() {

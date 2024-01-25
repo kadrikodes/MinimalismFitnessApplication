@@ -1,8 +1,11 @@
 package com.health.minimalismfitnessapp.controllers;
 
+<<<<<<< HEAD:src/test/java/com/health/MinimalismFitnessApp/controllers/PushUpControllerNoSpringTest.java
 import com.health.minimalismfitnessapp.entities.PushUpData;
 import com.health.minimalismfitnessapp.entities.UserData;
 import com.health.minimalismfitnessapp.services.PushUpService;
+=======
+>>>>>>> master:src/test/java/com/health/minimalismfitnessapp/controllers/PushUpControllerNoSpringTest.java
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +20,7 @@ class PushUpControllerNoSpringTest {
     PushUpService mockPushUpService;
     PushUpController pushUpController;
     LocalDate birthDate = LocalDate.of(1997, 06, 11);
-    UserData userData = new UserData("Kadri", 1L, 120, 70, birthDate, "Male");
+    UserData userData = new UserData("Kadri", 120, 70, birthDate, "Male");
 
     @BeforeEach
     void beforeEach() {
@@ -34,8 +37,9 @@ class PushUpControllerNoSpringTest {
     @Test
     void testGetPushUpDataById() {
         Long id = 4L;
+        UserData userData1 = new UserData("Rais", 180, 80, LocalDate.of(1997, 06, 11), "MALE");
 
-        PushUpData expectedPushUpData = new PushUpData(5, 10, 1.5, 50);
+        PushUpData expectedPushUpData = new PushUpData(5, 10, 1.5, 50, userData1);
 
         when(mockPushUpService.getPushUpDataById(id)).thenReturn(expectedPushUpData);
         pushUpController.getPushUpDataById(id);
@@ -47,7 +51,9 @@ class PushUpControllerNoSpringTest {
     void testGetPushUpDataByName() {
         String userName = "Kadri";
 
-        PushUpData expectedPushUpData = new PushUpData(5,10,1.5,50);
+        UserData userData1 = new UserData("Rais", 180, 80, LocalDate.of(1997, 06, 11), "MALE");
+
+        PushUpData expectedPushUpData = new PushUpData(5, 10, 1.5, 50, userData1);
 
         when(mockPushUpService.getPushUpDataByUserDataName(userName)).thenReturn(Collections.singletonList(expectedPushUpData));
         pushUpController.getPushUpDataByUserName(userName);
@@ -57,7 +63,9 @@ class PushUpControllerNoSpringTest {
 
     @Test
     void testAddPushUpData() {
-        PushUpData pushUpData = new PushUpData(5,10,1.5,50);
+        UserData userData1 = new UserData("Rais", 180, 80, LocalDate.of(1997, 06, 11), "MALE");
+
+        PushUpData pushUpData = new PushUpData(5, 10, 1.5, 50, userData1);
 
         when(mockPushUpService.addPushUpData(pushUpData)).thenReturn(pushUpData);
 
