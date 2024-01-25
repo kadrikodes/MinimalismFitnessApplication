@@ -49,7 +49,7 @@ class UserControllerSpringTest {
     void testGetUserDataById() throws Exception {
         long userId = 1L;
 
-        UserData userData = new UserData("Esra", 1L, 170.0, 60.0, LocalDate.of(1980, 6, 19), UserData.FEMALE);
+        UserData userData = new UserData("Esra", 170.0, 60.0, LocalDate.of(1980, 6, 19), UserData.FEMALE);
         when(mockUserService.getUserById(userId)).thenReturn(userData);
 
         MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/users/userId/" + userId);
@@ -64,7 +64,7 @@ class UserControllerSpringTest {
     void testGetUserDataByName() throws Exception {
         String name = "Esra";
 
-        UserData userData = new UserData("Esra", 1L, 170.0, 60.0, LocalDate.of(1980, 6, 19), UserData.FEMALE);
+        UserData userData = new UserData("Esra", 170.0, 60.0, LocalDate.of(1980, 6, 19), UserData.FEMALE);
         when(mockUserService.getAllUsersByName(name)).thenReturn(Optional.of((userData)));
 
         MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/users/name/" + name);
@@ -78,7 +78,7 @@ class UserControllerSpringTest {
     @Test
     void addUser() throws Exception {
         mapper.registerModule(new JavaTimeModule());
-        UserData userData = new UserData("Esra", 1L, 170.0, 60.0, LocalDate.of(1980, 6, 19), UserData.FEMALE);
+        UserData userData = new UserData("Esra", 170.0, 60.0, LocalDate.of(1980, 6, 19), UserData.FEMALE);
         String json = mapper.writeValueAsString(userData);
         mockMvc.perform(MockMvcRequestBuilders.post("/users/addUser")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -90,7 +90,7 @@ class UserControllerSpringTest {
     @Test
     void updateUser() throws Exception {
         mapper.registerModule(new JavaTimeModule());
-        UserData updatedUserData = new UserData("Joe", 1L, 175.0, 65.0, LocalDate.of(1990, 7, 10), UserData.MALE);
+        UserData updatedUserData = new UserData("Joe", 175.0, 65.0, LocalDate.of(1990, 7, 10), UserData.MALE);
         String json = mapper.writeValueAsString(updatedUserData);
         mockMvc.perform(MockMvcRequestBuilders.put("/users/updateUser/"+ 1)
                         .contentType(MediaType.APPLICATION_JSON)

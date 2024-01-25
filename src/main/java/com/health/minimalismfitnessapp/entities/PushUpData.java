@@ -24,10 +24,7 @@ public class PushUpData {
         this.target = target;
         this.timeDuration = timeDuration;
         this.caloriesBurnt = caloriesBurnt;
-<<<<<<< HEAD:src/main/java/com/health/MinimalismFitnessApp/entities/PushUpData.java
         this.userData = userData;
-=======
->>>>>>> master:src/main/java/com/health/minimalismfitnessapp/entities/PushUpData.java
     }
 
     public long getId() {

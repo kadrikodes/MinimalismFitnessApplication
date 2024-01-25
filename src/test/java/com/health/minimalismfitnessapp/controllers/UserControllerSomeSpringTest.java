@@ -47,7 +47,7 @@ class UserControllerSomeSpringTest {
     void testGetUserDataById() throws Exception {
         long userId = 1L;
 
-        UserData userData = new UserData("Esra", 1L, 170.0, 60.0, LocalDate.of(1980, 6, 19), UserData.FEMALE);
+        UserData userData = new UserData("Esra",  170.0, 60.0, LocalDate.of(1980, 6, 19), UserData.FEMALE);
         when(mockUserService.getUserById(userId)).thenReturn(userData);
 
         MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/users/userId/" + userId);
@@ -62,7 +62,7 @@ class UserControllerSomeSpringTest {
     void testGetUserDataByName() throws Exception {
         String name = "Esra";
 
-        UserData userData = new UserData("Esra", 1L, 170.0, 60.0, LocalDate.of(1980, 6, 19), UserData.FEMALE);
+        UserData userData = new UserData("Esra", 170.0, 60.0, LocalDate.of(1980, 6, 19), UserData.FEMALE);
         when(mockUserService.getAllUsersByName(name)).thenReturn(Optional.of((userData)));
 
         MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/users/name/" + name);

@@ -18,12 +18,6 @@ public class UserData {
     public static final String MALE="MALE";
     public static final String FEMALE="FEMALE";
 
-
-<<<<<<< HEAD:src/main/java/com/health/MinimalismFitnessApp/entities/UserData.java
-    //@OneToMany //TODO : add this mapping + ArrayList
-
-=======
->>>>>>> master:src/main/java/com/health/minimalismfitnessapp/entities/UserData.java
     public UserData(){}
 
     public UserData(String name, double height, double weight, LocalDate birthdate, String gender) {

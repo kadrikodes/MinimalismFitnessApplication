@@ -1,11 +1,8 @@
 package com.health.minimalismfitnessapp.controllers;
 
-<<<<<<< HEAD:src/test/java/com/health/MinimalismFitnessApp/controllers/PushUpControllerNoSpringTest.java
 import com.health.minimalismfitnessapp.entities.PushUpData;
 import com.health.minimalismfitnessapp.entities.UserData;
 import com.health.minimalismfitnessapp.services.PushUpService;
-=======
->>>>>>> master:src/test/java/com/health/minimalismfitnessapp/controllers/PushUpControllerNoSpringTest.java
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

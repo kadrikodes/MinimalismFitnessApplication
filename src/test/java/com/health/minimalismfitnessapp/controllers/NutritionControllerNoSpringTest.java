@@ -38,11 +38,8 @@ public class NutritionControllerNoSpringTest {
 
     @Test
     void getNutritionRecordByName(){
-<<<<<<< HEAD:src/test/java/com/health/MinimalismFitnessApp/controllers/NutritionControllerNoSpringTest.java
         UserData userData = new UserData("Rais", 180, 85, LocalDate.of(2000,1,1), "MALE");
-=======
-        UserData userData = new UserData("Rais", 1L, 180, 85, LocalDate.of(2000,1,1), "MALE");
->>>>>>> master:src/test/java/com/health/minimalismfitnessapp/controllers/NutritionControllerNoSpringTest.java
+
         NutritionData nutritionData = new NutritionData("Pounded Yam", 600, 20, 60, 20, "Dinner", userData);
         nutritionController.addNutritionData(nutritionData);
         mockNutritionService.getNutritionByName("Rais");

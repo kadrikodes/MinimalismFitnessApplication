@@ -51,7 +51,7 @@ public class NutritionServiceNoSpringTest {
 
     @Test
     void getNutritionDataRecordByValidId(){
-        NutritionData nutritionData = new NutritionData("Pounded Yam", 600, 20, 60, 20, "Dinner", new UserData("Rais", 1L, 180, 85, LocalDate.of(2000,1,1), "MALE"));
+        NutritionData nutritionData = new NutritionData("Pounded Yam", 600, 20, 60, 20, "Dinner", new UserData("Rais", 180, 85, LocalDate.of(2000,1,1), "MALE"));
         when(this.mockNutritionRepo.findById(1L)).thenReturn(Optional.of(nutritionData));
 
         NutritionData actual = nutritionService.getNutritionID(1L);
@@ -63,7 +63,7 @@ public class NutritionServiceNoSpringTest {
 
     @Test
     void getNutritionRecordByName(){
-        List<NutritionData>  nutritionData = Collections.singletonList(new NutritionData("Pounded Yam", 600, 20, 60, 20, "Dinner", new UserData("Rais", 1L, 180, 85, LocalDate.of(2000,1,1), "MALE")));
+        List<NutritionData>  nutritionData = Collections.singletonList(new NutritionData("Pounded Yam", 600, 20, 60, 20, "Dinner", new UserData("Rais", 180, 85, LocalDate.of(2000,1,1), "MALE")));
         when(this.mockNutritionRepo.findNutritionDataByUserDataName("Rais")).thenReturn(nutritionData);
 
         List<NutritionData> actual = nutritionService.getNutritionByName("Rais");
@@ -73,15 +73,15 @@ public class NutritionServiceNoSpringTest {
 
     @Test
     void addingANutritionRecord() throws URISyntaxException {
-        NutritionData nutritionData = new NutritionData("Pounded Yam", 600, 20, 60, 20, "Dinner", new UserData("Rais", 1L, 180, 85, LocalDate.of(2000,1,1), "MALE"));
+        NutritionData nutritionData = new NutritionData("Pounded Yam", 600, 20, 60, 20, "Dinner", new UserData("Rais", 180, 85, LocalDate.of(2000,1,1), "MALE"));
         nutritionService.addNutritionData(nutritionData);
         verify(mockNutritionRepo, times(1)).save(nutritionData);
     }
 
     @Test
     void updatingNutritionRecord() throws URISyntaxException{
-        when(mockNutritionRepo.findById(1L)).thenReturn(Optional.of(new NutritionData("Pounded Yam", 600, 20, 60, 20, "Dinner", new UserData("Rais", 1L, 180, 85, LocalDate.of(2000,1,1), "MALE"))));
-        NutritionData updatedNutritionData = new NutritionData("Pizza", 500, 30, 50, 20, "Dinner", new UserData("Rais", 1L, 180, 85, LocalDate.of(2000,1,1), "MALE"));
+        when(mockNutritionRepo.findById(1L)).thenReturn(Optional.of(new NutritionData("Pounded Yam", 600, 20, 60, 20, "Dinner", new UserData("Rais", 180, 85, LocalDate.of(2000,1,1), "MALE"))));
+        NutritionData updatedNutritionData = new NutritionData("Pizza", 500, 30, 50, 20, "Dinner", new UserData("Rais", 180, 85, LocalDate.of(2000,1,1), "MALE"));
 
         when(mockNutritionRepo.save(any(NutritionData.class))).thenReturn(updatedNutritionData);
         nutritionService.updateNutritionData(1L, updatedNutritionData);
