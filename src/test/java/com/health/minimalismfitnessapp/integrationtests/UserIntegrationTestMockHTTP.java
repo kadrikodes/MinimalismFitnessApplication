@@ -1,10 +1,9 @@
 package com.health.minimalismfitnessapp.integrationtests;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.health.minimalismfitnessapp.dataaccess.IUserRepository;
-import com.health.minimalismfitnessapp.entities.UserData;
+import com.health.minimalismfitnessapp.backend.dataaccess.IUserRepository;
+import com.health.minimalismfitnessapp.backend.entities.UserData;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,7 +18,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

@@ -1,7 +1,7 @@
 package com.health.minimalismfitnessapp;
 
-import com.health.minimalismfitnessapp.entities.NutritionData;
-import com.health.minimalismfitnessapp.entities.UserData;
+import com.health.minimalismfitnessapp.backend.entities.NutritionData;
+import com.health.minimalismfitnessapp.backend.entities.UserData;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

@@ -1,10 +1,10 @@
 package com.health.minimalismfitnessapp.service;
 
 import com.health.minimalismfitnessapp.TestUtilities;
-import com.health.minimalismfitnessapp.dataaccess.IWalkingRepository;
-import com.health.minimalismfitnessapp.entities.UserData;
-import com.health.minimalismfitnessapp.entities.WalkingData;
-import com.health.minimalismfitnessapp.services.WalkingService;
+import com.health.minimalismfitnessapp.backend.dataaccess.IWalkingRepository;
+import com.health.minimalismfitnessapp.backend.entities.UserData;
+import com.health.minimalismfitnessapp.backend.entities.WalkingData;
+import com.health.minimalismfitnessapp.backend.services.WalkingService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

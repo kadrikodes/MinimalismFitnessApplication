@@ -1,11 +1,11 @@
 package com.health.minimalismfitnessapp.service;
 
 import com.health.minimalismfitnessapp.TestConstantsNutrition;
-import com.health.minimalismfitnessapp.dataaccess.INutritionRepository;
-import com.health.minimalismfitnessapp.dataaccess.IUserRepository;
-import com.health.minimalismfitnessapp.entities.NutritionData;
-import com.health.minimalismfitnessapp.entities.UserData;
-import com.health.minimalismfitnessapp.services.NutritionService;
+import com.health.minimalismfitnessapp.backend.dataaccess.INutritionRepository;
+import com.health.minimalismfitnessapp.backend.dataaccess.IUserRepository;
+import com.health.minimalismfitnessapp.backend.entities.NutritionData;
+import com.health.minimalismfitnessapp.backend.entities.UserData;
+import com.health.minimalismfitnessapp.backend.services.NutritionService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
