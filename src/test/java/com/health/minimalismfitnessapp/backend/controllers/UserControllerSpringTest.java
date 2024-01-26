@@ -1,11 +1,9 @@
-package com.health.minimalismfitnessapp.controllers;
+package com.health.minimalismfitnessapp.backend.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.health.minimalismfitnessapp.entities.UserData;
-import com.health.minimalismfitnessapp.services.UserService;
-
-import org.junit.jupiter.api.BeforeEach;
+import com.health.minimalismfitnessapp.backend.entities.UserData;
+import com.health.minimalismfitnessapp.backend.services.UserService;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

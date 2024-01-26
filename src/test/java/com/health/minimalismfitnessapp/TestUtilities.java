@@ -1,7 +1,7 @@
 package com.health.minimalismfitnessapp;
 
-import com.health.minimalismfitnessapp.entities.UserData;
-import com.health.minimalismfitnessapp.entities.WalkingData;
+import com.health.minimalismfitnessapp.backend.entities.UserData;
+import com.health.minimalismfitnessapp.backend.entities.WalkingData;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;

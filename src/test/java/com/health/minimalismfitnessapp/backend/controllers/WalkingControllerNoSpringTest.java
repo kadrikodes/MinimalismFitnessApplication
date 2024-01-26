@@ -1,8 +1,8 @@
-package com.health.minimalismfitnessapp.controllers;
+package com.health.minimalismfitnessapp.backend.controllers;
 
-import com.health.minimalismfitnessapp.entities.UserData;
-import com.health.minimalismfitnessapp.entities.WalkingData;
-import com.health.minimalismfitnessapp.services.WalkingService;
+import com.health.minimalismfitnessapp.backend.entities.UserData;
+import com.health.minimalismfitnessapp.backend.entities.WalkingData;
+import com.health.minimalismfitnessapp.backend.services.WalkingService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;

@@ -1,10 +1,10 @@
-package com.health.minimalismfitnessapp.controllers;
+package com.health.minimalismfitnessapp.backend.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.health.minimalismfitnessapp.TestUtilities;
-import com.health.minimalismfitnessapp.entities.UserData;
-import com.health.minimalismfitnessapp.entities.WalkingData;
-import com.health.minimalismfitnessapp.services.WalkingService;
+import com.health.minimalismfitnessapp.backend.entities.UserData;
+import com.health.minimalismfitnessapp.backend.entities.WalkingData;
+import com.health.minimalismfitnessapp.backend.services.WalkingService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;

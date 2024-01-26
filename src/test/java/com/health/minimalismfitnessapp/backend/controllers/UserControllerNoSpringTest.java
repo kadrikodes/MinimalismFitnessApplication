@@ -1,7 +1,7 @@
-package com.health.minimalismfitnessapp.controllers;
+package com.health.minimalismfitnessapp.backend.controllers;
 
-import com.health.minimalismfitnessapp.entities.UserData;
-import com.health.minimalismfitnessapp.services.UserService;
+import com.health.minimalismfitnessapp.backend.entities.UserData;
+import com.health.minimalismfitnessapp.backend.services.UserService;
 //import org.h2.engine.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
