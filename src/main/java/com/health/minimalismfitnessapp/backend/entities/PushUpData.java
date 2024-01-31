@@ -1,16 +1,15 @@
 package com.health.minimalismfitnessapp.backend.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
 @Entity
 public class PushUpData {
 
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
+    @ManyToOne
+    private ActivityData activityData;
     private int numberOfPushUps;
     private int target;
     private double timeDuration;
@@ -18,20 +17,25 @@ public class PushUpData {
     @ManyToOne
     private UserData userData;
 
-    public PushUpData() {}
-    public PushUpData(int numberOfPushUps, int target, double timeDuration, int caloriesBurnt, UserData userData) {
+    public PushUpData() {
+//        super("PushUps", 234);
+    }
+    public PushUpData(int numberOfPushUps, int target, double timeDuration, int caloriesBurnt, UserData userData, ActivityData activityData) {
+//        super("PushUps", caloriesBurnt);
         this.numberOfPushUps = numberOfPushUps;
         this.target = target;
         this.timeDuration = timeDuration;
         this.caloriesBurnt = caloriesBurnt;
         this.userData = userData;
+        this.activityData = activityData;
     }
 
-    public long getId() {
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

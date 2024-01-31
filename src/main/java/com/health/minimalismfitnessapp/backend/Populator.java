@@ -1,6 +1,7 @@
 package com.health.minimalismfitnessapp.backend;
 
 import com.health.minimalismfitnessapp.backend.dataaccess.*;
+import com.health.minimalismfitnessapp.backend.entities.ActivityData;
 import com.health.minimalismfitnessapp.backend.entities.NutritionData;
 import com.health.minimalismfitnessapp.backend.entities.PushUpData;
 import com.health.minimalismfitnessapp.backend.entities.UserData;
@@ -17,9 +18,11 @@ public class Populator {
     ISleepRepository iSleepRepository;
     IUserRepository iUserRepository;
     IWalkingRepository iWalkingRepository;
+    IActivityRepository iActivityRepository;
 
     @Autowired
-    public Populator(INutritionRepository iNutritionRepository, IPushUpRepository iPushUpRepository, ISleepRepository iSleepRepository, IUserRepository iUserRepository, IWalkingRepository iWalkingRepository) {
+    public Populator(IActivityRepository iActivityRepository, INutritionRepository iNutritionRepository, IPushUpRepository iPushUpRepository, ISleepRepository iSleepRepository, IUserRepository iUserRepository, IWalkingRepository iWalkingRepository) {
+        this.iActivityRepository = iActivityRepository;
         this.iNutritionRepository = iNutritionRepository;
         this.iPushUpRepository = iPushUpRepository;
         this.iSleepRepository = iSleepRepository;
@@ -32,7 +35,9 @@ public class Populator {
         iUserRepository.save(userData);
         userData = new UserData("Divin", 160, 68, LocalDate.of(1999,1,1), "MALE");
         iUserRepository.save(userData);
-        PushUpData pushUpData = new PushUpData(20,25,5,50,userData);
+        ActivityData activityData = new ActivityData("PushUps", 50);
+        iActivityRepository.save(activityData);
+        PushUpData pushUpData = new PushUpData(20,25,5,50,userData, activityData);
         iPushUpRepository.save(pushUpData);
     }
 
