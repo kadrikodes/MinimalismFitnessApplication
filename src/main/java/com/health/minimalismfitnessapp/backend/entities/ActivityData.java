@@ -12,8 +12,7 @@ public class ActivityData {
     private String workout;
     private double calories;
 
-
-
+    public ActivityData(){}
     public ActivityData(String workout, double calories) {
         this.workout = workout;
         this.calories = calories;
