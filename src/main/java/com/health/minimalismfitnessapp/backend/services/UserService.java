@@ -1,7 +1,7 @@
 package com.health.minimalismfitnessapp.backend.services;
 
 import com.health.minimalismfitnessapp.backend.dataaccess.IUserRepository;
-import com.health.minimalismfitnessapp.backend.entities.UserData;
+import com.health.minimalismfitnessapp.backend.entities.userdata.UserData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;

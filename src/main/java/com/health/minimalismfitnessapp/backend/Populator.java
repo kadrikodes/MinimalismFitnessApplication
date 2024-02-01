@@ -3,7 +3,8 @@ package com.health.minimalismfitnessapp.backend;
 import com.health.minimalismfitnessapp.backend.dataaccess.*;
 import com.health.minimalismfitnessapp.backend.entities.NutritionData;
 import com.health.minimalismfitnessapp.backend.entities.PushUpData;
-import com.health.minimalismfitnessapp.backend.entities.UserData;
+import com.health.minimalismfitnessapp.backend.entities.userdata.UserData;
+import com.health.minimalismfitnessapp.backend.entities.userdata.UserGender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -28,9 +29,9 @@ public class Populator {
     }
 
     public void populate(){
-        UserData userData = new UserData("Rais", 180, 85, LocalDate.of(2000,1,1), "MALE");
+        UserData userData = new UserData("Rais", 180, 85, LocalDate.of(2000,1,1), UserGender.MALE);
         iUserRepository.save(userData);
-        userData = new UserData("Divin", 160, 68, LocalDate.of(1999,1,1), "MALE");
+        userData = new UserData("Divin", 160, 68, LocalDate.of(1999,1,1), UserGender.MALE);
         iUserRepository.save(userData);
         PushUpData pushUpData = new PushUpData(20,25,5,50,userData);
         iPushUpRepository.save(pushUpData);

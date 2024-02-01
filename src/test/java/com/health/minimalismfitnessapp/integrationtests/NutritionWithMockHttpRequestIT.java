@@ -2,7 +2,8 @@ package com.health.minimalismfitnessapp.integrationtests;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.health.minimalismfitnessapp.backend.entities.NutritionData;
-import com.health.minimalismfitnessapp.backend.entities.UserData;
+import com.health.minimalismfitnessapp.backend.entities.userdata.UserData;
+import com.health.minimalismfitnessapp.backend.entities.userdata.UserGender;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -73,7 +74,7 @@ public class NutritionWithMockHttpRequestIT {
 
     @Test
     void testUpdatingNutritionRecord() throws Exception {
-        UserData testUser = new UserData("Rais", 180, 85, LocalDate.of(2000,1,1), "MALE");
+        UserData testUser = new UserData("Rais", 180, 85, LocalDate.of(2000,1,1), UserGender.MALE);
         NutritionData updatedNutritionData = new NutritionData("Pounded Yam", 600, 20, 60, 20, "Dinner", testUser);
 
         String json = objectMapper.writeValueAsString(updatedNutritionData);
@@ -97,7 +98,7 @@ public class NutritionWithMockHttpRequestIT {
     @Test
     public void testAddingANutritionRecord() throws Exception {
         int originalNumOfNutritionRecords = getNumberOfNutritionRecords();
-        UserData testUser = new UserData("Samuel", 174, 82.5, LocalDate.of(1996,10,12), "MALE");
+        UserData testUser = new UserData("Samuel", 174, 82.5, LocalDate.of(1996,10,12), UserGender.MALE);
 
         NutritionData testNutritionData = new NutritionData("Burger", 300, 50, 30, 20, "Lunch", testUser);
 
