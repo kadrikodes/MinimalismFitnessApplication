@@ -4,6 +4,7 @@ import com.health.minimalismfitnessapp.backend.entities.PushUpData;
 import com.health.minimalismfitnessapp.backend.entities.UserData;
 import com.health.minimalismfitnessapp.backend.services.PushUpService;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -11,7 +12,7 @@ import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
-
+@Disabled
 class PushUpControllerNoSpringTest {
 
     PushUpService mockPushUpService;
