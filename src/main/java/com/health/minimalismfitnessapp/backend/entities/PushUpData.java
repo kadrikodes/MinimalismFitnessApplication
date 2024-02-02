@@ -15,6 +15,7 @@ public class PushUpData {
     private double timeDuration;
     private int caloriesBurnt;
     @ManyToOne
+    @JoinColumn(name = "user_data_id")
     private UserData userData;
 
     public PushUpData() {

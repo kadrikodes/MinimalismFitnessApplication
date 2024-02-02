@@ -16,6 +16,7 @@ public class NutritionData {
     private String mealType;
 
     @ManyToOne
+    @JoinColumn(name = "user_data_id")
     private UserData userData;
 
     public NutritionData(){}

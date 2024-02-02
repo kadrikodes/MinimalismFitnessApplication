@@ -1,9 +1,6 @@
 package com.health.minimalismfitnessapp.backend.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
@@ -22,6 +19,7 @@ public class WalkingData {
     private ActivityData activityData;
 
     @ManyToOne
+    @JoinColumn(name = "user_data_id")
     private UserData userData;
 
     public WalkingData() {}
