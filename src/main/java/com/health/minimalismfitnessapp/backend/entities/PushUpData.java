@@ -8,6 +8,9 @@ public class PushUpData {
     @Id
     @GeneratedValue
     private Long id;
+
+
+
     @ManyToOne
     private ActivityData activityData;
     private int numberOfPushUps;
@@ -18,11 +21,7 @@ public class PushUpData {
     @JoinColumn(name = "user_data_id")
     private UserData userData;
 
-    public PushUpData() {
-//        super("PushUps", 234);
-    }
     public PushUpData(int numberOfPushUps, int target, double timeDuration, int caloriesBurnt, UserData userData, ActivityData activityData) {
-//        super("PushUps", caloriesBurnt);
         this.numberOfPushUps = numberOfPushUps;
         this.target = target;
         this.timeDuration = timeDuration;
@@ -78,5 +77,12 @@ public class PushUpData {
 
     public void setCaloriesBurnt(int caloriesBurnt) {
         this.caloriesBurnt = caloriesBurnt;
+    }
+    public ActivityData getActivityData() {
+        return activityData;
+    }
+
+    public void setActivityData(ActivityData activityData) {
+        this.activityData = activityData;
     }
 }
