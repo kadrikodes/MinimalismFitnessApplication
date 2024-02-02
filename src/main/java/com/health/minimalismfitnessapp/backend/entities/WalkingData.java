@@ -15,6 +15,8 @@ public class WalkingData {
     private double duration;
     private double speed;
     private LocalDateTime dateTime;
+
+
     @ManyToOne
     private ActivityData activityData;
 
@@ -50,6 +52,13 @@ public class WalkingData {
     public void setId(Long id) {
         this.id = id;
 
+    }
+    public ActivityData getActivityData() {
+        return activityData;
+    }
+
+    public void setActivityData(ActivityData activityData) {
+        this.activityData = activityData;
     }
 
     public int getSteps() {
