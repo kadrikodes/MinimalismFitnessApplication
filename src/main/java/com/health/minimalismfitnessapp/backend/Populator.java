@@ -61,15 +61,19 @@ public class Populator {
             UserData userData1 = optionalUserData1.get();
             UserData userData2 = optionalUserData2.get();
             // Create activity data
-            Optional<ActivityData> optionalActivityData = iActivityRepository.findById(1L); // Example activity ID
-            if (optionalActivityData.isPresent()) {
-                ActivityData activityData = optionalActivityData.get();
+            Optional<ActivityData> optionalActivityData1 = iActivityRepository.findById(1L); // Example activity ID
+            Optional<ActivityData> optionalActivityData2 = iActivityRepository.findById(2L); // Example activity ID
+
+            if (optionalActivityData1.isPresent()) {
+                ActivityData activityData1 = optionalActivityData1.get();
+                ActivityData activityData2 = optionalActivityData2.get();
+
                 // Create push up data
-                PushUpData pushUpData1 = new PushUpData(20, 25, 5, 50, userData1, activityData);
+                PushUpData pushUpData1 = new PushUpData(20, 25, 5, 50, userData1, activityData1);
                 iPushUpRepository.save(pushUpData1);
-                PushUpData pushUpData2 = new PushUpData(25, 30, 7, 70, userData2, activityData);
+                PushUpData pushUpData2 = new PushUpData(25, 30, 7, 70, userData2, activityData2);
                 iPushUpRepository.save(pushUpData2);
-                PushUpData pushUpData3 = new PushUpData(27, 30, 10, 90, userData2, activityData);
+                PushUpData pushUpData3 = new PushUpData(27, 30, 10, 90, userData2, activityData1);
                 iPushUpRepository.save(pushUpData3);
             }
         }
@@ -82,13 +86,15 @@ public class Populator {
         if (optionalUserData1.isPresent() && optionalUserData2.isPresent()) {
             UserData userData1 = optionalUserData1.get();
             UserData userData2 = optionalUserData2.get();
-            // Create sleep data
-            SleepData sleepData1 = new SleepData(LocalTime.of(22, 00), LocalTime.of(07, 00), LocalTime.of(22, 30), LocalTime.of(07, 30, 15), userData1);
-            iSleepRepository.save(sleepData1);
-            SleepData sleepData2 = new SleepData(LocalTime.of(22, 00), LocalTime.of(07, 00), LocalTime.of(22, 30), LocalTime.of(07, 30, 15), userData1);
-            iSleepRepository.save(sleepData2);
-            SleepData sleepData3 = new SleepData(LocalTime.of(22, 00), LocalTime.of(07, 00), LocalTime.of(22, 30), LocalTime.of(07, 30, 15), userData2);
-            iSleepRepository.save(sleepData3);
+
+                // Create sleep data
+                SleepData sleepData1 = new SleepData(LocalTime.of(22, 00), LocalTime.of(07, 00), LocalTime.of(22, 30), LocalTime.of(07, 30, 15), userData1);
+                iSleepRepository.save(sleepData1);
+                SleepData sleepData2 = new SleepData(LocalTime.of(22, 00), LocalTime.of(07, 00), LocalTime.of(22, 30), LocalTime.of(07, 30, 15), userData1);
+                iSleepRepository.save(sleepData2);
+                SleepData sleepData3 = new SleepData(LocalTime.of(22, 00), LocalTime.of(07, 00), LocalTime.of(22, 30), LocalTime.of(07, 30, 15), userData2);
+                iSleepRepository.save(sleepData3);
+
         }
     }
 
@@ -107,13 +113,21 @@ public class Populator {
         if (optionalUserData1.isPresent() && optionalUserData2.isPresent()) {
             UserData userData1 = optionalUserData1.get();
             UserData userData2 = optionalUserData2.get();
-            // Create walking data
-            WalkingData walkingData1 = new WalkingData(1, 10, 100, 60, 5, LocalDateTime.of(2023, 11, 10, 12, 30), userData1);
-            iWalkingRepository.save(walkingData1);
-            WalkingData walkingData2 = new WalkingData(10, 20, 120, 70, 10, LocalDateTime.of(2021, 10, 15, 12, 30), userData2);
-            iWalkingRepository.save(walkingData2);
-            WalkingData walkingData3 = new WalkingData(1, 30, 150, 80, 15, LocalDateTime.of(2023, 11, 10, 12, 30), userData2);
-            iWalkingRepository.save(walkingData3);
+            // Create activity data
+            Optional<ActivityData> optionalActivityData1 = iActivityRepository.findById(1L); // Example activity ID
+            Optional<ActivityData> optionalActivityData4 = iActivityRepository.findById(4L); // Example activity ID
+
+            if(optionalUserData1.isPresent()) {
+                ActivityData activityData1 = optionalActivityData1.get();
+                ActivityData activityData4 = optionalActivityData4.get();
+                // Create walking data
+                WalkingData walkingData1 = new WalkingData(1, 10, 100, 60, 5, LocalDateTime.of(2023, 11, 10, 12, 30), userData1,activityData1);
+                iWalkingRepository.save(walkingData1);
+                WalkingData walkingData2 = new WalkingData(10, 20, 120, 70, 10, LocalDateTime.of(2021, 10, 15, 12, 30), userData2, activityData4);
+                iWalkingRepository.save(walkingData2);
+                WalkingData walkingData3 = new WalkingData(1, 30, 150, 80, 15, LocalDateTime.of(2023, 11, 10, 12, 30), userData2, activityData1);
+                iWalkingRepository.save(walkingData3);
+            }
         }
     }
 
