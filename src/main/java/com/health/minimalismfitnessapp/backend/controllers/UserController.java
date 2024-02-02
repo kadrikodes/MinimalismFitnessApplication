@@ -35,6 +35,7 @@ public class UserController {
 
 
     @GetMapping
+    @CrossOrigin(origins = "http://localhost:3000")
     public Iterable<UserData> findAll() {
         return userService.findAll();
     }
