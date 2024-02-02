@@ -1,0 +1,49 @@
+import React, { useState, useEffect } from "react";
+import "./HomePage.css";
+import NavBar from "./NavBar/NavBar";
+import Header from "./Header/Header";
+import SleepContainer from "./SleepSummary/SleepContainer";
+import WalkContainer from "./WalkSummary/WalkContainer";
+import PushUpContainer from "./PushUpSummary/PushUpContainer";
+import NutritionContainer from "./NutritionSummary/NutritionContainer";
+import UserContainer from "./UserSummary/UserContainer";
+
+const HomePage = () => {
+
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    const userAPI = 'http://localhost:8080/users';
+
+    fetch(userAPI)
+        .then((response) => {return response.json();})
+        .then((data) => setUserData(data) )
+  }, [])
+
+
+  return (
+    <div className="desktop">
+      <div className="overlap-wrapper">
+        <div className="overlap">
+          
+            <div className="div">
+              <NutritionContainer />
+              <SleepContainer />
+              <WalkContainer />
+              <PushUpContainer />
+            </div>          
+              <Header />
+              <UserContainer />
+          
+         
+          {/* {userData ? (<pre>{JSON.stringify(userData, null, 2)}</pre>) : (<p>Loading...</p>)} */}
+        
+         <NavBar />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+
+export default HomePage;

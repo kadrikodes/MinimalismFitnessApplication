@@ -1,0 +1,48 @@
+.desktop {
+  background-color: #082035;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+.desktop .overlap-wrapper {
+  background-color: #082035;
+  height: 100vh;
+  overflow: hidden;
+  width: 100%;
+}
+.desktop .overlap {
+  height: 100vh;
+  left: -10%;
+  position: relative;
+  top: -20%;
+  width: 100%;
+}
+.desktop .div {
+  height: 60vh;
+  left: 770px;
+  position: absolute;
+  top: 435px;
+  width: 996px;
+}
+.desktop .ellipse {
+  background-color: #87DDF0;
+  border-radius: 50%;
+  filter: blur(10vh);
+  height: 40vh;
+  left: 20%;
+  position: absolute;
+  top: 10vh;
+  width: 25vw;
+}
+.desktop .ellipse-2 {
+  background-color: #87DDF0;
+  border-radius: 50%;
+  filter: blur(10vw);
+  height: 40vh;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 25vw;
+}
+
