@@ -36,6 +36,7 @@ public class WalkingController {
     }
 
     @GetMapping("/{walkingId}")
+    @CrossOrigin(origins = "http://localhost:3000")
     public WalkingData getWalkingDataById(@PathVariable long walkingId) {
         WalkingData walkingData = walkingService.getWalkingDataById(walkingId);
 

@@ -13,12 +13,16 @@ const HomePage = () => {
   const [userData, setUserData] = useState(null);
   const [nutritionData, setNutritionData] = useState(null);
   const [sleepData, setSleepData] = useState(null);
+  const [walkingData, setWalkingData] = useState(null);
+
 
 
   useEffect(() => {
     const userAPI = 'http://localhost:8080/users/userId/1';
     const nutritionAPI = 'http://localhost:8080/nutrition/1';
     const sleepAPI = 'http://localhost:8080/sleeptracker/1';
+    const walkingAPI = 'http://localhost:8080/walking/1';
+  
 
     fetch(userAPI)
         .then((response) => {return response.json();})
@@ -30,9 +34,11 @@ const HomePage = () => {
 
     fetch(sleepAPI)
         .then((response) => {return response.json();})
-        .then((data) => {
-          console.log(data);
-          setSleepData(data);})
+        .then((data) => {setSleepData(data);})
+
+    fetch(walkingAPI)
+        .then((response) => {return response.json();})
+        .then((data) => {setWalkingData(data);})
 
   }, [])
 
@@ -49,7 +55,7 @@ const HomePage = () => {
             <SleepContainer sleepData={sleepData} />
           </div>
           <div className="containers">
-            <WalkContainer />
+            <WalkContainer walkingData={walkingData}/>
             <PushUpContainer /> 
           </div>
 
