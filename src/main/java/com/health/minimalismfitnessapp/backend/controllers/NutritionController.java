@@ -22,6 +22,7 @@ public class NutritionController {
     public List<NutritionData> getAllNutritionData() { return nutritionService.findAll();}
 
     @GetMapping("/{nutritionID}")
+    @CrossOrigin(origins = "http://localhost:3000")
     public NutritionData getNutritionDataByID(@PathVariable long nutritionID){
         return nutritionService.getNutritionID(nutritionID);
     }
