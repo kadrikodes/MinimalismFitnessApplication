@@ -17,11 +17,12 @@ import org.springframework.test.context.ContextConfiguration;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 
@@ -61,10 +62,28 @@ public class PopulatorTest {
     }
 
     @Test
+    public void testPopulateCallsAllMethods() {
+        populator.populate();
+
+        verify(userRepository, atLeastOnce()).save(any(UserData.class));
+        verify(activityRepository, atLeastOnce()).save(any(ActivityData.class));
+        verify(nutritionRepository, atLeastOnce()).save(any(NutritionData.class));
+        verify(pushUpRepository, atLeastOnce()).save(any(PushUpData.class));
+        verify(walkingRepository, atLeastOnce()).save(any(WalkingData.class));
+        verify(sleepRepository, atLeastOnce()).save(any(SleepData.class));
+
+
+        }
+    @Test
     public void testPopulateUserData() {
         populator.populateUserData();
 
         verify(userRepository, times(5)).save(any(UserData.class));
+
+        ArgumentCaptor<UserData> userDataCaptor = ArgumentCaptor.forClass(UserData.class);
+        verify(userRepository, atLeastOnce()).save(userDataCaptor.capture());
+        List<UserData> capturedUsers = userDataCaptor.getAllValues();
+        assertFalse(capturedUsers.isEmpty(), "Expected at least one UserData object to be saved");
     }
 
     @Test
@@ -137,5 +156,23 @@ public class PopulatorTest {
         assertEquals(LocalDateTime.of(2023, 11, 10,07, 00), capturedSleepData.get(0).getTargetWakeUpTime());
         assertEquals(LocalDateTime.of(2023, 11, 10,22, 30), capturedSleepData.get(0).getActualBedtime());
         assertEquals(LocalDateTime.of(2023, 11, 10,07, 30, 15), capturedSleepData.get(0).getActualWakeupTime());
+    }
+
+    @Test
+    public void testPopulateActivityData() {
+        populator.populateActivityData();
+
+        verify(activityRepository, times(4)).save(any(ActivityData.class));
+
+        ArgumentCaptor<ActivityData> activityDataCaptor = ArgumentCaptor.forClass(ActivityData.class);
+        verify(activityRepository, atLeastOnce()).save(activityDataCaptor.capture());
+
+        List<ActivityData> savedActivities = activityDataCaptor.getAllValues();
+
+        List<String> expectedActivities = Arrays.asList("PushUps", "Walking", "Skiing", "Running");
+        List<String> savedActivityNames = savedActivities.stream()
+                .map(ActivityData::getWorkout)
+                .collect(Collectors.toList());
+        assertTrue(savedActivityNames.containsAll(expectedActivities), "All expected activities should be saved");
     }
 }
