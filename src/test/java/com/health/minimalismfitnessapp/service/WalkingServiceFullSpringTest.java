@@ -94,9 +94,6 @@ public class WalkingServiceFullSpringTest {
         assertEquals(60, result.getDuration());
         assertEquals(5, result.getSpeed());
         assertEquals(expectedLocalDateTime, result.getDateTime());
-//        System.out.println("Expected UserData: " + expectedUserData);
-//        System.out.println("Result UserData: " + result.getUserData());
-//        assertEquals(expectedUserData, result.getUserData());
 
         verify(mockRepo, times(1)).save(any(WalkingData.class));
     }
