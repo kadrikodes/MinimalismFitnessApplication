@@ -105,9 +105,9 @@ public class Populator {
 
     public void populateUserData() {
         // Create user data
-        UserData userData1 = new UserData("Rais", 180, 85, LocalDate.of(2000, 1, 1), "MALE");
+        UserData userData1 = new UserData("Rais", 180, 85, LocalDate.of(2000, 1, 1), UserGender.MALE);
         iUserRepository.save(userData1);
-        UserData userData2 = new UserData("Divin", 160, 68, LocalDate.of(1999, 1, 1), "MALE");
+        UserData userData2 = new UserData("Divin", 160, 68, LocalDate.of(1999, 1, 1), UserGender.MALE);
         iUserRepository.save(userData2);
     }
 
