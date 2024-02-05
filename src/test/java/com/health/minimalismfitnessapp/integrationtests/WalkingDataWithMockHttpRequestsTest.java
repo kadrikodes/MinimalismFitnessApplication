@@ -2,8 +2,9 @@ package com.health.minimalismfitnessapp.integrationtests;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.health.minimalismfitnessapp.backend.dataaccess.IWalkingRepository;
-import com.health.minimalismfitnessapp.backend.entities.UserData;
+import com.health.minimalismfitnessapp.backend.entities.userdata.UserData;
 import com.health.minimalismfitnessapp.backend.entities.WalkingData;
+import com.health.minimalismfitnessapp.backend.entities.userdata.UserGender;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -99,7 +100,7 @@ public class WalkingDataWithMockHttpRequestsTest {
 
     @Test
     public void testAddingWalkingData() throws Exception {
-        UserData newUserData = new UserData("Delima", 170, 120, LocalDate.of(1975, 8, 26), "Male");
+        UserData newUserData = new UserData("Delima", 170, 120, LocalDate.of(1975, 8, 26), UserGender.MALE);
         WalkingData newWalkingData = new WalkingData(150, 15, 120, 70, 6, LocalDateTime.of(2023, 11, 30, 10, 45), newUserData);
 
         String jsonRequest = mapper.writeValueAsString(newWalkingData);
@@ -146,7 +147,7 @@ public class WalkingDataWithMockHttpRequestsTest {
     @Test
     void testUpdateWalkingData() throws Exception {
         long walkingId = 1000L;
-        WalkingData updatedData = new WalkingData(100, 10, 100, 60, 5, LocalDateTime.of(2023,11,29,11,33), new UserData("Kadri", 177,75,LocalDate.of(1997,06,11),"Male"));
+        WalkingData updatedData = new WalkingData(100, 10, 100, 60, 5, LocalDateTime.of(2023,11,29,11,33), new UserData("Kadri", 177,75,LocalDate.of(1997,06,11),UserGender.MALE));
         updatedData.setDistance(100);
         updatedData.setSteps(200);
         updatedData.setCaloriesBurned(200);

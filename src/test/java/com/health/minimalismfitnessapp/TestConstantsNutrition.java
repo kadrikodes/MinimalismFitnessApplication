@@ -1,7 +1,8 @@
 package com.health.minimalismfitnessapp;
 
 import com.health.minimalismfitnessapp.backend.entities.NutritionData;
-import com.health.minimalismfitnessapp.backend.entities.UserData;
+import com.health.minimalismfitnessapp.backend.entities.userdata.UserData;
+import com.health.minimalismfitnessapp.backend.entities.userdata.UserGender;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -17,11 +18,11 @@ public class TestConstantsNutrition {
     public static ArrayList<NutritionData> getNutritionList() {
         ArrayList<NutritionData> nutritionDataArrayList = new ArrayList<>();
 
-        NutritionData nutritionData1 = new NutritionData("Pounded Yam", 600, 20, 60, 20, "Dinner", new UserData("Rais", 180, 85, LocalDate.of(2000,1,1), "MALE"));
+        NutritionData nutritionData1 = new NutritionData("Pounded Yam", 600, 20, 60, 20, "Dinner", new UserData("Rais", 180, 85, LocalDate.of(2000,1,1), UserGender.MALE));
         nutritionDataArrayList.add(nutritionData1);
-        NutritionData nutritionData2 = new NutritionData("Curry", 500, 30, 30, 40, "Lunch", new UserData("Kadri", 185, 90, LocalDate.of(1997,1,1), "MALE"));
+        NutritionData nutritionData2 = new NutritionData("Curry", 500, 30, 30, 40, "Lunch", new UserData("Kadri", 185, 90, LocalDate.of(1997,1,1), UserGender.MALE));
         nutritionDataArrayList.add(nutritionData2);
-        NutritionData nutritionData3 = new NutritionData("Fish and chips", 400, 30, 40, 30, "Lunch", new UserData("Esra", 160, 60, LocalDate.of(1998,1,1), "FEMALE"));
+        NutritionData nutritionData3 = new NutritionData("Fish and chips", 400, 30, 40, 30, "Lunch", new UserData("Esra", 160, 60, LocalDate.of(1998,1,1), UserGender.FEMALE));
         nutritionDataArrayList.add(nutritionData3);
 
         return nutritionDataArrayList;

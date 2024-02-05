@@ -1,6 +1,6 @@
 package com.health.minimalismfitnessapp.backend.dataaccess;
 
-import com.health.minimalismfitnessapp.backend.entities.UserData;
+import com.health.minimalismfitnessapp.backend.entities.userdata.UserData;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.repository.ListCrudRepository;
 

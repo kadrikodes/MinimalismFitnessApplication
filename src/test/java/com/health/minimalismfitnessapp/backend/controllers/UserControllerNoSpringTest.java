@@ -1,6 +1,7 @@
 package com.health.minimalismfitnessapp.backend.controllers;
 
-import com.health.minimalismfitnessapp.backend.entities.UserData;
+import com.health.minimalismfitnessapp.backend.entities.userdata.UserData;
+import com.health.minimalismfitnessapp.backend.entities.userdata.UserGender;
 import com.health.minimalismfitnessapp.backend.services.UserService;
 //import org.h2.engine.User;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,7 +20,7 @@ public class UserControllerNoSpringTest {
     UserController userController;
 
     LocalDate expectedLocalDate = LocalDate.of(1980,06,19);
-    UserData userData = new UserData("Esra", 170.0, 60.0, LocalDate.of(1980, 06, 19), "FEMALE");
+    UserData userData = new UserData("Esra", 170.0, 60.0, LocalDate.of(1980, 06, 19), UserGender.FEMALE);
 
     @BeforeEach
     void beforeEach() {
@@ -37,7 +38,7 @@ public class UserControllerNoSpringTest {
     @Test
     void testGetUserDataById() {
         Long userId = 1L;
-        UserData expectedUserData = new UserData("Esra", 170.0, 160.0, LocalDate.of(1980, 06, 19), "FEMALE");
+        UserData expectedUserData = new UserData("Esra", 170.0, 160.0, LocalDate.of(1980, 06, 19), UserGender.FEMALE);
 
         when(mockUserService.getUserById(userId)).thenReturn(expectedUserData);
         userController.getUserById(userId);
@@ -47,7 +48,7 @@ public class UserControllerNoSpringTest {
     @Test
     void testGetWalkingDataByName() {
         String name = "Esra";
-        UserData expectedUserData = new UserData("Esra", 170.0, 160.0, LocalDate.of(1980, 6, 19), "FEMALE");
+        UserData expectedUserData = new UserData("Esra", 170.0, 160.0, LocalDate.of(1980, 6, 19), UserGender.FEMALE);
         when(mockUserService.getAllUsersByName(name)).thenReturn(Optional.of(expectedUserData));
         userController.getUserDataByUserName(name);
         verify(mockUserService, times(1)).getAllUsersByName(name);
@@ -56,7 +57,7 @@ public class UserControllerNoSpringTest {
 
     @Test
     void testAddUserData() {
-        UserData userData = new UserData("Esra", 170.0, 60.0, LocalDate.of(1980, 06, 19), "FEMALE");
+        UserData userData = new UserData("Esra", 170.0, 60.0, LocalDate.of(1980, 06, 19), UserGender.FEMALE);
 
         when(mockUserService.addUser(userData)).thenReturn(userData);
         UserData addedUserData = userController.addUser(userData);
@@ -68,7 +69,7 @@ public class UserControllerNoSpringTest {
     @Test
     void testUpdateUserData() {
         long userId = 1L;
-        UserData userData = new UserData("Esra", 170.0, 60.0, LocalDate.of(1980, 06, 19), "FEMALE");
+        UserData userData = new UserData("Esra", 170.0, 60.0, LocalDate.of(1980, 06, 19), UserGender.FEMALE);
 
         when(mockUserService.updateUser(userId, userData)).thenReturn(userData);
         UserData updatedUserData = userController.updateUser(userId, userData);

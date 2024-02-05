@@ -2,7 +2,8 @@ package com.health.minimalismfitnessapp.service;
 
 import com.health.minimalismfitnessapp.TestUtilitiesUser;
 import com.health.minimalismfitnessapp.backend.dataaccess.IUserRepository;
-import com.health.minimalismfitnessapp.backend.entities.UserData;
+import com.health.minimalismfitnessapp.backend.entities.userdata.UserData;
+import com.health.minimalismfitnessapp.backend.entities.userdata.UserGender;
 import com.health.minimalismfitnessapp.backend.services.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,7 @@ public class UserServiceFullSpringTest {
     @Test
     void testGetUserDataById() {
         long userId = 1L;
-        UserData expectedUserData = new UserData("Esra", 170.0, 160.0, LocalDate.of(1980, 06, 19), "FEMALE");
+        UserData expectedUserData = new UserData("Esra", 170.0, 160.0, LocalDate.of(1980, 06, 19), UserGender.FEMALE);
         when(iUserRepository.findById(userId)).thenReturn(Optional.of(expectedUserData));
 
         UserData actualUserData = userService.getUserById(userId);
@@ -48,7 +49,7 @@ public class UserServiceFullSpringTest {
 
     @Test
     void testAddingUserData() {
-        UserData userData = new UserData("Esra", 170.0, 60.0, LocalDate.of(1980, 06, 19), "FEMALE");
+        UserData userData = new UserData("Esra", 170.0, 60.0, LocalDate.of(1980, 06, 19), UserGender.FEMALE);
         when(iUserRepository.save(any(UserData.class))).thenReturn(userData);
         UserData result = userService.addUser(userData);
         LocalDate expectedLocalDateTime = LocalDate.of(1980,06,19);
@@ -66,10 +67,10 @@ public class UserServiceFullSpringTest {
     @Test
     void testUpdateUserData() {
         long userId = 1L;
-        UserData updatedUserData = new UserData("Esra", 170.0, 60.0, LocalDate.of(1980, 06, 19), "FEMALE");
-        when(iUserRepository.findById(userId)).thenReturn(Optional.of(new UserData("Esra", 170.0, 60.0, LocalDate.of(1980, 06, 19), "FEMALE")));
+        UserData updatedUserData = new UserData("Esra", 170.0, 60.0, LocalDate.of(1980, 06, 19), UserGender.FEMALE);
+        when(iUserRepository.findById(userId)).thenReturn(Optional.of(new UserData("Esra", 170.0, 60.0, LocalDate.of(1980, 06, 19), UserGender.FEMALE)));
         when(iUserRepository.save(any(UserData.class))).thenReturn(updatedUserData);
-        UserData actualUserData = userService.updateUser(userId, new UserData("Esra", 170.0, 60.0, LocalDate.of(1980, 06, 19), "FEMALE"));
+        UserData actualUserData = userService.updateUser(userId, new UserData("Esra", 170.0, 60.0, LocalDate.of(1980, 06, 19), UserGender.FEMALE));
         assertEquals(updatedUserData, actualUserData);
         verify(iUserRepository, times(1)).findById(userId);
         verify(iUserRepository, times(1)).save(any(UserData.class));
@@ -77,7 +78,7 @@ public class UserServiceFullSpringTest {
     @Test
     void testDeleteUserTracker() {
         long userId = 1L;
-        UserData userData = new UserData("Esra", 170.0, 60.0, LocalDate.of(1980, 06, 19), "FEMALE");
+        UserData userData = new UserData("Esra", 170.0, 60.0, LocalDate.of(1980, 06, 19), UserGender.FEMALE);
         when(iUserRepository.findById(userId)).thenReturn(Optional.of(userData));
         userService.deleteUser(userId);
         verify(iUserRepository, times(1)).findById(userId);

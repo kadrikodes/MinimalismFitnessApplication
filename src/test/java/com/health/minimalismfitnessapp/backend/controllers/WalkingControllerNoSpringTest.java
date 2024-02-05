@@ -1,7 +1,8 @@
 package com.health.minimalismfitnessapp.backend.controllers;
 
-import com.health.minimalismfitnessapp.backend.entities.UserData;
+import com.health.minimalismfitnessapp.backend.entities.userdata.UserData;
 import com.health.minimalismfitnessapp.backend.entities.WalkingData;
+import com.health.minimalismfitnessapp.backend.entities.userdata.UserGender;
 import com.health.minimalismfitnessapp.backend.services.WalkingService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,7 +24,7 @@ public class WalkingControllerNoSpringTest {
 
     LocalDateTime dateTime = LocalDateTime.of(2023, 11, 10, 12, 30);
     LocalDate birthDate = LocalDate.of(1997, 06, 11);
-    UserData userData = new UserData("Kadri", 120, 70, birthDate, "Male");
+    UserData userData = new UserData("Kadri", 120, 70, birthDate, UserGender.MALE);
 
     @BeforeEach
     void beforeEach() {

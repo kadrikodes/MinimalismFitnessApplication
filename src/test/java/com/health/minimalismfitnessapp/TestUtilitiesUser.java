@@ -1,6 +1,7 @@
 package com.health.minimalismfitnessapp;
 
-import com.health.minimalismfitnessapp.backend.entities.UserData;
+import com.health.minimalismfitnessapp.backend.entities.userdata.UserData;
+import com.health.minimalismfitnessapp.backend.entities.userdata.UserGender;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -14,9 +15,9 @@ public class TestUtilitiesUser {
     public List<UserData> createUserData() {
         List<UserData> userData = new ArrayList<>();
 
-        UserData firstUserData = new UserData("Esra", 170.0, 160.0, LocalDate.of(1980, 06, 19), "FEMALE");
+        UserData firstUserData = new UserData("Esra", 170.0, 160.0, LocalDate.of(1980, 06, 19), UserGender.FEMALE);
         userData.add(firstUserData);
-        UserData secondUserData = new UserData("Divin", 170.0, 160.0, LocalDate.of(1980, 06, 19), "MALE");
+        UserData secondUserData = new UserData("Divin", 170.0, 160.0, LocalDate.of(1980, 06, 19), UserGender.MALE);
         userData.add(secondUserData);
 
         return userData;
