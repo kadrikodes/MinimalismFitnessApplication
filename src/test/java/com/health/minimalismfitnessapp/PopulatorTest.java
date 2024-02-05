@@ -20,8 +20,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-import static net.bytebuddy.matcher.ElementMatchers.is;
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -140,11 +138,4 @@ public class PopulatorTest {
         assertEquals(LocalDateTime.of(2023, 11, 10,22, 30), capturedSleepData.get(0).getActualBedtime());
         assertEquals(LocalDateTime.of(2023, 11, 10,07, 30, 15), capturedSleepData.get(0).getActualWakeupTime());
     }
-
-//    // Utility method to create dummy ActivityData if needed
-//    private ActivityData createDummyActivityData(long id, String name) {
-//        ActivityData activityData = new ActivityData(name);
-//        ReflectionTestUtils.setField(activityData, "id", id);
-//        return activityData;
-//    }
 }
