@@ -10,12 +10,10 @@ public class ActivityData {
     @GeneratedValue
     private Long id;
     private String workout;
-    private double calories;
 
     public ActivityData(){}
-    public ActivityData(String workout, double calories) {
+    public ActivityData(String workout) {
         this.workout = workout;
-        this.calories = calories;
     }
 
     public Long getId() {
@@ -34,11 +32,4 @@ public class ActivityData {
         this.workout = workout;
     }
 
-    public double getCalories() {
-        return calories;
-    }
-
-    public void setCalories(double calories) {
-        this.calories = calories;
-    }
 }

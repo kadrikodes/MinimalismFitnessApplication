@@ -73,14 +73,13 @@ public class SleepController {
 
     @GetMapping("/targetSleepDuration")
     @ResponseStatus(HttpStatus.OK)
-    public Duration targetSleepDuration(@RequestBody SleepData sleepData) {
+    public Duration targetSleepDuration(@RequestParam Long sleepDataId) {
         try {
+            SleepData sleepData = sleepService.getSleepDataById(sleepDataId);
             return sleepService.targetSleepDuration(sleepData);
         } catch (IllegalArgumentException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
-
-
 
 }

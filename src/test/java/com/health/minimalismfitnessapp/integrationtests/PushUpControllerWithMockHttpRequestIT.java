@@ -5,6 +5,7 @@ package com.health.minimalismfitnessapp.integrationtests;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.health.minimalismfitnessapp.backend.dataaccess.IPushUpRepository;
+import com.health.minimalismfitnessapp.backend.entities.ActivityData;
 import com.health.minimalismfitnessapp.backend.entities.PushUpData;
 import com.health.minimalismfitnessapp.backend.entities.userdata.UserData;
 import com.health.minimalismfitnessapp.backend.entities.userdata.UserGender;
@@ -35,6 +36,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class PushUpControllerWithMockHttpRequestIT {
 
     private final ObjectMapper mapper = new ObjectMapper();
+    ActivityData activityData = new ActivityData("PushUps");
 
     @Autowired
     MockMvc mockMvc;
@@ -71,8 +73,13 @@ class PushUpControllerWithMockHttpRequestIT {
     @Test
     void testUpdatePushUpData() throws Exception {
         long id = 4;
+
+        UserData userData = new UserData("Kadri", 177,75, LocalDate.of(1997,06,11),"Male");
+        PushUpData pushUpData = new PushUpData(5, 10, 1.5, 100, userData, activityData);
+
         UserData userData = new UserData("Kadri", 177,75, LocalDate.of(1997,06,11), UserGender.MALE);
         PushUpData pushUpData = new PushUpData(5, 10, 1.5, 100, userData);
+
         pushUpData.setNumberOfPushUps(10);
         pushUpData.setTarget(20);
         pushUpData.setTimeDuration(2.5);
@@ -135,8 +142,13 @@ class PushUpControllerWithMockHttpRequestIT {
 
     @Test
     public void testAddPushUpData() throws Exception {
+
+        UserData newUserData = new UserData("Delima", 170, 120, LocalDate.of(1975, 8, 26), "Male");
+        PushUpData newPushUpData = new PushUpData(5, 10, 1.5, 50, newUserData, activityData);
+
         UserData newUserData = new UserData("Delima", 170, 120, LocalDate.of(1975, 8, 26), UserGender.MALE);
         PushUpData newPushUpData = new PushUpData(5, 10, 1.5, 50, newUserData);
+
 
         String jsonRequest = mapper.writeValueAsString(newPushUpData);
 

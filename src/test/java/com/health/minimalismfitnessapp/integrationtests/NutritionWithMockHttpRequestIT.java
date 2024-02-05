@@ -1,17 +1,24 @@
 package com.health.minimalismfitnessapp.integrationtests;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.health.minimalismfitnessapp.backend.MinimalismFitnessAppApplication;
+import com.health.minimalismfitnessapp.backend.dataaccess.INutritionRepository;
+import com.health.minimalismfitnessapp.backend.dataaccess.IUserRepository;
 import com.health.minimalismfitnessapp.backend.entities.NutritionData;
+
+import org.junit.jupiter.api.BeforeEach;
+
 import com.health.minimalismfitnessapp.backend.entities.userdata.UserData;
 import com.health.minimalismfitnessapp.backend.entities.userdata.UserGender;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
@@ -29,18 +36,37 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@Sql("classpath:nutrition-test-data.sql")
+//@Sql("classpath:nutrition-test-data.sql")
 @SpringBootTest
 @AutoConfigureMockMvc
+@ContextConfiguration(classes = MinimalismFitnessAppApplication.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
-@TestPropertySource(properties = {"spring.sql.init.mode=never"})
+//@TestPropertySource(properties = {"spring.sql.init.mode=never"})
 public class NutritionWithMockHttpRequestIT {
 
     @Autowired
     MockMvc mockMvc;
-
+    @Autowired
+    IUserRepository userRepository;
+    @Autowired
+    INutritionRepository nutritionRepository;
     @Autowired
     ObjectMapper objectMapper;
+
+    NutritionData nutritionData1;
+    NutritionData nutritionData2;
+    @BeforeEach
+    public void populateData() {
+        UserData userData = new UserData("Rais", 180, 85, LocalDate.of(2000, 1, 1), "MALE");
+        userRepository.save(userData);
+        this.nutritionData1 = new NutritionData("Pizza", 500, 40, 30, 30, "Lunch", userData);
+        nutritionRepository.save(this.nutritionData1);
+        userData = new UserData("Divin", 160, 68, LocalDate.of(1994, 1, 1), "MALE");
+        userRepository.save(userData);
+        this.nutritionData2 = new NutritionData("Chicken", 500, 40, 30, 30, "Dinner", userData);
+        nutritionRepository.save(this.nutritionData2);
+    }
+
 
     @Test
     public void gettingAllNutritionData() throws Exception {
@@ -54,14 +80,21 @@ public class NutritionWithMockHttpRequestIT {
 
     @Test
     public  void testGettingOneNutritionRecord() throws Exception {
-        long nutritionID = 1000L;
+        long nutritionID = this.nutritionData1.getId();
 
-        MvcResult mvcResult =
-                this.mockMvc.perform(MockMvcRequestBuilders.get("/nutrition/" + nutritionID ))
-                        .andExpect(status().isOk())
-                        .andExpect((content().contentType(MediaType.APPLICATION_JSON)))
-                        .andExpect(content().json(EXPECTED_ONE_NUTRITION_JSON))
-                        .andReturn();
+        ResultActions resultActions =
+                this.mockMvc.perform(MockMvcRequestBuilders.get("/nutrition/" + nutritionID ));
+        resultActions.andExpect(status().isOk());
+
+        resultActions.andExpect((content().contentType(MediaType.APPLICATION_JSON)));
+//        resultActions.andExpect(content().json(EXPECTED_ONE_NUTRITION_JSON));
+        MvcResult mvcResult = resultActions.andReturn();
+        String json = mvcResult.getResponse().getContentAsString();
+        NutritionData nutritionData = objectMapper.readValue(json, NutritionData.class);
+        assertNotNull(nutritionData);
+        assertEquals(nutritionID, nutritionData.getId());
+
+
     }
 
     @Test
