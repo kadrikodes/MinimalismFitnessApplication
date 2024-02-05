@@ -21,10 +21,10 @@ class PushUpControllerNoSpringTest {
     PushUpController pushUpController;
     LocalDate birthDate = LocalDate.of(1997, 06, 11);
 
-    UserData userData = new UserData("Kadri", 120, 70, birthDate, "Male");
+    UserData userData = new UserData("Kadri", 120, 70, birthDate, UserGender.MALE);
     ActivityData activityData = new ActivityData("Pushups");
 
-    UserData userData = new UserData("Kadri", 120, 70, birthDate, UserGender.MALE);
+
 
 
     @BeforeEach

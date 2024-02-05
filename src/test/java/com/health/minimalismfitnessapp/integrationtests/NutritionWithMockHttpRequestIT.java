@@ -57,11 +57,11 @@ public class NutritionWithMockHttpRequestIT {
     NutritionData nutritionData2;
     @BeforeEach
     public void populateData() {
-        UserData userData = new UserData("Rais", 180, 85, LocalDate.of(2000, 1, 1), "MALE");
+        UserData userData = new UserData("Rais", 180, 85, LocalDate.of(2000, 1, 1), UserGender.MALE);
         userRepository.save(userData);
         this.nutritionData1 = new NutritionData("Pizza", 500, 40, 30, 30, "Lunch", userData);
         nutritionRepository.save(this.nutritionData1);
-        userData = new UserData("Divin", 160, 68, LocalDate.of(1994, 1, 1), "MALE");
+        userData = new UserData("Divin", 160, 68, LocalDate.of(1994, 1, 1), UserGender.MALE);
         userRepository.save(userData);
         this.nutritionData2 = new NutritionData("Chicken", 500, 40, 30, 30, "Dinner", userData);
         nutritionRepository.save(this.nutritionData2);

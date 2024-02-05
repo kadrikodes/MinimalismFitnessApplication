@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.Optional;
 
 @Component
@@ -144,15 +143,15 @@ public class Populator {
 
     public void populateUserData() {
         // Create user data
-        UserData userData = new UserData("Rais", 180, 85, LocalDate.of(2000, 1, 1), "MALE");
+        UserData userData = new UserData("Rais", 180, 85, LocalDate.of(2000, 1, 1), UserGender.MALE);
         iUserRepository.save(userData);
-        userData = new UserData("Divin", 160, 68, LocalDate.of(1994, 1, 1), "MALE");
+        userData = new UserData("Divin", 160, 68, LocalDate.of(1994, 1, 1), UserGender.MALE);
         iUserRepository.save(userData);
-        userData = new UserData("Sam", 185, 75, LocalDate.of(1997, 2, 1), "MALE");
+        userData = new UserData("Sam", 185, 75, LocalDate.of(1997, 2, 1), UserGender.MALE);
         iUserRepository.save(userData);
-        userData = new UserData("Esra", 170, 68, LocalDate.of(1999, 6, 6), "FEMALE");
+        userData = new UserData("Esra", 170, 68, LocalDate.of(1999, 6, 6), UserGender.FEMALE);
         iUserRepository.save(userData);
-        userData = new UserData("Kadri", 188, 68, LocalDate.of(1999, 5, 10), "MALE");
+        userData = new UserData("Kadri", 188, 68, LocalDate.of(1999, 5, 10), UserGender.MALE);
         iUserRepository.save(userData);
     }
 

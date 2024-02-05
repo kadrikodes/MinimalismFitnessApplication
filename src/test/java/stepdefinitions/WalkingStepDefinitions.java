@@ -44,7 +44,7 @@ public class WalkingStepDefinitions {
     @Given("I have {int} records in the {string} data")
     public void iHaveRecordsInTheData(int numberOfRecords, String dataType) {
         Random random = new Random();
-        int recordsToGenerate = Math.min(numberOfRecords, 8);
+        int recordsToGenerate = Math.min(numberOfRecords, 10);
         for (int i = 0; i < recordsToGenerate; i++) {
             WalkingData walking = new WalkingData();
             walking.setSteps(random.nextInt(10000));

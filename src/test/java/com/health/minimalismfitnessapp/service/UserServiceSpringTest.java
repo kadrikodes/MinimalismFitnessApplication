@@ -42,8 +42,6 @@ public class UserServiceSpringTest {
         void testGetUserDataById() {
             long userId = 1L;
 
-            UserData expectedUserData = new UserData("Esra", 170.0, 160.0, LocalDate.of(1980, 6, 19), "FEMALE");
-
             UserData expectedUserData = new UserData("Esra", 170.0, 160.0, LocalDate.of(1980, 6, 19), UserGender.FEMALE);
 
             when(iUserRepository.findById(userId)).thenReturn(Optional.of(expectedUserData));
@@ -55,9 +53,6 @@ public class UserServiceSpringTest {
 
         @Test
         void testAddingUserData() {
-
-            UserData userData = new UserData("Esra", 170.0, 60.0, LocalDate.of(1980, 6, 19), "FEMALE");
-
             UserData userData = new UserData("Esra", 170.0, 60.0, LocalDate.of(1980, 6, 19), UserGender.FEMALE);
 
             when(iUserRepository.save(any(UserData.class))).thenReturn(userData);
@@ -78,11 +73,6 @@ public class UserServiceSpringTest {
         void testUpdateUserData() {
             long userId = 1L;
 
-            UserData updatedUserData = new UserData("Esra", 170.0, 60.0, LocalDate.of(1980, 6, 19), "FEMALE");
-            when(iUserRepository.findById(userId)).thenReturn(Optional.of(new UserData("Esra", 170.0, 60.0, LocalDate.of(1980, 6, 19), "FEMALE")));
-            when(iUserRepository.save(any(UserData.class))).thenReturn(updatedUserData);
-            UserData actualUserData = userService.updateUser(userId, new UserData("Esra", 170.0, 60.0, LocalDate.of(1980, 6, 19), "FEMALE"));
-
             UserData updatedUserData = new UserData("Esra", 170.0, 60.0, LocalDate.of(1980, 6, 19), UserGender.FEMALE);
             when(iUserRepository.findById(userId)).thenReturn(Optional.of(new UserData("Esra", 170.0, 60.0, LocalDate.of(1980, 6, 19), UserGender.FEMALE)));
             when(iUserRepository.save(any(UserData.class))).thenReturn(updatedUserData);
@@ -96,8 +86,6 @@ public class UserServiceSpringTest {
         @Test
         void testDeleteUserTracker() {
             long userId = 1L;
-
-            UserData userData = new UserData("Esra", 170.0, 60.0, LocalDate.of(1980, 6, 19), "FEMALE");
 
             UserData userData = new UserData("Esra", 170.0, 60.0, LocalDate.of(1980, 6, 19), UserGender.FEMALE);
 

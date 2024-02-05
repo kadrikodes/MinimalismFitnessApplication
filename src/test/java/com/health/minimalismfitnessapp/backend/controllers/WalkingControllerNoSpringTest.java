@@ -29,10 +29,8 @@ public class WalkingControllerNoSpringTest {
     LocalDateTime dateTime = LocalDateTime.of(2023, 11, 10, 12, 30);
     LocalDate birthDate = LocalDate.of(1997, 06, 11);
 
-    UserData userData = new UserData("Kadri", 120, 70, birthDate, "Male");
-    ActivityData activityData = new ActivityData("Walking");
-
     UserData userData = new UserData("Kadri", 120, 70, birthDate, UserGender.MALE);
+    ActivityData activityData = new ActivityData("Walking");
 
 
     @BeforeEach
