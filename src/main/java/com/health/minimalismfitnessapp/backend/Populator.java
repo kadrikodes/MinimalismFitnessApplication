@@ -1,6 +1,10 @@
 package com.health.minimalismfitnessapp.backend;
 
 import com.health.minimalismfitnessapp.backend.dataaccess.*;
+import com.health.minimalismfitnessapp.backend.entities.NutritionData;
+import com.health.minimalismfitnessapp.backend.entities.PushUpData;
+import com.health.minimalismfitnessapp.backend.entities.userdata.UserData;
+import com.health.minimalismfitnessapp.backend.entities.userdata.UserGender;
 import com.health.minimalismfitnessapp.backend.entities.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -30,6 +34,7 @@ public class Populator {
     }
 
     public void populate(){
+
         populateUserData();
         populateActivityData();
         populateNutritionData();

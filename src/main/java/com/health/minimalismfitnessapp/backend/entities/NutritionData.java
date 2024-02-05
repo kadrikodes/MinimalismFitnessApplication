@@ -1,5 +1,6 @@
 package com.health.minimalismfitnessapp.backend.entities;
 
+import com.health.minimalismfitnessapp.backend.entities.userdata.UserData;
 import jakarta.persistence.*;
 
 @Entity

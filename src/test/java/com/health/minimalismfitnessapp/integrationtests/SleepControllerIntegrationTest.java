@@ -6,7 +6,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.health.minimalismfitnessapp.backend.dataaccess.ISleepRepository;
 import com.health.minimalismfitnessapp.backend.entities.SleepData;
-import com.health.minimalismfitnessapp.backend.entities.UserData;
+import com.health.minimalismfitnessapp.backend.entities.userdata.UserData;
+import com.health.minimalismfitnessapp.backend.entities.userdata.UserGender;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -94,8 +95,13 @@ class SleepControllerIntegrationTest {
     @Test
     void addSleepRecord() throws Exception {
         int initialRecordCount = sleepRepository.findAll().size();
+
         UserData userData = new UserData("ABC", 67, 167, LocalDate.of(1960,04,11),"MALE");
         SleepData newSleepData = new SleepData(LocalDateTime.of(2023, 11, 10,22, 00), LocalDateTime.of(2023, 11, 10,07, 00), LocalDateTime.of(2023, 11, 10,22, 30), LocalDateTime.of(2023, 11, 10,07, 30, 15), userData);
+
+        UserData userData = new UserData("ABC", 67, 167, LocalDate.of(1960,04,11), UserGender.MALE);
+        SleepData newSleepData = new SleepData(LocalTime.of( 22,30), LocalTime.of(07, 30), LocalTime.of(22,30), LocalTime.of(07, 00), userData);
+
         String json = mapper.writeValueAsString(newSleepData);
 
         this.mockMvc.perform(MockMvcRequestBuilders.post("/sleeptracker")

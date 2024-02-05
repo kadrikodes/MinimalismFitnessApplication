@@ -2,9 +2,12 @@ package com.health.minimalismfitnessapp.backend.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.health.minimalismfitnessapp.TestUtilities;
+
 import com.health.minimalismfitnessapp.backend.entities.ActivityData;
-import com.health.minimalismfitnessapp.backend.entities.UserData;
+import com.health.minimalismfitnessapp.backend.entities.userdata.UserData;
+
 import com.health.minimalismfitnessapp.backend.entities.WalkingData;
+import com.health.minimalismfitnessapp.backend.entities.userdata.UserGender;
 import com.health.minimalismfitnessapp.backend.services.WalkingService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,8 +43,12 @@ public class WalkingControllerFullSpringTest {
     TestUtilities testUtilities = new TestUtilities();
     LocalDateTime dateTime = LocalDateTime.of(2023, 11, 10, 12, 30);
     LocalDate birthDate = LocalDate.of(1997, 06, 11);
+
     UserData userData = new UserData("Kadri", 120, 70, birthDate, "Male");
     ActivityData activityData = new ActivityData("Walking");
+
+    UserData userData = new UserData("Kadri", 120, 70, birthDate, UserGender.MALE);
+
 
     @Test
     void testGetAllWalkingData() throws Exception {

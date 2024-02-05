@@ -1,6 +1,12 @@
 package com.health.minimalismfitnessapp.backend.entities;
 
+
 import jakarta.persistence.*;
+import com.health.minimalismfitnessapp.backend.entities.userdata.UserData;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 import java.time.LocalDateTime;
 

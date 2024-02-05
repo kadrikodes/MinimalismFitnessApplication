@@ -2,7 +2,8 @@ package com.health.minimalismfitnessapp.backend.controllers;
 
 import com.health.minimalismfitnessapp.backend.entities.ActivityData;
 import com.health.minimalismfitnessapp.backend.entities.PushUpData;
-import com.health.minimalismfitnessapp.backend.entities.UserData;
+import com.health.minimalismfitnessapp.backend.entities.userdata.UserData;
+import com.health.minimalismfitnessapp.backend.entities.userdata.UserGender;
 import com.health.minimalismfitnessapp.backend.services.PushUpService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
@@ -19,8 +20,12 @@ class PushUpControllerNoSpringTest {
     PushUpService mockPushUpService;
     PushUpController pushUpController;
     LocalDate birthDate = LocalDate.of(1997, 06, 11);
+
     UserData userData = new UserData("Kadri", 120, 70, birthDate, "Male");
     ActivityData activityData = new ActivityData("Pushups");
+
+    UserData userData = new UserData("Kadri", 120, 70, birthDate, UserGender.MALE);
+
 
     @BeforeEach
     void beforeEach() {
@@ -37,7 +42,7 @@ class PushUpControllerNoSpringTest {
     @Test
     void testGetPushUpDataById() {
         Long id = 4L;
-        UserData userData1 = new UserData("Rais", 180, 80, LocalDate.of(1997, 06, 11), "MALE");
+        UserData userData1 = new UserData("Rais", 180, 80, LocalDate.of(1997, 06, 11), UserGender.MALE);
 
         PushUpData expectedPushUpData = new PushUpData(5, 10, 1.5, 50, userData1,  activityData);
 
@@ -51,7 +56,7 @@ class PushUpControllerNoSpringTest {
     void testGetPushUpDataByName() {
         String userName = "Kadri";
 
-        UserData userData1 = new UserData("Rais", 180, 80, LocalDate.of(1997, 06, 11), "MALE");
+        UserData userData1 = new UserData("Rais", 180, 80, LocalDate.of(1997, 06, 11), UserGender.MALE);
 
         PushUpData expectedPushUpData = new PushUpData(5, 10, 1.5, 50, userData1, activityData);
 
@@ -63,7 +68,7 @@ class PushUpControllerNoSpringTest {
 
     @Test
     void testAddPushUpData() {
-        UserData userData1 = new UserData("Rais", 180, 80, LocalDate.of(1997, 06, 11), "MALE");
+        UserData userData1 = new UserData("Rais", 180, 80, LocalDate.of(1997, 06, 11), UserGender.MALE);
 
         PushUpData pushUpData = new PushUpData(5, 10, 1.5, 50, userData1,  activityData);
 

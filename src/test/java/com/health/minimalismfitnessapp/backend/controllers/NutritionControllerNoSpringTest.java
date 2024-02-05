@@ -1,7 +1,8 @@
 package com.health.minimalismfitnessapp.backend.controllers;
 
 import com.health.minimalismfitnessapp.backend.entities.NutritionData;
-import com.health.minimalismfitnessapp.backend.entities.UserData;
+import com.health.minimalismfitnessapp.backend.entities.userdata.UserData;
+import com.health.minimalismfitnessapp.backend.entities.userdata.UserGender;
 import com.health.minimalismfitnessapp.backend.services.NutritionService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -38,7 +39,7 @@ public class NutritionControllerNoSpringTest {
 
     @Test
     void getNutritionRecordByName(){
-        UserData userData = new UserData("Rais", 180, 85, LocalDate.of(2000,1,1), "MALE");
+        UserData userData = new UserData("Rais", 180, 85, LocalDate.of(2000,1,1), UserGender.MALE);
 
         NutritionData nutritionData = new NutritionData("Pounded Yam", 600, 20, 60, 20, "Dinner", userData);
         nutritionController.addNutritionData(nutritionData);

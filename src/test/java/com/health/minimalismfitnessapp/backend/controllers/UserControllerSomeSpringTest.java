@@ -2,7 +2,8 @@ package com.health.minimalismfitnessapp.backend.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.health.minimalismfitnessapp.backend.entities.UserData;
+import com.health.minimalismfitnessapp.backend.entities.userdata.UserData;
+import com.health.minimalismfitnessapp.backend.entities.userdata.UserGender;
 import com.health.minimalismfitnessapp.backend.services.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +48,7 @@ class UserControllerSomeSpringTest {
     void testGetUserDataById() throws Exception {
         long userId = 1L;
 
-        UserData userData = new UserData("Esra",  170.0, 60.0, LocalDate.of(1980, 6, 19), UserData.FEMALE);
+        UserData userData = new UserData("Esra",  170.0, 60.0, LocalDate.of(1980, 6, 19), UserGender.FEMALE);
         when(mockUserService.getUserById(userId)).thenReturn(userData);
 
         MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/users/userId/" + userId);
@@ -62,7 +63,7 @@ class UserControllerSomeSpringTest {
     void testGetUserDataByName() throws Exception {
         String name = "Esra";
 
-        UserData userData = new UserData("Esra", 170.0, 60.0, LocalDate.of(1980, 6, 19), UserData.FEMALE);
+        UserData userData = new UserData("Esra", 170.0, 60.0, LocalDate.of(1980, 6, 19), UserGender.FEMALE);
         when(mockUserService.getAllUsersByName(name)).thenReturn(Optional.of((userData)));
 
         MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/users/name/" + name);
@@ -76,7 +77,7 @@ class UserControllerSomeSpringTest {
     @Test
     void addUser() throws Exception {
         mapper.registerModule(new JavaTimeModule());
-        UserData userData = new UserData("Esra", 170.0, 60.0, LocalDate.of(1980, 6, 19), UserData.FEMALE);
+        UserData userData = new UserData("Esra", 170.0, 60.0, LocalDate.of(1980, 6, 19), UserGender.FEMALE);
         String json = mapper.writeValueAsString(userData);
         mockMvc.perform(MockMvcRequestBuilders.post("/users/addUser")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -88,7 +89,7 @@ class UserControllerSomeSpringTest {
     @Test
     void updateUser() throws Exception {
         mapper.registerModule(new JavaTimeModule());
-        UserData updatedUserData = new UserData("Joe", 175.0, 65.0, LocalDate.of(1990, 7, 10), UserData.MALE);
+        UserData updatedUserData = new UserData("Joe", 175.0, 65.0, LocalDate.of(1990, 7, 10), UserGender.MALE);
         String json = mapper.writeValueAsString(updatedUserData);
         mockMvc.perform(MockMvcRequestBuilders.put("/users/updateUser/"+ 1)
                         .contentType(MediaType.APPLICATION_JSON)
