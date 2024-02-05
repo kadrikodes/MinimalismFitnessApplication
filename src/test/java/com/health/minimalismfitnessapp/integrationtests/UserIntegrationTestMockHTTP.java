@@ -111,7 +111,7 @@ public class UserIntegrationTestMockHTTP {
         String contentAsJson = result.getResponse().getContentAsString();
         UserData addedUser = mapper.readValue(contentAsJson, UserData.class);
         assertEquals("mike", addedUser.getName());
-        assertEquals(UserData.MALE, addedUser.getGender());
+        assertEquals(UserGender.MALE, addedUser.getGender());
 
 }
 
