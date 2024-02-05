@@ -1,6 +1,7 @@
 package com.health.minimalismfitnessapp.service;
 
 import com.health.minimalismfitnessapp.TestConstantsNutrition;
+import com.health.minimalismfitnessapp.backend.MinimalismFitnessAppApplication;
 import com.health.minimalismfitnessapp.backend.dataaccess.INutritionRepository;
 import com.health.minimalismfitnessapp.backend.entities.NutritionData;
 import com.health.minimalismfitnessapp.backend.entities.userdata.UserData;
@@ -12,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ContextConfiguration;
 
 import java.net.URISyntaxException;
 import java.time.LocalDate;
@@ -24,6 +26,7 @@ import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.times;
 
 @SpringBootTest
+@ContextConfiguration(classes = MinimalismFitnessAppApplication.class)
 public class NutritionServiceFullSpringTest {
     @Autowired
     NutritionService nutritionService;
