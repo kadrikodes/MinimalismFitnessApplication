@@ -11,13 +11,23 @@ import UserContainer from "./UserSummary/UserContainer";
 const HomePage = () => {
 
   const [userData, setUserData] = useState(null);
+  const [nutritionData, setNutritionData] = useState(null);
+
 
   useEffect(() => {
     const userAPI = 'http://localhost:8080/users/userId/1';
+    const nutritionAPI = 'http://localhost:8080/nutrition/1';
 
     fetch(userAPI)
         .then((response) => {return response.json();})
         .then((data) => { setUserData(data);} )
+
+    fetch(nutritionAPI)
+        .then((response) => { return response.json();})
+        .then((data) => {
+          console.log(data)
+          setNutritionData(data);})
+
   }, [])
 
   
@@ -29,7 +39,7 @@ const HomePage = () => {
           <NavBar />
           <UserContainer userData={userData} />
           <div className="containers">
-            <NutritionContainer />
+            <NutritionContainer nutritionData={nutritionData} />
             <SleepContainer />
           </div>
           <div className="containers">
