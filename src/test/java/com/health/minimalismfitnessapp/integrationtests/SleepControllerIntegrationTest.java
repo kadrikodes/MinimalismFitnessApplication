@@ -22,6 +22,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 
@@ -94,7 +95,7 @@ class SleepControllerIntegrationTest {
     void addSleepRecord() throws Exception {
         int initialRecordCount = sleepRepository.findAll().size();
         UserData userData = new UserData("ABC", 67, 167, LocalDate.of(1960,04,11),"MALE");
-        SleepData newSleepData = new SleepData(LocalTime.of( 22,30), LocalTime.of(07, 30), LocalTime.of(22,30), LocalTime.of(07, 00), userData);
+        SleepData newSleepData = new SleepData(LocalDateTime.of(2023, 11, 10,22, 00), LocalDateTime.of(2023, 11, 10,07, 00), LocalDateTime.of(2023, 11, 10,22, 30), LocalDateTime.of(2023, 11, 10,07, 30, 15), userData);
         String json = mapper.writeValueAsString(newSleepData);
 
         this.mockMvc.perform(MockMvcRequestBuilders.post("/sleeptracker")
@@ -109,7 +110,7 @@ class SleepControllerIntegrationTest {
     @Test
     void updateSleepRecord() throws Exception {
         SleepData updatedSleepData = sleepRepository.findById(52L).orElse(null);
-        updatedSleepData.setActualBedtime(LocalTime.of(23,00));
+        updatedSleepData.setActualBedtime(LocalDateTime.of(2023, 11, 10,22, 00));
         String json = mapper.writeValueAsString(updatedSleepData);
         MvcResult result = this.mockMvc.perform(MockMvcRequestBuilders.put("/sleeptracker/{id}",52)
                         .contentType(MediaType.APPLICATION_JSON)

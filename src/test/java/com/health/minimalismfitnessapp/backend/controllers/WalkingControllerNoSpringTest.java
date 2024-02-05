@@ -1,5 +1,6 @@
 package com.health.minimalismfitnessapp.backend.controllers;
 
+import com.health.minimalismfitnessapp.backend.entities.ActivityData;
 import com.health.minimalismfitnessapp.backend.entities.UserData;
 import com.health.minimalismfitnessapp.backend.entities.WalkingData;
 import com.health.minimalismfitnessapp.backend.services.WalkingService;
@@ -24,6 +25,7 @@ public class WalkingControllerNoSpringTest {
     LocalDateTime dateTime = LocalDateTime.of(2023, 11, 10, 12, 30);
     LocalDate birthDate = LocalDate.of(1997, 06, 11);
     UserData userData = new UserData("Kadri", 120, 70, birthDate, "Male");
+    ActivityData activityData = new ActivityData("Walking");
 
     @BeforeEach
     void beforeEach() {
@@ -41,7 +43,7 @@ public class WalkingControllerNoSpringTest {
     void testGetWalkingDataById() {
         Long walkingId = 1L;
 
-        WalkingData expectedWalkingData = new WalkingData(1, 10, 100, 60, 5, dateTime, userData);
+        WalkingData expectedWalkingData = new WalkingData(1, 10, 100, 60, 5, dateTime, userData, activityData);
 
         when(mockWalkingService.getWalkingDataById(walkingId)).thenReturn(expectedWalkingData);
         walkingController.getWalkingDataById(walkingId);
@@ -53,7 +55,7 @@ public class WalkingControllerNoSpringTest {
     void testGetWalkingDataByName() {
         String name = "Kadri";
 
-        WalkingData expectedWalkingData = new WalkingData(1, 10, 100, 60, 5, dateTime, userData);
+        WalkingData expectedWalkingData = new WalkingData(1, 10, 100, 60, 5, dateTime, userData, activityData);
 
         when(mockWalkingService.getWalkingDataByUserName(name)).thenReturn(Collections.singletonList(expectedWalkingData));
         walkingController.getWalkingDataByUserName(name);
@@ -63,7 +65,7 @@ public class WalkingControllerNoSpringTest {
 
     @Test
     void testAddWalkingData() {
-        WalkingData walkingData = new WalkingData(1, 10, 100, 60, 5, dateTime, userData);
+        WalkingData walkingData = new WalkingData(1, 10, 100, 60, 5, dateTime, userData, activityData);
 
         when(mockWalkingService.addWalkingData(walkingData)).thenReturn(walkingData);
 
@@ -79,7 +81,7 @@ public class WalkingControllerNoSpringTest {
         LocalDateTime dateTime = LocalDateTime.now();
         double distance = 10.0;
 
-        WalkingData expectedResult = new WalkingData (1, 10, 100, 60, 5, dateTime, userData);
+        WalkingData expectedResult = new WalkingData (1, 10, 100, 60, 5, dateTime, userData, activityData);
 
         when(mockWalkingService.searchEntriesByCriteria(dateTime, distance)).thenReturn(Collections.singletonList(expectedResult));
 
@@ -94,7 +96,7 @@ public class WalkingControllerNoSpringTest {
     void testUpdateWalkingData() {
         long walkingId = 1L;
 
-        WalkingData walkingData = new WalkingData(1, 10, 100, 60, 5, dateTime, userData);
+        WalkingData walkingData = new WalkingData(1, 10, 100, 60, 5, dateTime, userData, activityData);
 
         when(mockWalkingService.updateWalkingData(walkingId, walkingData)).thenReturn(walkingData);
 

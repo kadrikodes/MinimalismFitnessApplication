@@ -9,8 +9,6 @@ public class PushUpData {
     @GeneratedValue
     private Long id;
 
-
-
     @ManyToOne
     private ActivityData activityData;
     private int numberOfPushUps;

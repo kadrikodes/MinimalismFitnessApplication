@@ -1,5 +1,6 @@
 package com.health.minimalismfitnessapp.backend.controllers;
 
+import com.health.minimalismfitnessapp.backend.entities.ActivityData;
 import com.health.minimalismfitnessapp.backend.entities.PushUpData;
 import com.health.minimalismfitnessapp.backend.entities.UserData;
 import com.health.minimalismfitnessapp.backend.services.PushUpService;
@@ -12,13 +13,14 @@ import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
-@Disabled
+
 class PushUpControllerNoSpringTest {
 
     PushUpService mockPushUpService;
     PushUpController pushUpController;
     LocalDate birthDate = LocalDate.of(1997, 06, 11);
     UserData userData = new UserData("Kadri", 120, 70, birthDate, "Male");
+    ActivityData activityData = new ActivityData("Pushups");
 
     @BeforeEach
     void beforeEach() {
@@ -37,7 +39,7 @@ class PushUpControllerNoSpringTest {
         Long id = 4L;
         UserData userData1 = new UserData("Rais", 180, 80, LocalDate.of(1997, 06, 11), "MALE");
 
-        PushUpData expectedPushUpData = new PushUpData(5, 10, 1.5, 50, userData1);
+        PushUpData expectedPushUpData = new PushUpData(5, 10, 1.5, 50, userData1,  activityData);
 
         when(mockPushUpService.getPushUpDataById(id)).thenReturn(expectedPushUpData);
         pushUpController.getPushUpDataById(id);
@@ -51,7 +53,7 @@ class PushUpControllerNoSpringTest {
 
         UserData userData1 = new UserData("Rais", 180, 80, LocalDate.of(1997, 06, 11), "MALE");
 
-        PushUpData expectedPushUpData = new PushUpData(5, 10, 1.5, 50, userData1);
+        PushUpData expectedPushUpData = new PushUpData(5, 10, 1.5, 50, userData1, activityData);
 
         when(mockPushUpService.getPushUpDataByUserDataName(userName)).thenReturn(Collections.singletonList(expectedPushUpData));
         pushUpController.getPushUpDataByUserName(userName);
@@ -63,7 +65,7 @@ class PushUpControllerNoSpringTest {
     void testAddPushUpData() {
         UserData userData1 = new UserData("Rais", 180, 80, LocalDate.of(1997, 06, 11), "MALE");
 
-        PushUpData pushUpData = new PushUpData(5, 10, 1.5, 50, userData1);
+        PushUpData pushUpData = new PushUpData(5, 10, 1.5, 50, userData1,  activityData);
 
         when(mockPushUpService.addPushUpData(pushUpData)).thenReturn(pushUpData);
 

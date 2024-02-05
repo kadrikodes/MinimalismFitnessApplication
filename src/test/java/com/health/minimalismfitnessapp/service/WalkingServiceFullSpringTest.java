@@ -2,6 +2,7 @@ package com.health.minimalismfitnessapp.service;
 
 import com.health.minimalismfitnessapp.TestUtilities;
 import com.health.minimalismfitnessapp.backend.dataaccess.IWalkingRepository;
+import com.health.minimalismfitnessapp.backend.entities.ActivityData;
 import com.health.minimalismfitnessapp.backend.entities.UserData;
 import com.health.minimalismfitnessapp.backend.entities.WalkingData;
 import com.health.minimalismfitnessapp.backend.services.WalkingService;
@@ -32,6 +33,7 @@ public class WalkingServiceFullSpringTest {
     LocalDateTime dateTime = LocalDateTime.of(2023, 11, 10, 12, 30);
     LocalDate birthDate = LocalDate.of(1997, 06, 11);
     UserData userData = new UserData("Kadri", 120, 70, birthDate, "Male");
+    ActivityData activityData = new ActivityData("Walking");
 
 
     @Test
@@ -46,7 +48,7 @@ public class WalkingServiceFullSpringTest {
     @Test
     void testGetWalkingDataById() {
         long walkingId = 1L;
-        WalkingData expectedWalkingData = new WalkingData(1, 10, 100, 60, 5, dateTime, userData);
+        WalkingData expectedWalkingData = new WalkingData(1, 10, 100, 60, 5, dateTime, userData, activityData);
         when(mockRepo.findById(walkingId)).thenReturn(Optional.of(expectedWalkingData));
 
         WalkingData actualWalkingData = walkingService.getWalkingDataById(walkingId);
@@ -58,7 +60,7 @@ public class WalkingServiceFullSpringTest {
     @Test
     void testGetWalkingDataByUserName() {
         String name = "Kadri";
-        List<WalkingData> expectedWalkingDataList = Collections.singletonList(new WalkingData(1, 10, 100, 60, 5, dateTime, userData));
+        List<WalkingData> expectedWalkingDataList = Collections.singletonList(new WalkingData(1, 10, 100, 60, 5, dateTime, userData, activityData));
         when(mockRepo.findWalkingDataByUserDataName(name)).thenReturn(expectedWalkingDataList);
 
         List<WalkingData> actualWalkingDataList = walkingService.getWalkingDataByUserName(name);
@@ -69,7 +71,7 @@ public class WalkingServiceFullSpringTest {
 
     @Test
     void testAddingWalkingData() {
-        WalkingData walkingData = new WalkingData(100, 10, 100, 60, 5, dateTime, userData);
+        WalkingData walkingData = new WalkingData(100, 10, 100, 60, 5, dateTime, userData, activityData);
 
         when(mockRepo.save(any(WalkingData.class))).thenReturn(walkingData);
 
@@ -97,7 +99,7 @@ public class WalkingServiceFullSpringTest {
         LocalDateTime dateTime = LocalDateTime.now();
         double distance = 10.0;
 
-        WalkingData expectedResult = new WalkingData(100, 10, 100, 60, 5, dateTime, userData);
+        WalkingData expectedResult = new WalkingData(100, 10, 100, 60, 5, dateTime, userData, activityData);
 
         when(mockRepo.findByDateTimeAndDistance(any(LocalDateTime.class), anyDouble())).thenReturn(Collections.singletonList(expectedResult));
 
@@ -116,11 +118,11 @@ public class WalkingServiceFullSpringTest {
     @Test
     void testUpdateWalkingData() {
         long walkingId = 1L;
-        WalkingData updatedWalkingData = new WalkingData(1, 10, 100, 60, 5, dateTime, userData);
-        when(mockRepo.findById(walkingId)).thenReturn(Optional.of(new WalkingData(1, 10, 100, 60, 5, dateTime, userData)));
+        WalkingData updatedWalkingData = new WalkingData(1, 10, 100, 60, 5, dateTime, userData, activityData);
+        when(mockRepo.findById(walkingId)).thenReturn(Optional.of(new WalkingData(1, 10, 100, 60, 5, dateTime, userData, activityData)));
         when(mockRepo.save(any(WalkingData.class))).thenReturn(updatedWalkingData);
 
-        WalkingData actualWalkingData = walkingService.updateWalkingData(walkingId, new WalkingData(1, 10, 100, 60, 5, dateTime, userData));
+        WalkingData actualWalkingData = walkingService.updateWalkingData(walkingId, new WalkingData(1, 10, 100, 60, 5, dateTime, userData, activityData));
 
         assertEquals(updatedWalkingData, actualWalkingData);
         verify(mockRepo, times(1)).findById(walkingId);
@@ -130,7 +132,7 @@ public class WalkingServiceFullSpringTest {
     @Test
     void testDeleteWalkingTracker() {
         long walkingId = 1L;
-        WalkingData walkingData = new WalkingData(1, 10, 100, 60, 5, dateTime, userData);
+        WalkingData walkingData = new WalkingData(1, 10, 100, 60, 5, dateTime, userData, activityData);
         when(mockRepo.findById(walkingId)).thenReturn(Optional.of(walkingData));
 
         walkingService.deleteWalkingTracker(walkingId);

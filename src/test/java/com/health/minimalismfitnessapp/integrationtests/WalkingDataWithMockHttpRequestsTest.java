@@ -2,6 +2,7 @@ package com.health.minimalismfitnessapp.integrationtests;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.health.minimalismfitnessapp.backend.dataaccess.IWalkingRepository;
+import com.health.minimalismfitnessapp.backend.entities.ActivityData;
 import com.health.minimalismfitnessapp.backend.entities.UserData;
 import com.health.minimalismfitnessapp.backend.entities.WalkingData;
 import org.junit.jupiter.api.Test;
@@ -29,6 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 @TestPropertySource(properties = {"spring.sql.init.mode=never"})
 public class WalkingDataWithMockHttpRequestsTest {
+    ActivityData activityData = new ActivityData("Walking");
     @Autowired
     MockMvc mockMvc;
     @Autowired
@@ -100,7 +102,7 @@ public class WalkingDataWithMockHttpRequestsTest {
     @Test
     public void testAddingWalkingData() throws Exception {
         UserData newUserData = new UserData("Delima", 170, 120, LocalDate.of(1975, 8, 26), "Male");
-        WalkingData newWalkingData = new WalkingData(150, 15, 120, 70, 6, LocalDateTime.of(2023, 11, 30, 10, 45), newUserData);
+        WalkingData newWalkingData = new WalkingData(150, 15, 120, 70, 6, LocalDateTime.of(2023, 11, 30, 10, 45), newUserData, activityData);
 
         String jsonRequest = mapper.writeValueAsString(newWalkingData);
 
@@ -146,7 +148,7 @@ public class WalkingDataWithMockHttpRequestsTest {
     @Test
     void testUpdateWalkingData() throws Exception {
         long walkingId = 1000L;
-        WalkingData updatedData = new WalkingData(100, 10, 100, 60, 5, LocalDateTime.of(2023,11,29,11,33), new UserData("Kadri", 177,75,LocalDate.of(1997,06,11),"Male"));
+        WalkingData updatedData = new WalkingData(100, 10, 100, 60, 5, LocalDateTime.of(2023,11,29,11,33), new UserData("Kadri", 177,75,LocalDate.of(1997,06,11),"Male"), activityData);
         updatedData.setDistance(100);
         updatedData.setSteps(200);
         updatedData.setCaloriesBurned(200);
