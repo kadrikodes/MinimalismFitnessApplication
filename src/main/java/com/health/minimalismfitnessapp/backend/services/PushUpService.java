@@ -15,7 +15,6 @@ import java.util.Optional;
 
 @Service
 public class PushUpService {
-
     IPushUpRepository pushUpRepository;
     IUserRepository userRepository;
 

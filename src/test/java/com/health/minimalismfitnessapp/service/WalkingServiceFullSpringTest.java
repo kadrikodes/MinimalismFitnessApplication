@@ -33,7 +33,6 @@ public class WalkingServiceFullSpringTest {
 
     @MockBean
     IWalkingRepository mockRepo;
-
     @Autowired
     WalkingService walkingService;
     TestUtilities testUtilities =new TestUtilities();

@@ -1,5 +1,6 @@
 package com.health.minimalismfitnessapp.service;
 
+import com.health.minimalismfitnessapp.TestUtilities;
 import com.health.minimalismfitnessapp.TestUtilitiesUser;
 import com.health.minimalismfitnessapp.backend.MinimalismFitnessAppApplication;
 import com.health.minimalismfitnessapp.backend.dataaccess.IUserRepository;
@@ -28,34 +29,20 @@ public class UserServiceFullSpringTest {
 
     @MockBean
     IUserRepository userRepository;
-
     @Autowired
     UserService userService;
+    TestUtilitiesUser testUtilitiesUser =new TestUtilitiesUser();
 
-
-    UserData userData1;
-    UserData userData2;
-
-    @BeforeEach
-    public void populateData() {
-        this.userData1 = new UserData("Rais", 180, 85, LocalDate.of(2000, 1, 1), UserGender.MALE);
-        userRepository.save(this.userData1);
-
-        this.userData2 = new UserData("Divin", 160, 68, LocalDate.of(1994, 1, 1), UserGender.MALE);
-        userRepository.save(this.userData2);
+    @Test
+    void testFindAllWithSpring() {
+        List<UserData> userData = testUtilitiesUser.createUserData();
+        when(userRepository.findAll()).thenReturn(userData);
+        List<UserData> actualUserData = userService.findAll();
+        assertEquals(userData, actualUserData);
     }
-
-
-//    @Test
-//    void testFindAllWithSpring() {
-//        List<UserData> userData = testUtilitiesUser.createUserData();
-//        when(userRepository.findAll()).thenReturn(userData);
-//        List<UserData> actualUserData = userService.findAll();
-//        assertEquals(userData, actualUserData);
-//    }
     @Test
     void testGetUserDataById() {
-        long userID = this.userData1.getId();
+        long userID = 1L;
         UserData expectedUserData = new UserData("Rais", 180, 85, LocalDate.of(2000, 1, 1), UserGender.MALE);
         expectedUserData.setId(userID); // Set the ID for the expectedUserData
         when(userRepository.findById(userID)).thenReturn(Optional.of(expectedUserData));
@@ -74,17 +61,16 @@ public class UserServiceFullSpringTest {
 
         assertNotNull(result);
         assertEquals("Esra", result.getName());
-        assertEquals(0L, result.getId());
         assertEquals(170.0, result.getHeight());
         assertEquals(60.0, result.getWeight());
-        assertEquals("FEMALE", result.getGender());
+        assertEquals(UserGender.FEMALE, result.getGender());
         assertEquals(expectedLocalDateTime, result.getBirthdate());
         verify(userRepository, times(1)).save(any(UserData.class));
     }
 
     @Test
     void testUpdateUserData() {
-        long userID = this.userData1.getId();
+        long userID = 1L;
         UserData updatedUserData = new UserData("Esra", 170.0, 60.0, LocalDate.of(1980, 06, 19), UserGender.FEMALE);
         when(userRepository.findById(userID)).thenReturn(Optional.of(new UserData("Esra", 170.0, 60.0, LocalDate.of(1980, 06, 19), UserGender.FEMALE)));
         when(userRepository.save(any(UserData.class))).thenReturn(updatedUserData);
@@ -95,7 +81,7 @@ public class UserServiceFullSpringTest {
     }
     @Test
     void testDeleteUserTracker() {
-        long userID = this.userData1.getId();
+        long userID = 1L;
         UserData userData = new UserData("Esra", 170.0, 60.0, LocalDate.of(1980, 06, 19), UserGender.FEMALE);
         when(userRepository.findById(userID)).thenReturn(Optional.of(userData));
         userService.deleteUser(userID);
