@@ -23,24 +23,19 @@ const HomePage = () => {
 
   return (
     <div className="desktop">
-      <div className="overlap-wrapper">
-        <div className="overlap">
-          
-            <div className="div">
-              <NutritionContainer />
-              <SleepContainer />
-              <WalkContainer />
-              <PushUpContainer />
-            </div>          
-              <Header />
-              <UserContainer />
-          
-         
-          {/* {userData ? (<pre>{JSON.stringify(userData, null, 2)}</pre>) : (<p>Loading...</p>)} */}
-        
-         <NavBar />
-        </div>
-      </div>
+          <Header />
+          <NavBar />
+          <UserContainer />
+          <div className="containers">
+            <NutritionContainer />
+            <SleepContainer />
+          </div>
+          <div className="containers">
+            <WalkContainer />
+            <PushUpContainer /> 
+          </div>
+
+      {/* {userData ? (<pre>{JSON.stringify(userData, null, 2)}</pre>) : (<p>Loading...</p>)} */}
     </div>
   );
 };
