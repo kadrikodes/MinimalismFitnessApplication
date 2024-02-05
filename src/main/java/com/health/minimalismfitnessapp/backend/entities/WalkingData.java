@@ -19,12 +19,14 @@ public class WalkingData {
     private double duration;
     private double speed;
     private LocalDateTime dateTime;
+    @ManyToOne
+    private ActivityData activityData;
 
     @ManyToOne
     private UserData userData;
 
     public WalkingData() {}
-    public WalkingData(int steps, double distance, int caloriesBurned, double duration, double speed, LocalDateTime dateTime, UserData userData) {
+    public WalkingData(int steps, double distance, int caloriesBurned, double duration, double speed, LocalDateTime dateTime, UserData userData, ActivityData activityData) {
         this.steps = steps;
         this.distance = distance;
         this.caloriesBurned = caloriesBurned;
@@ -32,6 +34,8 @@ public class WalkingData {
         this.speed = speed;
         this.dateTime = dateTime;
         this.userData = userData;
+        this.activityData = activityData;
+
     }
 
     public UserData getUserData() {
