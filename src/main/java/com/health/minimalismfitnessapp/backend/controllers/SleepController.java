@@ -36,7 +36,7 @@ public class SleepController {
     }
 
 
-    @PostMapping
+    @PostMapping("/addSleepData")
     @ResponseStatus(HttpStatus.CREATED)
     public SleepData addSleepRecord(@RequestBody SleepData sleepData) {
         try {
