@@ -2,7 +2,8 @@ package com.health.minimalismfitnessapp.backend.entities;
 
 import com.health.minimalismfitnessapp.backend.entities.userdata.UserData;
 import jakarta.persistence.*;
-import java.time.LocalTime;
+
+import java.time.LocalDateTime;
 
 @Entity
 public class SleepData {
@@ -11,10 +12,10 @@ public class SleepData {
     @GeneratedValue(generator = "sleep_data_sequence")
     @SequenceGenerator(name="sleep_data_sequence", initialValue = 100)
     private Long id;
-    private LocalTime targetBedtime;
-    private LocalTime targetWakeUpTime;
-    private LocalTime actualBedtime;
-    private LocalTime actualWakeupTime;
+    private LocalDateTime targetBedtime;
+    private LocalDateTime targetWakeUpTime;
+    private LocalDateTime actualBedtime;
+    private LocalDateTime actualWakeupTime;
 
 
     @ManyToOne
@@ -25,7 +26,7 @@ public class SleepData {
 
     }
 
-    public SleepData(LocalTime targetBedtime, LocalTime targetWakeUpTime, LocalTime actualBedtime, LocalTime actualWakeupTime, UserData userData) {
+    public SleepData(LocalDateTime targetBedtime, LocalDateTime targetWakeUpTime, LocalDateTime actualBedtime, LocalDateTime actualWakeupTime, UserData userData) {
         this.targetBedtime = targetBedtime;
         this.targetWakeUpTime = targetWakeUpTime;
         this.actualBedtime = actualBedtime;
@@ -49,35 +50,35 @@ public class SleepData {
         this.userData = userData;
     }
 
-    public LocalTime getTargetBedtime() {
+    public LocalDateTime getTargetBedtime() {
         return targetBedtime;
     }
 
-    public void setTargetBedtime(LocalTime targetBedtime) {
+    public void setTargetBedtime(LocalDateTime targetBedtime) {
         this.targetBedtime = targetBedtime;
     }
 
-    public LocalTime getTargetWakeUpTime() {
+    public LocalDateTime getTargetWakeUpTime() {
         return targetWakeUpTime;
     }
 
-    public void setTargetWakeUpTime(LocalTime targetWakeUpTime) {
+    public void setTargetWakeUpTime(LocalDateTime targetWakeUpTime) {
         this.targetWakeUpTime = targetWakeUpTime;
     }
 
-    public LocalTime getActualBedtime() {
+    public LocalDateTime getActualBedtime() {
         return actualBedtime;
     }
 
-    public void setActualBedtime(LocalTime actualBedtime) {
+    public void setActualBedtime(LocalDateTime actualBedtime) {
         this.actualBedtime = actualBedtime;
     }
 
-    public LocalTime getActualWakeupTime() {
+    public LocalDateTime getActualWakeupTime() {
         return actualWakeupTime;
     }
 
-    public void setActualWakeupTime(LocalTime actualWakeupTime) {
+    public void setActualWakeupTime(LocalDateTime actualWakeupTime) {
         this.actualWakeupTime = actualWakeupTime;
     }
 

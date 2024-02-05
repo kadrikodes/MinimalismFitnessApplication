@@ -1,5 +1,7 @@
 package com.health.minimalismfitnessapp.backend.entities;
 
+
+import jakarta.persistence.*;
 import com.health.minimalismfitnessapp.backend.entities.userdata.UserData;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,10 +21,13 @@ public class WalkingData {
     private double duration;
     private double speed;
     private LocalDateTime dateTime;
+
+
     @ManyToOne
     private ActivityData activityData;
 
     @ManyToOne
+    @JoinColumn(name = "user_data_id")
     private UserData userData;
 
     public WalkingData() {}
@@ -53,6 +58,13 @@ public class WalkingData {
     public void setId(Long id) {
         this.id = id;
 
+    }
+    public ActivityData getActivityData() {
+        return activityData;
+    }
+
+    public void setActivityData(ActivityData activityData) {
+        this.activityData = activityData;
     }
 
     public int getSteps() {

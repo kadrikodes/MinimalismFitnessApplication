@@ -2,7 +2,10 @@ package com.health.minimalismfitnessapp.backend.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.health.minimalismfitnessapp.TestUtilities;
+
+import com.health.minimalismfitnessapp.backend.entities.ActivityData;
 import com.health.minimalismfitnessapp.backend.entities.userdata.UserData;
+
 import com.health.minimalismfitnessapp.backend.entities.WalkingData;
 import com.health.minimalismfitnessapp.backend.entities.userdata.UserGender;
 import com.health.minimalismfitnessapp.backend.services.WalkingService;
@@ -40,7 +43,12 @@ public class WalkingControllerFullSpringTest {
     TestUtilities testUtilities = new TestUtilities();
     LocalDateTime dateTime = LocalDateTime.of(2023, 11, 10, 12, 30);
     LocalDate birthDate = LocalDate.of(1997, 06, 11);
+
+    UserData userData = new UserData("Kadri", 120, 70, birthDate, "Male");
+    ActivityData activityData = new ActivityData("Walking");
+
     UserData userData = new UserData("Kadri", 120, 70, birthDate, UserGender.MALE);
+
 
     @Test
     void testGetAllWalkingData() throws Exception {
@@ -69,7 +77,7 @@ public class WalkingControllerFullSpringTest {
     void testGetWalkingDataById() throws Exception {
         Long walkingId = 1L;
 
-        WalkingData walkingData = new WalkingData(1, 10, 100, 60, 5, dateTime, userData);
+        WalkingData walkingData = new WalkingData(1, 10, 100, 60, 5, dateTime, userData, activityData);
         when(mockWalkingService.getWalkingDataById(walkingId)).thenReturn(walkingData);
 
         MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/walking/" + walkingId.toString());
@@ -84,7 +92,7 @@ public class WalkingControllerFullSpringTest {
     void testGetWalkingDataByName() throws Exception {
         String name = "Kadri";
 
-        WalkingData walkingData = new WalkingData(1, 10, 100, 60, 5, dateTime, userData);
+        WalkingData walkingData = new WalkingData(1, 10, 100, 60, 5, dateTime, userData, activityData);
         when(mockWalkingService.getWalkingDataByUserName(name)).thenReturn(Collections.singletonList(walkingData));
 
         MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/walking/name/" + name);
@@ -97,7 +105,7 @@ public class WalkingControllerFullSpringTest {
 
     @Test
     void testAddWalkingData() throws Exception {
-        WalkingData walkingData = new WalkingData(1, 10, 100, 60, 5, dateTime, userData);
+        WalkingData walkingData = new WalkingData(1, 10, 100, 60, 5, dateTime, userData, activityData);
 
         String json = mapper.writeValueAsString(walkingData);
 
@@ -116,7 +124,7 @@ public class WalkingControllerFullSpringTest {
         LocalDateTime dateTime = LocalDateTime.now();
         double distance = 10.0;
 
-        WalkingData expectedResult = new WalkingData(1, 10, 100, 60, 5, dateTime, userData);
+        WalkingData expectedResult = new WalkingData(1, 10, 100, 60, 5, dateTime, userData, activityData);
 
         when(mockWalkingService.searchEntriesByCriteria(dateTime, distance)).thenReturn(Collections.singletonList(expectedResult));
 
@@ -137,7 +145,7 @@ public class WalkingControllerFullSpringTest {
     @Test
     void testUpdateWalkingData() throws Exception {
         Long walkingId = 1L;
-        WalkingData updatedData = new WalkingData(1, 15, 120, 70, 7, dateTime, userData);
+        WalkingData updatedData = new WalkingData(1, 15, 120, 70, 7, dateTime, userData, activityData);
 
         when(mockWalkingService.updateWalkingData(eq(walkingId), any(WalkingData.class))).thenReturn(updatedData);
 
