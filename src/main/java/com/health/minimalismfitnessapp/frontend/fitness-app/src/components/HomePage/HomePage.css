@@ -1,0 +1,18 @@
+.desktop {
+  background-color: #082035;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.containers {
+  display: flex;
+  flex-direction: row;
+  justify-content: right; /* Adjust as needed */
+  width: 80%;
+  padding: 1rem;
+}
+
+
