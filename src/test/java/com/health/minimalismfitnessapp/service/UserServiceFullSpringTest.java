@@ -31,21 +31,20 @@ public class UserServiceFullSpringTest {
 
     @Autowired
     UserService userService;
-//    @Autowired
-//    TestUtilitiesUser testUtilitiesUser =new TestUtilitiesUser();
+
 
     UserData userData1;
     UserData userData2;
 
     @BeforeEach
     public void populateData() {
-        userData1 = new UserData("Rais", 180, 85, LocalDate.of(2000, 1, 1), UserGender.MALE);
-        userRepository.save(userData1);
+        this.userData1 = new UserData("Rais", 180, 85, LocalDate.of(2000, 1, 1), UserGender.MALE);
+        userRepository.save(this.userData1);
 
-        userData2 = new UserData("Divin", 160, 68, LocalDate.of(1994, 1, 1), UserGender.MALE);
-        userRepository.save(userData2);
-
+        this.userData2 = new UserData("Divin", 160, 68, LocalDate.of(1994, 1, 1), UserGender.MALE);
+        userRepository.save(this.userData2);
     }
+
 
 //    @Test
 //    void testFindAllWithSpring() {
@@ -57,12 +56,13 @@ public class UserServiceFullSpringTest {
     @Test
     void testGetUserDataById() {
         long userID = this.userData1.getId();
-        UserData expectedUserData = new UserData("Esra", 170.0, 160.0, LocalDate.of(1980, 06, 19), UserGender.FEMALE);
+        UserData expectedUserData = new UserData("Rais", 180, 85, LocalDate.of(2000, 1, 1), UserGender.MALE);
+        expectedUserData.setId(userID); // Set the ID for the expectedUserData
         when(userRepository.findById(userID)).thenReturn(Optional.of(expectedUserData));
 
         UserData actualUserData = userService.getUserById(userID);
         assertEquals(expectedUserData, actualUserData);
-//        verify(userRepository, times(1)).findById(userID);
+        verify(userRepository, times(1)).findById(userID);
     }
 
     @Test
@@ -84,22 +84,22 @@ public class UserServiceFullSpringTest {
 
     @Test
     void testUpdateUserData() {
-        long userId = 1L;
+        long userID = this.userData1.getId();
         UserData updatedUserData = new UserData("Esra", 170.0, 60.0, LocalDate.of(1980, 06, 19), UserGender.FEMALE);
-        when(userRepository.findById(userId)).thenReturn(Optional.of(new UserData("Esra", 170.0, 60.0, LocalDate.of(1980, 06, 19), UserGender.FEMALE)));
+        when(userRepository.findById(userID)).thenReturn(Optional.of(new UserData("Esra", 170.0, 60.0, LocalDate.of(1980, 06, 19), UserGender.FEMALE)));
         when(userRepository.save(any(UserData.class))).thenReturn(updatedUserData);
-        UserData actualUserData = userService.updateUser(userId, new UserData("Esra", 170.0, 60.0, LocalDate.of(1980, 06, 19), UserGender.FEMALE));
+        UserData actualUserData = userService.updateUser(userID, new UserData("Esra", 170.0, 60.0, LocalDate.of(1980, 06, 19), UserGender.FEMALE));
         assertEquals(updatedUserData, actualUserData);
-        verify(userRepository, times(1)).findById(userId);
+        verify(userRepository, times(1)).findById(userID);
         verify(userRepository, times(1)).save(any(UserData.class));
     }
     @Test
     void testDeleteUserTracker() {
-        long userId = 1L;
+        long userID = this.userData1.getId();
         UserData userData = new UserData("Esra", 170.0, 60.0, LocalDate.of(1980, 06, 19), UserGender.FEMALE);
-        when(userRepository.findById(userId)).thenReturn(Optional.of(userData));
-        userService.deleteUser(userId);
-        verify(userRepository, times(1)).findById(userId);
+        when(userRepository.findById(userID)).thenReturn(Optional.of(userData));
+        userService.deleteUser(userID);
+        verify(userRepository, times(1)).findById(userID);
         verify(userRepository, times(1)).delete(userData);
     }
     }
