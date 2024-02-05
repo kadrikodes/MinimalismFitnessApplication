@@ -1,6 +1,7 @@
 package com.health.minimalismfitnessapp.service;
 
 import com.health.minimalismfitnessapp.TestUtilities;
+import com.health.minimalismfitnessapp.backend.MinimalismFitnessAppApplication;
 import com.health.minimalismfitnessapp.backend.dataaccess.IWalkingRepository;
 
 import com.health.minimalismfitnessapp.backend.entities.ActivityData;
@@ -15,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ContextConfiguration;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -26,6 +28,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
+@ContextConfiguration(classes = MinimalismFitnessAppApplication.class)
 public class WalkingServiceFullSpringTest {
 
     @MockBean
@@ -33,17 +36,12 @@ public class WalkingServiceFullSpringTest {
 
     @Autowired
     WalkingService walkingService;
-    @Autowired
     TestUtilities testUtilities =new TestUtilities();
     LocalDateTime dateTime = LocalDateTime.of(2023, 11, 10, 12, 30);
     LocalDate birthDate = LocalDate.of(1997, 06, 11);
 
     UserData userData = new UserData("Kadri", 120, 70, birthDate, UserGender.MALE);
     ActivityData activityData = new ActivityData("Walking");
-
-
-
-
 
     @Test
     void testFindAllWithSpring() {
