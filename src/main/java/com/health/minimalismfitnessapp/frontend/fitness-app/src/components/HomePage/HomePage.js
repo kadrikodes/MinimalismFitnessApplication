@@ -13,19 +13,21 @@ const HomePage = () => {
   const [userData, setUserData] = useState(null);
 
   useEffect(() => {
-    const userAPI = 'http://localhost:8080/users';
+    const userAPI = 'http://localhost:8080/users/userId/1';
 
     fetch(userAPI)
         .then((response) => {return response.json();})
-        .then((data) => setUserData(data) )
+        .then((data) => { setUserData(data);} )
   }, [])
+
+  
 
 
   return (
     <div className="desktop">
           <Header />
           <NavBar />
-          <UserContainer />
+          <UserContainer userData={userData} />
           <div className="containers">
             <NutritionContainer />
             <SleepContainer />
