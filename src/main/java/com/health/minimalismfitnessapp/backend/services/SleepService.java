@@ -39,25 +39,57 @@ public class SleepService {
     }
 
     public SleepData addSleepRecord(SleepData sleepData) {
+        UserData userData = sleepData.getUser();
+        if(userData.getId() == null) {
+            userData = userRepository.save(userData);
+            sleepData.setUser(userData);
+        }
         return sleepRepository.save(sleepData);
     }
 
     public SleepData updateSleepRecord(Long sleepDataId, SleepData updatedSleepData) {
+        if (updatedSleepData == null) {
+            throw new IllegalArgumentException("Updated sleep data cannot be null");
+        }
+
         Optional<SleepData> existingSleepDataOptional = sleepRepository.findById(sleepDataId);
 
-        if(existingSleepDataOptional.isPresent()) {
+        if (existingSleepDataOptional.isPresent()) {
             SleepData existingSleepData = existingSleepDataOptional.get();
-            existingSleepData.setTargetBedtime(updatedSleepData.getTargetBedtime());
-            existingSleepData.setTargetWakeUpTime(updatedSleepData.getTargetWakeUpTime());
-            existingSleepData.setActualBedtime(updatedSleepData.getActualBedtime());
-            existingSleepData.setActualWakeupTime(updatedSleepData.getActualWakeupTime());
 
-            return sleepRepository.save(existingSleepData);
-        }
-        else{
+            // Perform basic data validation if needed
+            if (isValidSleepData(updatedSleepData)) {
+                // Check if user data needs to be updated
+                UserData userData = updatedSleepData.getUser();
+                if (userData != null && userData.getId() == null) {
+                    userData = userRepository.save(userData);
+                    existingSleepData.setUser(userData);
+                }
+
+                existingSleepData.setTargetBedtime(updatedSleepData.getTargetBedtime());
+                existingSleepData.setTargetWakeUpTime(updatedSleepData.getTargetWakeUpTime());
+                existingSleepData.setActualBedtime(updatedSleepData.getActualBedtime());
+                existingSleepData.setActualWakeupTime(updatedSleepData.getActualWakeupTime());
+
+                return sleepRepository.save(existingSleepData);
+            } else {
+                throw new IllegalArgumentException("Invalid sleep data provided");
+            }
+        } else {
             throw new IllegalArgumentException("Sleep record not found with ID: " + sleepDataId);
         }
     }
+
+
+    private boolean isValidSleepData(SleepData sleepData) {
+        // Perform validation checks here (e.g., check if target bedtime is before target wakeup time)
+        // Return true if the data is valid, false otherwise
+
+        // Example of basic validation: Check if target bedtime is before target wakeup time
+        return sleepData.getTargetBedtime() != null && sleepData.getTargetWakeUpTime() != null &&
+                sleepData.getTargetBedtime().isBefore(sleepData.getTargetWakeUpTime());
+    }
+
 
     public void deleteSleepRecord(Long sleepDataId) {
         if (sleepRepository.existsById(sleepDataId)) {

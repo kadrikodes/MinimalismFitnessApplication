@@ -6,6 +6,8 @@ import java.time.LocalDate;
 
 @Entity
 public class UserData {
+
+
     @Id
     @GeneratedValue
     private Long id;
@@ -82,5 +84,8 @@ public class UserData {
 
     public void setGender(UserGender gender) {
         this.gender = gender;
+    }
+    public void setId(Long id) {
+        this.id = id;
     }
 }
