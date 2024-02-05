@@ -6,6 +6,7 @@ import com.health.minimalismfitnessapp.backend.dataaccess.INutritionRepository;
 import com.health.minimalismfitnessapp.backend.dataaccess.IUserRepository;
 import com.health.minimalismfitnessapp.backend.entities.NutritionData;
 
+import com.health.minimalismfitnessapp.backend.entities.WalkingData;
 import org.junit.jupiter.api.BeforeEach;
 
 import com.health.minimalismfitnessapp.backend.entities.userdata.UserData;
@@ -26,6 +27,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 
 import static com.health.minimalismfitnessapp.TestConstantsNutrition.EXPECTED_ALL_NUTRITION_JSON;
@@ -126,9 +128,6 @@ public class NutritionWithMockHttpRequestIT {
 
     }
 
-
-
-
     @Test
     public void testAddingANutritionRecord() throws Exception {
         int originalNumOfNutritionRecords = getNumberOfNutritionRecords();
@@ -153,6 +152,27 @@ public class NutritionWithMockHttpRequestIT {
                 () -> assertEquals(originalNumOfNutritionRecords+1, getNumberOfNutritionRecords()),
                 () -> assertTrue(checkIfOnList(testNutritionData))
         );
+    }
+
+    @Test
+    public void testFindNutritionDataByUserName() throws Exception {
+        String userName = nutritionData1.getUser().getName();
+
+        MvcResult result =
+                (this.mockMvc.perform(MockMvcRequestBuilders.get("/nutrition//user/name/" + userName)))
+                        .andExpect(status().isOk())
+                        .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                        .andReturn();
+
+        String contentAsJson = result.getResponse().getContentAsString();
+        NutritionData[] nutritionData = objectMapper.readValue(contentAsJson, NutritionData[].class);
+
+        assertEquals("Pizza", nutritionData[0].getFoodName());
+        assertEquals(500, nutritionData[0].getCalories());
+        assertEquals(40, nutritionData[0].getProtein());
+        assertEquals(30, nutritionData[0].getCarbohydrates());
+        assertEquals(30, nutritionData[0].getFats());
+        assertEquals("Lunch", nutritionData[0].getMealType());
     }
 
     private int getNumberOfNutritionRecords() throws Exception {

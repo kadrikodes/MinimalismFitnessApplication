@@ -3,6 +3,7 @@ package com.health.minimalismfitnessapp.backend.services;
 import com.health.minimalismfitnessapp.backend.dataaccess.IPushUpRepository;
 import com.health.minimalismfitnessapp.backend.dataaccess.IUserRepository;
 import com.health.minimalismfitnessapp.backend.entities.PushUpData;
+import com.health.minimalismfitnessapp.backend.entities.WalkingData;
 import com.health.minimalismfitnessapp.backend.entities.userdata.UserData;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,15 +24,6 @@ public class PushUpService {
 
         this.pushUpRepository = pushUpRepository;
         this.userRepository = userRepository;
-    }
-
-    public  void delete(long pushUpId) {
-        pushUpRepository.deleteById(pushUpId);
-    }
-
-    public PushUpData saveOrUpdate(PushUpData pushUpData) {
-        pushUpRepository.save(pushUpData);
-        return pushUpData;
     }
 
     public List<PushUpData> findAll() {
@@ -76,10 +68,9 @@ public class PushUpService {
     }
 
     public void deletePushUpData(long id) {
-        if (pushUpRepository.existsById(id)){
-            pushUpRepository.deleteById(id);
-        }else{
-            throw new IllegalArgumentException("Pushup data with ID " + id + " not found");
-        }
+        PushUpData pushUpData = pushUpRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Pushup data not found"));
+
+        pushUpRepository.delete(pushUpData);
     }
 }
