@@ -14,6 +14,7 @@ const HomePage = () => {
   const [nutritionData, setNutritionData] = useState(null);
   const [sleepData, setSleepData] = useState(null);
   const [walkingData, setWalkingData] = useState(null);
+  const [pushUpData, setPushUpData] = useState(null);
 
 
 
@@ -22,6 +23,7 @@ const HomePage = () => {
     const nutritionAPI = 'http://localhost:8080/nutrition/1';
     const sleepAPI = 'http://localhost:8080/sleeptracker/1';
     const walkingAPI = 'http://localhost:8080/walking/1';
+    const pushUpAPI = 'http://localhost:8080/pushups/1';
   
 
     fetch(userAPI)
@@ -40,6 +42,10 @@ const HomePage = () => {
         .then((response) => {return response.json();})
         .then((data) => {setWalkingData(data);})
 
+    fetch(pushUpAPI)
+    .then((response) => {return response.json();})
+    .then((data) => {setPushUpData(data);})
+
   }, [])
 
   
@@ -56,7 +62,7 @@ const HomePage = () => {
           </div>
           <div className="containers">
             <WalkContainer walkingData={walkingData}/>
-            <PushUpContainer /> 
+            <PushUpContainer pushUpData={pushUpData} /> 
           </div>
 
       {/* {userData ? (<pre>{JSON.stringify(userData, null, 2)}</pre>) : (<p>Loading...</p>)} */}
