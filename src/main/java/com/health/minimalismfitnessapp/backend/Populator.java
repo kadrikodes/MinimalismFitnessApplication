@@ -21,7 +21,6 @@ public class Populator {
     IUserRepository iUserRepository;
     IWalkingRepository iWalkingRepository;
     IActivityRepository iActivityRepository;
-
     @Autowired
     public Populator(IActivityRepository iActivityRepository, INutritionRepository iNutritionRepository, IPushUpRepository iPushUpRepository, ISleepRepository iSleepRepository, IUserRepository iUserRepository, IWalkingRepository iWalkingRepository) {
         this.iActivityRepository = iActivityRepository;
@@ -31,17 +30,13 @@ public class Populator {
         this.iUserRepository = iUserRepository;
         this.iWalkingRepository = iWalkingRepository;
     }
-
     public void populate(){
-
         populateUserData();
         populateActivityData();
         populateNutritionData();
         populatePushUpData();
         populateWalkingData();
-        populateSleepData();
-    }
-
+        populateSleepData();}
     public void populateNutritionData() {
         // Create user data
         Optional<UserData> optionalUserData1 = iUserRepository.findById(1L);
@@ -49,7 +44,6 @@ public class Populator {
         Optional<UserData> optionalUserData3 = iUserRepository.findById(3L);
         Optional<UserData> optionalUserData4 = iUserRepository.findById(4L);
         Optional<UserData> optionalUserData5 = iUserRepository.findById(5L);
-
 
         if (optionalUserData1.isPresent() && optionalUserData2.isPresent()) {
             UserData userData1 = optionalUserData1.get();
@@ -73,7 +67,6 @@ public class Populator {
             iNutritionRepository.save(nutritionData);
         }
     }
-
     public void populatePushUpData() {
         // Create user data
         Optional<UserData> optionalUserData1 = iUserRepository.findById(1L);

@@ -43,27 +43,21 @@ public class PushUpController {
         }
         return newPushUp;
     }
-    @DeleteMapping("/user/{delete}")
-    public void deletePushUpData(@PathVariable("delete") long delete) {
-        PushUpService.delete(delete);
-    }
-
-    @PutMapping("/{update}")
-    public ResponseEntity<PushUpData> updatePushUpData(@PathVariable("update") long id, @RequestBody PushUpData pushUpData) {
-        PushUpData existingPushUpData = pushUpService.getPushUpDataById(id);
-
-        if (existingPushUpData == null) {
-
-            return ResponseEntity.notFound().build();
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteNutritionData(@PathVariable long id){
+        try{
+            pushUpService.deletePushUpData(id);
+        } catch (IllegalArgumentException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Internal Server Error", e);
         }
-
-        existingPushUpData.setNumberOfPushUps(pushUpData.getNumberOfPushUps());
-        existingPushUpData.setTarget(pushUpData.getTarget());
-        existingPushUpData.setTimeDuration(pushUpData.getTimeDuration());
-        existingPushUpData.setCaloriesBurnt(pushUpData.getCaloriesBurnt());
-
-        pushUpService.saveOrUpdate(existingPushUpData);
-
-        return ResponseEntity.ok(existingPushUpData);
     }
+
+    @PutMapping("/{id}")
+    public PushUpData updatePushUpData(@PathVariable long id, @RequestBody PushUpData pushUpData) {
+        return pushUpService.updatePushUpData(id, pushUpData);
+    }
+
 }

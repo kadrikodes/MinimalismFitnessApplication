@@ -27,6 +27,8 @@ public class PushUpData {
     @JoinColumn(name = "user_data_id")
     private UserData userData;
 
+    public PushUpData() {}
+
     public PushUpData(int numberOfPushUps, int target, double timeDuration, int caloriesBurnt, UserData userData, ActivityData activityData) {
         this.numberOfPushUps = numberOfPushUps;
         this.target = target;
@@ -35,7 +37,6 @@ public class PushUpData {
         this.userData = userData;
         this.activityData = activityData;
     }
-
 
     public Long getId() {
         return id;
