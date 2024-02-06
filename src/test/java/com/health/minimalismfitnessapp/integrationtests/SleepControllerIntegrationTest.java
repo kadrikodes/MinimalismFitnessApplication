@@ -1,38 +1,41 @@
 
 package com.health.minimalismfitnessapp.integrationtests;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.health.minimalismfitnessapp.backend.MinimalismFitnessAppApplication;
 import com.health.minimalismfitnessapp.backend.dataaccess.ISleepRepository;
 import com.health.minimalismfitnessapp.backend.dataaccess.IUserRepository;
-import com.health.minimalismfitnessapp.backend.entities.NutritionData;
 import com.health.minimalismfitnessapp.backend.entities.SleepData;
 import com.health.minimalismfitnessapp.backend.entities.userdata.UserData;
 import com.health.minimalismfitnessapp.backend.entities.userdata.UserGender;
+import com.health.minimalismfitnessapp.backend.services.SleepService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.web.server.ResponseStatusException;
 
 
-import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.when;
+import static org.springframework.http.RequestEntity.put;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -53,15 +56,13 @@ class SleepControllerIntegrationTest {
     @Autowired
     IUserRepository userRepository;
 
+
     UserData userData1;
     UserData userData2;
 
     SleepData sleepData1;
     SleepData sleepData2;
 
-//    public SleepControllerIntegrationTest() {
-//        mapper.registerModule(new JavaTimeModule());
-//    }
 
     @BeforeEach
     public void populateData() {
@@ -87,7 +88,7 @@ class SleepControllerIntegrationTest {
 
 
         MvcResult result =
-                (this.mockMvc.perform(MockMvcRequestBuilders.get("/sleeptracker")))
+                (this.mockMvc.perform(MockMvcRequestBuilders.get("/sleeptracker/allSleepingData")))
                         .andExpect(status().isOk())
                         .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                         .andReturn();
@@ -138,31 +139,27 @@ class SleepControllerIntegrationTest {
     }
 //
 @Test
-void updateSleepRecord() throws Exception {
+void updateSleepRecord_Success() throws Exception {
     long sleepID = this.sleepData1.getId();
     SleepData originalSleepData = sleepRepository.findById(sleepID).orElse(null);
 
-    // Modify the actual bedtime of the sleep data
-    LocalDateTime newActualBedtime = LocalDateTime.of(2023, 11, 10, 22, 30);
+    LocalDateTime newActualBedtime = LocalDateTime.of(2023, 11, 10, 22, 00);
     originalSleepData.setActualBedtime(newActualBedtime);
 
-    // Serialize the modified sleep data to JSON
     String json = objectMapper.writeValueAsString(originalSleepData);
 
-    // Perform the update operation via HTTP PUT request
     MvcResult result = this.mockMvc.perform(MockMvcRequestBuilders.put("/sleeptracker/{id}", sleepID)
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(json))
             .andExpect(status().isOk())
             .andReturn();
 
-    // Deserialize the updated sleep data from the response content
     String contentAsJson = result.getResponse().getContentAsString();
     SleepData updatedSleepRecord = objectMapper.readValue(contentAsJson, SleepData.class);
 
-    // Verify that the actual bedtime of the updated sleep record matches the modified value
     assertEquals(newActualBedtime, updatedSleepRecord.getActualBedtime());
 }
+
 
 
     @Test
@@ -176,23 +173,5 @@ void updateSleepRecord() throws Exception {
         SleepData checkingSleepDataAfterDeletion = sleepRepository.findById(sleepID).orElse(null);
         assertNull(checkingSleepDataAfterDeletion, "Sleep Record Deleted");
     }
-
-//    @Test
-//    void testTargetSleepDuration() throws Exception {
-//        long sleepID = this.sleepData1.getId();
-//        SleepData sleepData = sleepRepository.findById(sleepID).orElse(null);
-//        String json = objectMapper.writeValueAsString(sleepData);
-//
-//        MvcResult result = this.mockMvc.perform(MockMvcRequestBuilders.get("/sleeptracker/targetSleepDuration")
-//                        .contentType(MediaType.APPLICATION_JSON)
-//                        .content(json))
-//                .andExpect(status().isOk())
-//                .andReturn();
-//
-//        String contentAsJson = result.getResponse().getContentAsString();
-//        Duration targetSleepDuration = objectMapper.readValue(contentAsJson, Duration.class);
-//        assertEquals(Duration.ofHours(9), targetSleepDuration);
-//        assertNotNull(targetSleepDuration);
-//    }
 
 }

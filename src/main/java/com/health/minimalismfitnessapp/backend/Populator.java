@@ -169,8 +169,6 @@ public class Populator {
             UserData userData4 = optionalUserData4.get();
             UserData userData5 = optionalUserData5.get();
 
-
-
             // Create activity data
             Optional<ActivityData> optionalActivityData = iActivityRepository.findById(2L); // Example activity ID
 
