@@ -53,10 +53,13 @@ const HomePage = () => {
 
   return (
     <div className="desktop">
+          <div className="header">
           <Header />
           <NavBar />
+          </div>
+          
           <div className="row">
-            <div className="column">
+            <div className="column" id="userColumn">
               <UserContainer userData={userData} />
             </div>
             <div className="column">
@@ -70,12 +73,7 @@ const HomePage = () => {
           
             
             
-
-  
-            
           </div>
-
-      {/* {userData ? (<pre>{JSON.stringify(userData, null, 2)}</pre>) : (<p>Loading...</p>)} */}
     </div>
   );
 };

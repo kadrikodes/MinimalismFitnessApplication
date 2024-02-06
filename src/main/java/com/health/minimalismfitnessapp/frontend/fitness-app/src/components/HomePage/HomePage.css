@@ -1,8 +1,11 @@
 .desktop {
   background-color: #082035;
-  align-items: center;
-  justify-content: center;
   height: 100vh;
+}
+
+.header {
+  text-align: center;
+  padding-bottom: 200px;
 }
 
 .row {
@@ -17,4 +20,7 @@
   padding: 0 4px;
 }
 
+#userColumn{
+  margin-left: 25%;
+}
 
