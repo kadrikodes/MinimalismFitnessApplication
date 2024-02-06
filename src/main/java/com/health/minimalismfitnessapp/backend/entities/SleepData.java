@@ -10,7 +10,6 @@ public class SleepData {
 
     @Id
     @GeneratedValue(generator = "sleep_data_sequence")
-    @SequenceGenerator(name="sleep_data_sequence", initialValue = 100)
     private Long id;
     private LocalDateTime targetBedtime;
     private LocalDateTime targetWakeUpTime;

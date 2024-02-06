@@ -1,31 +1,28 @@
 package com.health.minimalismfitnessapp.backend.services;
 
 import com.health.minimalismfitnessapp.backend.dataaccess.IPushUpRepository;
+import com.health.minimalismfitnessapp.backend.dataaccess.IUserRepository;
 import com.health.minimalismfitnessapp.backend.entities.PushUpData;
+import com.health.minimalismfitnessapp.backend.entities.WalkingData;
+import com.health.minimalismfitnessapp.backend.entities.userdata.UserData;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
 public class PushUpService {
-
-    static IPushUpRepository pushUpRepository;
+    IPushUpRepository pushUpRepository;
+    IUserRepository userRepository;
 
     @Autowired
-    public PushUpService(IPushUpRepository pushUpRepository) {
-        PushUpService.pushUpRepository = pushUpRepository;
-    }
+    public PushUpService(IPushUpRepository pushUpRepository, IUserRepository userRepository) {
 
-    public static void delete(long pushUpId) {
-        pushUpRepository.deleteById(pushUpId);
-    }
-
-    public static PushUpData saveOrUpdate(PushUpData pushUpData) {
-        pushUpRepository.save(pushUpData);
-        return pushUpData;
+        this.pushUpRepository = pushUpRepository;
+        this.userRepository = userRepository;
     }
 
     public List<PushUpData> findAll() {
@@ -42,23 +39,37 @@ public class PushUpService {
     }
 
     public PushUpData addPushUpData(PushUpData pushUpData) {
-        return pushUpData;
+        String name = pushUpData.getUser().getName();
+        Optional<UserData> prospectiveUser = userRepository.findUserDataByName(name);
+        if(prospectiveUser.isEmpty()){
+            UserData userData = userRepository.save(pushUpData.getUser());
+            pushUpData.setUser(userData);
+        } else{
+            pushUpData.setUser(prospectiveUser.get());
+        }
+
+        return pushUpRepository.save(pushUpData);
     }
 
     public PushUpData updatePushUpData(long id, PushUpData pushUpData) {
         PushUpData existingPushUpData = pushUpRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Push up data not found"));
+                .orElseThrow(() -> new NoSuchElementException("Push up data not found"));
 
         existingPushUpData.setNumberOfPushUps(pushUpData.getNumberOfPushUps());
         existingPushUpData.setTarget(pushUpData.getTarget());
         existingPushUpData.setTimeDuration(pushUpData.getTimeDuration());
         existingPushUpData.setCaloriesBurnt(pushUpData.getCaloriesBurnt());
+        existingPushUpData.setUser(pushUpData.getUser());
+        existingPushUpData.setActivityData(pushUpData.getActivityData());
 
-        return pushUpRepository.save(existingPushUpData);
+        pushUpRepository.save(existingPushUpData);
+        return existingPushUpData;
     }
 
     public void deletePushUpData(long id) {
         PushUpData pushUpData = pushUpRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Push up data not found"));
+                .orElseThrow(() -> new EntityNotFoundException("Pushup data not found"));
+
+        pushUpRepository.delete(pushUpData);
     }
 }

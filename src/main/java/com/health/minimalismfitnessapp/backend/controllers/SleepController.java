@@ -26,6 +26,7 @@ public class SleepController {
     }
 
     @GetMapping("/{sleepDataId}")
+    @CrossOrigin(origins = "http://localhost:3000")
     public SleepData getSleepDataById(@PathVariable Long sleepDataId) {
         return sleepService.getSleepDataById(sleepDataId);
     }
@@ -36,7 +37,7 @@ public class SleepController {
     }
 
 
-    @PostMapping
+    @PostMapping("/addSleepData")
     @ResponseStatus(HttpStatus.CREATED)
     public SleepData addSleepRecord(@RequestBody SleepData sleepData) {
         try {
