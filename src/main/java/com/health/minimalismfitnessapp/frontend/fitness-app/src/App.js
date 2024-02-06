@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import HomePage from './components/HomePage/HomePage';
 
-import { BrowserRouter as Router, Routes, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NavBar from './components/HomePage/NavBar/NavBar';
 import WalkPage from './components/WalkPage/WalkPage';
 import PushUpPage from './components/PushUpPage/PushUpPage';
