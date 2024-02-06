@@ -11,27 +11,51 @@ import UserContainer from "./UserSummary/UserContainer";
 const HomePage = () => {
 
   const [userData, setUserData] = useState(null);
+  const [nutritionData, setNutritionData] = useState(null);
+  const [sleepData, setSleepData] = useState(null);
+  const [walkingData, setWalkingData] = useState(null);
+
+
 
   useEffect(() => {
-    const userAPI = 'http://localhost:8080/users';
+    const userAPI = 'http://localhost:8080/users/userId/1';
+    const nutritionAPI = 'http://localhost:8080/nutrition/1';
+    const sleepAPI = 'http://localhost:8080/sleeptracker/1';
+    const walkingAPI = 'http://localhost:8080/walking/1';
+  
 
     fetch(userAPI)
         .then((response) => {return response.json();})
-        .then((data) => setUserData(data) )
+        .then((data) => { setUserData(data);} )
+
+    fetch(nutritionAPI)
+        .then((response) => { return response.json();})
+        .then((data) => {setNutritionData(data);})
+
+    fetch(sleepAPI)
+        .then((response) => {return response.json();})
+        .then((data) => {setSleepData(data);})
+
+    fetch(walkingAPI)
+        .then((response) => {return response.json();})
+        .then((data) => {setWalkingData(data);})
+
   }, [])
+
+  
 
 
   return (
     <div className="desktop">
           <Header />
           <NavBar />
-          <UserContainer />
+          <UserContainer userData={userData} />
           <div className="containers">
-            <NutritionContainer />
-            <SleepContainer />
+            <NutritionContainer nutritionData={nutritionData} />
+            <SleepContainer sleepData={sleepData} />
           </div>
           <div className="containers">
-            <WalkContainer />
+            <WalkContainer walkingData={walkingData}/>
             <PushUpContainer /> 
           </div>
 
