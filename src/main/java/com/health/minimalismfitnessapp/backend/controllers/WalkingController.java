@@ -95,7 +95,6 @@ public class WalkingController {
             }
         }, (long) hours * 60 * 60 * 1000 + (long) minutes * 60 * 1000);
 
-
         return ResponseEntity.ok("Walk reminder scheduled successfully");
     }
 

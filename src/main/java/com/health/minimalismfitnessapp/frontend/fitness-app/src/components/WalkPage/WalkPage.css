@@ -1,0 +1,10 @@
+.walkPage {
+    background-color: #082035; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    padding: 20px;
+    min-height: 100vh;
+  }
+  

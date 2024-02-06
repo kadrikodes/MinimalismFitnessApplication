@@ -1,0 +1,73 @@
+.navbar {
+    height: 27px;
+    left: 1099px;
+    position: absolute;
+    top: 293px;
+    width: 504px;
+  }
+  .user {
+    color: #FFFFFF;
+    font-family: "Outfit-Bold", Helvetica;
+    font-size: 24px;
+    font-weight: 700;
+    left: -120px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 0;
+    white-space: nowrap;
+    width: 116px;
+  }
+   .walk {
+    color: #FFFFFF;
+    font-family: "Outfit-Bold", Helvetica;
+    font-size: 24px;
+    font-weight: 700;
+    left: 115px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 0;
+    white-space: nowrap;
+    width: 116px;
+  }
+   .pushup {
+    color: #FFFFFF;
+    font-family: "Outfit-Bold", Helvetica;
+    font-size: 24px;
+    font-weight: 700;
+    left: 217px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 0;
+    white-space: nowrap;
+    width: 170px;
+  }
+   .nutrition {
+    color: #FFFFFF;
+    font-family: "Outfit-Bold", Helvetica;
+    font-size: 24px;
+    font-weight: 700;
+    left: 356px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 0;
+    white-space: nowrap;
+    width: 148px;
+  }
+   .sleep {
+    color: #FFFFFF;
+    font-family: "Outfit-Bold", Helvetica;
+    font-size: 24px;
+    font-weight: 700;
+    left: 0;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 0;
+    white-space: nowrap;
+    width: 126px;
+  }
+
