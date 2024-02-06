@@ -8,6 +8,25 @@
   box-sizing: border-box;
 }
 
+.contentContainer {
+  display: flex;
+  width: 100%;
+  justify-content: center; 
+  gap: 20px; 
+}
+
+.WalkingSummary {
+  flex: 1; 
+  max-width: 300px; 
+  max-height: 300px;
+  background-color: #E6E6E6;
+  border-radius: 20px;
+  padding: 20px;
+  margin-right: 20px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
 .walkingForm {
   max-width: 600px; 
   margin: auto;
@@ -23,8 +42,6 @@
   margin: 0 10px 10px 0; 
 }
 
-
-
 .WalkingContent {
   display: flex;
   width: 100%;
@@ -32,19 +49,8 @@
   align-items: start;
 }
 
-.WalkingSummary {
-  flex: 1; 
-  max-width: 300px; 
-  background-color: #E6E6E6;
-  border-radius: 20px;
-  padding: 20px;
-  margin-right: 20px; 
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  text-align: center;
-}
-
 .WalkingDetailList {
-  flex: 3; /* Adjust as needed */
+  flex: 3;
   display: flex;
   flex-direction: column;
   align-items: center;

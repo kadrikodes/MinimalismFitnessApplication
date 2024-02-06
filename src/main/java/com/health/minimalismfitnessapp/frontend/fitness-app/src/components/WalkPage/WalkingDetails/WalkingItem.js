@@ -8,7 +8,9 @@ const WalkingItem = ({ data, onEdit, onDelete }) => {
         <div className="walkingItemData">
         <p>Steps: {data.steps}</p>
         <p>Distance: {data.distance}km</p>
-        {/* Add more details as needed */}
+        <p>caloriesBurned: {data.caloriesBurned}</p>
+        <p>Duration: {data.duration}mins</p>
+        <p>Speed: {data.speed}km/hr</p>
         </div>
         
         <button onClick={() => onEdit(data)}>Edit</button>

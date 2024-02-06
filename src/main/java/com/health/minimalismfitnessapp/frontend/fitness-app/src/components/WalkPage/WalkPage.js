@@ -20,8 +20,10 @@ const WalkPage = () => {
     <div className="walkPage">
       <NavBar />
       <WalkingHeader />
-      <WalkingSummary walkingData={walkingData} />
-      <WalkingDetailList walkingData={walkingData} />
+      <div className="contentContainer">
+                <WalkingSummary walkingData={walkingData} />
+                <WalkingDetailList walkingData={walkingData} />
+            </div>
     </div>
   );
 };
