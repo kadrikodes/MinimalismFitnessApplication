@@ -7,11 +7,11 @@
   height: 100vh;
 }
 
-.containers {
+.row {
   display: flex;
   flex-direction: row;
   justify-content: right; /* Adjust as needed */
-  width: 80%;
+  width: 50%;
   padding: 1rem;
 }
 

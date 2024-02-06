@@ -55,12 +55,12 @@ const HomePage = () => {
     <div className="desktop">
           <Header />
           <NavBar />
-          <UserContainer userData={userData} />
-          <div className="containers">
+          
+          <div className="row">
             <NutritionContainer nutritionData={nutritionData} />
             <SleepContainer sleepData={sleepData} />
           </div>
-          <div className="containers">
+          <div className="row">
             <WalkContainer walkingData={walkingData}/>
             <PushUpContainer pushUpData={pushUpData} /> 
           </div>
