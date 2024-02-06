@@ -4,11 +4,13 @@ import com.health.minimalismfitnessapp.backend.dataaccess.ISleepRepository;
 import com.health.minimalismfitnessapp.backend.dataaccess.IUserRepository;
 import com.health.minimalismfitnessapp.backend.entities.SleepData;
 import com.health.minimalismfitnessapp.backend.entities.userdata.UserData;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.Duration;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -48,47 +50,16 @@ public class SleepService {
     }
 
     public SleepData updateSleepRecord(Long sleepDataId, SleepData updatedSleepData) {
-        if (updatedSleepData == null) {
-            throw new IllegalArgumentException("Updated sleep data cannot be null");
-        }
+        SleepData existingSleepData = sleepRepository.findById(sleepDataId)
+                .orElseThrow(() -> new EntityNotFoundException("Walking data not found"));
+        existingSleepData.setActualBedtime(updatedSleepData.getActualBedtime());
+        existingSleepData.setActualWakeupTime(updatedSleepData.getActualWakeupTime());
+        existingSleepData.setTargetBedtime(updatedSleepData.getTargetBedtime());
+        existingSleepData.setTargetWakeUpTime(updatedSleepData.getTargetWakeUpTime());
 
-        Optional<SleepData> existingSleepDataOptional = sleepRepository.findById(sleepDataId);
-
-        if (existingSleepDataOptional.isPresent()) {
-            SleepData existingSleepData = existingSleepDataOptional.get();
-
-            // Perform basic data validation if needed
-            if (isValidSleepData(updatedSleepData)) {
-                // Check if user data needs to be updated
-                UserData userData = updatedSleepData.getUser();
-                if (userData != null && userData.getId() == null) {
-                    userData = userRepository.save(userData);
-                    existingSleepData.setUser(userData);
-                }
-
-                existingSleepData.setTargetBedtime(updatedSleepData.getTargetBedtime());
-                existingSleepData.setTargetWakeUpTime(updatedSleepData.getTargetWakeUpTime());
-                existingSleepData.setActualBedtime(updatedSleepData.getActualBedtime());
-                existingSleepData.setActualWakeupTime(updatedSleepData.getActualWakeupTime());
-
-                return sleepRepository.save(existingSleepData);
-            } else {
-                throw new IllegalArgumentException("Invalid sleep data provided");
-            }
-        } else {
-            throw new IllegalArgumentException("Sleep record not found with ID: " + sleepDataId);
-        }
+        return sleepRepository.save(existingSleepData);
     }
 
-
-    private boolean isValidSleepData(SleepData sleepData) {
-        // Perform validation checks here (e.g., check if target bedtime is before target wakeup time)
-        // Return true if the data is valid, false otherwise
-
-        // Example of basic validation: Check if target bedtime is before target wakeup time
-        return sleepData.getTargetBedtime() != null && sleepData.getTargetWakeUpTime() != null &&
-                sleepData.getTargetBedtime().isBefore(sleepData.getTargetWakeUpTime());
-    }
 
 
     public void deleteSleepRecord(Long sleepDataId) {
