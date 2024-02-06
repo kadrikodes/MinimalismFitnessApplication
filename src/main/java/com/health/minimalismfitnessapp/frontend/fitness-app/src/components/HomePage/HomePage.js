@@ -55,14 +55,24 @@ const HomePage = () => {
     <div className="desktop">
           <Header />
           <NavBar />
+          <div className="row">
+            <div className="column">
+              <UserContainer userData={userData} />
+            </div>
+            <div className="column">
+              <NutritionContainer nutritionData={nutritionData} />
+              <SleepContainer sleepData={sleepData} />
+            </div>
+            <div className="column">
+              <WalkContainer walkingData={walkingData}/>
+              <PushUpContainer pushUpData={pushUpData} /> 
+            </div>
           
-          <div className="row">
-            <NutritionContainer nutritionData={nutritionData} />
-            <SleepContainer sleepData={sleepData} />
-          </div>
-          <div className="row">
-            <WalkContainer walkingData={walkingData}/>
-            <PushUpContainer pushUpData={pushUpData} /> 
+            
+            
+
+  
+            
           </div>
 
       {/* {userData ? (<pre>{JSON.stringify(userData, null, 2)}</pre>) : (<p>Loading...</p>)} */}
