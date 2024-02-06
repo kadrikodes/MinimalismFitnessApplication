@@ -23,11 +23,12 @@ public class PushUpController {
     public Iterable<PushUpData> getAllPushUpData() {
         return pushUpService.findAll();
     }
-    @GetMapping("/user/{id}")
+    @GetMapping("/{id}")
+    @CrossOrigin(origins = "http://localhost:3000")
     public PushUpData getPushUpDataById(@PathVariable long id) {
         return this.pushUpService.getPushUpDataById(id);
     }
-    @GetMapping("/{userName}")
+    @GetMapping("/user/{userName}")
     public List<PushUpData> getPushUpDataByUserName(@PathVariable String userName) {
         return this.pushUpService.getPushUpDataByUserDataName(userName);
     }
