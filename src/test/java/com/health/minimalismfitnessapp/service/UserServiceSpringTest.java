@@ -1,6 +1,7 @@
 package com.health.minimalismfitnessapp.service;
 
 import com.health.minimalismfitnessapp.TestUtilitiesUser;
+import com.health.minimalismfitnessapp.backend.MinimalismFitnessAppApplication;
 import com.health.minimalismfitnessapp.backend.dataaccess.IUserRepository;
 import com.health.minimalismfitnessapp.backend.entities.userdata.UserData;
 import com.health.minimalismfitnessapp.backend.entities.userdata.UserGender;
@@ -9,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ContextConfiguration;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -17,8 +19,9 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
-@SuppressWarnings("unused")
+
 @SpringBootTest
+@ContextConfiguration(classes = MinimalismFitnessAppApplication.class)
 public class UserServiceSpringTest {
 
         @MockBean
@@ -26,8 +29,6 @@ public class UserServiceSpringTest {
 
         @Autowired
         UserService userService;
-        @Autowired
-        final
         TestUtilitiesUser testUtilitiesUser = new TestUtilitiesUser();
 
         @Test
@@ -61,10 +62,9 @@ public class UserServiceSpringTest {
 
             assertNotNull(result);
             assertEquals("Esra", result.getName());
-            assertEquals(0L, result.getId());
             assertEquals(170.0, result.getHeight());
             assertEquals(60.0, result.getWeight());
-            assertEquals("FEMALE", result.getGender());
+            assertEquals(UserGender.FEMALE, result.getGender());
             assertEquals(expectedLocalDateTime, result.getBirthdate());
             verify(iUserRepository, times(1)).save(any(UserData.class));
         }

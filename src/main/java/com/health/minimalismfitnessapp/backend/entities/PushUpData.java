@@ -38,7 +38,6 @@ public class PushUpData {
         this.activityData = activityData;
     }
 
-
     public Long getId() {
         return id;
     }

@@ -20,7 +20,7 @@ public class SleepController {
         this.sleepService = sleepService;
     }
 
-    @GetMapping
+    @GetMapping("/allSleepingData")
     public List<SleepData> getAllSleepData() {
         return sleepService.getAllSleepData();
     }
@@ -37,7 +37,7 @@ public class SleepController {
     }
 
 
-    @PostMapping
+    @PostMapping("/addSleepData")
     @ResponseStatus(HttpStatus.CREATED)
     public SleepData addSleepRecord(@RequestBody SleepData sleepData) {
         try {
@@ -68,18 +68,6 @@ public class SleepController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Internal Server Error", e);
-        }
-    }
-
-
-    @GetMapping("/targetSleepDuration")
-    @ResponseStatus(HttpStatus.OK)
-    public Duration targetSleepDuration(@RequestParam Long sleepDataId) {
-        try {
-            SleepData sleepData = sleepService.getSleepDataById(sleepDataId);
-            return sleepService.targetSleepDuration(sleepData);
-        } catch (IllegalArgumentException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
 

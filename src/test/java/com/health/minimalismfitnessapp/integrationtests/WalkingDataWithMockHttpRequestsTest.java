@@ -1,19 +1,25 @@
 package com.health.minimalismfitnessapp.integrationtests;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.health.minimalismfitnessapp.backend.MinimalismFitnessAppApplication;
+import com.health.minimalismfitnessapp.backend.dataaccess.IActivityRepository;
+import com.health.minimalismfitnessapp.backend.dataaccess.IUserRepository;
 import com.health.minimalismfitnessapp.backend.dataaccess.IWalkingRepository;
 
 import com.health.minimalismfitnessapp.backend.entities.ActivityData;
+import com.health.minimalismfitnessapp.backend.entities.PushUpData;
 import com.health.minimalismfitnessapp.backend.entities.userdata.UserData;
 
 import com.health.minimalismfitnessapp.backend.entities.WalkingData;
 import com.health.minimalismfitnessapp.backend.entities.userdata.UserGender;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
@@ -27,19 +33,39 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@Sql({"classpath:test-walkingdata.sql"})
+//@Sql({"classpath:test-walkingdata.sql"})
 @SpringBootTest
 @AutoConfigureMockMvc
+@ContextConfiguration(classes = MinimalismFitnessAppApplication.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
-@TestPropertySource(properties = {"spring.sql.init.mode=never"})
+//@TestPropertySource(properties = {"spring.sql.init.mode=never"})
 public class WalkingDataWithMockHttpRequestsTest {
-    ActivityData activityData = new ActivityData("Walking");
     @Autowired
     MockMvc mockMvc;
     @Autowired
     IWalkingRepository walkingRepository;
     @Autowired
     ObjectMapper mapper;
+    @Autowired
+    IUserRepository userRepository;
+    @Autowired
+    IActivityRepository activityRepository;
+    WalkingData walkingData1;
+    WalkingData walkingData2;
+
+    @BeforeEach
+    public void populateData() {
+        ActivityData activityData = new ActivityData("Walking");
+        activityRepository.save(activityData);
+        UserData userData = new UserData("Rais", 180, 85, LocalDate.of(2000, 1, 1), UserGender.MALE);
+        userRepository.save(userData);
+        this.walkingData1 = new WalkingData(150, 15, 120, 70, 6, LocalDateTime.of(2023, 11, 30, 10, 45), userData, activityData);
+        walkingRepository.save(this.walkingData1);
+        userData = new UserData("Divin", 160, 68, LocalDate.of(1994, 1, 1), UserGender.MALE);
+        userRepository.save(userData);
+        this.walkingData2 = new WalkingData(200, 20, 150, 90, 7, LocalDateTime.of(2023, 11, 30, 10, 45), userData, activityData);
+        walkingRepository.save(this.walkingData2);
+    }
 
     @Test
     public void testGettingAllWalkingData() throws Exception {
@@ -52,17 +78,17 @@ public class WalkingDataWithMockHttpRequestsTest {
         String contentAsJson = result.getResponse().getContentAsString();
         WalkingData[] actualWalkingId = mapper.readValue(contentAsJson, WalkingData[].class);
 
-        assertEquals(100, actualWalkingId[0].getSteps());
-        assertEquals(10, actualWalkingId[0].getDistance());
-        assertEquals(100, actualWalkingId[0].getCaloriesBurned());
-        assertEquals(60, actualWalkingId[0].getDuration());
-        assertEquals(5, actualWalkingId[0].getSpeed());
-        assertEquals(LocalDateTime.of(2023, 11, 29, 11, 33), actualWalkingId[0].getDateTime());
+        assertEquals(150, actualWalkingId[0].getSteps());
+        assertEquals(15, actualWalkingId[0].getDistance());
+        assertEquals(120, actualWalkingId[0].getCaloriesBurned());
+        assertEquals(70, actualWalkingId[0].getDuration());
+        assertEquals(6, actualWalkingId[0].getSpeed());
+        assertEquals(LocalDateTime.of(2023, 11, 30, 10, 45), actualWalkingId[0].getDateTime());
     }
 
     @Test
     public void testGetWalkingDataById() throws Exception {
-        long walkingId = 1000;
+        long walkingId = walkingData1.getId();
 
         MvcResult result =
                 (this.mockMvc.perform(MockMvcRequestBuilders.get("/walking/" + walkingId)))
@@ -73,17 +99,17 @@ public class WalkingDataWithMockHttpRequestsTest {
         String contentAsJson = result.getResponse().getContentAsString();
         WalkingData actualWalkingId = mapper.readValue(contentAsJson, WalkingData.class);
 
-        assertEquals(100, actualWalkingId.getSteps());
-        assertEquals(10, actualWalkingId.getDistance());
-        assertEquals(100, actualWalkingId.getCaloriesBurned());
-        assertEquals(60, actualWalkingId.getDuration());
-        assertEquals(5, actualWalkingId.getSpeed());
-        assertEquals(LocalDateTime.of(2023, 11, 29, 11, 33), actualWalkingId.getDateTime());
+        assertEquals(150, actualWalkingId.getSteps());
+        assertEquals(15, actualWalkingId.getDistance());
+        assertEquals(120, actualWalkingId.getCaloriesBurned());
+        assertEquals(70, actualWalkingId.getDuration());
+        assertEquals(6, actualWalkingId.getSpeed());
+        assertEquals(LocalDateTime.of(2023, 11, 30, 10, 45), actualWalkingId.getDateTime());
     }
 
     @Test
     public void testFindWalkingDataByUserName() throws Exception {
-        String userName = "Kadri";
+        String userName = walkingData1.getUserData().getName();
 
         MvcResult result =
                 (this.mockMvc.perform(MockMvcRequestBuilders.get("/walking/name/" + userName)))
@@ -94,19 +120,21 @@ public class WalkingDataWithMockHttpRequestsTest {
         String contentAsJson = result.getResponse().getContentAsString();
         WalkingData[] actualWalkingId = mapper.readValue(contentAsJson, WalkingData[].class);
 
-        assertEquals(100, actualWalkingId[0].getSteps());
-        assertEquals(10, actualWalkingId[0].getDistance());
-        assertEquals(100, actualWalkingId[0].getCaloriesBurned());
-        assertEquals(60, actualWalkingId[0].getDuration());
-        assertEquals(5, actualWalkingId[0].getSpeed());
-        assertEquals(LocalDateTime.of(2023, 11, 29, 11, 33), actualWalkingId[0].getDateTime());
+        assertEquals(150, actualWalkingId[0].getSteps());
+        assertEquals(15, actualWalkingId[0].getDistance());
+        assertEquals(120, actualWalkingId[0].getCaloriesBurned());
+        assertEquals(70, actualWalkingId[0].getDuration());
+        assertEquals(6, actualWalkingId[0].getSpeed());
+        assertEquals(LocalDateTime.of(2023, 11, 30, 10, 45), actualWalkingId[0].getDateTime());
     }
 
     @Test
     public void testAddingWalkingData() throws Exception {
-
+        ActivityData activityData = new ActivityData("Walking");
+        activityRepository.save(activityData);
         UserData newUserData = new UserData("Delima", 170, 120, LocalDate.of(1975, 8, 26), UserGender.MALE);
-        WalkingData newWalkingData = new WalkingData(150, 15, 120, 70, 6, LocalDateTime.of(2023, 11, 30, 10, 45), newUserData, activityData);
+        userRepository.save(newUserData);
+        WalkingData newWalkingData = new WalkingData(200, 20, 180, 100, 8, LocalDateTime.of(2024,02,05,14,15), newUserData, activityData);
 
 
         String jsonRequest = mapper.writeValueAsString(newWalkingData);
@@ -121,18 +149,18 @@ public class WalkingDataWithMockHttpRequestsTest {
         WalkingData addedWalkingData = mapper.readValue(contentAsJson, WalkingData.class);
 
         assertNotNull(addedWalkingData.getId());
-        assertEquals(150, addedWalkingData.getSteps());
-        assertEquals(15, addedWalkingData.getDistance());
-        assertEquals(120, addedWalkingData.getCaloriesBurned());
-        assertEquals(70, addedWalkingData.getDuration());
-        assertEquals(6, addedWalkingData.getSpeed());
-        assertEquals(LocalDateTime.of(2023, 11, 30, 10, 45), addedWalkingData.getDateTime());
+        assertEquals(200, addedWalkingData.getSteps());
+        assertEquals(20, addedWalkingData.getDistance());
+        assertEquals(180, addedWalkingData.getCaloriesBurned());
+        assertEquals(100, addedWalkingData.getDuration());
+        assertEquals(8, addedWalkingData.getSpeed());
+        assertEquals(LocalDateTime.of(2024,02,05,14,15), addedWalkingData.getDateTime());
     }
 
     @Test
     void testSearchWalkingData() throws Exception {
-        LocalDateTime dateTime = LocalDateTime.of(2023, 11, 29, 11, 33);
-        double distance = 10.0;
+        LocalDateTime dateTime = walkingData1.getDateTime();
+        double distance = walkingData1.getDistance();
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/walking/search")
                         .param("dateTime", dateTime.toString())
@@ -152,8 +180,10 @@ public class WalkingDataWithMockHttpRequestsTest {
 
     @Test
     void testUpdateWalkingData() throws Exception {
-        long walkingId = 1000L;
+        long walkingId = walkingData1.getId();
 
+        ActivityData activityData = new ActivityData("Walking");
+        activityRepository.save(activityData);
         WalkingData updatedData = new WalkingData(100, 10, 100, 60, 5, LocalDateTime.of(2023,11,29,11,33), new UserData("Kadri", 177,75,LocalDate.of(1997,06,11),UserGender.MALE), activityData);
 
         updatedData.setDistance(100);
@@ -168,7 +198,7 @@ public class WalkingDataWithMockHttpRequestsTest {
                 .andExpect(status().isOk())
                 .andReturn();
 
-        WalkingData updatedWalkingData = walkingRepository.findById(1000L).orElse(null);
+        WalkingData updatedWalkingData = walkingRepository.findById(walkingId).orElse(null);
         assertNotNull(updatedWalkingData);
         assertEquals(updatedData.getSteps(), updatedWalkingData.getSteps());
         assertEquals(updatedData.getDistance(), updatedWalkingData.getDistance());
@@ -176,18 +206,18 @@ public class WalkingDataWithMockHttpRequestsTest {
 
     @Test
     void testDeleteWalkingData() throws Exception {
-        long walkingId = 1000L;
+        long walkingId = walkingData1.getId();
 
         mockMvc.perform(MockMvcRequestBuilders.delete("/walking/delete/" + walkingId))
                 .andExpect(status().isOk())
                 .andReturn();
-        WalkingData deletedWalkingData = walkingRepository.findById(1000L).orElse(null);
+        WalkingData deletedWalkingData = walkingRepository.findById(walkingId).orElse(null);
         assertNull(deletedWalkingData, "Walking data deleted successfully");
     }
 
     @Test
     void testStepsToBurnCalories() throws Exception {
-        double caloriesToBurn = 500.0;
+        double caloriesToBurn = walkingData1.getCaloriesBurned();
 
         MvcResult result =
                 (this.mockMvc.perform(MockMvcRequestBuilders.get("/walking/calculateStepsToBurnCalories")
@@ -201,7 +231,7 @@ public class WalkingDataWithMockHttpRequestsTest {
 
     @Test
     void testCalculateWeightLoss() throws Exception {
-        int steps = 1000;
+        int steps = walkingData1.getSteps();
 
         MvcResult result =
                 (this.mockMvc.perform(MockMvcRequestBuilders.get("/walking/calculateWeightLoss")
@@ -215,7 +245,7 @@ public class WalkingDataWithMockHttpRequestsTest {
 
     @Test
     public void testGetTotalCaloriesBurned() throws Exception {
-        long walkingId = 1000L;
+        long walkingId = walkingData1.getId();
 
         MvcResult result =
                 (this.mockMvc.perform(MockMvcRequestBuilders.get("/walking/calories/" + walkingId)))
@@ -238,14 +268,14 @@ public class WalkingDataWithMockHttpRequestsTest {
                         .andExpect(status().isOk())
                         .andReturn());
 
-        WalkingData scheduleReminder = walkingRepository.findById(1000L).orElse(null);
+        WalkingData scheduleReminder = walkingRepository.findById(walkingData1.getId()).orElse(null);
 
         assertNotNull(scheduleReminder);
     }
 
     @Test
     void testHasAchievedDailyGoal() throws Exception {
-        int stepsTaken = 16000;
+        int stepsTaken = walkingData1.getSteps() + 15000;
 
         mockMvc.perform(MockMvcRequestBuilders.get("/walking/hasAchievedDailyGoal")
                         .param("stepsTaken", String.valueOf(stepsTaken)))
@@ -257,7 +287,7 @@ public class WalkingDataWithMockHttpRequestsTest {
 
     @Test
     void testHasNotAchievedDailyGoal() throws Exception {
-        int stepsTaken = 10000;
+        int stepsTaken = walkingData1.getSteps();
 
         mockMvc.perform(MockMvcRequestBuilders.get("/walking/hasAchievedDailyGoal")
                         .param("stepsTaken", String.valueOf(stepsTaken)))
@@ -269,7 +299,7 @@ public class WalkingDataWithMockHttpRequestsTest {
 
     @Test
     void testHasAchievedWeeklyGoal() throws Exception {
-        int stepsTaken = 110000;
+        int stepsTaken = walkingData1.getSteps() + 105000;
 
         mockMvc.perform(MockMvcRequestBuilders.get("/walking/hasAchievedWeeklyGoal")
                         .param("stepsTaken", String.valueOf(stepsTaken)))
@@ -281,7 +311,7 @@ public class WalkingDataWithMockHttpRequestsTest {
 
     @Test
     void testHasNotAchievedWeeklyGoal() throws Exception {
-        int stepsTaken = 100000;
+        int stepsTaken = walkingData1.getSteps();
 
         mockMvc.perform(MockMvcRequestBuilders.get("/walking/hasAchievedWeeklyGoal")
                         .param("stepsTaken", String.valueOf(stepsTaken)))
@@ -293,7 +323,7 @@ public class WalkingDataWithMockHttpRequestsTest {
 
     @Test
     void testHasAchievedMonthlyGoal() throws Exception {
-        int stepsTaken = 450000;
+        int stepsTaken = walkingData1.getSteps() + 420000;
 
         mockMvc.perform(MockMvcRequestBuilders.get("/walking/hasAchievedMonthlyGoal")
                         .param("stepsTaken", String.valueOf(stepsTaken)))
@@ -305,7 +335,7 @@ public class WalkingDataWithMockHttpRequestsTest {
 
     @Test
     void testHasNotAchievedMonthlyGoal() throws Exception {
-        int stepsTaken = 400000;
+        int stepsTaken = walkingData1.getSteps();
 
         mockMvc.perform(MockMvcRequestBuilders.get("/walking/hasAchievedMonthlyGoal")
                         .param("stepsTaken", String.valueOf(stepsTaken)))

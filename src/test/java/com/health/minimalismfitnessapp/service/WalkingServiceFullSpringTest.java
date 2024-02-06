@@ -1,6 +1,7 @@
 package com.health.minimalismfitnessapp.service;
 
 import com.health.minimalismfitnessapp.TestUtilities;
+import com.health.minimalismfitnessapp.backend.MinimalismFitnessAppApplication;
 import com.health.minimalismfitnessapp.backend.dataaccess.IWalkingRepository;
 
 import com.health.minimalismfitnessapp.backend.entities.ActivityData;
@@ -15,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ContextConfiguration;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -26,24 +28,19 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
+@ContextConfiguration(classes = MinimalismFitnessAppApplication.class)
 public class WalkingServiceFullSpringTest {
 
     @MockBean
     IWalkingRepository mockRepo;
-
     @Autowired
     WalkingService walkingService;
-    @Autowired
     TestUtilities testUtilities =new TestUtilities();
     LocalDateTime dateTime = LocalDateTime.of(2023, 11, 10, 12, 30);
     LocalDate birthDate = LocalDate.of(1997, 06, 11);
 
     UserData userData = new UserData("Kadri", 120, 70, birthDate, UserGender.MALE);
     ActivityData activityData = new ActivityData("Walking");
-
-
-
-
 
     @Test
     void testFindAllWithSpring() {
@@ -96,9 +93,6 @@ public class WalkingServiceFullSpringTest {
         assertEquals(60, result.getDuration());
         assertEquals(5, result.getSpeed());
         assertEquals(expectedLocalDateTime, result.getDateTime());
-//        System.out.println("Expected UserData: " + expectedUserData);
-//        System.out.println("Result UserData: " + result.getUserData());
-//        assertEquals(expectedUserData, result.getUserData());
 
         verify(mockRepo, times(1)).save(any(WalkingData.class));
     }
