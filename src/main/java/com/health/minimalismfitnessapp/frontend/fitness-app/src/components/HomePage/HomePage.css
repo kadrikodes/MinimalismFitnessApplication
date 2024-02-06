@@ -16,26 +16,6 @@
 }
 
 .column {
-  flex: 100%;
-  max-width: 17%;
-  padding: 0 4px;
+  flex-basis: 1 0 20%; /* flex-grow, flex-shrink, flex-basis */
+  padding: 0 10px;
 }
-
-/* #userColumn{
-  margin-left: 25%;
-} */
-
-@media (max-width: 800px) {
-  .column {
-    flex: 50%;
-    max-width: 50%;
-  }
-}
-
-@media (max-width: 600px) {
-  .column {
-    flex: 100%;
-    max-width: 100%;
-  }
-}
-
