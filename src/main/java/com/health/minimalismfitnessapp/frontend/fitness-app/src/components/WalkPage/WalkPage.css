@@ -1,10 +1,54 @@
-.walkPage {
-    background-color: #082035; 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: start;
-    padding: 20px;
-    min-height: 100vh;
-  }
-  
+.WalkPage {
+  background-color: #082035; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.walkingForm {
+  max-width: 600px; 
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px; 
+}
+
+.walkingForm input {
+  flex: 1 1 180px; 
+  padding: 10px;
+  margin: 0 10px 10px 0; 
+}
+
+
+
+.WalkingContent {
+  display: flex;
+  width: 100%;
+  justify-content: space-around; /* Adjust as needed */
+  align-items: start;
+}
+
+.WalkingSummary {
+  flex: 1; 
+  max-width: 300px; 
+  background-color: #E6E6E6;
+  border-radius: 20px;
+  padding: 20px;
+  margin-right: 20px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.WalkingDetailList {
+  flex: 3; /* Adjust as needed */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+

@@ -1,5 +1,4 @@
-// src/components/WalkPage/WalkingDetails/WalkingForm.js
-
+import "./WalkingForm.css";
 import React, { useState } from 'react';
 
 const WalkingForm = ({ initialData = {}, onSubmit, onCancel }) => {
@@ -16,7 +15,7 @@ const WalkingForm = ({ initialData = {}, onSubmit, onCancel }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="walkingForm">
       <input
         type="number"
         name="steps"
@@ -55,8 +54,9 @@ const WalkingForm = ({ initialData = {}, onSubmit, onCancel }) => {
         value={formData.speed || ''}
         onChange={handleChange}
       />
-      <button type="submit">Save</button>
-      <button type="button" onClick={onCancel}>Cancel</button>
+      <button type="submit" className="formButton">Save</button>
+      <button type="button" onClick={onCancel} className="formButton">Cancel</button>
+
     </form>
   );
 };

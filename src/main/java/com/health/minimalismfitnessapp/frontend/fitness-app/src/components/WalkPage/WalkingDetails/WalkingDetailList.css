@@ -1,8 +1,9 @@
 .WalkingDetailList {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 90%;
-    margin-top: 20px;
-  }
+  flex: 3; /* Adjust as needed */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
   

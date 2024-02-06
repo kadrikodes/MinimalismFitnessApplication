@@ -1,11 +1,16 @@
 import React from 'react';
+import './WalkingItem.css';
+
 
 const WalkingItem = ({ data, onEdit, onDelete }) => {
     return (
       <div className="WalkingItem">
+        <div className="walkingItemData">
         <p>Steps: {data.steps}</p>
         <p>Distance: {data.distance}km</p>
         {/* Add more details as needed */}
+        </div>
+        
         <button onClick={() => onEdit(data)}>Edit</button>
         <button onClick={() => onDelete(data.id)}>Delete</button>
       </div>

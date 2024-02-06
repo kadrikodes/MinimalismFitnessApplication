@@ -12,7 +12,6 @@ const WalkingTracker = () => {
   });
 
   useEffect(() => {
-    // Example function to calculate summary based on walkingData
     const calculateSummary = () => {
       const totalSteps = walkingData.reduce((acc, curr) => acc + curr.steps, 0);
       const totalDistance = walkingData.reduce((acc, curr) => acc + curr.distance, 0);
