@@ -1,0 +1,8 @@
+.WalkingDetailList {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    margin-top: 20px;
+  }
+  

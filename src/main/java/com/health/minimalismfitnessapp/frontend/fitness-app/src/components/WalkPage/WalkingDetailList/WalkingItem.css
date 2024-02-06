@@ -1,0 +1,30 @@
+.WalkingItem {
+    background-color: #F2F2F2;
+    border-radius: 15px;
+    padding: 15px;
+    margin: 10px 0;
+    width: 100%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .WalkingItem p {
+    margin: 5px 0;
+  }
+  
+  .WalkingItem button {
+    padding: 5px 10px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    background-color: #4CAF50; /* Edit button */
+    color: white;
+    margin-right: 5px;
+  }
+  
+  .WalkingItem button:last-child {
+    background-color: #f44336; /* Delete button */
+  }
+  

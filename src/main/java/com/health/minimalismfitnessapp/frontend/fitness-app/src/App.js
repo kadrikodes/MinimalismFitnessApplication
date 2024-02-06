@@ -9,7 +9,6 @@ import PushUpPage from './components/PushUpPage/PushUpPage';
 import NutritionPage from './components/NutritionPage/NutritionPage';
 import SleepPage from './components/SleepPage/SleepPage';
 import UserPage from './components/UserPage/UserPage';
-import { Routes, Route} from 'react-router-dom';
 import LoginPage from './components/RegistrationPage/LoginPage';
 import SignupPage from './components/RegistrationPage/SignUpPage';
 
