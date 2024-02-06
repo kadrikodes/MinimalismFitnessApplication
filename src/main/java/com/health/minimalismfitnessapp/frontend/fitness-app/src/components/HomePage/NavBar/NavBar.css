@@ -1,9 +1,7 @@
 .navbar {
-  display: flex;
-  align-items: center;
   height: 27px;
   margin-top: 1%;
-  margin-left: 15%; /* Align to the right */
+/* Align to the right */
 }
 
 .user,
@@ -18,5 +16,6 @@
   letter-spacing: 0;
   line-height: normal;
   white-space: nowrap;
-  margin-left: 10%; /* Adjust the spacing between items as needed */
+  margin-left: 2.5%; /* Adjust the spacing between items as needed */
+  margin-right: 2.5%;
 }

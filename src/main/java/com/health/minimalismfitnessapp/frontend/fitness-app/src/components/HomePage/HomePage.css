@@ -12,15 +12,30 @@
   display: flex;
   flex-wrap: wrap;
   padding: 0 4px;
+  justify-content: center;
 }
 
 .column {
-  flex: 50%;
+  flex: 100%;
   max-width: 17%;
   padding: 0 4px;
 }
 
-#userColumn{
+/* #userColumn{
   margin-left: 25%;
+} */
+
+@media (max-width: 800px) {
+  .column {
+    flex: 50%;
+    max-width: 50%;
+  }
+}
+
+@media (max-width: 600px) {
+  .column {
+    flex: 100%;
+    max-width: 100%;
+  }
 }
 
