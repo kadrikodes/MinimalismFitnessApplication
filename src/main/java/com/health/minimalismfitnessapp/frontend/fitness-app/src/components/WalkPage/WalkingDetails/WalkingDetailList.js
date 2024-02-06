@@ -1,8 +1,7 @@
-
 import React, { useState, useEffect } from 'react';
 import WalkingActivityList from './WalkingActivityList';
 import WalkingForm from './WalkingForm';
-import { getWalkingData, addWalkingData, updateWalkingData, deleteWalkingData } from '../services/WalkingService';
+import { getWalkingData, addWalkingData, updateWalkingData, deleteWalkingData } from '../Service/WalkingService';
 
 const WalkingDetailList = () => {
   const [walkingData, setWalkingData] = useState([]);
@@ -14,13 +13,21 @@ const WalkingDetailList = () => {
   }, []);
 
   const fetchWalkingData = async () => {
-    const data = await getWalkingData();
-    setWalkingData(data);
+    try {
+      const data = await getWalkingData();
+      setWalkingData(data);
+    } catch (error) {
+      console.error('Failed to fetch walking data:', error);
+    }
   };
 
   const handleAddWalking = async (walking) => {
-    const newWalking = await addWalkingData(walking);
-    setWalkingData([...walkingData, newWalking]);
+    try {
+      const newWalking = await addWalkingData(walking);
+      setWalkingData([...walkingData, newWalking]);
+    } catch (error) {
+      console.error('Failed to add walking data:', error);
+    }
   };
 
   const handleEditWalking = (walking) => {
@@ -29,17 +36,25 @@ const WalkingDetailList = () => {
   };
 
   const handleUpdateWalking = async (walking) => {
-    const updated = await updateWalkingData(walking);
-    const updatedData = walkingData.map((item) => (item.id === updated.id ? updated : item));
-    setWalkingData(updatedData);
-    setIsEditing(false);
-    setSelectedWalking(null);
+    try {
+      const updated = await updateWalkingData(walking);
+      const updatedData = walkingData.map((item) => (item.id === updated.id ? updated : item));
+      setWalkingData(updatedData);
+      setIsEditing(false);
+      setSelectedWalking(null);
+    } catch (error) {
+      console.error('Failed to update walking data:', error);
+    }
   };
 
   const handleDeleteWalking = async (id) => {
-    await deleteWalkingData(id);
-    const updatedData = walkingData.filter((item) => item.id !== id);
-    setWalkingData(updatedData);
+    try {
+      await deleteWalkingData(id);
+      const updatedData = walkingData.filter((item) => item.id !== id);
+      setWalkingData(updatedData);
+    } catch (error) {
+      console.error('Failed to delete walking data:', error);
+    }
   };
 
   return (

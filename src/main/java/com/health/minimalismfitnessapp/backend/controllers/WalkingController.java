@@ -31,6 +31,7 @@ public class WalkingController {
     }
 
     @GetMapping("/allWalkingData")
+    @CrossOrigin(origins = "http://localhost:3000")
     public List<WalkingData> getAllWalkingData() {
         return walkingService.findAll();
     }
@@ -47,26 +48,31 @@ public class WalkingController {
     }
 
     @GetMapping("/name/{name}")
+    @CrossOrigin(origins = "http://localhost:3000")
     public List<WalkingData> getWalkingDataByUserName(@PathVariable String name) {
         return walkingService.getWalkingDataByUserName(name);
     }
 
     @PostMapping("/addWalkingData")
+    @CrossOrigin(origins = "http://localhost:3000")
     public WalkingData addWalkingData(@RequestBody WalkingData walkingData) {
         return walkingService.addWalkingData(walkingData);
     }
 
     @GetMapping("/search")
+    @CrossOrigin(origins = "http://localhost:3000")
     public List<WalkingData> searchWalkingData(@RequestParam(required = false)LocalDateTime dateTime, @RequestParam(required = false) double distance) {
         return walkingService.searchEntriesByCriteria(dateTime, distance);
     }
 
     @PutMapping("/update/{walkingId}")
+    @CrossOrigin(origins = "http://localhost:3000")
     public WalkingData updateWalkingData(@PathVariable long walkingId, @RequestBody WalkingData walkingData) {
         return walkingService.updateWalkingData(walkingId, walkingData);
     }
 
     @DeleteMapping("/delete/{walkingId}")
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<String> deleteWalkingData(@PathVariable long walkingId) {
         walkingService.deleteWalkingTracker(walkingId);
         return ResponseEntity.ok("Walking data deleted successfully");

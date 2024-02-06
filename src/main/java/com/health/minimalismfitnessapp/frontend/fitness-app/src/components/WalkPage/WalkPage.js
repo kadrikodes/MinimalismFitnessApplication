@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./WalkPage.css";
 import NavBar from "./NavBar/NavBar";
 import WalkingHeader from "./WalkingHeader/WalkPageHeader"; 
-import WalkingSummary from ".WalkingDetails/WalkingSummary";
+import WalkingSummary from './WalkingDetails/WalkingSummary';
 import WalkingDetailList from "./WalkingDetails/WalkingDetailList";
 
 const WalkPage = () => {
