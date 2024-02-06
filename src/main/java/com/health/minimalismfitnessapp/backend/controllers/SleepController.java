@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.time.Duration;
 import java.util.List;
 
 @RestController
@@ -26,8 +25,7 @@ public class SleepController {
     }
 
     @GetMapping("/{sleepDataId}")
-    @CrossOrigin(origins = "http://localhost:3000")
-    public SleepData getSleepDataById(@PathVariable Long sleepDataId) {
+    @CrossOrigin(origins = "http://localhost:3000") public SleepData getSleepDataById(@PathVariable Long sleepDataId) {
         return sleepService.getSleepDataById(sleepDataId);
     }
 

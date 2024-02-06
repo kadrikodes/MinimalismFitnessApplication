@@ -100,7 +100,7 @@ public class PushUpControllerWithMockHttpRequestIT {
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk());
 
-        MvcResult getResult = mockMvc.perform(MockMvcRequestBuilders.get("/pushups/user/" + pushupId))
+        MvcResult getResult = mockMvc.perform(MockMvcRequestBuilders.get("/pushups/" + pushupId))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(content().json(mapper.writeValueAsString(pushUpData1)))
                 .andReturn();
@@ -113,7 +113,7 @@ public class PushUpControllerWithMockHttpRequestIT {
         long pushUpId = this.pushUpData1.getId();
 
         ResultActions resultActions =
-                this.mockMvc.perform(MockMvcRequestBuilders.get("/pushups/user/" + pushUpId ));
+                this.mockMvc.perform(MockMvcRequestBuilders.get("/pushups/" + pushUpId ));
         resultActions.andExpect(status().isOk());
 
         resultActions.andExpect((content().contentType(MediaType.APPLICATION_JSON)));
@@ -130,7 +130,7 @@ public class PushUpControllerWithMockHttpRequestIT {
 
         mapper.registerModule(new JavaTimeModule());
 
-        MvcResult result = this.mockMvc.perform(MockMvcRequestBuilders.get("/pushups/" + userName))
+        MvcResult result = this.mockMvc.perform(MockMvcRequestBuilders.get("/pushups/user/" + userName))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andReturn();

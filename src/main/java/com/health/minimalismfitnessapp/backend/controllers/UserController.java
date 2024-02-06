@@ -46,13 +46,12 @@ public class UserController {
         UserData userData = userService.getUserById(userId);
         if (userData==null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User with ID " + userId + " has not been found.");
-            //return userService.findByID(userId);
+
         }return userData;
     }
 
 
-    @GetMapping("/name/{name}")
-    public Optional<UserData> getUserDataByUserName(@PathVariable String name) {
+    @GetMapping("/name/{name}") public Optional<UserData> getUserDataByUserName(@PathVariable String name) {
         return userService.getAllUsersByName(name);
     }
 

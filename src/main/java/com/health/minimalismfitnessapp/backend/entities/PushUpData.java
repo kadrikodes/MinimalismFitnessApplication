@@ -37,43 +37,33 @@ public class PushUpData {
         this.userData = userData;
         this.activityData = activityData;
     }
-
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
-
     public UserData getUser() {
         return userData;
     }
-
     public void setUser(UserData userData) {
         this.userData = userData;
     }
-
     public int getNumberOfPushUps() {
         return numberOfPushUps;
     }
-
     public void setNumberOfPushUps(int numberOfPushUps) {
         this.numberOfPushUps = numberOfPushUps;
     }
-
     public int getTarget() {
         return target;
     }
-
     public void setTarget(int target) {
         this.target = target;
     }
-
     public double getTimeDuration() {
         return timeDuration;
     }
-
     public void setTimeDuration(double timeDuration) {
         this.timeDuration = timeDuration;
     }

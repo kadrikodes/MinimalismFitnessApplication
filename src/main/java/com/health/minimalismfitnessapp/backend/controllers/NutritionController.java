@@ -27,8 +27,7 @@ public class NutritionController {
         return nutritionService.getNutritionID(nutritionID);
     }
 
-    @GetMapping("/user/name/{name}")
-    public List<NutritionData> getNutritionDataByUserName(@PathVariable String name){
+    @GetMapping("/user/name/{name}") public List<NutritionData> getNutritionDataByUserName(@PathVariable String name){
         return nutritionService.getNutritionByName(name);
     }
 
