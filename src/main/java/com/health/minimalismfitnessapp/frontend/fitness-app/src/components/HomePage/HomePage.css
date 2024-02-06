@@ -16,6 +16,6 @@
 }
 
 .column {
-  flex-basis: 1 0 20%; /* flex-grow, flex-shrink, flex-basis */
+  flex-basis: 1 0 20%; 
   padding: 0 10px;
 }

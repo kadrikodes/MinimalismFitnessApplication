@@ -59,7 +59,7 @@ const HomePage = () => {
           </div>
           
           <div className="row">
-            <div className="column" id="userColumn">
+            <div className="column">
               <UserContainer userData={userData} />
             </div>
             <div className="column">

@@ -1,0 +1,4 @@
+.column {
+  flex-basis: 1 0 20%; 
+  padding: 0 100px;
+}
