@@ -1,0 +1,32 @@
+/* TargetTracker.css */
+
+.target-tracker-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  input[type="number"] {
+    padding: 8px;
+    margin: 10px 0;
+    font-size: 16px;
+  }
+  
+  .counter-container {
+    margin-top: 20px;
+  }
+  
+  .pushups-info {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .pushups-info h3 {
+    margin-bottom: 5px;
+  }
+  
+  .pushups-info p {
+    margin: 0;
+    font-size: 18px;
+  }
+  
