@@ -23,6 +23,7 @@ function App() {
             <Route path="/sleep" element={<SleepPage />} />
         <Route path='/login' element={<LoginPage />} />
         <Route path='/signup' element={<SignupPage />} />
+        <Route path='/pushuppage' element={<PushUpPage />} />
     </Routes>
     </>
   );
