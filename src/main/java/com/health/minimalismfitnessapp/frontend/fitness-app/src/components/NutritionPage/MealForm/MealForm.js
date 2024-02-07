@@ -78,7 +78,7 @@ const MealForm = (props) => {
         <input type="number" name="carbohydrates" max="100"/>
     
 
-  
+
         Fats (%):
         <input type="number" name="fats" max="100" />
       
