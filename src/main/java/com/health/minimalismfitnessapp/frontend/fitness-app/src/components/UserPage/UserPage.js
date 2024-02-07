@@ -28,6 +28,7 @@ const UserPage = () => {
                     gender: data.gender,
                     birthdate: data.birthdate
                 });
+                localStorage.setItem('userData', JSON.stringify(data));
             })
             .catch(error => console.error('Error fetching data:', error));
     }, []);
@@ -36,6 +37,13 @@ const UserPage = () => {
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
+
+
+        if (name === 'gender' && (value !== 'MALE' && value !== 'FEMALE')) {
+            // Handle invalid gender value, e.g., display error message
+            console.error('Invalid gender value:', value);
+            return;}
+
         setFormData(prevState => ({
             ...prevState,
             [name]: value
@@ -44,6 +52,7 @@ const UserPage = () => {
 
 
     const handleSaveChanges = () => {
+
         // Send request to update user data in the backend
         fetch('http://localhost:8080/users/updateUser/1', {
             method: 'PUT',
