@@ -19,14 +19,14 @@ const TrackerContainer = (props) => {
     //   }
     // };
   
-    const handleSave = () => {
-      setSavedCount(savedCount + count);
-      setCount(0); 
-    };
+    // const handleSave = () => {
+    //   setSavedCount(savedCount + count);
+    //   setCount(0); 
+    // };
   
-    const handleReset = () => {
-      setSavedCount(0); 
-    };
+    // const handleReset = () => {
+    //   setSavedCount(0); 
+    // };
 
     return (
       <div className="desktop">
@@ -47,10 +47,10 @@ const TrackerContainer = (props) => {
             </div>
           </div>
           <div className="row">
-            <div className="button-column">
+            {/* <div className="button-column">
               <button className="action-button" onClick={handleSave}>Save</button>
               <button className="action-button" onClick={handleReset}>Reset</button>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
