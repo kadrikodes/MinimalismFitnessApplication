@@ -13,6 +13,7 @@ const PushUpPage = () => {
     const [count, setCount] = useState(0);
     const [savedCount, setSavedCount] = useState(0);
 
+
     const [pushUpData, setPushUpData] = useState(null);
 
     useEffect(() => {
@@ -23,15 +24,15 @@ const PushUpPage = () => {
         .then((data) => {setPushUpData(data);})
     }, [])
 
-    // const handleIncrement = () => {
-    //     setCount(count + 1);
-    //   };
+    const handleIncrement = () => {
+        setCount(count + 1);
+      };
     
-    //   const handleDecrement = () => {
-    //     if (count > 0) {
-    //       setCount(count - 1);
-    //     }
-    //   };
+      const handleDecrement = () => {
+        if (count > 0) {
+          setCount(count - 1);
+        }
+      };
 
     return (
         <div className="desktop">
@@ -42,12 +43,12 @@ const PushUpPage = () => {
             <PushUpContainer pushUpData={pushUpData} />
             </div>
             <div className="column">
-            <TrackerContainer />
+            <TrackerContainer handleIncrement={handleIncrement} handleDecrement={handleDecrement}/>
             </div>
             <div className="column">
                 <h2>Target Tracker:</h2>
             <InputContainer />
-            <CounterContainer />
+            <CounterContainer count={count} savedCount={savedCount} />
             </div>
             </div>
         </div>

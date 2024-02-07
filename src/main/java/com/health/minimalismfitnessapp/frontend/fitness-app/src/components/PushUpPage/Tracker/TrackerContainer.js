@@ -4,7 +4,7 @@ import "./TrackerContainer.css";
 import CounterContainer from "../Counter/CounterContainer";
 
 
-const TrackerContainer = () => {
+const TrackerContainer = (props) => {
     const [goal, setGoal] = useState(0);
     const [count, setCount] = useState(0);
     const [savedCount, setSavedCount] = useState(0);
@@ -42,8 +42,8 @@ const TrackerContainer = () => {
         <div className="column">
           <div className="row">
             <div className="row">
-              {/* <button className="increment-button" onClick={handleDecrement}>-</button>
-              <button className="increment-button" onClick={handleIncrement}>+</button> */}
+              <button className="increment-button" onClick={props.handleDecrement}>-</button>
+              <button className="increment-button" onClick={props.handleIncrement}>+</button>
             </div>
           </div>
           <div className="row">
