@@ -1,7 +1,9 @@
 package com.health.minimalismfitnessapp.backend.services;
 
+import com.health.minimalismfitnessapp.backend.dataaccess.IUserRepository;
 import com.health.minimalismfitnessapp.backend.dataaccess.IWalkingRepository;
 import com.health.minimalismfitnessapp.backend.entities.WalkingData;
+import com.health.minimalismfitnessapp.backend.entities.userdata.UserData;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,10 +15,12 @@ import java.util.Optional;
 @Service
 public class WalkingService {
     private final IWalkingRepository walkingRepository;
+    IUserRepository userRepository;
 
     @Autowired
-    public WalkingService(IWalkingRepository walkingRepository) {
+    public WalkingService(IWalkingRepository walkingRepository, IUserRepository userRepository) {
         this.walkingRepository = walkingRepository;
+        this.userRepository = userRepository;
     }
 
     public List<WalkingData> findAll() {
@@ -33,6 +37,23 @@ public class WalkingService {
     }
 
     public WalkingData addWalkingData(WalkingData walkingData) {
+        Optional<UserData> prospectiveUser;
+        Long userId = walkingData.getUserData().getId();
+        if(userId == null || userId == 0){
+            String name = walkingData.getUserData().getName();
+            if(name == null || name.isEmpty()){
+                throw new RuntimeException("Could not find user ID or name");
+            }
+            prospectiveUser = userRepository.findUserDataByName(name);
+        } else {
+            prospectiveUser = userRepository.findById(userId);
+        }
+
+        if(prospectiveUser.isEmpty()){
+            throw new RuntimeException("Walking data needs a user");
+        }
+
+        walkingData.setUserData(prospectiveUser.get());
         return walkingRepository.save(walkingData);
     }
 

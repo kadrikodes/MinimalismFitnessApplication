@@ -28,6 +28,7 @@ public class NutritionController {
         return nutritionService.getNutritionID(nutritionID);
     }
 
+
     @GetMapping("/user/name/{name}")
     @CrossOrigin(origins = "http://localhost:3000")
     public List<NutritionData> getNutritionDataByUserName(@PathVariable String name){

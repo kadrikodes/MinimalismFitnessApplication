@@ -4,7 +4,6 @@ import com.health.minimalismfitnessapp.backend.entities.PushUpData;
 import com.health.minimalismfitnessapp.backend.services.PushUpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -45,8 +44,7 @@ public class PushUpController {
         return newPushUp;
     }
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteNutritionData(@PathVariable long id){
+    @ResponseStatus(HttpStatus.NO_CONTENT) public void deleteNutritionData(@PathVariable long id){
         try{
             pushUpService.deletePushUpData(id);
         } catch (IllegalArgumentException e) {
@@ -55,10 +53,7 @@ public class PushUpController {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Internal Server Error", e);
         }
     }
-
     @PutMapping("/{id}")
     public PushUpData updatePushUpData(@PathVariable long id, @RequestBody PushUpData pushUpData) {
-        return pushUpService.updatePushUpData(id, pushUpData);
-    }
-
+        return pushUpService.updatePushUpData(id, pushUpData);}
 }
