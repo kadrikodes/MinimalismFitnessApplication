@@ -15,12 +15,8 @@ const NutritionPage = () => {
         const findAllNutritionAPI = 'http://localhost:8080/nutrition/user/name/Rais';
 
         fetch(findAllNutritionAPI)
-            .then((response) => {
-                console.log(response);
-                return response.json();})
-            .then((data) => { 
-                console.log(data)
-                setNutritionHistory(data);} )
+            .then((response) => {return response.json();})
+            .then((data) => {setNutritionHistory(data);} )
     }
 
     useEffect(() => {
