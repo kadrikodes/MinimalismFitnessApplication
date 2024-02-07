@@ -10,9 +10,10 @@
 
 .contentContainer {
   display: flex;
-  flex-direction: column; 
-  align-items: center; 
+  flex-direction: row; /* Align items horizontally */
+  align-items: flex-start; /* Align items from the top */
   width: 100%;
+  justify-content: space-between; /* Distribute space between the elements */
 }
 
 .WalkingSummary {
@@ -53,12 +54,13 @@
 
 .WalkingDetailList {
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
-  justify-content: flex-end; 
-  gap: 20px; 
-  width: 100%; 
-  padding-right: 20px; 
+  justify-content: flex-start; /* Align items to the start */
+  gap: 20px; /* Space between items */
+  max-width: 60%; /* Adjust based on desired width */
 }
+
 
 .WalkingFormContainer {
   flex: 1; 

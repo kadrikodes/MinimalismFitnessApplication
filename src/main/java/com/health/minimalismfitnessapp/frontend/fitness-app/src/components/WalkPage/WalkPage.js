@@ -22,8 +22,9 @@ const WalkPage = () => {
       <WalkingHeader />
       <div className="contentContainer">
         <WalkingDetailList walkingData={walkingData} />
-        <WalkingSummary walkingData={walkingData} />    
+        <WalkingSummary walkingData={walkingData} />   
       </div>
+
     </div>
   );
 };
