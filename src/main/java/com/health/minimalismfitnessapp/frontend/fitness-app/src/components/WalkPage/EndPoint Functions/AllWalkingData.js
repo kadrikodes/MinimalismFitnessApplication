@@ -7,3 +7,5 @@ const fetchAllWalkingData = async () => {
         console.error('Error fetching all walking data:', error);
     }
 };
+
+export default fetchAllWalkingData;
