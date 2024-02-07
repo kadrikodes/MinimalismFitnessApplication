@@ -1,50 +1,94 @@
+import { useState } from "react";
 import "./MealForm.css"
 
 const MealForm = () => {
 
-    
+  const [mealMessage, setMealMessage] = useState("");
+
+    const handleSubmit = (event) => {
+      event.preventDefault();
+
+      const saveMealAPI = 'http://localhost:8080/nutrition/addNutritionData';
+       
+      const mealType = event.target.elements.mealType.value;
+      const foodName = event.target.elements.foodName.value;
+      const calories = event.target.elements.calories.value;
+      const protein = event.target.elements.protein.value;
+      const carbohydrates = event.target.elements.carbohydrates.value;
+      const fats = event.target.elements.fats.value;
+      const userID = "1"
+
+      const mealData = {
+        foodName,
+        calories,
+        protein,
+        carbohydrates,
+        fats,
+        mealType,
+        user: { id: userID},  
+      };
+
+        fetch(saveMealAPI, {
+          method:'post',
+          headers: { 'Content-Type': 'application/json',},
+          body: JSON.stringify(mealData),
+        })
+        .then((response) => {
+          if (response.ok){
+            setMealMessage("Meal data consumed!")
+          } else{
+            setMealMessage("Meal data tastes bad!")
+          }
+          })
+    }
 
 
 
     return (
     <div> 
-        <form>
-      <label>
+        <form onSubmit={handleSubmit}>
+
         Meal Type:
-        <select>
-          <option value="breakfast">Breakfast</option>
-          <option value="lunch">Lunch</option>
-          <option value="dinner">Dinner</option>
-          <option value="snack">Snack</option>
+        <select name="mealType">
+          <option value="Breakfast">Breakfast</option>
+          <option value="Lunch">Lunch</option>
+          <option value="Dinner">Dinner</option>
+          <option value="Snack">Snack</option>
         </select>
-      </label>
 
-      <label>
+
+  
         Food Name:
-        <input type="text" />
-      </label>
+        <input type="text" name="foodName" />
+ 
 
-      <label>
+
         Calories:
-        <input type="text" />
-      </label>
+        <input type="text" name="calories"/>
 
-      <label>
+
+
         Protein (%):
-        <input type="number" max="100" />
-      </label>
+        <input type="number" name="protein"  max="100" />
+ 
 
-      <label>
+
         Carbohydrates (%):
-        <input type="number" max="100"/>
-      </label>
+        <input type="number" name="carbohydrates" max="100"/>
+    
 
-      <label>
+  
         Fats (%):
-        <input type="number" max="100" />
-      </label>
+        <input type="number" name="fats" max="100" />
+      
 
       <button type="submit">Submit</button>
+
+
+            {mealMessage && <p className={mealMessage.includes("consumed") ? "greenMealMessage" : "redMealMessage"}>
+              {mealMessage}
+              </p>}
+
     </form>
     </div>);
 }

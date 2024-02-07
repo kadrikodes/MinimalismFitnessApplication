@@ -11,7 +11,7 @@ const NutritionPage = () => {
     const [nutritionHistory, setNutritionHistory] = useState(null);
 
     useEffect(() => {
-        const findAllNutritionAPI = 'http://localhost:8080/nutrition/user/name/Sam';
+        const findAllNutritionAPI = 'http://localhost:8080/nutrition/user/name/Rais';
 
         fetch(findAllNutritionAPI)
             .then((response) => {return response.json();})

@@ -32,3 +32,18 @@ form {
     background-color: #0056b3;
   }
   
+  #mealMessageContainer {
+    height: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .greenMealMessage {
+    color: #2ceb05;
+    font-size: 1.3rem;
+  }
+  
+  .redMealMessage {
+    color: #ff2a1b;
+    font-size: 1.3rem;
+  }
+  

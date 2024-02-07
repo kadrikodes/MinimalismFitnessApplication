@@ -35,6 +35,7 @@ public class NutritionController {
     }
 
     @PostMapping("/addNutritionData")
+    @CrossOrigin(origins = "http://localhost:3000")
     public NutritionData addNutritionData(@RequestBody NutritionData nutritionData){
         return nutritionService.addNutritionData(nutritionData);
     }
