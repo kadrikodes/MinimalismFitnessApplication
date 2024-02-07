@@ -7,3 +7,4 @@ const calculateWeightLoss = async (stepsTaken) => {
         console.error('Error calculating weight loss:', error);
     }
 };
+export { calculateWeightLoss };

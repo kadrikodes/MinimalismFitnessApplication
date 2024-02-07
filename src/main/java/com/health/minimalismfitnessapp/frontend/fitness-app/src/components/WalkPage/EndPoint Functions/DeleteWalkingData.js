@@ -8,3 +8,5 @@ const deleteWalkingData = async (walkingId) => {
         console.error(`Error deleting walking data for ID ${walkingId}:`, error);
     }
 };
+
+export { deleteWalkingData };

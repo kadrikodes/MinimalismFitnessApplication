@@ -11,3 +11,4 @@ const addWalkingData = async (newData) => {
         console.error('Error adding walking data:', error);
     }
 };
+export { addWalkingData };

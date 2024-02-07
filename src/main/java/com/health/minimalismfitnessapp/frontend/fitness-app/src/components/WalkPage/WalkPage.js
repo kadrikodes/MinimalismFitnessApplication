@@ -46,7 +46,7 @@ const WalkPage = () => {
 
     const handleFetchByName = async () => {
         const data = await fetchWalkingDataByUserName(userName);
-        setAllWalkingData(data); // Assuming it returns an array of data
+        setAllWalkingData(data || []); // Assuming it returns an array of data
     };
 
     // Additional handlers for search, calculations, etc., following similar patterns

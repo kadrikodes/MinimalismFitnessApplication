@@ -11,3 +11,4 @@ const updateWalkingData = async (walkingId, updatedData) => {
         console.error(`Error updating walking data for ID ${walkingId}:`, error);
     }
 };
+export { updateWalkingData };

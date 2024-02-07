@@ -8,3 +8,4 @@ const searchWalkingData = async (criteria) => {
         console.error('Error searching walking data:', error);
     }
 };
+export { searchWalkingData };

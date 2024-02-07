@@ -7,3 +7,4 @@ const calculateStepsToBurnCalories = async (caloriesToBurn) => {
         console.error('Error calculating steps to burn calories:', error);
     }
 };
+export { calculateStepsToBurnCalories };

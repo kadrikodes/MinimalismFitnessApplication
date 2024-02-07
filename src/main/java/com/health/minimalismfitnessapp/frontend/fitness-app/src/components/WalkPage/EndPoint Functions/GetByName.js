@@ -7,3 +7,5 @@ const fetchWalkingDataByUserName = async (name) => {
         console.error(`Error fetching walking data by user name ${name}:`, error);
     }
 };
+
+export { fetchWalkingDataByUserName };

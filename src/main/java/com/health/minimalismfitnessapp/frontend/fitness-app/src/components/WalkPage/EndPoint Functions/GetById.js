@@ -7,3 +7,4 @@ const fetchWalkingDataById = async (walkingId) => {
         console.error(`Error fetching walking data by ID ${walkingId}:`, error);
     }
 };
+export { fetchWalkingDataById };
