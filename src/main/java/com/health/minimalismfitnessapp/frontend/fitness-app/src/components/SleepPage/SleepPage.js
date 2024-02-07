@@ -1,8 +1,11 @@
 
 
 const SleepPage = () => {
-    return()
-        <h1>Sleep Page</h1>
+    return(
+        <div>
+            <h1>Sleep Page</h1>
+            <div>Your sleep details</div>
+        </div>
     )
 }
     
