@@ -1,9 +1,10 @@
-.PushUpContainer {
-    background-color: #D9D9D9;
+  .PushUpContainer {
+    background-color: #f0f0f07f;
     border-radius: 45px;
-    height: 318px;
-    left: 0;
-    top: 348px;
-    width: 370px;
+    height: 400px;
+    margin-left: 50px; /* Use margin-left instead of left */
+    margin-top: 100px; /* Adjust top margin as needed */
+    margin-bottom: 10px; /* Adjust bottom margin as needed */
+    width: 400px;
     text-align: center;
-  }
+}
