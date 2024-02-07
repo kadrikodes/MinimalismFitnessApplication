@@ -8,15 +8,24 @@ import MealForm from "./MealForm/MealForm";
 
 const NutritionPage = () => {
 
-    const [nutritionHistory, setNutritionHistory] = useState(null);
+    const [nutritionHistory, setNutritionHistory] = useState([]);
+    const [newItem, setNewItem] = useState(null);
 
-    useEffect(() => {
+    const updateNutritionHistory = () => {
         const findAllNutritionAPI = 'http://localhost:8080/nutrition/user/name/Rais';
 
         fetch(findAllNutritionAPI)
-            .then((response) => {return response.json();})
-            .then((data) => { setNutritionHistory(data);} )
-    }, [])
+            .then((response) => {
+                console.log(response);
+                return response.json();})
+            .then((data) => { 
+                console.log(data)
+                setNutritionHistory(data);} )
+    }
+
+    useEffect(() => {
+        updateNutritionHistory();
+    }, [newItem]);
 
     
 
@@ -32,13 +41,13 @@ const NutritionPage = () => {
         <div className="row">
             <div className="column">
                 <h1>Nutriton History</h1>
-                {nutritionHistory !== null && nutritionHistory.map(
+                { nutritionHistory.map(
                     (nutritionData) => (<NutritionHistory nutritionData={nutritionData} /> )
                 )}
             </div>
             <div className="column">
                 <h1>Enter meal</h1>
-                <MealForm />
+                <MealForm setNewItem={setNewItem}/>
             </div>
         </div>
 

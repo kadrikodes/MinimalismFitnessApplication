@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./MealForm.css"
 
-const MealForm = () => {
+const MealForm = (props) => {
 
   const [mealMessage, setMealMessage] = useState("");
 
@@ -36,6 +36,7 @@ const MealForm = () => {
         .then((response) => {
           if (response.ok){
             setMealMessage("Meal data consumed!")
+            props.setNewItem(response)
           } else{
             setMealMessage("Meal data tastes bad!")
           }
