@@ -33,15 +33,23 @@ public class NutritionService {
     public List<NutritionData> getNutritionByName(String name){ return nutritionRepository.findNutritionDataByUserDataName(name);}
 
     public NutritionData addNutritionData(NutritionData nutritionData){
-        String name = nutritionData.getUser().getName();
-        Optional<UserData> prospectiveUser = userRepository.findUserDataByName(name);
-        if(prospectiveUser.isEmpty()){
-            UserData userData = userRepository.save(nutritionData.getUser());
-            nutritionData.setUser(userData);
-        } else{
-            nutritionData.setUser(prospectiveUser.get());
+        Optional<UserData> prospectiveUser;
+        Long userId = nutritionData.getUser().getId();
+        if(userId == null || userId == 0){
+            String name = nutritionData.getUser().getName();
+            if(name == null || name.isEmpty()){
+                throw new RuntimeException("Could not find user ID or name");
+            }
+            prospectiveUser = userRepository.findUserDataByName(name);
+        } else {
+            prospectiveUser = userRepository.findById(userId);
         }
 
+        if(prospectiveUser.isEmpty()){
+            throw new RuntimeException("Nutrition data needs a user");
+        }
+
+        nutritionData.setUser(prospectiveUser.get());
         return nutritionRepository.save(nutritionData);
     }
 

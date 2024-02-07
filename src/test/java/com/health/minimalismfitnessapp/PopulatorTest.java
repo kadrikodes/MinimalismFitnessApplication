@@ -154,7 +154,7 @@ public class PopulatorTest {
 
         assertEquals(LocalDateTime.of(2023, 11, 10,22, 00), capturedSleepData.get(0).getTargetBedtime());
         assertEquals(LocalDateTime.of(2023, 11, 10,07, 00), capturedSleepData.get(0).getTargetWakeUpTime());
-        assertEquals(LocalDateTime.of(2023, 11, 10,22, 30), capturedSleepData.get(0).getActualBedtime());
+        assertEquals(LocalDateTime.of(2023, 11, 9,22, 30), capturedSleepData.get(0).getActualBedtime());
         assertEquals(LocalDateTime.of(2023, 11, 10,07, 30, 15), capturedSleepData.get(0).getActualWakeupTime());
     }
 

@@ -1,0 +1,107 @@
+.desktop {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
+
+.user-page-container {
+    display: flex;
+    justify-content: center; 
+    margin-top: 20px;
+}
+
+.left-box,
+.right-box {
+    width: 100%;
+    padding: 100px;
+    border-radius: 20px;
+    background-color: #f0f0f05f;
+    margin: 50px;
+    position: relative; 
+}
+
+.left-box {
+    border: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
+    
+}
+.left-box p {
+    font-size: 25px;
+    margin: 10px 10; 
+    color: #000000;
+}
+
+.right-box {
+    border: none;
+}
+
+.edit-container {
+    margin-bottom: 10px;
+}
+
+.edit-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 25px; 
+}
+
+input[type="text"],
+input[type="number"],
+select,
+input[type="date"] {
+    flex: 1;
+    font-size: 25px; 
+    color: #333;
+    background-color: #b5b5b5;
+    border: 1px solid #b5b5b5;
+    border-radius: 5px;
+    padding: 8px;
+    width: 100%;
+}
+
+select {
+    appearance: none;
+}
+
+
+input[type="file"] {
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #b5b5b5;
+    border-radius: 5px;
+    border: 1px solid #b5b5b5;
+    color: #333;
+    font-size: 17px;
+    width: 260px; 
+}
+
+.left-box img {
+    max-width: 200px; 
+    max-height: 200px; 
+    object-fit: contain; 
+}
+
+.saveUserChanges {
+    margin: 10px;
+    padding: 10px 15px 10px;
+    font-size: 25px; 
+    background-color: #3b2da3;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.left-content {
+    position: sticky;
+    top: 0; 
+}
+
+.saveUserChanges:hover {
+    background-color: #68809a;
+    
+}

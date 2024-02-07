@@ -3,7 +3,6 @@ import './App.css';
 import HomePage from './components/HomePage/HomePage';
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import NavBar from './components/HomePage/NavBar/NavBar';
 import WalkPage from './components/WalkPage/WalkPage';
 import PushUpPage from './components/PushUpPage/PushUpPage';
 import NutritionPage from './components/NutritionPage/NutritionPage';
@@ -24,6 +23,7 @@ function App() {
             <Route path="/sleep" element={<SleepPage />} />
         <Route path='/login' element={<LoginPage />} />
         <Route path='/signup' element={<SignupPage />} />
+        <Route path='/pushuppage' element={<PushUpPage />} />
     </Routes>
     </>
   );
