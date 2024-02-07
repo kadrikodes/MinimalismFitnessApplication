@@ -25,7 +25,7 @@ const WalkForm = (props) => {
                 duration,
                 speed,
                 dateTime,
-                user: {id: userId},
+                userData: {id: userId},
             };
 
             fetch(saveWalkAPI, {
