@@ -1,11 +1,8 @@
-const fetchWalkingDataByUserName = async (name) => {
-    try {
-        const response = await fetch(`/walking/name/${name}`);
-        const data = await response.json();
-        // Handle data
-    } catch (error) {
-        console.error(`Error fetching walking data by user name ${name}:`, error);
-    }
+const fetchWalkingDataByUserName = () => {
+    const findByUserName = `http://localhost:8080/walking/name/Rais`;
+
+    fetch(findByUserName)
+    .then((response) => {return response.json();})
 };
 
 export { fetchWalkingDataByUserName };
