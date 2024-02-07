@@ -10,7 +10,7 @@ const LoginPage = () => {
                 <Header></Header>
 
             </div>
-            <form action="">
+            <form action="" id="login-form" >
                 <h1>Login</h1>
                 <div className="input-box">
                     <input type="text" placeholder="Username" required />
