@@ -3,6 +3,7 @@ import Header from "../HomePage/Header/Header";
 import NavBar from "../HomePage/NavBar/NavBar";
 import NutritionHistory from "./NutritionHistory/NutritionHistory";
 import "./NutritionPage.css"
+import MealForm from "./MealForm/MealForm";
 
 
 const NutritionPage = () => {
@@ -10,7 +11,7 @@ const NutritionPage = () => {
     const [nutritionHistory, setNutritionHistory] = useState(null);
 
     useEffect(() => {
-        const findAllNutritionAPI = 'http://localhost:8080/nutrition/user/name/Rais';
+        const findAllNutritionAPI = 'http://localhost:8080/nutrition/user/name/Sam';
 
         fetch(findAllNutritionAPI)
             .then((response) => {return response.json();})
@@ -37,6 +38,7 @@ const NutritionPage = () => {
             </div>
             <div className="column">
                 <h1>Enter meal</h1>
+                <MealForm />
             </div>
         </div>
 
