@@ -1,9 +1,11 @@
 import "./InputContainer.css";
+import { useState } from "react";
 
+const InputContainer = () => {
+  const [goal, setGoal] = useState(0);
 
-const InputContainer = ({ goal, setGoal }) => {
   const handleChange = (e) => {
-    const newGoal = parseInt(e.target.value);
+    const newGoal = (e.target.value);
     setGoal(newGoal);
   };
 
