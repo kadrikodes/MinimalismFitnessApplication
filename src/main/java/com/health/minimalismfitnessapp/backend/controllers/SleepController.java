@@ -11,6 +11,7 @@ import java.time.Duration;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/sleeptracker")    //Sleep tracker Endpoint
 public class SleepController {
     private final SleepService sleepService;
@@ -26,7 +27,6 @@ public class SleepController {
     }
 
     @GetMapping("/{sleepDataId}")
-    @CrossOrigin(origins = "http://localhost:3000")
     public SleepData getSleepDataById(@PathVariable Long sleepDataId) {
         return sleepService.getSleepDataById(sleepDataId);
     }
