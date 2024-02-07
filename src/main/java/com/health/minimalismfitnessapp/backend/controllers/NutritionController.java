@@ -19,6 +19,7 @@ public class NutritionController {
     public NutritionController(NutritionService nutritionService) { this.nutritionService = nutritionService; }
 
     @GetMapping("")
+    @CrossOrigin(origins = "http://localhost:3000")
     public List<NutritionData> getAllNutritionData() { return nutritionService.findAll();}
 
     @GetMapping("/{nutritionID}")
@@ -28,11 +29,13 @@ public class NutritionController {
     }
 
     @GetMapping("/user/name/{name}")
+    @CrossOrigin(origins = "http://localhost:3000")
     public List<NutritionData> getNutritionDataByUserName(@PathVariable String name){
         return nutritionService.getNutritionByName(name);
     }
 
     @PostMapping("/addNutritionData")
+    @CrossOrigin(origins = "http://localhost:3000")
     public NutritionData addNutritionData(@RequestBody NutritionData nutritionData){
         return nutritionService.addNutritionData(nutritionData);
     }

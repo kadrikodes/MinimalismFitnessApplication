@@ -1,10 +1,15 @@
+import Header from "../HomePage/Header/Header";
 import "./LoginPage.css";
 import { Link } from "react-router-dom";
 
 const LoginPage = () => {
 
     return (
-        <div className="wrapper">
+        <div className="desktop">
+            <div className="Header">
+                <Header></Header>
+
+            </div>
             <form action="">
                 <h1>Login</h1>
                 <div className="input-box">
