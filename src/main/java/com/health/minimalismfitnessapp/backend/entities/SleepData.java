@@ -14,7 +14,7 @@ public class SleepData {
     private LocalDateTime targetBedtime;
     private LocalDateTime targetWakeUpTime;
     private LocalDateTime actualBedtime;
-    private LocalDateTime actualWakeupTime;
+    private LocalDateTime actualWakeupTime;//Todo: naming
 
     @ManyToOne
     @JoinColumn(name = "user_data_id")

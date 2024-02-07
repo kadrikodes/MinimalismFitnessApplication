@@ -124,6 +124,10 @@ public class Populator {
             iSleepRepository.save(sleepData);
             sleepData = new SleepData(LocalDateTime.of(2023, 11, 10,22, 00), LocalDateTime.of(2023, 11, 10,07, 00), LocalDateTime.of(2023, 11, 9,22, 30), LocalDateTime.of(2023, 11, 10,07, 30, 15), userData2);
             iSleepRepository.save(sleepData);
+            sleepData = new SleepData(LocalDateTime.of(2023, 11, 11,22, 00), LocalDateTime.of(2023, 11, 10,07, 00), LocalDateTime.of(2023, 11, 10,22, 30), LocalDateTime.of(2023, 11, 11,07, 30, 15), userData2);
+            iSleepRepository.save(sleepData);
+            sleepData = new SleepData(LocalDateTime.of(2023, 11, 12,22, 00), LocalDateTime.of(2023, 11, 10,07, 00), LocalDateTime.of(2023, 11, 11,22, 30), LocalDateTime.of(2023, 11, 12,07, 30, 15), userData2);
+            iSleepRepository.save(sleepData);
             sleepData = new SleepData(LocalDateTime.of(2023, 11, 10,22, 00), LocalDateTime.of(2023, 11, 10,07, 00), LocalDateTime.of(2023, 11, 9,22, 30), LocalDateTime.of(2023, 11, 10,07, 30, 15), userData3);
             iSleepRepository.save(sleepData);
             sleepData = new SleepData(LocalDateTime.of(2023, 11, 10,22, 00), LocalDateTime.of(2023, 11, 10,07, 00), LocalDateTime.of(2023, 11, 9,22, 30), LocalDateTime.of(2023, 11, 10,07, 30, 15), userData4);
