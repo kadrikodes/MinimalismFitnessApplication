@@ -19,19 +19,6 @@ form {
     box-sizing: border-box;
   }
   
-  button {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
-  
   #walkMessageContainer {
     height: 1rem;
     margin-bottom: 2rem;

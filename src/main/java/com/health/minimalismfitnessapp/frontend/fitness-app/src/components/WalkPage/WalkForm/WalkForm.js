@@ -65,7 +65,7 @@ const WalkForm = (props) => {
                     Date & Time:
                     <input type="datetime-local" name="datetime" defaultValueExpression="currentDate()" />
 
-                    <button type="submit">Submit</button>
+                    <input type="submit" className="submitButton"/>
 
                     {walkMessage && <p className={walkMessage.includes("added") ? "greenWalkMessage" : "redWalkMessage"}>
                         {walkMessage
