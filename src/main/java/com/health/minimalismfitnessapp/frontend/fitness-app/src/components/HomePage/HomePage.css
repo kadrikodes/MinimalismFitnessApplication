@@ -1,11 +1,11 @@
 .desktop {
   background-color: #082035;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .header {
   text-align: center;
-  padding-bottom: 200px;
+  padding-bottom: 50px;
 }
 
 .row {
@@ -18,4 +18,3 @@
 .column {
   flex-basis: 1 0 20%; 
   padding: 0 10px;
-}

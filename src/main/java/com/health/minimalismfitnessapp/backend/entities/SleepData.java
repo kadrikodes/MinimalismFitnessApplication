@@ -16,13 +16,11 @@ public class SleepData {
     private LocalDateTime actualBedtime;
     private LocalDateTime actualWakeupTime;
 
-
     @ManyToOne
     @JoinColumn(name = "user_data_id")
     private UserData userData;
 
     public SleepData(){
-
     }
 
     public SleepData(LocalDateTime targetBedtime, LocalDateTime targetWakeUpTime, LocalDateTime actualBedtime, LocalDateTime actualWakeupTime, UserData userData) {
