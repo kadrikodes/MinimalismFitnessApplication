@@ -77,18 +77,22 @@ public class WalkingController {
     }
 
     @GetMapping("/calculateStepsToBurnCalories")
+    @CrossOrigin(origins = "http://localhost:3000")
     public int calculateStepsToBurnCalories(@RequestParam double caloriesToBurn) {
         double caloriesPerStep = walkingService.getCaloriesPerStep();
         return walkingService.calculateStepsToBurnCalories(caloriesToBurn, caloriesPerStep);
     }
 
-    @GetMapping("/calculateWeightLoss") public double calculateWeightLoss(@RequestParam int stepsTaken) {
+    @GetMapping("/calculateWeightLoss")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public double calculateWeightLoss(@RequestParam int stepsTaken) {
         double caloriesPerStep = walkingService.getCaloriesPerStep();
         double caloriesPerKg = walkingService.getCaloriesPerKg();
         return walkingService.calculateWeightLoss(stepsTaken, caloriesPerStep, caloriesPerKg);
     }
 
     @PostMapping("/scheduleWalkReminder")
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<String> scheduleWalkReminder(@RequestParam int hours, @RequestParam int minutes) {
         walkReminderTimer = new Timer();
         walkReminderTimer.schedule(new TimerTask() {
@@ -100,21 +104,29 @@ public class WalkingController {
         return ResponseEntity.ok("Walk reminder scheduled successfully");
     }
 
-    @GetMapping("/hasAchievedDailyGoal") public boolean hasAchievedDailyGoal(@RequestParam int stepsTaken) {
+    @GetMapping("/hasAchievedDailyGoal")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public boolean hasAchievedDailyGoal(@RequestParam int stepsTaken) {
         int dailyStepGoal = walkingService.getDailyStepGoal();
         return walkingService.hasAchievedDailyGoal(stepsTaken, dailyStepGoal);
     }
-    @GetMapping("/hasAchievedWeeklyGoal") public boolean hasAchievedWeeklyGoal(@RequestParam int stepsTaken) {
+    @GetMapping("/hasAchievedWeeklyGoal")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public boolean hasAchievedWeeklyGoal(@RequestParam int stepsTaken) {
         int weeklyStepGoal = walkingService.getWeeklyStepGoal();
         return walkingService.hasAchievedWeeklyGoal(stepsTaken, weeklyStepGoal);
 
     }
-    @GetMapping("/hasAchievedMonthlyGoal") public boolean hasAchievedMonthlyGoal(@RequestParam int stepsTaken) {
+    @GetMapping("/hasAchievedMonthlyGoal")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public boolean hasAchievedMonthlyGoal(@RequestParam int stepsTaken) {
         int monthlyStepGoal = walkingService.getMonthlyStepGoal();
         return walkingService.hasAchievedMonthlyGoal(stepsTaken, monthlyStepGoal);
     }
 
-    @GetMapping("/calories/{walkingId}") public double getTotalCaloriesBurned(@PathVariable long walkingId) {
+    @GetMapping("/calories/{walkingId}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public double getTotalCaloriesBurned(@PathVariable long walkingId) {
         return walkingService.calculateTotalCaloriesBurned(walkingId);
     }
 }

@@ -10,10 +10,10 @@
 
 .contentContainer {
   display: flex;
-  flex-direction: row; /* Align items horizontally */
-  align-items: flex-start; /* Align items from the top */
+  flex-direction: row; 
+  justify-content: space-between; 
+  align-items: start; 
   width: 100%;
-  justify-content: space-between; /* Distribute space between the elements */
 }
 
 .WalkingSummary {
@@ -21,11 +21,7 @@
   border-radius: 45px; 
   width: 370px; 
   height: 30%; 
-  text-align: center; 
-  position: absolute; 
-  left: 10%; 
-  top: 50%; 
-  transform: translateY(-50%); 
+  text-align: center;  
   box-sizing: border-box; 
   padding: 20px;
 }
@@ -56,9 +52,9 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: flex-start; /* Align items to the start */
-  gap: 20px; /* Space between items */
-  max-width: 60%; /* Adjust based on desired width */
+  justify-content: flex-start;
+  gap: 20px; 
+  max-width: 60%; 
 }
 
 
