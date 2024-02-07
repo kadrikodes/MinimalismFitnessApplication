@@ -48,27 +48,35 @@ const HomePage = () => {
 
   }, [])
 
-  
+
 
 
   return (
     <div className="desktop">
+          <div className="header">
           <Header />
           <NavBar />
-          <UserContainer userData={userData} />
-          <div className="containers">
-            <NutritionContainer nutritionData={nutritionData} />
-            <SleepContainer sleepData={sleepData} />
           </div>
-          <div className="containers">
-            <WalkContainer walkingData={walkingData}/>
-            <PushUpContainer pushUpData={pushUpData} /> 
+          
+          <div className="row">
+            <div className="column">
+              <UserContainer userData={userData} />
+            </div>
+            <div className="column">
+              <NutritionContainer nutritionData={nutritionData} />
+              <SleepContainer sleepData={sleepData} />
+            </div>
+            <div className="column">
+              <WalkContainer walkingData={walkingData}/>
+              <PushUpContainer pushUpData={pushUpData} /> 
+            </div>
+          
+            
+            
           </div>
-
-      {/* {userData ? (<pre>{JSON.stringify(userData, null, 2)}</pre>) : (<p>Loading...</p>)} */}
     </div>
   );
 };
 
 
-export default HomePage;  
+export default HomePage;

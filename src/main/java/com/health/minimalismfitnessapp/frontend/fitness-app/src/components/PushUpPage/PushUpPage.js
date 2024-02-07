@@ -2,9 +2,10 @@ import { useState, useEffect } from "react";
 import Header from "../HomePage/Header/Header";
 import NavBar from "../HomePage/NavBar/NavBar";
 import "./PushUpPage.css";
-import Counter from "./Counter/Counter";
 import PushUpContainer from "../HomePage/PushUpSummary/PushUpContainer";
 import TargetTracker from "./TargetTracker/TargetTracker";
+import TargetInput from "./TargetTracker/TargetInput";
+
 
 
 const PushUpPage = () => {
@@ -20,16 +21,21 @@ const PushUpPage = () => {
     }, [])
 
     return (
-        <div className="pushUpPage">
+        <div className="desktop">
             <Header />
             <NavBar />
-            {/* <Counter /> */}
-            <PushUpContainer />
+            <div className="row">
+            <div className="colum">
+            <PushUpContainer pushUpData={pushUpData} />
+            </div>
+            <div className="column">
             <TargetTracker />
+            </div>
+            
+                
+            </div>
         </div>
-    )
-
-
-}
+    );
+};
 
 export default PushUpPage;

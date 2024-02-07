@@ -1,46 +1,63 @@
 import React, { useState } from "react";
-import Counter from "../Counter/Counter";
+import TargetInput from "./TargetInput";
 
 const TargetTracker = () => {
   const [goal, setGoal] = useState(0);
-  const [pushupsDone, setPushupsDone] = useState(0);
-  const [totalCount, setTotalCount] = useState(0); // Lifted state
+  const [count, setCount] = useState(0);
+  const [savedCount, setSavedCount] = useState(0);
 
-  const handleGoalChange = (e) => {
-    const newGoal = parseInt(e.target.value);
-    setGoal(newGoal);
+  const handleIncrement = () => {
+    setCount(count + 1);
   };
 
-  const handlePushupsDoneChange = (newPushupsDone) => {
-    setPushupsDone(newPushupsDone);
+  const handleDecrement = () => {
+    if (count > 0) {
+      setCount(count - 1);
+    }
   };
 
-  const handleSubmitTotal = (currentCount) => { // Pass the current count to calculate total
-    setTotalCount(totalCount + currentCount); // Update total count
-    setPushupsDone(pushupsDone + currentCount); // Update pushupsDone
+  const handleSave = () => {
+    setSavedCount(savedCount + count);
+    setCount(0); 
+  };
+
+  const handleReset = () => {
+    setSavedCount(0); 
   };
 
   return (
-    <div>
-      <h2>Push-up Goal for Today:</h2>
-      <input
-        type="number"
-        value={goal}
-        onChange={handleGoalChange}
-        placeholder="Enter your goal"
-      />
-      <Counter onChange={handlePushupsDoneChange} onSubmitTotal={handleSubmitTotal} />
-      <div>
-        <h3>Push-ups Done:</h3>
-        <p>{pushupsDone}</p>
-        <h3>Target:</h3>
-        <p>{goal}</p>
-        <button onClick={({totalCount}) => handleSubmitTotal(0)}>Submit Total </button> 
-
-        <button className="savebutton" onClick={handleSave}>Save</button>
+    <div className="desktop">
+      <div className="target-header">
+        <h2>Target Tracker</h2>
       </div>
-    </div>
+      <div className="goal-box">
+        <TargetInput goal={goal} setGoal={setGoal} />
+      </div>
+
+      <div className="column">
+        <div className="row">
+          <div className="button-column">
+            <button className="increment-button" onClick={handleDecrement}>-</button>
+            <button className="increment-button" onClick={handleIncrement}>+</button>
+          </div>
+        </div>
+        <div className="row">
+          <div className="button-column">
+            <button className="action-button" onClick={handleSave}>Save</button>
+            <button className="action-button" onClick={handleReset}>Reset</button>
+          </div>
+        </div>
+        <div className="target-tracker">
+          <h3>Current: {count}</h3>
+          <h3>Target: {goal}</h3>
+          <h3>Total: {savedCount}</h3>
+        </div>
+            </div>
+      </div>
   );
 };
 
+
+
 export default TargetTracker;
+
