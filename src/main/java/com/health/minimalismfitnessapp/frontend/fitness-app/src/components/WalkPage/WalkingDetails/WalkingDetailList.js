@@ -58,18 +58,19 @@ const WalkingDetailList = () => {
   };
 
   return (
-    <div>
-      <h2>Walking Activities</h2>
-      {isEditing ? (
-        <WalkingForm initialData={selectedWalking} onSubmit={handleUpdateWalking} onCancel={() => setIsEditing(false)} />
-      ) : (
-        <WalkingForm onSubmit={handleAddWalking} />
-      )}
-      <WalkingActivityList
-        walkingData={walkingData}
-        onEdit={handleEditWalking}
-        onDelete={handleDeleteWalking}
-      />
+    <div className="WalkingDetailList">
+        <div className="WalkingFormContainer"> {/* New wrapper for the form */}
+            {isEditing ? (
+                <WalkingForm initialData={selectedWalking} onSubmit={handleUpdateWalking} onCancel={() => setIsEditing(false)} />
+            ) : (
+                <WalkingForm onSubmit={handleAddWalking} />
+            )}
+        </div>
+        <WalkingActivityList
+            walkingData={walkingData}
+            onEdit={handleEditWalking}
+            onDelete={handleDeleteWalking}
+        />
     </div>
   );
 };

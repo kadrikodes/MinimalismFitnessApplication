@@ -1,4 +1,4 @@
-.WalkPage {
+.walkPage {
   background-color: #082035; 
   display: flex;
   flex-direction: column;
@@ -11,20 +11,22 @@
 .contentContainer {
   display: flex;
   width: 100%;
-  justify-content: center; 
-  gap: 20px; 
+  justify-content: space-between; /* Distribute space between the elements */
+  align-items: flex-start; /* Align items at the start of the container */
 }
 
 .WalkingSummary {
-  flex: 1; 
-  max-width: 300px; 
-  max-height: 300px;
-  background-color: #E6E6E6;
-  border-radius: 20px;
-  padding: 20px;
-  margin-right: 20px; 
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  text-align: center;
+  background-color: #D9D9D9; 
+    border-radius: 45px; 
+    width: 370px; 
+    height: 30%; 
+    text-align: center; 
+    position: absolute; 
+    left: 10%; 
+    top: 50%; 
+    transform: translateY(-50%); 
+    box-sizing: border-box; 
+    padding: 20px;
 }
 
 .walkingForm {
@@ -50,11 +52,25 @@
 }
 
 .WalkingDetailList {
-  flex: 2;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 20px;
+  flex-direction: row; /* Change the direction to row */
+  justify-content: flex-end; /* Push the detail list to the far right */
+  width: 100%; /* Ensure it takes the full width to allow spacing */
 }
 
+.WalkingFormContainer {
+  max-width: 600px; /* Adjust based on your preference */
+  margin-top: 20px; /* Adjust based on the navbar height and desired spacing */
+  margin-left: auto;
+  margin-right: auto;
+}
 
+.WalkingFormContainer { /* New class for the form container within WalkingDetailList */
+  flex-grow: 1; /* Allow the form container to grow and push the list to the right */
+  display: flex;
+  justify-content: center; /* Center the form within its container */
+}
+
+.WalkingActivityList { /* Adjust this if it's a class applied to the list within WalkingDetailList */
+  flex-basis: content; /* Let the list size based on its content */
+}
