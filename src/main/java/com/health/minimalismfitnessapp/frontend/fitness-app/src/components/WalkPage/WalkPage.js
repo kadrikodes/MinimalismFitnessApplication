@@ -21,9 +21,9 @@ const WalkPage = () => {
       <NavBar />
       <WalkingHeader />
       <div className="contentContainer">
-                <WalkingSummary walkingData={walkingData} />
-                <WalkingDetailList walkingData={walkingData} />
-            </div>
+        <WalkingDetailList walkingData={walkingData} />
+        <WalkingSummary walkingData={walkingData} />    
+      </div>
     </div>
   );
 };
