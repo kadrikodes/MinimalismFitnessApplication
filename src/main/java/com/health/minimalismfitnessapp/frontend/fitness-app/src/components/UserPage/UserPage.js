@@ -1,6 +1,3 @@
-
-import Header from "../HomePage/Header/Header";
-import NavBar from "../HomePage/NavBar/NavBar";
 import React, { useState, useEffect } from 'react';
 import "./UserPage.css"; 
 

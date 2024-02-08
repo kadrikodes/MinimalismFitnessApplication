@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import Header from "../HomePage/Header/Header";
-import NavBar from "../HomePage/NavBar/NavBar";
 import NutritionHistory from "./NutritionHistory/NutritionHistory";
 import "./NutritionPage.css"
 import MealForm from "./MealForm/MealForm";

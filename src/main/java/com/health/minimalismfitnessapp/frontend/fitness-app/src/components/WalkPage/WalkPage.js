@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import Header from "../HomePage/Header/Header";
-import NavBar from "../HomePage/NavBar/NavBar";
 import WalkingHistory from "./WalkingHistory/WalkingHistory";
 import "./WalkPage.css"
 import WalkForm from "./WalkForm/WalkForm";

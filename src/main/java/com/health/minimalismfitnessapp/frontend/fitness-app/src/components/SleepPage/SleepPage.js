@@ -1,7 +1,5 @@
 import { getSleepDataForUser, addSleepDataForUser } from "../../api/sleepApi";
 import { useEffect, useState } from "react";
-import Header from "../HomePage/Header/Header";
-import NavBar from "../HomePage/NavBar/NavBar";
 import "./SleepPage.css"
 
 const SleepPage = () => {
@@ -59,7 +57,6 @@ const SleepPage = () => {
     };
 
     return (
-        // <div className="SleepPage">
         <div className="desktop">
             <h1>Sleep</h1>
             <div>Your sleep details are below</div>

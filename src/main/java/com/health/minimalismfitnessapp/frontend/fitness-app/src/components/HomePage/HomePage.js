@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "./HomePage.css";
-import NavBar from "./NavBar/NavBar";
-// import Header from "./Header/Header";
 import SleepContainer from "./SleepSummary/SleepContainer";
 import WalkContainer from "./WalkSummary/WalkContainer";
 import PushUpContainer from "./PushUpSummary/PushUpContainer";
