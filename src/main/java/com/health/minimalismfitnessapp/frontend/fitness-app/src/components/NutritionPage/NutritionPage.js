@@ -34,13 +34,13 @@ const NutritionPage = () => {
         <NavBar />
         </div>
         <div className="row">
-            <div className="column">
+            <div className="nutrition-column">
                 <h1 className="nutritionHeading">Nutriton History</h1>
                 { nutritionHistory.map(
                     (nutritionData) => (<NutritionHistory key={nutritionData.id} nutritionData={nutritionData} setNewItem={setNewItem} /> )
                 )}
             </div>
-            <div className="column">
+            <div className="nutrition-column">
                 <h1 className="nutritionHeading">Enter meal</h1>
                 <MealForm setNewItem={setNewItem}/>
             </div>
