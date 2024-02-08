@@ -34,7 +34,7 @@ const WalkPage = () => {
             <div className="column">
                 <h1 className="walkingHeading">Walking History</h1>
                 { walkingHistory.map(
-                    (walkingData) => (<WalkingHistory walkingData={walkingData} /> )
+                    (walkingData) => (<WalkingHistory walkingData={walkingData} setNewItem={setNewItem} /> )
                 )}
             </div>
             <div className="column">
