@@ -19,3 +19,13 @@
     margin: 5px 0; 
     font-weight: normal; 
 }
+
+.greenWalkMessage {
+    color: #2ceb05;
+    font-size: 1.3rem;
+  }
+  
+  .redWalkMessage {
+    color: #ff2a1b;
+    font-size: 1.3rem;
+  }
