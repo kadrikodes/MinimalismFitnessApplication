@@ -1,9 +1,10 @@
+
 import React, { useState, useEffect } from "react";
-import Header from "../HomePage/Header/Header";
-import NavBar from "../HomePage/NavBar/NavBar";
+import { useState, useEffect } from "react";
 import "./PushUpPage.css";
 import PushUpContainer from "../HomePage/PushUpSummary/PushUpContainer";
 const PushUpPage = () => {
+
   const [count, setCount] = useState(0);
   const [savedCount, setSavedCount] = useState(0);
   const [pushUpData, setPushUpData] = useState(null);

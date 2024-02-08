@@ -1,28 +1,3 @@
-// import React from "react";
-// import "./UserContainer.css";
-
-// const UserContainer = (props) => {
-//   const { name = "", height = "", weight = "", profilePicture } =
-//     props.userData || {};
-//   return (
-//     <div className="UserContainer">
-//         <p></p>
-//       <h1>Welcome {name}!</h1>
-//       {profilePicture && (
-//         <img src={profilePicture} alt="Profile" style={{ width: "250px", height: "250px" }} />
-//       )}
-//       {!profilePicture && (
-//         <img src="\default-user-icon.png" alt="Default Image" style={{ width: "250px", height: "250px" }} />
-//       )}
-//       <h2>Height: {height}cm</h2>
-//       <h2>Weight: {weight}kg</h2>
-      
-//     </div>
-//   );
-// };
-
-// export default UserContainer;
-
 import React from "react";
 import "./UserContainer.css";
 

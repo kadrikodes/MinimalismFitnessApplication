@@ -1,7 +1,9 @@
 package com.health.minimalismfitnessapp.backend.services;
 
+import com.health.minimalismfitnessapp.backend.dataaccess.IActivityRepository;
 import com.health.minimalismfitnessapp.backend.dataaccess.IUserRepository;
 import com.health.minimalismfitnessapp.backend.dataaccess.IWalkingRepository;
+import com.health.minimalismfitnessapp.backend.entities.ActivityData;
 import com.health.minimalismfitnessapp.backend.entities.WalkingData;
 import com.health.minimalismfitnessapp.backend.entities.userdata.UserData;
 import jakarta.persistence.EntityNotFoundException;
@@ -16,6 +18,7 @@ import java.util.Optional;
 public class WalkingService {
     private final IWalkingRepository walkingRepository;
     IUserRepository userRepository;
+    IActivityRepository activityRepository;
 
     @Autowired
     public WalkingService(IWalkingRepository walkingRepository, IUserRepository userRepository) {
@@ -51,6 +54,13 @@ public class WalkingService {
 
         if(prospectiveUser.isEmpty()){
             throw new RuntimeException("Walking data needs a user");
+        }
+
+        if (walkingData.getActivityData() != null) {
+            Long activityDataId = walkingData.getActivityData().getId();
+            ActivityData activityData = activityRepository.findById(activityDataId)
+                    .orElseThrow(() -> new EntityNotFoundException("ActivityData not found with id " + activityDataId));
+            walkingData.setActivityData(activityData);
         }
 
         walkingData.setUserData(prospectiveUser.get());

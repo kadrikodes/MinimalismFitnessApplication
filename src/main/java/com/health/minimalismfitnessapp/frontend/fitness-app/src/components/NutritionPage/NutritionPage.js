@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import Header from "../HomePage/Header/Header";
-import NavBar from "../HomePage/NavBar/NavBar";
 import NutritionHistory from "./NutritionHistory/NutritionHistory";
 import "./NutritionPage.css"
 import MealForm from "./MealForm/MealForm";
@@ -29,18 +27,14 @@ const NutritionPage = () => {
 
     return(
     <div className="desktop">
-        <div className="header">
-        <Header />
-        <NavBar />
-        </div>
         <div className="row">
-            <div className="column">
+            <div className="nutrition-column">
                 <h1 className="nutritionHeading">Nutriton History</h1>
                 { nutritionHistory.map(
-                    (nutritionData) => (<NutritionHistory key={nutritionData.id} nutritionData={nutritionData} /> )
+                    (nutritionData) => (<NutritionHistory key={nutritionData.id} nutritionData={nutritionData} setNewItem={setNewItem} /> )
                 )}
             </div>
-            <div className="column">
+            <div className="nutrition-column">
                 <h1 className="nutritionHeading">Enter meal</h1>
                 <MealForm setNewItem={setNewItem}/>
             </div>

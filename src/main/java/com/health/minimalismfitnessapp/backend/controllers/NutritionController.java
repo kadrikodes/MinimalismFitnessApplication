@@ -43,6 +43,7 @@ public class NutritionController {
 
     @DeleteMapping("/{nutritionID}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @CrossOrigin(origins = "http://localhost:3000")
     public void deleteNutritionData(@PathVariable long nutritionID){
         try{
             nutritionService.deleteNutritionData(nutritionID);

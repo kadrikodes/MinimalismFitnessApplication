@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "./HomePage.css";
-import NavBar from "./NavBar/NavBar";
-import Header from "./Header/Header";
 import SleepContainer from "./SleepSummary/SleepContainer";
 import WalkContainer from "./WalkSummary/WalkContainer";
 import PushUpContainer from "./PushUpSummary/PushUpContainer";
@@ -28,23 +26,28 @@ const HomePage = () => {
 
     fetch(userAPI)
         .then((response) => {return response.json();})
-        .then((data) => { setUserData(data);} )
+        .then((data) => { setUserData(data);})
+        .catch((error) => {console.error(error)})
 
     fetch(nutritionAPI)
         .then((response) => { return response.json();})
         .then((data) => {setNutritionData(data);})
+        .catch((error) => {console.error(error)})
 
     fetch(sleepAPI)
         .then((response) => {return response.json();})
         .then((data) => {setSleepData(data);})
+        .catch((error) => {console.error(error)})
 
     fetch(walkingAPI)
         .then((response) => {return response.json();})
         .then((data) => {setWalkingData(data);})
+        .catch((error) => {console.error(error)})
 
     fetch(pushUpAPI)
-    .then((response) => {return response.json();})
-    .then((data) => {setPushUpData(data);})
+        .then((response) => {return response.json();})
+        .then((data) => {setPushUpData(data);})
+        .catch((error) => {console.error(error)})
 
   }, [])
 
@@ -53,11 +56,6 @@ const HomePage = () => {
 
   return (
     <div className="desktop">
-          <div className="header">
-          <Header />
-          <NavBar />
-          </div>
-          
           <div className="row">
             <div className="column">
               <UserContainer userData={userData} />

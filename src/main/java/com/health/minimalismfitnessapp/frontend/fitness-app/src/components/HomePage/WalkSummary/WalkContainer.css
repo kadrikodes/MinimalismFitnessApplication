@@ -1,21 +1,10 @@
-/* .WalkContainer {
-    background-color: #D9D9D9;
-    border-radius: 45px;
-    height: 318px;
-    left: 390px;
-    top: 348px;
-    width: 370px;
-    text-align: center;
-  } */
-
-  
   .WalkContainer {
     background-color: #f0f0f07f;
     border-radius: 45px;
     height: 400px;
-    margin-left: 50px; /* Use margin-left instead of left */
-    margin-top: 20px; /* Adjust top margin as needed */
-    margin-bottom: 0px; /* Adjust bottom margin as needed */
+    margin-left: 50px; 
+    margin-top: 20px; 
+    margin-bottom: 0px; 
     width: 400px;
     text-align: center;
 }

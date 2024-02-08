@@ -1,8 +1,8 @@
-.column {
+.nutrition-column {
   flex-basis: 1 0 20%; 
   padding: 0 100px;
 }
 
 .nutritionHeading {
-  color: white;
+  color: rgb(0, 0, 0);
 }

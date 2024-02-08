@@ -34,7 +34,7 @@ const SignupPage = () => {
           </select>
         </div>
 
-        <button type="submit">Sign Up</button>
+        <button type="submit" id='signup-btn'>Sign Up</button>
       </form>
     </div>
   );
