@@ -68,7 +68,7 @@ const WalkingHistory = (props) => {
     };
 
     return (
-        <div className={`WalkingContainer ${isSearchMatch() ? 'highlight' : ''}`}>
+        <div className={`WalkContainer walkhistory ${isSearchMatch() ? 'highlight' : ''}`}>
             {isEditing ? (
                 <>
                     <input type="text" value={editData.walkType} onChange={(e) => handleEditChange(e, 'walkType')} />
@@ -90,8 +90,8 @@ const WalkingHistory = (props) => {
                     <h2>Duration: {duration}mins</h2>
                     <h2>Speed: {speed}km/h</h2>
                     <h2>Date Time: {dateTime}</h2>
-                    <button onClick={toggleEdit}>Edit</button>
-                    <button onClick={handleDelete}>Delete</button>
+                    <button onClick={toggleEdit} className="edit-btn">Edit</button>
+                    <button onClick={handleDelete} className="delete-btn">Delete</button>
                     {walkMessage && <p className={(walkMessage.includes("deleted") || walkMessage.includes("updated")) ? "greenWalkMessage" : "redWalkMessage"}>
                         {walkMessage}
                     </p>}

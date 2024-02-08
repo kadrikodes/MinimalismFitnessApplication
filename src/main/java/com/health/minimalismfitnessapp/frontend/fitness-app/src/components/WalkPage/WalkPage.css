@@ -9,9 +9,17 @@
 .walkingHeading {
   color: rgb(0, 0, 0);
   margin-top: 0;
+  margin-left: 30%;
+}
+
+.enter{
   margin-left: 18%;
 }
 
 .desktop .row .column .walkForm {
   margin-top: 0; /* Adjust this value as needed */
+}
+
+.walksearch{
+  margin-left: 12%;
 }
