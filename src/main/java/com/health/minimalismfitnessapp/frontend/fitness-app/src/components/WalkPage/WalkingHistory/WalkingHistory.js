@@ -68,7 +68,7 @@ const WalkingHistory = (props) => {
     };
 
     return (
-        <div className={`WalkingContainer ${isSearchMatch() ? 'highlight' : ''}`}>
+        <div className={`WalkContainer ${isSearchMatch() ? 'highlight' : ''}`}>
             {isEditing ? (
                 <>
                     <input type="text" value={editData.walkType} onChange={(e) => handleEditChange(e, 'walkType')} />
