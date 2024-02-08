@@ -1,6 +1,4 @@
-
 import React, { useState, useEffect } from "react";
-import { useState, useEffect } from "react";
 import "./PushUpPage.css";
 import PushUpContainer from "../HomePage/PushUpSummary/PushUpContainer";
 const PushUpPage = () => {
@@ -36,8 +34,6 @@ const PushUpPage = () => {
   };
   return (
     <div className="desktop">
-      <Header />
-      <NavBar />
       <div className="push-up-page-container">
         <div className="left-box">
           <PushUpContainer pushUpData={pushUpData} />
