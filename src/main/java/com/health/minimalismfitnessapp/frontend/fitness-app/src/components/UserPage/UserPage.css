@@ -116,14 +116,15 @@ input[type="file"] {
     margin: 10px auto;
     
 }
+.saveUserChanges:hover {
+    background-color: #FE6A16;
+    
+}
 
 .left-content {
     position: sticky;
     top: 0; 
 }
 
-.saveUserChanges:hover {
-    background-color: #FE6A16;
-    
-}
+
 

@@ -34,6 +34,17 @@ function NavBar() {
               </NavLink>
             </li>
             <li className="nav-item">
+              <NavLink
+                
+                to="/about"
+                activeClassName="active"
+                className="nav-links"
+                onClick={handleNavClick}
+              >
+                About
+              </NavLink>
+            </li>
+            <li className="nav-item">
               <NavLink           
                 to="/nutrition"
                 activeClassName="active"
