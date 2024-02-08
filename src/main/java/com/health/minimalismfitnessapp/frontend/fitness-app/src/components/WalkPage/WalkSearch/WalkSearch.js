@@ -30,7 +30,7 @@ const WalkSearch = ({ setNewItem, onSearchResults }) => {
     };
 
     return (
-        <form onSubmit={handleSearch}>
+        <form onSubmit={handleSearch} className='walksearch'>
             <label>
                 Date & Time:
                 <input type="datetime-local" value={dateTime} onChange={e => setDateTime(e.target.value)} />

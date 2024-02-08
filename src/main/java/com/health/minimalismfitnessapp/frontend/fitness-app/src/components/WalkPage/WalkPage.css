@@ -15,3 +15,7 @@
 .desktop .row .column .walkForm {
   margin-top: 0; /* Adjust this value as needed */
 }
+
+.walksearch{
+  margin-left: 12%;
+}

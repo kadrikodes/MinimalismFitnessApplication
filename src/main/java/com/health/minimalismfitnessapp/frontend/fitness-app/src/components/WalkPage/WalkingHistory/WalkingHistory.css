@@ -1,3 +1,8 @@
+.walkhistory {
+    height: auto;
+    padding-bottom: 5%;
+}
+
 .greenWalkMessage {
     color: #2ceb05;
     font-size: 1.3rem;
