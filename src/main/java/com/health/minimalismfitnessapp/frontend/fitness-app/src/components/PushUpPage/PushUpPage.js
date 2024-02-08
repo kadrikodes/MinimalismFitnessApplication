@@ -45,8 +45,6 @@ const PushUpPage = () => {
 
     return (
         <div className="desktop">
-            <Header />
-            <NavBar />
             <div className="row">
             <div className="colum">
             <PushUpContainer pushUpData={pushUpData} />

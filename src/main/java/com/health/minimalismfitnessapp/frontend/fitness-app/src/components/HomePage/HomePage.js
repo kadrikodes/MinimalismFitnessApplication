@@ -53,11 +53,6 @@ const HomePage = () => {
 
   return (
     <div className="desktop">
-          <div className="header">
-          {/* {/* <Header /> */}
-          {/* <NavBar /> */}
-          </div>
-          
           <div className="row">
             <div className="column">
               <UserContainer userData={userData} />

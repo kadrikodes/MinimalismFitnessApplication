@@ -70,8 +70,6 @@ const UserPage = () => {
 
     return (
         <div className="desktop">
-            <Header />
-            {/* <NavBar /> */}
             <div className="user-page-container">
                 <div className="left-box">
                     <h2>Your Profile </h2>

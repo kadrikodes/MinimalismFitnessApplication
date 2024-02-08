@@ -25,11 +25,6 @@ const WalkPage = () => {
 
     return(
     <div className="desktop">
-        <div className="header">
-        <Header />
-        <NavBar />
-        </div>
-
         <div className="row">
             <div className="column">
                 <h1 className="walkingHeading">Walking History</h1>

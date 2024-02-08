@@ -61,8 +61,6 @@ const SleepPage = () => {
     return (
         // <div className="SleepPage">
         <div className="desktop">
-            <Header />
-            <NavBar />
             <h1>Sleep</h1>
             <div>Your sleep details are below</div>
             <ul>
