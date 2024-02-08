@@ -2,9 +2,9 @@
     background-color: #f0f0f07f;
     border-radius: 45px;
     height: 400px;
-    margin-left: 50px; /* Use margin-left instead of left */
-    margin-top: 100px; /* Adjust top margin as needed */
-    margin-bottom: 10px; /* Adjust bottom margin as needed */
+    margin-left: 50px; 
+    margin-top: 100px; 
+    margin-bottom: 10px; 
     width: 400px;
     text-align: center;
 }

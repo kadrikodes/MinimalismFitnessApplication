@@ -38,11 +38,11 @@
 .left-box h2 {
     position: sticky;
     top: 0;
-    padding: 30px 0 20px; /* Add padding for better spacing */
-    margin-bottom: 0px; /* Add margin bottom to create space between "Your Profile" and the content */
-    margin-top: 00; /* Remove margin top to fix the text at the top */
-    color: #050505; /* Set color of the text */
-    font-size: 30px; /* Set font size of the text */
+    padding: 30px 0 20px; 
+    margin-bottom: 0px;
+    margin-top: 00; 
+    color: #050505; 
+    font-size: 30px; 
 }
 
 .right-box h2 {
