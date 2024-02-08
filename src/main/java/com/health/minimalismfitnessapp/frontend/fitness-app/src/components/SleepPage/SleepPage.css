@@ -178,3 +178,7 @@ form {
 .sleep-record .wake-up-time {
   color: rgb(83, 14, 104); 
 }
+
+.sleep-record:hover {
+  background-color: rgba(199, 196, 191, 0.533); /* Change the background color on hover */
+}
