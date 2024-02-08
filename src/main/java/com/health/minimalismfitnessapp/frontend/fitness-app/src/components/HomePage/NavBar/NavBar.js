@@ -1,25 +1,3 @@
-
-// import { Link } from "react-router-dom";
-// import { ReactComponent as Brand } from '../Mlogo.svg' 
-
-
-// const NavBar = () => {
-//     return (
-    
-//     <div className="navbar">
-//         <Link to="/user" className="user">USER</Link>
-//         <Link to="/walk" className="walk">WALK</Link>
-//         <Link to="/pushup" className="pushup">PUSHUP</Link>
-//         <Link to="/nutrition" className="nutrition">NUTRITION</Link>
-//         <Link to="/sleep" className="sleep">SLEEP</Link>
-//     </div>
-//   );
-// }
-
-// export default NavBar;
-
-
-
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import "./NavBar.css";
@@ -58,6 +36,17 @@ function NavBar() {
             <li className="nav-item">
               <NavLink
                 
+                to="/about"
+                activeClassName="active"
+                className="nav-links"
+                onClick={handleNavClick}
+              >
+                About
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
+                
                 to="/user"
                 activeClassName="active"
                 className="nav-links"
@@ -66,6 +55,7 @@ function NavBar() {
                 User
               </NavLink>
             </li>
+            
             <li className="nav-item">
               <NavLink
                 
