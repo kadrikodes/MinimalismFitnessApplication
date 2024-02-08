@@ -4,6 +4,14 @@ const NutritionContainer = (props) => {
 
     const { mealType = '', foodName = '', calories = '', protein = '', carbohydrates = '', fats = ''} = props.nutritionData || {};
 
+    if (!props.nutritionData){
+        return(
+            <div className="NutritionContainer">
+                <h1>No nutrition data</h1>
+            </div>
+        )
+    }
+
     return (
     <div className="NutritionContainer"> 
         <h1> {mealType}</h1>
