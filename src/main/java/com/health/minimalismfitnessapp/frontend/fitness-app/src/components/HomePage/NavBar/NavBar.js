@@ -58,25 +58,15 @@ function NavBar() {
             <li className="nav-item">
               <NavLink
                 
-                to="/user"
+                to="/nutrition"
                 activeClassName="active"
                 className="nav-links"
                 onClick={handleNavClick}
               >
-                User
+                Nutrition
               </NavLink>
             </li>
-            <li className="nav-item">
-              <NavLink
-                
-                to="/sleep"
-                activeClassName="active"
-                className="nav-links"
-                onClick={handleNavClick}
-              >
-                Sleep
-              </NavLink>
-            </li>
+
             <li className="nav-item">
               <NavLink
                 
@@ -88,17 +78,21 @@ function NavBar() {
                 Walk
               </NavLink>
             </li>
+
+            
             <li className="nav-item">
               <NavLink
                 
-                to="/nutrition"
+                to="/sleep"
                 activeClassName="active"
                 className="nav-links"
                 onClick={handleNavClick}
               >
-                Nutrition
+                Sleep
               </NavLink>
             </li>
+            
+            
             <li className="nav-item">
               <NavLink
     
@@ -108,6 +102,17 @@ function NavBar() {
                 onClick={handleNavClick}
               >
                 PushUp
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
+                
+                to="/user"
+                activeClassName="active"
+                className="nav-links"
+                onClick={handleNavClick}
+              >
+                Profile
               </NavLink>
             </li>
           </ul>
