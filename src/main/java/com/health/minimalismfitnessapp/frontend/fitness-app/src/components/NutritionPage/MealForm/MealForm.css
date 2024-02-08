@@ -46,7 +46,8 @@ form {
   }
 
   .greenMealMessage {
-    color: #2ceb05;
+    font-weight: bold;
+    color: #299913;
     font-size: 1.3rem;
   }
   
