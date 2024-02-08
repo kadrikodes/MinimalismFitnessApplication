@@ -8,6 +8,13 @@
     justify-content: space-around;
     align-items: flex-start;
   }
+  .pushup-counter{
+    padding-top: 15%;
+  }
+
+  .target-tracker{
+    padding-top: 15%;
+  }
 
   .left-box,
   .middle-box,
