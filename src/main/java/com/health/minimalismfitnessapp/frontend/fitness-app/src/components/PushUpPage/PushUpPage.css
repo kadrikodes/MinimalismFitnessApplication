@@ -8,11 +8,13 @@
     justify-content: space-around;
     align-items: flex-start;
   }
+
   .left-box,
   .middle-box,
   .right-box {
     width: 30%; /* Adjust width as needed */
     margin: 0 10px; /* Add margin between the boxes */
+    background-color: transparent;
   }
   .middle-box {
     display: flex;
