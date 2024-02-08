@@ -37,7 +37,7 @@ const NutritionPage = () => {
             <div className="column">
                 <h1 className="nutritionHeading">Nutriton History</h1>
                 { nutritionHistory.map(
-                    (nutritionData) => (<NutritionHistory key={nutritionData.id} nutritionData={nutritionData} /> )
+                    (nutritionData) => (<NutritionHistory key={nutritionData.id} nutritionData={nutritionData} setNewItem={setNewItem} /> )
                 )}
             </div>
             <div className="column">
