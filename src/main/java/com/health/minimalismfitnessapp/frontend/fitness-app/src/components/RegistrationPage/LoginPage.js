@@ -18,7 +18,7 @@ const LoginPage = () => {
                 <div className="input-box">
                     <input type="password" placeholder="Password" required />
                 </div>
-                <button type="submit">Login</button>
+                <button type="submit" id="login-btn">Login</button>
             </form>
             <p>
         Don't have an account? <Link to="/signup">Sign Up</Link>

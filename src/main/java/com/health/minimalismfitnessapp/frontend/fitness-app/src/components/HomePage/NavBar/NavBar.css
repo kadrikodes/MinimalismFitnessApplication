@@ -1,6 +1,7 @@
 .navbar {
   height: 27px;
   margin-top: 1%;
+  width: 1000px;
 }
 
 .user,
@@ -8,7 +9,7 @@
 .pushup,
 .nutrition,
 .sleep {
-  color: #FFFFFF;
+  color: #000000;
   font-family: "Outfit-Bold", Helvetica;
   font-size: 24px;
   font-weight: 700;

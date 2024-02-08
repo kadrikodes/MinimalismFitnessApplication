@@ -28,23 +28,28 @@ const HomePage = () => {
 
     fetch(userAPI)
         .then((response) => {return response.json();})
-        .then((data) => { setUserData(data);} )
+        .then((data) => { setUserData(data);})
+        .catch((error) => {console.error(error)})
 
     fetch(nutritionAPI)
         .then((response) => { return response.json();})
         .then((data) => {setNutritionData(data);})
+        .catch((error) => {console.error(error)})
 
     fetch(sleepAPI)
         .then((response) => {return response.json();})
         .then((data) => {setSleepData(data);})
+        .catch((error) => {console.error(error)})
 
     fetch(walkingAPI)
         .then((response) => {return response.json();})
         .then((data) => {setWalkingData(data);})
+        .catch((error) => {console.error(error)})
 
     fetch(pushUpAPI)
-    .then((response) => {return response.json();})
-    .then((data) => {setPushUpData(data);})
+        .then((response) => {return response.json();})
+        .then((data) => {setPushUpData(data);})
+        .catch((error) => {console.error(error)})
 
   }, [])
 
