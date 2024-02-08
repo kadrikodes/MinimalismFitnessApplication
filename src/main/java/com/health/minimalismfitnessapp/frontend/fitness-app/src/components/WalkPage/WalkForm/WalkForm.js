@@ -9,7 +9,6 @@ const WalkForm = (props) => {
             event.preventDefault();
 
             const saveWalkAPI = 'http://localhost:8080/walking/addWalkingData';
-            const deleteWalkAPI = 'http://localhost:8080/walking/delete/1'
 
             const steps = event.target.elements.steps.value;
             const distance = event.target.elements.distance.value;
@@ -42,18 +41,9 @@ const WalkForm = (props) => {
                     setWalkMessage("Walk some more !")
                 }
             })
-            fetch(deleteWalkAPI, {
-                method:'delete',
-                headers: { 'Content-Type': 'application/json',},
-                body: JSON.stringify(walkData),
-            })
-            .then((response) => {
-                if (response.ok){
-                    setWalkMessage("Walk data deleted!")
-                    props.setNewItem(response)
-                }
-            })
         }
+
+        const currentDateTime = new Date().toISOString().slice(0, 16);
 
         return (
             <div>
@@ -75,11 +65,9 @@ const WalkForm = (props) => {
                     <input type="number" step="0.1" name="speed" />
 
                     <label>Date & Time: </label>
-                    <input type="datetime-local" name="datetime" defaultValueExpression="currentDate()" />
-
+                    <input type="datetime-local" name="datetime" defaultValue={currentDateTime} />
 
                     <input type="submit" className="submitButton"/>
-
 
                     {walkMessage && <p className={walkMessage.includes("added") ? "greenWalkMessage" : "redWalkMessage"}>
                         {walkMessage

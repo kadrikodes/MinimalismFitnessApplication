@@ -24,6 +24,7 @@ public class WalkingData {
 
 
     @ManyToOne
+    @JoinColumn(name = "activity_data_id")
     private ActivityData activityData;
 
     @ManyToOne
