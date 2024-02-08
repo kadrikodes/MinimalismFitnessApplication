@@ -1,5 +1,4 @@
 .minimalism-fitness {
-    color: #FFFFFF;
     font-family: "Outfit-Bold", Helvetica;
     font-size: 38px;
     font-weight: 700;
@@ -10,4 +9,9 @@
     top: 280px;
     width: 501px;
   }
+
+#heading {
+  color: #FFFFFF;
+  text-decoration: none;
+}
 

@@ -59,26 +59,27 @@ const WalkForm = (props) => {
             <div>
                 <form onSubmit={handleSubmit}>
 
-                    Steps:
+                    <label>Steps: </label>
                     <input type="number" name="steps" />
 
-                    Distance (km):
+                    <label>Distance (km): </label>
                     <input type="number" step="0.1" name="distance" />
 
-                    Calories Burned:
+                    <label>Calories burned: </label>
                     <input type="number" name="caloriesBurned" />
 
-                    Duration (mins):
+                    <label>Duration (mins): </label>
                     <input type="number" step="0.1" name="duration" />
 
-                    Speed (km/h):
+                    <label>Speed (km/h): </label>
                     <input type="number" step="0.1" name="speed" />
 
-                    Date & Time:
+                    <label>Date & Time: </label>
                     <input type="datetime-local" name="datetime" defaultValueExpression="currentDate()" />
 
-                    <button type="submit">Submit</button>
-                    <button type="delete">Delete</button>
+
+                    <input type="submit" className="submitButton"/>
+
 
                     {walkMessage && <p className={walkMessage.includes("added") ? "greenWalkMessage" : "redWalkMessage"}>
                         {walkMessage

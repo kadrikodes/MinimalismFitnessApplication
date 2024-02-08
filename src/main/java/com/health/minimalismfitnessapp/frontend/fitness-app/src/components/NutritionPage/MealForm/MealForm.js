@@ -47,9 +47,9 @@ const MealForm = (props) => {
 
     return (
     <div> 
-        <form onSubmit={handleSubmit}>
+        <form id="mealForm" onSubmit={handleSubmit}>
 
-        Meal Type:
+        <label> Type: </label>
         <select name="mealType">
           <option value="Breakfast">Breakfast</option>
           <option value="Lunch">Lunch</option>
@@ -57,33 +57,23 @@ const MealForm = (props) => {
           <option value="Snack">Snack</option>
         </select>
 
-
-  
-        Food Name:
+        <label>Name: </label>
         <input type="text" name="foodName" />
- 
 
-
-        Calories:
+        <label>Calories (kCal): </label>
         <input type="text" name="calories"/>
 
-
-
-        Protein (%):
+        <label>Protein (%): </label>
         <input type="number" name="protein"  max="100" />
- 
 
-
-        Carbohydrates (%):
+        <label>Carbohydrates (%): </label>
         <input type="number" name="carbohydrates" max="100"/>
-    
 
-
-        Fats (%):
+        <label>Fats (%): </label>
         <input type="number" name="fats" max="100" />
       
 
-      <button type="submit">Submit</button>
+        <input type="submit" className="submitButton"/>
 
 
             {mealMessage && <p className={mealMessage.includes("consumed") ? "greenMealMessage" : "redMealMessage"}>
