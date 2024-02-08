@@ -55,6 +55,7 @@ public class NutritionController {
     }
 
     @PutMapping("/{nutritionID}")
+    @CrossOrigin(origins = "http://localhost:3000")
     public NutritionData updateNutritionData(@PathVariable long nutritionID, @RequestBody NutritionData nutritionData){
         return nutritionService.updateNutritionData(nutritionID, nutritionData);
     }

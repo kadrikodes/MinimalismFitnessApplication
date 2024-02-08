@@ -38,7 +38,7 @@ const PushUpPage = () => {
         <div className="left-box">
           <PushUpContainer pushUpData={pushUpData} />
         </div>
-        <div className="middle-box desktop">
+        <div className="middle-box pushup-counter">
           <h2>Pushup Counter: </h2>
           <div className="target-header"></div>
           <div className="button-row">
@@ -51,7 +51,7 @@ const PushUpPage = () => {
             <button className="action-button" onClick={handleReset}>Reset</button>
           </div>
         </div>
-        <div className="right-box">
+        <div className="right-box target-tracker">
           <h2>Target Tracker:</h2>
           <div className="input-container">
             <label htmlFor="goalInput">Enter target</label>

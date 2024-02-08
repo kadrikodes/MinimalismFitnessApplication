@@ -8,11 +8,20 @@
     justify-content: space-around;
     align-items: flex-start;
   }
+  .pushup-counter{
+    padding-top: 15%;
+  }
+
+  .target-tracker{
+    padding-top: 15%;
+  }
+
   .left-box,
   .middle-box,
   .right-box {
     width: 30%; /* Adjust width as needed */
     margin: 0 10px; /* Add margin between the boxes */
+    background-color: transparent;
   }
   .middle-box {
     display: flex;
