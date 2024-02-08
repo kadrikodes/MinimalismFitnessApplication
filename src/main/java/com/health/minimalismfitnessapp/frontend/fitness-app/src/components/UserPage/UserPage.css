@@ -106,14 +106,15 @@ input[type="file"] {
 
 .saveUserChanges {
     padding: 10px 15px 10px;
-    font-size: 25px; 
-    background-color: #E83C00;
-    color: #fff;
+    color: white;
+    padding: 10px 15px;
     border: none;
-    border-radius: 5px;
+    border-radius: 25px;
+    width: 200px;
     cursor: pointer;
-    transition: background-color 0.3s;
-    margin: 10px auto;
+    font-weight: bold;
+    margin-left: 25%;
+    height: 50px;
     
 }
 
@@ -123,7 +124,7 @@ input[type="file"] {
 }
 
 .saveUserChanges:hover {
-    background-color: #FE6A16;
+    background-color: #af3204;
     
 }
 

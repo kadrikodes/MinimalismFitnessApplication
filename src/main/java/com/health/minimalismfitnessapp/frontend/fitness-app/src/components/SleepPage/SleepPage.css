@@ -107,16 +107,18 @@ input[type="datetime-local"] {
 }
 
 button {
-  margin-top: 10px;
-  padding: 10px 15px;
-  font-size: 16px; 
   background-color: #E83C00;
-  color: #fff;
+  padding: 10px 15px 10px;
+  color: white;
+  padding: 10px 15px;
   border: none;
-  border-radius: 5px;
+  border-radius: 25px;
+  width: 200px;
   cursor: pointer;
-  transition: background-color 0.3s;
-}
+  font-weight: bold;
+  margin-left: 25%;
+  height: 50px;
+  font-size: 25px;}
 
 button:hover {
   background-color: #FE6A16;

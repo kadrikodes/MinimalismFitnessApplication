@@ -111,7 +111,7 @@ const UserPage = () => {
                     {/* Content for the third box */}
                     </div>
                     
-                    <button className="saveUserChanges" onClick={handleSaveChanges}>Save Changes</button>
+                    <button className="saveUserChanges" onClick={handleSaveChanges}>Save</button>
                 </div>
             </div>
         </div>
