@@ -1,3 +1,5 @@
+import "./WalkingHistory.css";
+
 const WalkingHistory = (props) => {
 
     const { walkType = '', steps = '', distance = '', caloriesBurned = '', duration = '', speed = '', dateTime = ''} = props.walkingData || {};

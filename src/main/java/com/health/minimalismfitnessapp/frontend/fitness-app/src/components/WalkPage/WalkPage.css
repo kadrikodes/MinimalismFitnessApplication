@@ -1,4 +1,16 @@
 .column {
-  flex-basis: 1 0 20%; 
-  padding: 0 100px;
+  flex-basis: 1 0 20%;
+  padding-top: 10px; /* Adjust this value as needed */
+  padding-right: 100px;
+  padding-bottom: 0;
+  padding-left: 100px;
+}
+
+.walkingHeading {
+  color: white;
+  margin-top: 0;
+}
+
+.desktop .row .column .walkForm {
+  margin-top: 0; /* Adjust this value as needed */
 }
