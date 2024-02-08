@@ -5,7 +5,7 @@ const WalkingHistory = (props) => {
     const {
         walkingData,
         setNewItem,
-        searchCriteria // Add searchCriteria to the props
+        searchCriteria
     } = props;
 
     const { walkType = '', steps = '', distance = '', caloriesBurned = '', duration = '', speed = '', dateTime = '', id = '' } = props.walkingData || {};
@@ -63,8 +63,15 @@ const WalkingHistory = (props) => {
 
     const isSearchMatch = () => {
         if (!searchCriteria) return false;
-        const { dateTime: searchDateTime, distance: searchDistance } = searchCriteria;
-        return dateTime.startsWith(searchDateTime) && parseFloat(distance) === parseFloat(searchDistance);
+        let matches = true;
+        if (searchCriteria.dateTime) {
+            matches = matches && walkingData.dateTime.startsWith(searchCriteria.dateTime);
+        }
+        if (searchCriteria.distance) {
+            matches = matches && parseFloat(walkingData.distance) === parseFloat(searchCriteria.distance);
+        }
+        console.log(`Matching entry for distance ${distance}:`, matches);
+        return matches;
     };
 
     return (
