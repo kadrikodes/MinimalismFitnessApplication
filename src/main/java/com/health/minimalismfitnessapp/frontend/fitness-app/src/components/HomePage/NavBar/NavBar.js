@@ -34,27 +34,28 @@ function NavBar() {
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink
-                
-                to="/about"
+              <NavLink           
+                to="/nutrition"
                 activeClassName="active"
                 className="nav-links"
                 onClick={handleNavClick}
               >
-                About
+                Nutrition
               </NavLink>
             </li>
+
             <li className="nav-item">
               <NavLink
                 
-                to="/user"
+                to="/walk"
                 activeClassName="active"
                 className="nav-links"
                 onClick={handleNavClick}
               >
-                User
+                Walk
               </NavLink>
             </li>
+
             
             <li className="nav-item">
               <NavLink
@@ -67,28 +68,8 @@ function NavBar() {
                 Sleep
               </NavLink>
             </li>
-            <li className="nav-item">
-              <NavLink
-                
-                to="/walk"
-                activeClassName="active"
-                className="nav-links"
-                onClick={handleNavClick}
-              >
-                Walk
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink
-                
-                to="/nutrition"
-                activeClassName="active"
-                className="nav-links"
-                onClick={handleNavClick}
-              >
-                Nutrition
-              </NavLink>
-            </li>
+            
+            
             <li className="nav-item">
               <NavLink
     
@@ -98,6 +79,17 @@ function NavBar() {
                 onClick={handleNavClick}
               >
                 PushUp
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
+                
+                to="/user"
+                activeClassName="active"
+                className="nav-links"
+                onClick={handleNavClick}
+              >
+                Profile
               </NavLink>
             </li>
           </ul>

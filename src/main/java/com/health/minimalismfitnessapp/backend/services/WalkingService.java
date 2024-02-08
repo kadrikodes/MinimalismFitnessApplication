@@ -56,13 +56,6 @@ public class WalkingService {
             throw new RuntimeException("Walking data needs a user");
         }
 
-        if (walkingData.getActivityData() != null) {
-            Long activityDataId = walkingData.getActivityData().getId();
-            ActivityData activityData = activityRepository.findById(activityDataId)
-                    .orElseThrow(() -> new EntityNotFoundException("ActivityData not found with id " + activityDataId));
-            walkingData.setActivityData(activityData);
-        }
-
         walkingData.setUserData(prospectiveUser.get());
         return walkingRepository.save(walkingData);
     }

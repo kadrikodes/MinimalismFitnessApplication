@@ -3,6 +3,7 @@ package com.health.minimalismfitnessapp.service;
 import com.health.minimalismfitnessapp.TestConstantsNutrition;
 import com.health.minimalismfitnessapp.backend.MinimalismFitnessAppApplication;
 import com.health.minimalismfitnessapp.backend.dataaccess.INutritionRepository;
+import com.health.minimalismfitnessapp.backend.dataaccess.IUserRepository;
 import com.health.minimalismfitnessapp.backend.entities.NutritionData;
 import com.health.minimalismfitnessapp.backend.entities.userdata.UserData;
 import com.health.minimalismfitnessapp.backend.entities.userdata.UserGender;
@@ -21,6 +22,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.times;
@@ -33,6 +35,8 @@ public class NutritionServiceFullSpringTest {
 
     @MockBean
     INutritionRepository mockNutritionRepo;
+    @MockBean
+    IUserRepository mockUserRepo;
 
     @BeforeEach
     void beforeEach() { reset(mockNutritionRepo);}
@@ -80,8 +84,16 @@ public class NutritionServiceFullSpringTest {
 
     @Test
     void addingANutritionRecord() throws URISyntaxException {
-        NutritionData nutritionData = new NutritionData("Pounded Yam", 600, 20, 60, 20, "Dinner", new UserData("Rais", 180, 85, LocalDate.of(2000,1,1), UserGender.MALE));
-        nutritionService.addNutritionData(nutritionData);
+        UserData userData = new UserData("Rais", 180, 85, LocalDate.of(2000,1,1), UserGender.MALE);
+        userData.setId(1L);
+        NutritionData nutritionData = new NutritionData("Pounded Yam", 600, 20, 60, 20, "Dinner", userData);
+        when(mockUserRepo.findById(anyLong())).thenReturn(Optional.of(userData));
+        when(mockNutritionRepo.save(any(NutritionData.class))).thenReturn(nutritionData);
+
+        NutritionData result = nutritionService.addNutritionData(nutritionData);
+
+        assertNotNull(result);
+        verify(mockUserRepo, times(1)).findById(anyLong());
         verify(mockNutritionRepo, times(1)).save(nutritionData);
     }
 

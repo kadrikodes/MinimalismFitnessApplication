@@ -132,6 +132,7 @@ public class NutritionWithMockHttpRequestIT {
     public void testAddingANutritionRecord() throws Exception {
         int originalNumOfNutritionRecords = getNumberOfNutritionRecords();
         UserData testUser = new UserData("Samuel", 174, 82.5, LocalDate.of(1996,10,12), UserGender.MALE);
+        testUser.setId(1L);
 
         NutritionData testNutritionData = new NutritionData("Burger", 300, 50, 30, 20, "Lunch", testUser);
 
@@ -150,7 +151,7 @@ public class NutritionWithMockHttpRequestIT {
 
         assertAll("testing add a Nutrition data record",
                 () -> assertEquals(originalNumOfNutritionRecords+1, getNumberOfNutritionRecords()),
-                () -> assertTrue(checkIfOnList(testNutritionData))
+                () -> assertTrue(checkIfOnList(nutritionData))
         );
     }
 

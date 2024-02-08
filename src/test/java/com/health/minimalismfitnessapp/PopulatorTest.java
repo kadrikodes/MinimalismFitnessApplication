@@ -34,11 +34,11 @@ public class PopulatorTest {
     private Populator populator;
 
     @MockBean
-    private IUserRepository userRepository;
+    IUserRepository userRepository;
     @MockBean
-    private INutritionRepository nutritionRepository;
+    INutritionRepository nutritionRepository;
     @MockBean
-    private IPushUpRepository pushUpRepository;
+    IPushUpRepository pushUpRepository;
     @MockBean
     IWalkingRepository walkingRepository;
     @MockBean
@@ -58,7 +58,7 @@ public class PopulatorTest {
         when(nutritionRepository.findById(anyLong())).thenReturn(Optional.of(new NutritionData("Pizza", 500, 40, 30, 30, "Lunch", userData)));
         when(pushUpRepository.findById(anyLong())).thenReturn(Optional.of(new PushUpData(5, 10, 1.5, 100, userData, activityData)));
         when(walkingRepository.findById(anyLong())).thenReturn(Optional.of(new WalkingData(150, 15, 120, 70, 6, LocalDateTime.of(2023, 11, 30, 10, 45), userData, activityData)));
-        when(sleepRepository.findById(anyLong())).thenReturn(Optional.of(new SleepData(LocalDateTime.of(2023, 11, 10,22, 00), LocalDateTime.of(2023, 11, 10,07, 00), LocalDateTime.of(2023, 11, 10,22, 30), LocalDateTime.of(2023, 11, 10,07, 30, 15), userData)));
+        when(sleepRepository.findById(anyLong())).thenReturn(Optional.of(new SleepData(LocalDateTime.of(2023, 11, 10,22,00), LocalDateTime.of(2023, 11, 10,07, 00), LocalDateTime.of(2023, 11, 10,22, 30), LocalDateTime.of(2023, 11, 10,07, 30, 15), userData)));
     }
 
     @Test
