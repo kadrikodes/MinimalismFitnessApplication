@@ -17,6 +17,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
 
 public class NutritionServiceNoSpringTest {
@@ -73,11 +74,20 @@ public class NutritionServiceNoSpringTest {
     }
 
     @Test
-    void addingANutritionRecord() throws URISyntaxException {
-        NutritionData nutritionData = new NutritionData("Pounded Yam", 600, 20, 60, 20, "Dinner", new UserData("Rais", 180, 85, LocalDate.of(2000,1,1), UserGender.MALE));
-        nutritionService.addNutritionData(nutritionData);
+    void addingANutritionRecord() {
+        UserData userData = new UserData("Rais", 180, 85, LocalDate.of(2000,1,1), UserGender.MALE);
+        userData.setId(1L);
+        NutritionData nutritionData = new NutritionData("Pounded Yam", 600, 20, 60, 20, "Dinner", userData);
+        when(mockUserRepo.findById(anyLong())).thenReturn(Optional.of(userData));
+        when(mockNutritionRepo.save(any(NutritionData.class))).thenReturn(nutritionData);
+
+        NutritionData result = nutritionService.addNutritionData(nutritionData);
+
+        assertNotNull(result);
+        verify(mockUserRepo, times(1)).findById(anyLong());
         verify(mockNutritionRepo, times(1)).save(nutritionData);
     }
+
 
     @Test
     void updatingNutritionRecord() throws URISyntaxException{

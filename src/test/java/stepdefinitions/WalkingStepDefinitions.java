@@ -2,8 +2,10 @@ package stepdefinitions;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
+import com.health.minimalismfitnessapp.backend.dataaccess.IUserRepository;
 import com.health.minimalismfitnessapp.backend.dataaccess.IWalkingRepository;
 import com.health.minimalismfitnessapp.backend.entities.WalkingData;
+import com.health.minimalismfitnessapp.backend.entities.userdata.UserData;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -40,6 +42,8 @@ public class WalkingStepDefinitions {
     ObjectMapper mapper;
     @Autowired
     IWalkingRepository walkingRepo;
+    @Autowired
+    IUserRepository userRepository;
 
     @Given("I have {int} records in the {string} data")
     public void iHaveRecordsInTheData(int numberOfRecords, String dataType) {
@@ -76,7 +80,10 @@ public class WalkingStepDefinitions {
         newWalkingData.setCaloriesBurned(500);
         newWalkingData.setDuration(30.0);
         newWalkingData.setDateTime(LocalDateTime.now());
-        newWalkingData.setUserData(null);
+
+        UserData userData = new UserData();
+        userData = userRepository.save(userData);
+        newWalkingData.setUserData(userData);
         walkingRepo.save(newWalkingData);
     }
     @When("I submit {string} data")

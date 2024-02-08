@@ -2,6 +2,7 @@ package com.health.minimalismfitnessapp.service;
 
 import com.health.minimalismfitnessapp.TestUtilities;
 import com.health.minimalismfitnessapp.backend.MinimalismFitnessAppApplication;
+import com.health.minimalismfitnessapp.backend.dataaccess.IUserRepository;
 import com.health.minimalismfitnessapp.backend.dataaccess.IWalkingRepository;
 
 import com.health.minimalismfitnessapp.backend.entities.ActivityData;
@@ -35,6 +36,8 @@ public class WalkingServiceFullSpringTest {
     IWalkingRepository mockRepo;
     @Autowired
     WalkingService walkingService;
+    @MockBean
+    IUserRepository userRepository;
     TestUtilities testUtilities =new TestUtilities();
     LocalDateTime dateTime = LocalDateTime.of(2023, 11, 10, 12, 30);
     LocalDate birthDate = LocalDate.of(1997, 06, 11);
@@ -77,8 +80,10 @@ public class WalkingServiceFullSpringTest {
 
     @Test
     void testAddingWalkingData() {
+        userData.setId(1L);
         WalkingData walkingData = new WalkingData(100, 10, 100, 60, 5, dateTime, userData, activityData);
 
+        when(userRepository.findById(anyLong())).thenReturn(Optional.of(userData));
         when(mockRepo.save(any(WalkingData.class))).thenReturn(walkingData);
 
         WalkingData result = walkingService.addWalkingData(walkingData);
