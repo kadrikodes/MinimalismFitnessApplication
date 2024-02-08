@@ -1,3 +1,5 @@
+import "./NutritionHistory.css"
+
 const NutritionHistory = (props) => {
 
     const { mealType = '', foodName = '', calories = '', protein = '', carbohydrates = '', fats = ''} = props.nutritionData || {};
@@ -9,6 +11,7 @@ const NutritionHistory = (props) => {
         <h2>Carbohydrates: {carbohydrates}%</h2>
         <h2>Protein: {protein}%</h2>
         <h2>Fats: {fats}%</h2>
+        <button className="delete-btn">Delete</button>
     </div>);
 }
 
