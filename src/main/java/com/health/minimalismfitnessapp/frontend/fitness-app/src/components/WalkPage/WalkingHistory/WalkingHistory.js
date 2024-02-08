@@ -2,6 +2,12 @@ import "./WalkingHistory.css";
 import { useState } from "react";
 
 const WalkingHistory = (props) => {
+    const {
+        walkingData,
+        setNewItem,
+        searchCriteria // Add searchCriteria to the props
+    } = props;
+
     const { walkType = '', steps = '', distance = '', caloriesBurned = '', duration = '', speed = '', dateTime = '', id = '' } = props.walkingData || {};
     const [walkMessage, setWalkMessage] = useState("");
     const [isEditing, setIsEditing] = useState(false);
@@ -55,8 +61,14 @@ const WalkingHistory = (props) => {
         });
     };
 
+    const isSearchMatch = () => {
+        if (!searchCriteria) return false;
+        const { dateTime: searchDateTime, distance: searchDistance } = searchCriteria;
+        return dateTime.startsWith(searchDateTime) && parseFloat(distance) === parseFloat(searchDistance);
+    };
+
     return (
-        <div className="WalkingContainer">
+        <div className={`WalkingContainer ${isSearchMatch() ? 'highlight' : ''}`}>
             {isEditing ? (
                 <>
                     <input type="text" value={editData.walkType} onChange={(e) => handleEditChange(e, 'walkType')} />

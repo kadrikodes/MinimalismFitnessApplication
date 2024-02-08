@@ -43,6 +43,8 @@ const WalkForm = (props) => {
             })
         }
 
+        const currentDateTime = new Date().toISOString().slice(0, 16);
+
         return (
             <div>
                 <form onSubmit={handleSubmit}>
@@ -63,7 +65,7 @@ const WalkForm = (props) => {
                     <input type="number" step="0.1" name="speed" />
 
                     <label>Date & Time: </label>
-                    <input type="datetime-local" name="datetime" defaultValueExpression="currentDate()" />
+                    <input type="datetime-local" name="datetime" defaultValue={currentDateTime} />
 
                     <input type="submit" className="submitButton"/>
 

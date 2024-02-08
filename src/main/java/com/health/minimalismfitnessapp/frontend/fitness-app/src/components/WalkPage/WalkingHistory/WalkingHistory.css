@@ -25,7 +25,11 @@
     font-size: 1.3rem;
   }
   
-  .redWalkMessage {
+.redWalkMessage {
     color: #ff2a1b;
     font-size: 1.3rem;
   }
+
+.highlight {
+    background-color: yellow; 
+}
