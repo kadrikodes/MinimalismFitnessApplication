@@ -2,11 +2,11 @@ import "./WalkingHistory.css";
 import { useState } from "react";
 
 const WalkingHistory = (props) => {
-    const { walkType = '', steps = '', distance = '', caloriesBurned = '', duration = '', speed = '', dateTime = '', activity = '', id = '' } = props.walkingData || {};
+    const { walkType = '', steps = '', distance = '', caloriesBurned = '', duration = '', speed = '', dateTime = '', id = '' } = props.walkingData || {};
     const [walkMessage, setWalkMessage] = useState("");
     const [isEditing, setIsEditing] = useState(false);
     const [editData, setEditData] = useState({
-        walkType, steps, distance, caloriesBurned, duration, speed, dateTime, activity
+        walkType, steps, distance, caloriesBurned, duration, speed, dateTime
     });
 
     const handleDelete = (event) => {
@@ -59,7 +59,7 @@ const WalkingHistory = (props) => {
         <div className="WalkingContainer">
             {isEditing ? (
                 <>
-                    {/* <input type="text" value={editData.walkType} onChange={(e) => handleEditChange(e, 'walkType')} /> */}
+                    <input type="text" value={editData.walkType} onChange={(e) => handleEditChange(e, 'walkType')} />
                     <input type="number" value={editData.steps} onChange={(e) => handleEditChange(e, 'steps')} />
                     <input type="number" value={editData.distance} onChange={(e) => handleEditChange(e, 'distance')} />
                     <input type="number" value={editData.caloriesBurned} onChange={(e) => handleEditChange(e, 'caloriesBurned')} />
@@ -78,7 +78,6 @@ const WalkingHistory = (props) => {
                     <h2>Duration: {duration}mins</h2>
                     <h2>Speed: {speed}km/h</h2>
                     <h2>Date Time: {dateTime}</h2>
-                    <h2>Activity Type: {activity}</h2>
                     <button onClick={toggleEdit}>Edit</button>
                     <button onClick={handleDelete}>Delete</button>
                     {walkMessage && <p className={(walkMessage.includes("deleted") || walkMessage.includes("updated")) ? "greenWalkMessage" : "redWalkMessage"}>

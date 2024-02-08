@@ -16,7 +16,6 @@ const WalkForm = (props) => {
             const duration = event.target.elements.duration.value;
             const speed = event.target.elements.speed.value;
             const dateTime = event.target.elements.datetime.value;
-            const activityData = event.target.elements.activityData.value;
             const userId = "1"
 
             const walkData = {
@@ -26,7 +25,6 @@ const WalkForm = (props) => {
                 duration,
                 speed,
                 dateTime,
-                activityData: {activity_data_id: activityData},
                 userData: {id: userId},
             };
 
@@ -66,12 +64,6 @@ const WalkForm = (props) => {
 
                     <label>Date & Time: </label>
                     <input type="datetime-local" name="datetime" defaultValueExpression="currentDate()" />
-
-                    <label> Activity Type: </label>
-                    <select name="activityData">
-                        <option value="Pushups">Pushups</option>
-                        <option value="Walking">Walking</option>
-                    </select>
 
                     <input type="submit" className="submitButton"/>
 
