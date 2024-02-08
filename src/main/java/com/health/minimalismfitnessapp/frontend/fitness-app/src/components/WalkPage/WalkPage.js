@@ -38,7 +38,7 @@ const WalkPage = () => {
                 )}
             </div>
             <div className="walk-column">
-                <h1 className="walkingHeading">Enter walking data</h1>
+                <h1 className="walkingHeading enter">Enter walking data</h1>
                 <WalkForm setNewItem={setNewItem}/>
             </div>
         </div>
