@@ -15,8 +15,8 @@
     width: 100%;
     padding: 100px;
     border-radius: 20px;
-    background-color: #f0f0f05f;
-    margin: 50px;
+    background-color: #f0f0f032;
+    margin: 40px;
     position: relative; 
 }
 
@@ -24,8 +24,9 @@
     border: none;
     display: flex;
     flex-direction: column;
-    justify-content: center; 
+    justify-content: flex-end;
     align-items: center;
+    position: relative;
     
 }
 .left-box p {
@@ -33,6 +34,21 @@
     margin: 10px 10; 
     color: #000000;
 }
+
+.left-box h2 {
+    position: sticky;
+    top: 0;
+    padding: 30px 0 20px; /* Add padding for better spacing */
+    margin-bottom: 0px; /* Add margin bottom to create space between "Your Profile" and the content */
+    margin-top: 00; /* Remove margin top to fix the text at the top */
+    color: #050505; /* Set color of the text */
+    font-size: 30px; /* Set font size of the text */
+}
+
+.right-box h2 {
+    font-size: 30px;
+}
+
 
 .right-box {
     border: none;
@@ -47,6 +63,7 @@
     margin-bottom: 5px;
     font-size: 25px; 
 }
+
 
 input[type="text"],
 input[type="number"],
@@ -79,8 +96,8 @@ input[type="file"] {
 }
 
 .left-box img {
-    max-width: 200px; 
-    max-height: 200px; 
+    max-width: 250px; 
+    max-height: 250px; 
     object-fit: contain; 
 }
 
@@ -88,7 +105,7 @@ input[type="file"] {
     margin: 10px;
     padding: 10px 15px 10px;
     font-size: 25px; 
-    background-color: #3b2da3;
+    background-color: #E83C00;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -102,6 +119,6 @@ input[type="file"] {
 }
 
 .saveUserChanges:hover {
-    background-color: #68809a;
+    background-color: #FE6A16;
     
 }

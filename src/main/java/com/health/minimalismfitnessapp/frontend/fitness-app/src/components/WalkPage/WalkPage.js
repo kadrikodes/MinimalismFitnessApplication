@@ -32,13 +32,13 @@ const WalkPage = () => {
 
         <div className="row">
             <div className="column">
-                <h1>Walking History</h1>
+                <h1 className="walkingHeading">Walking History</h1>
                 { walkingHistory.map(
                     (walkingData) => (<WalkingHistory walkingData={walkingData} /> )
                 )}
             </div>
             <div className="column">
-                <h1>Enter walking data</h1>
+                <h1 className="walkingHeading">Enter walking data</h1>
                 <WalkForm setNewItem={setNewItem}/>
             </div>
         </div>

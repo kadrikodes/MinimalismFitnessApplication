@@ -34,6 +34,15 @@ const PushUpPage = () => {
         }
       };
 
+      const handleSave = () => {
+        setSavedCount(savedCount + count);
+        setCount(0); 
+      };
+    
+      const handleReset = () => {
+        setSavedCount(0); 
+      };
+
     return (
         <div className="desktop">
             <Header />
@@ -47,6 +56,10 @@ const PushUpPage = () => {
             </div>
             <div className="column">
                 <h2>Target Tracker:</h2>
+                <div className="button-column">
+              <button className="action-button" onClick={handleSave}>Save</button>
+              <button className="action-button" onClick={handleReset}>Reset</button>
+            </div>
             <InputContainer />
             <CounterContainer count={count} savedCount={savedCount} />
             </div>
