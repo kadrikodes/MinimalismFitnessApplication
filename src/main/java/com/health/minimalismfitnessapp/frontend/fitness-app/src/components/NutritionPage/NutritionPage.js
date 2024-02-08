@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import Header from "../HomePage/Header/Header";
-import NavBar from "../HomePage/NavBar/NavBar";
 import NutritionHistory from "./NutritionHistory/NutritionHistory";
 import "./NutritionPage.css"
 import MealForm from "./MealForm/MealForm";
@@ -29,10 +27,6 @@ const NutritionPage = () => {
 
     return(
     <div className="desktop">
-        <div className="header">
-        <Header />
-        <NavBar />
-        </div>
         <div className="row">
             <div className="nutrition-column">
                 <h1 className="nutritionHeading">Nutriton History</h1>

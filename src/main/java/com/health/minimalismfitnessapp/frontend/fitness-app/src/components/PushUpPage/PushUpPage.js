@@ -1,6 +1,4 @@
 import { useState, useEffect } from "react";
-import Header from "../HomePage/Header/Header";
-import NavBar from "../HomePage/NavBar/NavBar";
 import "./PushUpPage.css";
 import PushUpContainer from "../HomePage/PushUpSummary/PushUpContainer";
 import TrackerContainer from "./Tracker/TrackerContainer";
@@ -45,8 +43,6 @@ const PushUpPage = () => {
 
     return (
         <div className="desktop">
-            <Header />
-            <NavBar />
             <div className="row">
             <div className="colum">
             <PushUpContainer pushUpData={pushUpData} />

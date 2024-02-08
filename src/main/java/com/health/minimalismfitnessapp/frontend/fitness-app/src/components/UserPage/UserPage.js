@@ -1,6 +1,3 @@
-
-import Header from "../HomePage/Header/Header";
-import NavBar from "../HomePage/NavBar/NavBar";
 import React, { useState, useEffect } from 'react';
 import "./UserPage.css"; 
 
@@ -70,8 +67,6 @@ const UserPage = () => {
 
     return (
         <div className="desktop">
-            <Header />
-            <NavBar />
             <div className="user-page-container">
                 <div className="left-box">
                     <h2>Your Profile </h2>
