@@ -32,7 +32,7 @@ const CalculateWeightLoss = () => {
                         placeholder="Enter steps taken"
                     />
                 </label>
-                <button type="submit">Calculate Weight Loss</button>
+                <button type="submit">Calculate</button>
             </form>
             {weightLossMessage && <p>{weightLossMessage}</p>}
         </div>

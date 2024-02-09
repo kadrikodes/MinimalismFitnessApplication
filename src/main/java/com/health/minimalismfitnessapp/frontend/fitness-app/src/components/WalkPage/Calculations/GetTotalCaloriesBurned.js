@@ -22,7 +22,7 @@ const GetTotalCaloriesBurned = () => {
     return (
         <div>
             <label>
-                Walking ID:
+               Enter Walking ID to get total calories burned:
                 <input
                     type="text"
                     value={walkingId}
@@ -30,7 +30,7 @@ const GetTotalCaloriesBurned = () => {
                     placeholder="Enter Walking ID"
                 />
             </label>
-            <button onClick={fetchTotalCalories}>Get Total Calories Burned</button>
+            <button onClick={fetchTotalCalories}>Get Total</button>
             {totalCaloriesMessage && <p>{totalCaloriesMessage}</p>}
         </div>
     );

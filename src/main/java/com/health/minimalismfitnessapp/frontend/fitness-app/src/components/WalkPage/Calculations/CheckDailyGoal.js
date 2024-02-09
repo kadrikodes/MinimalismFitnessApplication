@@ -30,7 +30,7 @@ const CheckDailyGoal = () => {
                 placeholder="Enter steps taken"
             />
             </label>
-            <button onClick={checkGoal}>Check Daily Goal</button>
+            <button onClick={checkGoal}>Check</button>
             {goalMessage && <p>{goalMessage}</p>}
         </div>
     );

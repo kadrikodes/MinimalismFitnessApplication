@@ -33,7 +33,7 @@ const CalculateStepsToBurnCalories = ({ props }) => {
                         placeholder="Enter calories"
                     />
                 </label>
-                <button type="submit">Calculate Steps</button>
+                <button type="submit">Calculate</button>
             </form>
             {walkMessage && <p>{walkMessage}</p>} {/* Display the walkMessage */}
         </div>

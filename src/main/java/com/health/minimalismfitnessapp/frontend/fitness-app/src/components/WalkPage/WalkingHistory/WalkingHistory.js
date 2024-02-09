@@ -78,15 +78,28 @@ const WalkingHistory = (props) => {
         <div className={`WalkContainer walkhistory ${isSearchMatch() ? 'highlight' : ''}`}>
             {isEditing ? (
                 <>
-                    <input type="text" value={editData.walkType} onChange={(e) => handleEditChange(e, 'walkType')} />
-                    <input type="number" value={editData.steps} onChange={(e) => handleEditChange(e, 'steps')} />
-                    <input type="number" value={editData.distance} onChange={(e) => handleEditChange(e, 'distance')} />
-                    <input type="number" value={editData.caloriesBurned} onChange={(e) => handleEditChange(e, 'caloriesBurned')} />
-                    <input type="number" value={editData.duration} onChange={(e) => handleEditChange(e, 'duration')} />
-                    <input type="number" value={editData.speed} onChange={(e) => handleEditChange(e, 'speed')} />
-                    <input type="datetime-local" value={editData.dateTime} onChange={(e) => handleEditChange(e, 'dateTime')} />
-                    <button onClick={handleUpdate}>Save</button>
-                    <button onClick={toggleEdit}>Cancel</button>
+                    
+                    <label> Steps: </label>
+                    <input type="number" value={editData.steps} onChange={(e) => handleEditChange(e, 'steps')} className="edit-input" />
+                    
+                    <label> Distance (km): </label>
+                    <input type="number" value={editData.distance} onChange={(e) => handleEditChange(e, 'distance')} className="edit-input"/>
+                    
+                    <label> Calories Burned: </label>
+                    <input type="number" value={editData.caloriesBurned} onChange={(e) => handleEditChange(e, 'caloriesBurned')} className="edit-input" />
+                    
+                    <label> Duration (mins): </label>
+                    <input type="number" value={editData.duration} onChange={(e) => handleEditChange(e, 'duration')} className="edit-input"/>
+                    
+                    <label> Speed (km/h): </label>
+                    <input type="number" value={editData.speed} onChange={(e) => handleEditChange(e, 'speed')} className="edit-input" />
+                    
+                    <label> Date & Time: </label>
+                    <input type="datetime-local" value={editData.dateTime} onChange={(e) => handleEditChange(e, 'dateTime')}  className="edit-input"/>
+                    
+                    <button className="cancel-btn" onClick={toggleEdit}>Cancel</button>
+                    <button className="update-btn" onClick={handleUpdate}>Save</button>
+                    
                 </>
             ) : (
                 <>

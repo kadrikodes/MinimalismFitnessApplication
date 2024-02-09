@@ -42,7 +42,7 @@ const ScheduleWalkReminder = () => {
                         placeholder="Enter minutes"
                     />
                 </label>
-                <button type="submit">Schedule Reminder</button>
+                <button type="submit">Reminder</button>
             </form>
             {reminderMessage && <p>{reminderMessage}</p>}
         </div>
