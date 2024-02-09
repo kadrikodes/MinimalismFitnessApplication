@@ -1,5 +1,58 @@
-.desktop {
+
+   .about-page {
     display: flex;
-    flex-direction: column;
-    align-items: center; 
-}
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 20px;
+  }
+  
+  .person-tile {
+    width: 300px; /* Increase the width of the tiles */
+    margin: 30px; /* Increase the margin to add more space between tiles */
+    padding: 20px;
+    margin-top: 200px;
+    border: 1px solid #cccccc74;
+    border-radius: 45px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f0f0f07f
+  }
+  
+  .profile-image {
+    width: 200px; /* Increase the size of the profile images */
+    height: 200px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+  }
+  
+  .info h2 {
+    font-size: 35px; /* Increase the font size of the name */
+    margin-bottom: 10px;
+  }
+  
+  .info .role {
+    font-size: 27px;
+    font-style: italic;
+    color: #555;
+  }
+  
+  .info .description {
+    font-size: 23px; /* Increase the font size of the description */
+    margin-bottom: 10px;
+  }
+  
+  .info .email {
+    font-size: 18px; /* Increase the font size of the email */
+    color: #383636;
+    margin-bottom: 10px;
+  }
+  
+
+  .about-page {
+    text-align: center;
+  }
+  
+  .about-page h1 {
+    margin-bottom: 20px; 
+  }
+  

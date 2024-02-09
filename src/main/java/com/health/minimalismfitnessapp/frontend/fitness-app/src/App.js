@@ -7,7 +7,8 @@ import SleepPage from './components/SleepPage/SleepPage';
 import WalkPage from './components/WalkPage/WalkPage';
 import NutritionPage from './components/NutritionPage/NutritionPage';
 import PushUpPage from './components/PushUpPage/PushUpPage';
-import { AboutPage } from "./components/AboutPage/AboutPage";
+// import { AboutPage } from "./components/AboutPage/AboutPage";
+import AboutPage from "./components/AboutPage/AboutPage";
 
 function App() {
   return (

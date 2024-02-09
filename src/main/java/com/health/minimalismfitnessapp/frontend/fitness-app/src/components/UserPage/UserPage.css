@@ -117,11 +117,16 @@ input[type="file"] {
     height: 50px;
     
 }
+.saveUserChanges:hover {
+    background-color: #FE6A16;
+    
+}
 
 .left-content {
     position: sticky;
     top: 0; 
 }
+
 
 .saveUserChanges:hover {
     background-color: #af3204;
