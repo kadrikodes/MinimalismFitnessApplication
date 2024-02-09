@@ -107,8 +107,11 @@ const UserPage = () => {
                         <label>Profile Picture:</label>
                         <input type="file" accept="image/*" name="profilePicture" onChange={handleFileChange} />
                     </div>
+                    <div className="third-box">
+                    {/* Content for the third box */}
+                    </div>
                     
-                    <button className="saveUserChanges" onClick={handleSaveChanges}>Save Changes</button>
+                    <button className="saveUserChanges" onClick={handleSaveChanges}>Save</button>
                 </div>
             </div>
         </div>

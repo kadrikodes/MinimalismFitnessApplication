@@ -30,9 +30,16 @@ const NutritionPage = () => {
         <div className="row">
             <div className="nutrition-column">
                 <h1 className="nutritionHeading">Nutriton History</h1>
-                { nutritionHistory.map(
-                    (nutritionData) => (<NutritionHistory key={nutritionData.id} nutritionData={nutritionData} setNewItem={setNewItem} /> )
-                )}
+
+
+                { nutritionHistory.length === 0 ? (
+                            <img src="\nutrition.gif" alt="NutritionImg" id="nutrition-sum-img"/>
+                ) : (
+                    nutritionHistory.map(
+                        (nutritionData) => (<NutritionHistory key={nutritionData.id} nutritionData={nutritionData} setNewItem={setNewItem} /> )
+                    )
+                )
+                }
             </div>
             <div className="nutrition-column">
                 <h1 className="nutritionHeading">Enter meal</h1>

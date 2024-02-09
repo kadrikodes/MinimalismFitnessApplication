@@ -72,9 +72,7 @@ const WalkPage = () => {
               </div>
           </div>
       </div>
-  );
-    
-
+  );   
 }
 
 export default WalkPage;

@@ -20,6 +20,9 @@
     position: relative; 
 }
 
+
+
+
 .left-box {
     border: none;
     display: flex;
@@ -87,7 +90,7 @@ select {
 input[type="file"] {
     padding: 10px;
     margin-top: 10px;
-    background-color: #b5b5b5;
+    background-color: #fffefe;
     border-radius: 5px;
     border: 1px solid #b5b5b5;
     color: #333;
@@ -102,15 +105,17 @@ input[type="file"] {
 }
 
 .saveUserChanges {
-    margin: 10px;
     padding: 10px 15px 10px;
-    font-size: 25px; 
-    background-color: #E83C00;
-    color: #fff;
+    color: white;
+    padding: 10px 15px;
     border: none;
-    border-radius: 5px;
+    border-radius: 25px;
+    width: 200px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    font-weight: bold;
+    margin-left: 25%;
+    height: 50px;
+    
 }
 
 .left-content {
@@ -119,6 +124,7 @@ input[type="file"] {
 }
 
 .saveUserChanges:hover {
-    background-color: #FE6A16;
+    background-color: #af3204;
     
 }
+

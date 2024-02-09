@@ -1,18 +1,194 @@
-.SleepPage {
-    background-color: #D9D9D9;
-    border-radius: 45px;
-    height: 318px;
-    left: 390px;
-    top: 0;
-    width: 370px;
-    text-align: center;
-  }
-  .SleepPage p {
-    color: antiquewhite;
-  }
+.desktop {
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+}
 
-  .desktop {
-    display: flex;
-    flex-direction: column;
-    align-items: center; 
+.sleep-page-container {
+  display: flex;
+  justify-content: center; 
+  margin-top: 20px;
+}
+
+
+.rightboxsleep {
+  width: 100%;
+  padding: 20px;
+  border-radius: 20px;
+  background-color: #f0f0f032;
+  margin: 40px;
+  position: relative;
+}
+.leftboxsleep {
+  width: 100%;
+  
+  border-radius: 20px;
+  background-color: #f0f0f032;
+  margin: 40px;
+  position: relative;
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+  padding: 20px;
+  justify-content: center;
+
+  max-height: 500px;
+  overflow-y: auto;
+  padding-top: 200px;
+
+
+
+}
+
+
+/* Scrollbar styles */
+.leftboxsleep::-webkit-scrollbar {
+  width: 15px; 
+}
+.leftboxsleep::-webkit-scrollbar-track {
+  background: #a7a4a4; 
+}
+
+
+.leftboxsleep::-webkit-scrollbar-thumb {
+  background: #888; 
+  border-radius: 15px; 
+}
+
+
+.leftboxsleep::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+
+.leftboxsleep {
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1); 
+}
+
+
+
+.sleep-page-container::-webkit-scrollbar-thumb {
+  background-color: #888; 
+  border-radius: 15px; 
+  height: 40px; 
+}
+
+
+
+
+
+
+.leftboxsleep h2 {
+  position: absolute;
+  top: 0;
+  left :50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  padding: 30px 0 20px; 
+  margin-bottom: 10px;
+  margin-top: 00; 
+  color: #050505; 
+  font-size: 30px; 
+}
+
+.leftboxsleep ul li {
+  font-size: 25px; 
+}
+
+.leftboxsleep,.rightboxsleep {
+  border: none;
+  text-align: center;
+}
+
+
+input[type="datetime-local"] {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+button {
+  background-color: #E83C00;
+  padding: 10px 15px 10px;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 25px;
+  width: 200px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-left: 25%;
+  height: 50px;
+  font-size: 25px;}
+
+button:hover {
+  background-color: #FE6A16;
+}
+
+
+form {
+  background-color:none;
+  padding: 20px; 
+  border-radius: 10px; 
+}
+
+
+
+.rightboxsleep h2 {
+  font-size: 30px; 
+}
+
+
+.rightboxsleep input[type="datetime-local"] {
+  width: 100%;
+  margin-bottom: 20px;
+  font-size: 25px;
+  padding: 10px; 
+}
+
+.rightboxsleep button {
+  margin-top: 20px; 
+  padding: 10px 15px 10px; 
+  font-size: 25px; 
+  align-self: center;
+}
+
+
+.rightboxsleep form {
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  text-align: center;
+  background-color: transparent; 
+}
+
+
+
+.sleep-record {
+  border: 2.5px solid #9b8dbe94; 
+  border-radius: 5px; 
+  padding: 10px;
+  margin-bottom: 10px;
+  display: inline-block; 
+  width: auto; 
+  height: auto; 
+  display: flex; 
+  align-items: center;
+}
+
+.sleep-record p {
+  margin: 5px 0; 
+  font-size: 20px; 
+  font-weight: bold; 
+}
+
+.sleep-record .bed-time {
+  color: #91491f; 
+}
+
+.sleep-record .wake-up-time {
+  color: rgb(83, 14, 104); 
+}
+
+.sleep-record:hover {
+  background-color: rgba(199, 196, 191, 0.533);
 }

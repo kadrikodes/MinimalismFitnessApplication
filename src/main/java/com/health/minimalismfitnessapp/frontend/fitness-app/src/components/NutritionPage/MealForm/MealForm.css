@@ -22,6 +22,16 @@ form {
     margin-bottom: 15px;
     box-sizing: border-box;
   }
+
+
+  input[type="submit"]{
+    background-color: #E83C00;
+  }
+
+  input[type="submit"]:hover{
+    background-color: #af3204;
+  }
+  
   
   .submitButton {
     background-color: #007bff;
@@ -34,6 +44,7 @@ form {
     font-weight: bold;
     margin-left: 25%;
     height: 50px;
+    font-size: 25px;
   }
   
   .submitButton:hover {
@@ -46,7 +57,8 @@ form {
   }
 
   .greenMealMessage {
-    color: #2ceb05;
+    font-weight: bold;
+    color: #299913;
     font-size: 1.3rem;
   }
   
