@@ -24,7 +24,7 @@ const CalculateWeightLoss = () => {
         <div>
             <form onSubmit={handleCalculateWeightLoss}>
                 <label>
-                    Steps Taken:
+                    Enter steps taken to calculate how much weight you have lost:
                     <input
                         type="number"
                         value={stepsTaken}

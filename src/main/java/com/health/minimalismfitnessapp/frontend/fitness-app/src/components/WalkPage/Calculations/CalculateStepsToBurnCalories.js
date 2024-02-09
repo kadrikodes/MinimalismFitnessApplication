@@ -25,7 +25,7 @@ const CalculateStepsToBurnCalories = ({ props }) => {
         <div>
             <form onSubmit={calculateSteps}>
                 <label>
-                    Calories to Burn:
+                    Enter calories to Burn to calculate steps needed:
                     <input
                         type="number"
                         value={calories}

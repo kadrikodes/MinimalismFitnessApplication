@@ -1,28 +1,28 @@
 import React, { useState } from 'react';
 
-const CheckDailyGoal = () => {
+const CheckWeeklyGoal = () => {
     const [stepsTaken, setStepsTaken] = useState('');
     const [goalMessage, setGoalMessage] = useState('');
 
     const checkGoal = async () => {
-        const checkDailyGoalAPI = `http://localhost:8080/walking/hasAchievedDailyGoal?stepsTaken=${stepsTaken}`;
+        const checkWeeklyGoalAPI = `http://localhost:8080/walking/hasAchievedWeeklyGoal?stepsTaken=${stepsTaken}`;
 
         try {
-            const response = await fetch(checkDailyGoalAPI);
+            const response = await fetch(checkWeeklyGoalAPI);
             if (!response.ok) throw new Error("Failed to check goal");
 
             const hasAchieved = await response.json();
-            setGoalMessage(hasAchieved ? "You have achieved your daily goal!" : "Daily goal not achieved yet.");
+            setGoalMessage(hasAchieved ? "You have achieved your weekly goal!" : "Weekly goal not achieved yet.");
         } catch (error) {
             console.error(error);
-            setGoalMessage("Failed to check daily goal!");
+            setGoalMessage("Failed to check weekly goal!");
         }
     };
 
     return (
         <div>
             <label>
-                Check if daily goal achieved:
+                Check if weekly goal achieved:
             <input
                 type="number"
                 value={stepsTaken}
@@ -30,9 +30,9 @@ const CheckDailyGoal = () => {
                 placeholder="Enter steps taken"
             />
             </label>
-            <button onClick={checkGoal}>Check Daily Goal</button>
+            <button onClick={checkGoal}>Check Weekly Goal</button>
             {goalMessage && <p>{goalMessage}</p>}
         </div>
     );
 };
-export default CheckDailyGoal;
+export default CheckWeeklyGoal;

@@ -7,6 +7,8 @@ import CalculateStepsToBurnCalories from './Calculations/CalculateStepsToBurnCal
 import CalculateWeightLoss from './Calculations/CalculateWeightLoss';
 import ScheduleWalkReminder from './Calculations/ScheduleWalkReminder';
 import CheckDailyGoal from './Calculations/CheckDailyGoal';
+import CheckWeeklyGoal from './Calculations/CheckWeeklyGoal';
+import CheckMonthlyGoal from './Calculations/CheckMonthlyGoal';
 import GetTotalCaloriesBurned from './Calculations/GetTotalCaloriesBurned';
 
 
@@ -35,33 +37,43 @@ const WalkPage = () => {
         updateWalkingHistory();
     }, [newItem]);
 
-    return(
-    <div className="desktop">
-        <div className="row">
-            <div className="walk-column">
-                <h1 className="walkingHeading">Walking History</h1>
-                <WalkSearch onSearchResults={handleSearchResults} />
-                { walkingHistory.map(
-                    (walkingData, index) => (<WalkingHistory key={index} walkingData={walkingData} setNewItem={setNewItem} searchCriteria={searchCriteria}/> )
-                )}
-            </div>
-            <div className="walk-column">
-                <h1 className="walkingHeading">Enter walking data</h1>
-                <WalkForm setNewItem={setNewItem}/>
-                <CalculateStepsToBurnCalories onStepsCalculated={setCalculatedSteps} />
-                {calculatedSteps && <p>Calculated Steps: {calculatedSteps}</p>}
-                <h2>Calculate Weight Loss</h2>
-              <CalculateWeightLoss />
+    return (
+      <div className="desktop">
+          
+          <div className="row">
+              
+              <div className="walk-column">
+                  <h1 className="walkingHeading">Walking History</h1>
+                  <WalkSearch onSearchResults={handleSearchResults} />
+                  {walkingHistory.map(
+                      (walkingData, index) => (
+                          <WalkingHistory key={index} walkingData={walkingData} setNewItem={setNewItem} searchCriteria={searchCriteria}/>
+                      )
+                  )}
+              </div>
+  
+              <div className="walk-column">
+                  <h1 className="walkingHeading">Enter Walking Data</h1>
+                  <WalkForm setNewItem={setNewItem}/>
+              </div>
 
-              <h2>Schedule Walk Reminder</h2>
-              <ScheduleWalkReminder />
-
-              <h2>Check Daily Goal</h2>
-              <CheckDailyGoal />
-            </div>
-        </div>
-
-    </div>)   
+              <div className="walk-column">
+                  <h1 className="walkingHeading">Calculations and Goals</h1>
+                  <CalculateStepsToBurnCalories onStepsCalculated={setCalculatedSteps} />
+                  {calculatedSteps && <p>Calculated Steps: {calculatedSteps}</p>}
+  
+                  <CalculateWeightLoss />
+                  <ScheduleWalkReminder />
+                  <CheckDailyGoal />
+                  <CheckWeeklyGoal />
+                  <CheckMonthlyGoal />
+                  <GetTotalCaloriesBurned />
+                  
+              </div>
+          </div>
+      </div>
+  );
+    
 
 }
 

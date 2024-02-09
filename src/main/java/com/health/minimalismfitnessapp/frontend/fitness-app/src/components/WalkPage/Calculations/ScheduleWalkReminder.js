@@ -25,7 +25,7 @@ const ScheduleWalkReminder = () => {
         <div>
             <form onSubmit={handleScheduleReminder}>
                 <label>
-                    Hours:
+                    Enter Hours:
                     <input
                         type="number"
                         value={hours}
@@ -34,7 +34,7 @@ const ScheduleWalkReminder = () => {
                     />
                 </label>
                 <label>
-                    Minutes:
+                   Enter Minutes:
                     <input
                         type="number"
                         value={minutes}
