@@ -1,6 +1,6 @@
 .walk-column {
   flex-basis: 1 0 20%;
-  padding-top: 10px; /* Adjust this value as needed */
+  padding-top: 10px; 
   padding-right: 100px;
   padding-bottom: 0;
   padding-left: 100px;
@@ -9,9 +9,27 @@
 .walkingHeading {
   color: rgb(0, 0, 0);
   margin-top: 0;
+  margin-left: 30%;
+}
+
+.enter{
   margin-left: 18%;
 }
 
 .desktop .row .column .walkForm {
-  margin-top: 0; /* Adjust this value as needed */
+  margin-top: 0; 
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.walk-column {
+  flex: 1; 
+  padding: 10px; 
+}
+
+.walksearch{
+  margin-left: 12%;
 }

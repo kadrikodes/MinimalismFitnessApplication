@@ -5,7 +5,7 @@ const WalkingHistory = (props) => {
     const {
         walkingData,
         setNewItem,
-        searchCriteria // Add searchCriteria to the props
+        searchCriteria
     } = props;
 
     const { walkType = '', steps = '', distance = '', caloriesBurned = '', duration = '', speed = '', dateTime = '', id = '' } = props.walkingData || {};
@@ -63,12 +63,19 @@ const WalkingHistory = (props) => {
 
     const isSearchMatch = () => {
         if (!searchCriteria) return false;
-        const { dateTime: searchDateTime, distance: searchDistance } = searchCriteria;
-        return dateTime.startsWith(searchDateTime) && parseFloat(distance) === parseFloat(searchDistance);
+        let matches = true;
+        if (searchCriteria.dateTime) {
+            matches = matches && walkingData.dateTime.startsWith(searchCriteria.dateTime);
+        }
+        if (searchCriteria.distance) {
+            matches = matches && parseFloat(walkingData.distance) === parseFloat(searchCriteria.distance);
+        }
+        console.log(`Matching entry for distance ${distance}:`, matches);
+        return matches;
     };
 
     return (
-        <div className={`WalkingContainer ${isSearchMatch() ? 'highlight' : ''}`}>
+        <div className={`WalkContainer walkhistory ${isSearchMatch() ? 'highlight' : ''}`}>
             {isEditing ? (
                 <>
                     <input type="text" value={editData.walkType} onChange={(e) => handleEditChange(e, 'walkType')} />
@@ -90,8 +97,8 @@ const WalkingHistory = (props) => {
                     <h2>Duration: {duration}mins</h2>
                     <h2>Speed: {speed}km/h</h2>
                     <h2>Date Time: {dateTime}</h2>
-                    <button onClick={toggleEdit}>Edit</button>
-                    <button onClick={handleDelete}>Delete</button>
+                    <button onClick={toggleEdit} className="edit-btn">Edit</button>
+                    <button onClick={handleDelete} className="delete-btn">Delete</button>
                     {walkMessage && <p className={(walkMessage.includes("deleted") || walkMessage.includes("updated")) ? "greenWalkMessage" : "redWalkMessage"}>
                         {walkMessage}
                     </p>}
